@@ -27,6 +27,20 @@ class PredeclaredEvaluationTests(unittest.TestCase):
     def test_protocol_digest_is_pinned(self):
         self.assertEqual(self.digest, "1cd92c48b91c465c9e18c0bca1c39cc112c9993c7e9e510061964f1672eb29b4")
 
+    def test_second_protocol_is_separate_and_pinned_before_new_development(self):
+        protocol, digest = load_protocol(Path(__file__).with_name("phase2") / "protocol.json")
+        self.assertEqual(digest, "15e373f2f634a26a9fd8013853ab6618e1b57ef79877effea7a0ddf2ae1dadd7")
+        self.assertEqual(len(protocol["holdout_cases"]), 8)
+        self.assertEqual(protocol["holdout_transform_protocol"]["expected_policy_run_count"], 64)
+        self.assertEqual(protocol["prior_phase"]["protocol_sha256"], self.digest)
+
+    def test_type_specific_time_shift_is_applied_without_changing_other_fault(self):
+        transform = copy.deepcopy(self.protocol["holdout_cases"][0])
+        transform["fault_time_shift_s"] = {"sensor_bias": -300}
+        result = holdout_request(self.snapshot, transform, self.protocol)
+        self.assertEqual(result["faults"][0]["start_s"], 300)
+        self.assertEqual(result["faults"][1]["start_s"], 3300)
+
     def test_true_pair_and_guarded_mitigation_meet_declared_criteria(self):
         result = assess_table(self.table, self.protocol)
         self.assertTrue(result["joint_failure"])

@@ -1,6 +1,6 @@
 # Evidence and validation contract
 
-StormPilot evaluates policies in a published simulation. A passing evidence check means the recorded experiment is reproducible and the reported numerical claims follow from its artifacts. It does **not** establish a calibrated local flood forecast, a field diagnosis, a successful physical repair, or a general safety guarantee.
+StormPilot evaluates policies in a published simulation. A passing evidence check means the included artifacts and reported numerical claims are internally consistent. An actual simulator replay is checked separately. It does **not** establish a calibrated local flood forecast, a field diagnosis, a successful physical repair, or a general safety guarantee.
 
 This contract is coordinated with the engine interface. The independent validator lives in `validation/`; the simulator and experiment generation remain in `engine/`.
 
@@ -156,7 +156,71 @@ Source/interface review and field calibration are explicit unperformed categorie
 
 `validation.replay.compare_replay(original, replayed, root_path)` compares a freshly executed replay against the original. It checks both packets, unchanged experiment/request/source identities, logical run IDs and treatments, all physical trace rows, recomputed metrics, and per-node flood/peak results. It ignores creation times, runtime and report CPU timings. The current replay comparator expects the same routing sample grid within timestamp tolerance. The simulator CLI re-executes all unique recorded controller/fault treatments; search declarations are retained for comparison, but the search procedure itself is not re-executed. Comparing two copied packets alone cannot establish execution.
 
-## Architecture review and observed checks
+## Joint-failure policy evaluation: phase 1
+
+The main evaluation separates a real development improvement from an unfavorable unseen result. The protocol was pinned before the new fault screen and policy tuning: `evaluation/protocol.json`, SHA-256 `1cd92c48b91c465c9e18c0bca1c39cc112c9993c7e9e510061964f1672eb29b4`. Its full horizon is 280,800 seconds, and the primary flood limit is 100 m³ with a 1e-6 m³ tolerance.
+
+The development pair combines a +1 m depth-reading bias at P2 during 10,800–21,600 seconds with outlet 2 stuck at setting 0.035 during 21,600–28,800 seconds. Under `constant_flow` with `target_scale=1`, clean, valve-only and sensor-only flooding are all zero; the pair produces **237.262837 m³**. The pair satisfies joint necessity for this threshold violation. The separately calculated interaction excess is also 237.262837 m³; the claim does not rest on threshold crossing alone.
+
+The grid-selected `balanced_flow` policy (`target_scale=0.98`, `balance_gain=2`) reduces development-pair flooding to **11.580060 m³**, while passing the fixed clean/single nonregression checks and all downstream/terminal guards. These guards allow increases of at most 0.001 m³/s downstream peak, 1 m³ downstream excess volume, and 0.1 m³ terminal node-and-link storage. Candidate snapshot SHA-256: `99590e22adb316c6639f61088b246f4d4881a3497855856de2c4d60a2b99ea5b`.
+
+That candidate **fails the complete six-transform heldout evaluation**. All 48 native policy/subset runs produced valid evidence, but paired flooding increases in aggregate from **8,461.737544 to 10,361.597851 m³**: **+1,899.860307 m³, or +22.45%**. Only one of the six paired cases meets the declared individual improvement criterion; three were required. Twelve of 24 subset comparisons fail the 1 m³ primary nonregression allowance. The valve-only comparison in h2 also increases downstream peak by 0.006222947 m³/s, exceeding the 0.001 m³/s guard. All terminal-storage guards pass.
+
+| Fixed transform | Reference paired flood (m³) | Candidate paired flood (m³) | Candidate minus reference (m³) |
+|---|---:|---:|---:|
+| h1 | 0.000 | 0.000 | 0.000 |
+| h2 | 451.740 | 1,162.861 | +711.122 |
+| h3 | 4,361.069 | 5,034.020 | +672.951 |
+| h4 | 258.297 | 57.290 | −201.007 |
+| h5 | 0.000 | 0.000 | 0.000 |
+| h6 | 3,390.632 | 4,107.427 | +716.795 |
+
+The three higher-rainfall transforms also worsen flooding in their clean runs, so this failure is not confined to the chosen fault pair. A fixed lower release target and reliance on noisy or biased depth allocation are plausible contributors. The comparison changes both allocation and total target, so it does not isolate their causal contributions. These already-seen cases can only serve as explicitly labeled development/diagnostic data for subsequent policy work.
+
+The complete phase 1 record is preserved in `evaluation/phase1-evidence.zip`, SHA-256 `33baf99ec58d5dec629cb75b58aead13cc9e54e7b229d3544cfb6b2fa192d1fd`, containing the exact engine/model/evaluator sources, frozen protocol and candidate, development proof and all six compressed heldout proofs. The original report SHA-256 is `a705049c23f2021c5d54dcb5c67810ed4c4ab4af31cd3b494f5c019d83324627`.
+
+A separate audit extracted that archive and independently recomputed every compressed full trace against the archived source/model bytes: **56 runs, 727,771 trace rows, 1,015 passed checks, zero failures**, and 21 explicit unperformed categories (three per packet). All archived aggregate outcomes match the original report. `validation/phase1-archive-audit.json` records this audit. It is a fresh record check, not a second native simulator execution; it does not set a replay badge or revise the unfavorable policy outcome.
+
+### Independent tuning-ledger audit
+
+`validation/repair.py` independently checks the declared Cartesian grid, exact candidate order/coverage, sequential hydraulic calls, budget and cache accounting, all candidate comparisons, guard failures, materiality, and the final feasibility-first selection rule. The genuine production repair has **25 candidates, 104 hydraulic calls, 12 rejected candidates**, and exhausts its declared grid. Its packet passes **151 recorded checks**, with three explicit unperformed categories. The selected policy's eight proof treatments match the ledger and independently checked full traces.
+
+The other 96 tuning calls retain compact metrics, diagnostics and trace digests; their full traces are not in this repair packet. Their ledger consistency is checked, but independent trace integration cannot be claimed for those missing traces. The original preselection request is also not embedded: its digest is syntactically checked but cannot be recomputed from the selected-policy request. These limits are explicit in `validation/production-repair-check.json`. Neither a consistent ledger nor a development improvement establishes optimizer superiority.
+
+### Separately frozen phase 2
+
+Before further controller development or any new-suite outcome, `evaluation/phase2/protocol.json` was frozen at **2026-09-20 15:37:21 UTC**, SHA-256 `15e373f2f634a26a9fd8013853ab6618e1b57ef79877effea7a0ddf2ae1dadd7`. It fixes the same development pair and reference policy while expanding to eight seeded stratified transforms (64 policy/subset runs), with broader rainfall, noise, duration and signed bias severity, and separate sensor/valve timing shifts. No phase 2 simulation was run while declaring those transforms.
+
+The original per-case guards remain unchanged. Every one of the 32 subset comparisons must pass guards and flood nonregression; the paired aggregate must improve by both 80 m³ and 10%, and at least four of eight paired cases must each improve by both 10 m³ and 10%. A single new candidate is frozen before that suite executes. All earlier results stay visible. A later policy or criterion change cannot reuse either observed suite as unseen evidence.
+
+The later controller declares `causal-depth-history-feedback-v2` instead of the protocol's `causal-depth-feedback-v1` identifier. A dated **pre-execution semantic clarification and metadata deviation** records that v2 adds isolated history of the same permitted noisy depth observations, with no additional true-state, fault, rainfall or future information. Reference and candidate share the v2 context, and state is created empty inside every run. The frozen protocol bytes, transforms and acceptance thresholds are unchanged. The clarification was recorded after controller development began and before phase 2 execution; this chronology is explicit. Its file, `evaluation/phase2/information-boundary-clarification.json`, is pinned into the candidate and report with SHA-256 `79693d55b10a98befd4351257c5920a8f25a25a9f0e244854dda7ad31b96ce6d`.
+
+### Phase 2 result: valid evidence, rejected controller
+
+The final `plausible_depth` candidate uses `target_scale=1`, `jump_threshold_m=0.65` and `correction_fraction=0.75`. Its development pair improves from **237.262837 to 19.361153 m³** (91.84%), while clean and valve-only outputs are exactly unchanged and all declared development guards pass. Candidate snapshot SHA-256: `742f3f43880930dbb2146bf99d1a8d901f4427df00ae5cdeb101d7c8269e3e4f`.
+
+The complete phase 2 development ledger has **293 attempted native calls: 292 completed and one disk-exhaustion failure**, within the 512-call budget. It preserves four exact historical source versions and 11 request identities. Independent checks confirm ledger sequencing, budget, source/request hashes, finite metrics and diagnostics, and all eight selected final traces. The final 16-call default search contains three candidates; the selected proof passes 151 recorded checks. Unlike the earlier phase 1 packet, this repair includes its original request, whose content hash is independently checked. These records are in `engine/experiments/phase2-development/`; audit reports are `validation/phase2-development-ledger-audit.json` and `validation/phase2-development-proof-check.json`.
+
+The new unseen suite **still rejects the candidate**. All 64 native runs are valid, and no subset increases flooding beyond the 1 m³ allowance. Aggregate paired flooding falls from **9,840.092953 to 9,122.721824 m³**, an improvement of **717.371129 m³ (7.2903%)**. The relative requirement was 10%. Only two paired cases meet the individual 10 m³ and 10% improvement criteria; four were required. In p2h1, paired downstream excess volume increases by **1.47113394 m³**, above the 1 m³ guard. Every other downstream/terminal guard passes.
+
+| Fixed transform | Reference paired flood (m³) | Candidate paired flood (m³) | Candidate minus reference (m³) |
+|---|---:|---:|---:|
+| p2h1 | 3,243.744 | 2,822.424 | −421.320 |
+| p2h2 | 0.000 | 0.000 | 0.000 |
+| p2h3 | 2,289.404 | 2,289.404 | 0.000 |
+| p2h4 | 412.007 | 412.007 | 0.000 |
+| p2h5 | 2,727.436 | 2,727.436 | 0.000 |
+| p2h6 | 0.000 | 0.000 | 0.000 |
+| p2h7 | 1,167.502 | 871.451 | −296.051 |
+| p2h8 | 0.000 | 0.000 | 0.000 |
+
+The recorded report is `evaluation/phase2/report.json`, SHA-256 `757b0a7a4095a5cadc2b01ef7efdc364521bbad4d31aef3792c244472c459b98`. `evaluation/phase2-evidence.zip`, SHA-256 `8210a09aa32d5da9808b3f9f730f2c6bbbc8c5ae07b59d10899d6129131c1223`, preserves the exact evaluation sources, model, protocol, clarification, candidate, development ledger/source history, base proof and all eight complete heldout proofs. It supplements the earlier phase 1 archive; neither rejected result is replaced.
+
+A separate extraction verified all **218 archived files** and independently recomputed **72 full runs, 933,235 trace rows and 1,311 passed checks**, with zero failures and 27 explicit unperformed categories. All aggregate results agree with the frozen report. Then the archived native sources were compiled in that separate directory, and p2h1 was actually replayed. All eight treatments and **109,088 physical trace rows** matched, with maximum observed difference zero; all 11 replay-comparison checks passed. The exact compressed replay is retained at `evaluation/phase2/p2h1-replay.json.gz`; `validation/phase2-archive-audit.json` and `validation/phase2-p2h1-replay-check.json` record these checks. This proves same-host reproduction of this case, not cross-platform equality or field validity.
+
+After hashes, complete compact records and selected proofs were retained, 284 nonselected development scratch packets were removed to recover disk space. Their source versions, request identities, metrics, diagnostics and trace hashes remain; they are explicitly **summary-only evidence**, with no claim that their missing full traces were independently reintegrated. The final development proof, its eight individual selected traces, every heldout packet and the exact replay remain preserved. No policy tuning followed the new unseen outcomes. StormPilot's supported result is a reproducible discovery and falsification workbench, not a validated general controller.
+
+## Earlier reduction prototype checks (superseded as the main example)
 
 The implementation plan's process-isolated native engine, fixed policy library, shared exogenous catalog and separate validation module support the intended evidence boundary. A native engine with global state must not run competing simulations in a shared thread. Keeping all exogenous fault boundaries in every ablation's step schedule avoids a numerical step change being mistaken for the removed fault's effect.
 

@@ -1,0 +1,63 @@
+{
+  "created_at": "2026-09-20T15:48:25.858975+00:00",
+  "source_sha256": "2b474d488cda938a21fb23ed8f9546a129b6b838004c67be0b94118b73a237e3",
+  "request": {
+    "scenario_id": "theta",
+    "controller_id": "constant_flow",
+    "fallback_controller_id": "balanced_flow",
+    "controller_parameters": {
+      "target_scale": 1.0
+    },
+    "fallback_controller_parameters": {
+      "target_scale": 0.98,
+      "balance_gain": 2.0
+    },
+    "seed": 42,
+    "rainfall_multiplier": 1.0,
+    "noise_std_m": 0.0,
+    "faults": [
+      {
+        "id": "partial-valve",
+        "type": "valve_stuck",
+        "asset": "2",
+        "start_s": 21600.0,
+        "end_s": 28800.0,
+        "setting": 0.035
+      },
+      {
+        "id": "sensor-bias",
+        "type": "sensor_bias",
+        "asset": "P2",
+        "start_s": 10800.0,
+        "end_s": 21600.0,
+        "bias_m": 1.0
+      }
+    ],
+    "test_contract": {
+      "mode": "absolute",
+      "direction": "above",
+      "metric": "flood_volume_m3",
+      "threshold": 100.0,
+      "tolerance": 1e-06,
+      "units": "m3",
+      "horizon_s": 280800.0
+    }
+  },
+  "default_search": {
+    "controller_id": "plausible_depth",
+    "budget": 120,
+    "target_scales": [
+      1.0
+    ],
+    "jump_thresholds_m": [
+      0.65
+    ],
+    "correction_fractions": [
+      0.25,
+      0.5,
+      0.75
+    ]
+  },
+  "global_call_budget": 512,
+  "purpose": "Generate final default-search proof after development; no phase2 heldout access."
+}

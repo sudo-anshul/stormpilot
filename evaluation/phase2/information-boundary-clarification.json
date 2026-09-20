@@ -1,0 +1,34 @@
+{
+  "schema_version": "stormpilot.protocol-clarification.v1",
+  "recorded_at_utc": "2026-09-20T15:46:26.132266+00:00",
+  "protocol_sha256": "15e373f2f634a26a9fd8013853ab6618e1b57ef79877effea7a0ddf2ae1dadd7",
+  "declared_information_boundary_id": "causal-depth-feedback-v1",
+  "execution_information_boundary_id": "causal-depth-history-feedback-v2",
+  "category": "pre_execution_semantic_clarification_and_metadata_deviation",
+  "change": "The v2 identifier names isolated per-run memory of current and past instances of the same permitted depth observations. It introduces no additional observation source.",
+  "permitted_information": [
+    "Current possibly noisy or biased measured depths",
+    "Earlier instances of those same measured depths stored in isolated per-run state",
+    "Declared static model geometry and controller parameters"
+  ],
+  "prohibited_information": [
+    "Noise-free true simulator depth as a separate control input",
+    "Active fault catalog, timing, type or hidden status",
+    "Rainfall realization or forecast",
+    "Future observations, terminal metrics or heldout outcomes"
+  ],
+  "invariant_requirements": [
+    "Every reference and candidate run uses the same v2 experiment/context information-boundary identifier",
+    "Controller state is constructed empty inside every run_simulation invocation",
+    "Controller code receives only observations, static geometry, parameters and its isolated state"
+  ],
+  "unchanged": [
+    "All frozen perturbation transforms",
+    "All development and heldout acceptance thresholds",
+    "The fixed development pair and reference policy",
+    "The one-candidate-before-unseen-execution rule"
+  ],
+  "chronology": "This clarification is recorded after phase 2 controller development began but before any phase 2 heldout execution or outcome. It is a disclosed identifier deviation, not a revision of the frozen protocol bytes.",
+  "authorization": "Root agent accepted this semantic treatment before phase 2 execution; genuine expansion of the observable set is not authorized by this clarification.",
+  "required_report_statement": "Phase 2 used causal-depth-history-feedback-v2 instead of the protocol's v1 identifier. A pre-execution clarification records isolated history of the same permitted observations; no transforms or acceptance criteria changed."
+}

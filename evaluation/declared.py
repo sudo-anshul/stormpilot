@@ -58,6 +58,7 @@ def prepare_declared_suite(packet, reference_run_id, candidate_run_id, pair_ids,
                     frozen_at_utc=now(), status="declared_before_this_execution_not_heldout",
                     scope="Recorded supplied model and visible robustness transforms; no calibration or heldout claim.",
                     scenario_id=request["scenario_id"], horizon_s=packet["experiment"]["horizon_s"],
+                    information_boundary_id=packet["experiment"]["information_boundary_id"],
                     primary_contract=copy.deepcopy(packet["experiment"]["test_contract"]))
     protocol["primary_contract"]["horizon_s"] = protocol["horizon_s"]
     request["test_contract"] = copy.deepcopy(protocol["primary_contract"])

@@ -14,7 +14,7 @@ class DeclaredSuiteTests(unittest.TestCase):
             request=dict(scenario_id="custom_test", rainfall_multiplier=1, noise_std_m=0, seed=42,
                          faults=[dict(id="sensor", type="sensor_bias", asset="basin", start_s=0, end_s=400, bias_m=1),
                                  dict(id="valve", type="valve_stuck", asset="outlet", start_s=400, end_s=700, setting=0.1)]),
-            experiment=dict(horizon_s=900, test_contract=dict(metric="flood_volume_m3", units="m3", mode="absolute",
+            experiment=dict(horizon_s=900, information_boundary_id="causal-depth-history-feedback-v2", test_contract=dict(metric="flood_volume_m3", units="m3", mode="absolute",
                                                             direction="above", threshold=50, tolerance=1e-6, horizon_s=900)),
             model=dict(assets=[dict(id="outlet")], nodes=[dict(id="basin", type="basin")]),
             runs=[dict(run_id="reference", controller=dict(id="constant_flow", parameters=dict(target_scale=1, targets_m3s=[0.2], control_interval_s=300))),
@@ -26,6 +26,7 @@ class DeclaredSuiteTests(unittest.TestCase):
         self.assertEqual(protocol["scenario_id"], "custom_test")
         self.assertEqual(protocol["horizon_s"], 900)
         self.assertEqual(protocol["primary_contract"]["threshold"], 50)
+        self.assertEqual(protocol["information_boundary_id"], "causal-depth-history-feedback-v2")
         self.assertEqual(spec["candidate"]["parameters"], dict(target_scale=0.98, balance_gain=2))
         self.assertIn("not_heldout", protocol["status"])
         changed = holdout_request(dict(request=request), protocol["holdout_cases"][-1], protocol)

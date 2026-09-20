@@ -10,6 +10,7 @@ import gc
 import gzip
 import hashlib
 import json
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 import subprocess
@@ -46,12 +47,21 @@ def check_sources(snapshot, root):
             raise EvidenceError("frozen source/model artifact is missing")
         if hashlib.sha256(path.read_bytes()).hexdigest() != artifact["sha256"]:
             raise EvidenceError(f"source changed after candidate freeze: {artifact['path']}")
+    for name in ("development_search_ledger", "information_boundary_clarification"):
+        record = snapshot.get(name)
+        if record is None:
+            continue
+        path = (root / record["path"]).resolve()
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != record["sha256"]:
+            raise EvidenceError(f"frozen supplementary evidence changed: {name}")
 
 
-def freeze_candidate(packet_path, spec_path, output, protocol_path):
+def freeze_candidate(packet_path, spec_path, output, protocol_path, development_ledger=None):
     if Path(output).exists() or Path(output).with_suffix(".sha256").exists():
         raise EvidenceError("candidate freeze already exists; it cannot be overwritten")
     protocol, protocol_hash = load_protocol(protocol_path)
+    if protocol.get("prior_phase") and development_ledger is None:
+        raise EvidenceError("phase 2 requires its complete development ledger before candidate freeze")
     packet, spec = read_json(packet_path), read_json(spec_path)
     request = packet["request"]
     for key in ("rainfall_multiplier", "noise_std_m", "seed"):
@@ -59,6 +69,9 @@ def freeze_candidate(packet_path, spec_path, output, protocol_path):
             raise EvidenceError(f"development case departed from the frozen context: {key}")
     if request["scenario_id"] != protocol["scenario_id"] or request["test_contract"] != protocol["primary_contract"]:
         raise EvidenceError("development scenario or primary contract differs from protocol")
+    fixed_pair = protocol["development_context"].get("fixed_fault_pair")
+    if fixed_pair is not None and request["faults"] != fixed_pair:
+        raise EvidenceError("development fault pair differs from the pair fixed before policy development")
     if spec["reference"]["controller_id"] != protocol["development_context"]["reference_controller_id"]:
         raise EvidenceError("reference controller differs from the predeclared baseline")
     reference_parameters = protocol["development_context"].get("reference_controller_parameters", {})
@@ -71,8 +84,32 @@ def freeze_candidate(packet_path, spec_path, output, protocol_path):
                     artifacts=packet["artifacts"], provenance=packet["provenance"],
                     development_packet_sha256=hashlib.sha256(Path(packet_path).read_bytes()).hexdigest(),
                     development_request_sha256=canonical_sha256(request))
+    clarification_path = Path(protocol_path).parent / "information-boundary-clarification.json"
+    if clarification_path.exists():
+        clarification_bytes = clarification_path.read_bytes()
+        clarification_hash = hashlib.sha256(clarification_bytes).hexdigest()
+        if clarification_hash != clarification_path.with_suffix(".sha256").read_text().split()[0]:
+            raise EvidenceError("information-boundary clarification changed after recording")
+        snapshot["information_boundary_clarification"] = dict(content=json.loads(clarification_bytes), sha256=clarification_hash,
+            path=str(clarification_path.relative_to(ROOT)) if clarification_path.is_relative_to(ROOT) else str(clarification_path))
     checked = assess_case(packet, snapshot, request, protocol, ROOT)
     snapshot["development"] = checked
+    if development_ledger is not None:
+        ledger_path = Path(development_ledger)
+        ledger_bytes = ledger_path.read_bytes()
+        if not ledger_bytes:
+            raise EvidenceError("development ledger is empty")
+        ledger_copy = Path(output).parent / ("development-ledger" + "".join(ledger_path.suffixes))
+        ledger_copy.parent.mkdir(parents=True, exist_ok=True)
+        if ledger_path.resolve() != ledger_copy.resolve():
+            shutil.copyfile(ledger_path, ledger_copy)
+        ledger_hash = hashlib.sha256(ledger_bytes).hexdigest()
+        if hashlib.sha256(ledger_copy.read_bytes()).hexdigest() != ledger_hash:
+            raise EvidenceError("development ledger changed while being frozen")
+        snapshot["development_search_ledger"] = dict(
+            path=str(ledger_copy.relative_to(ROOT)) if ledger_copy.is_relative_to(ROOT) else str(ledger_copy),
+            sha256=ledger_hash, source_filename=ledger_path.name,
+            scope="Complete recorded development ledger, including rejected and failed attempts; no optimizer-superiority claim.")
     proof_copy = Path(output).parent / "development-packet.json.gz"
     proof_copy.parent.mkdir(parents=True, exist_ok=True)
     with proof_copy.open("wb") as handle:
@@ -136,13 +173,13 @@ def make_report(cases, snapshot, protocol, protocol_hash, snapshot_hash, retaine
                 reference=snapshot["reference"], candidate=snapshot["candidate"], development=development,
                 development_request=snapshot["request"], development_packet=snapshot.get("development_packet"),
                 holdout=dict(case_count=len(cases), policy_run_count=sum(8 for c in cases if c["status"] == "completed"),
-                             expected_policy_run_count=48, criteria=protocol["heldout_usefulness_acceptance"],
+                             expected_policy_run_count=len(protocol["holdout_cases"]) * 8, criteria=protocol["heldout_usefulness_acceptance"],
                              guard_allowances=protocol["mitigation_acceptance"]["guard_maximum_increase"],
                              aggregate_metrics={k: v for k, v in aggregate.items() if k not in {"case_outcomes", "claim_scope"}}, cases=presentation),
                 acceptance=accepted, conclusion=("The frozen candidate meets the predeclared development and heldout criteria." if accepted["overall"] else
                     "The frozen candidate does not meet every predeclared criterion; inspect the complete case table and guard failures."),
                 retained_packets=retained,
-                limitations=["Fixed Theta benchmark and six simulated perturbations; no field calibration or general safety claim.",
+                limitations=[f"Fixed Theta benchmark and {len(protocol['holdout_cases'])} simulated perturbations; no field calibration or general safety claim.",
                              "The heldout suite was executed once after candidate freeze; unfavorable and invalid cases are retained in the table.",
                              "All complete traces were independently checked during execution and retained in compressed case packets. Extra retention was authorized before outcomes without changing any criteria.",
                              "This is a fixed policy comparison. No algorithmic superiority is claimed without a complete equal-budget optimization baseline."])
@@ -156,6 +193,11 @@ def make_report(cases, snapshot, protocol, protocol_hash, snapshot_hash, retaine
             "No field calibration, general safety or algorithmic-superiority claim follows from this policy comparison.",
             "All complete traces were checked during execution and retained in compressed case packets alongside the complete metric table and trace hashes.",
         ]
+    if "information_boundary_clarification" in snapshot:
+        result["information_boundary_clarification"] = snapshot["information_boundary_clarification"]
+        result["limitations"].append(snapshot["information_boundary_clarification"]["content"]["required_report_statement"])
+    if "development_search_ledger" in snapshot:
+        result["development_search_ledger"] = snapshot["development_search_ledger"]
     return result
 
 
@@ -191,12 +233,6 @@ def run_holdout(snapshot_path, protocol_path, output_dir, report_path=None, suit
             packet = read_json(packet_path)
             checked = assess_case(packet, snapshot, request, protocol, ROOT)
             case.update(checked, status="completed", full_packet_sha256=hashlib.sha256(packet_path.read_bytes()).hexdigest())
-            gzip_path = output_dir / f"{identifier}-packet.json.gz"
-            with packet_path.open("rb") as source, gzip_path.open("wb") as destination:
-                with gzip.GzipFile(fileobj=destination, mode="wb", mtime=0) as zipped:
-                    for chunk in iter(lambda: source.read(65536), b""):
-                        zipped.write(chunk)
-            compressed[identifier] = gzip_path
             del packet
         except (EvidenceError, OSError, ValueError, KeyError, TypeError, subprocess.TimeoutExpired) as exc:
             case["error"] = str(exc)
@@ -204,6 +240,15 @@ def run_holdout(snapshot_path, protocol_path, output_dir, report_path=None, suit
             if progress_path.exists():
                 case["execution"] = read_json(progress_path)
             if packet_path.exists():
+                # Preserve rejected evidence too: an invalid full packet must
+                # remain inspectable instead of disappearing after validation.
+                gzip_path = output_dir / f"{identifier}-packet.json.gz"
+                with packet_path.open("rb") as source, gzip_path.open("wb") as destination:
+                    with gzip.GzipFile(fileobj=destination, mode="wb", mtime=0) as zipped:
+                        for chunk in iter(lambda: source.read(65536), b""):
+                            zipped.write(chunk)
+                compressed[identifier] = gzip_path
+                case["full_packet_sha256"] = hashlib.sha256(packet_path.read_bytes()).hexdigest()
                 packet_path.unlink()
         cases.append(case)
         write_json(output_dir / "case-records.json", cases)
@@ -219,9 +264,10 @@ def run_holdout(snapshot_path, protocol_path, output_dir, report_path=None, suit
     for identifier, path in compressed.items():
         retained.append(dict(case_id=identifier, path=str(path.relative_to(ROOT)) if path.is_relative_to(ROOT) else str(path),
                              sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+                             validation_status=next(c["status"] for c in cases if c["case_id"] == identifier),
                              highlighted_by_predeclared_rule=identifier in retained_ids))
     report = make_report(cases, snapshot, protocol, protocol_hash, snapshot_hash, retained, suite_type)
-    report_path = Path(report_path) if report_path is not None else ROOT / "evaluation/report.json"
+    report_path = Path(report_path) if report_path is not None else output_dir.parent / "report.json"
     write_json(report_path, report)
     state.update(status="completed", completed_at_utc=now(), report_sha256=hashlib.sha256(report_path.read_bytes()).hexdigest())
     write_json(lock, state)
@@ -236,12 +282,14 @@ def main():
     freeze.add_argument("--spec", type=Path, required=True)
     freeze.add_argument("--output", type=Path, default=ROOT / "evaluation/candidate.json")
     freeze.add_argument("--protocol", type=Path, default=ROOT / "evaluation/protocol.json")
+    freeze.add_argument("--development-ledger", type=Path, help="Complete development ledger, mandatory for phase 2")
     holdout = sub.add_parser("holdout")
     holdout.add_argument("--snapshot", type=Path, default=ROOT / "evaluation/candidate.json")
     holdout.add_argument("--protocol", type=Path, default=ROOT / "evaluation/protocol.json")
     holdout.add_argument("--output-dir", type=Path, default=ROOT / "evaluation/heldout")
+    holdout.add_argument("--report", type=Path, help="Default: report.json beside the case output directory")
     args = parser.parse_args()
-    result = freeze_candidate(args.packet, args.spec, args.output, args.protocol) if args.command == "freeze" else run_holdout(args.snapshot, args.protocol, args.output_dir)
+    result = freeze_candidate(args.packet, args.spec, args.output, args.protocol, args.development_ledger) if args.command == "freeze" else run_holdout(args.snapshot, args.protocol, args.output_dir, args.report)
     print(json.dumps(result), flush=True)
 
 

@@ -1,0 +1,285 @@
+{
+  "schema_version": "stormpilot.evaluation-protocol.v1",
+  "protocol_id": "joint-failure-and-mitigation-2026-09-20-phase2-v1",
+  "frozen_at_utc": "2026-09-20T15:37:21.451715+00:00",
+  "status": "frozen_before_phase2_controller_development_and_any_phase2_outcome",
+  "scope": "One public Theta model, the unchanged phase 1 development pair, and eight newly declared simulated perturbations. Phase 1 outcomes are prior development/diagnostic data, preserved as a failed earlier candidate evaluation.",
+  "scenario_id": "theta",
+  "horizon_s": 280800,
+  "information_boundary_id": "causal-depth-feedback-v1",
+  "primary_contract": {
+    "metric": "flood_volume_m3",
+    "threshold": 100,
+    "tolerance": 1e-06,
+    "units": "m3",
+    "mode": "absolute",
+    "direction": "above",
+    "horizon_s": 280800
+  },
+  "secondary_detection_contract": {
+    "metric": "flood_volume_m3",
+    "threshold": 1,
+    "tolerance": 1e-06,
+    "units": "m3",
+    "interpretation": "A stricter descriptive check; never substitutes for the primary joint-failure criterion after outcomes."
+  },
+  "development_context": {
+    "rainfall_multiplier": 1,
+    "noise_std_m": 0,
+    "seed": 42,
+    "reference_controller_id": "constant_flow",
+    "reference_controller_parameters": {
+      "target_scale": 1.0
+    },
+    "fault_types_allowed": [
+      "valve_stuck",
+      "sensor_bias",
+      "sensor_dropout"
+    ],
+    "fault_condition_count": 2,
+    "required_subsets": [
+      "empty",
+      "a",
+      "b",
+      "ab"
+    ],
+    "maximum_discovery_simulator_calls": 512,
+    "budget_note": "Phase 2 development has a fresh maximum of 512 hydraulic calls, including previous-suite diagnostic/tuning trials, repeats and failures. Log all calls and cache hits. Do not execute any phase 2 transform during development; exceeding budget requires a separately labeled exploratory campaign.",
+    "fixed_fault_pair": [
+      {
+        "id": "partial-valve",
+        "type": "valve_stuck",
+        "asset": "2",
+        "start_s": 21600.0,
+        "end_s": 28800.0,
+        "setting": 0.035
+      },
+      {
+        "id": "sensor-bias",
+        "type": "sensor_bias",
+        "asset": "P2",
+        "start_s": 10800.0,
+        "end_s": 21600.0,
+        "bias_m": 1.0
+      }
+    ]
+  },
+  "joint_failure_acceptance": {
+    "require_clean_and_each_single_to_pass_primary": true,
+    "require_pair_to_violate_primary": true,
+    "require_all_four_subsets_included": true,
+    "require_common_controller_parameters_and_exogenous_catalog": true,
+    "claim": "The two modeled conditions are jointly necessary for this threshold violation within the tested pair.",
+    "not_implied": [
+      "Global minimality",
+      "Novel hydraulic physics",
+      "A nonlinear interaction merely from threshold crossing"
+    ],
+    "interaction_statistic": "L(ab) - L(a) - L(b) + L(empty)",
+    "material_superadditivity_minimum_m3": 10
+  },
+  "mitigation_acceptance": {
+    "stressed_minimum_absolute_flood_reduction_m3": 10,
+    "stressed_minimum_relative_flood_reduction": 0.1,
+    "require_both_reduction_conditions": true,
+    "primary_nonregression_allowance_m3_other_subsets": 1,
+    "guard_maximum_increase": {
+      "downstream_excess_volume_m3": 1,
+      "peak_downstream_flow_m3s": 0.001,
+      "terminal_storage_m3": 0.1
+    },
+    "guard_arithmetic_tolerance": 1e-06,
+    "require_guards_on_all_four_subsets": true,
+    "interpretation": "Improvement within declared materiality and guard allowances, not literally zero change or a safety guarantee."
+  },
+  "candidate_freeze": {
+    "must_precede_any_holdout_execution": true,
+    "required_contents": [
+      "Protocol SHA-256",
+      "Full selected fault pair",
+      "Reference policy ID and parameters",
+      "Candidate policy ID and parameters",
+      "Engine, runner, controller and model source digests",
+      "Development outcome table including unfavorable trials",
+      "Parameter search space and complete call log if algorithmic advantage is claimed",
+      "Complete phase 2 development ledger, including failed and rejected candidates, with no claim of optimizer superiority"
+    ],
+    "one_final_candidate_per_claim": true,
+    "post_holdout_tuning_rule": "Exactly one phase 2 candidate may be frozen for this unseen suite. After any phase 2 outcome is observed, every changed policy is exploratory and these cases cannot again be called held out. Preserve phase 1 and phase 2 complete outcomes."
+  },
+  "holdout_transform_protocol": {
+    "application": "Apply each fixed transform to the finally frozen development pair, then evaluate empty, a, b and ab under the same transformed catalog.",
+    "fault_time_transform": "For each fault use its fault-type-specific shift when present, otherwise time_shift_s: duration=min(original_duration*duration_scale,horizon); start=min(max(original_start+shift,0),horizon-duration); end=start+duration.",
+    "valve_setting_transform": "For explicit numeric settings, clamp(original_setting + valve_setting_delta, 0, 1); null remains a freeze-at-onset fault.",
+    "sensor_bias_transform": "Multiply signed bias_m by sensor_bias_scale; zero-reading faults retain the declared zero-reading semantics.",
+    "rainfall_transform": "Absolute multiplier of the pinned base rainfall, not a multiplier of an already scaled development event.",
+    "holdout_subsets": [
+      "empty",
+      "a",
+      "b",
+      "ab"
+    ],
+    "policies": [
+      "frozen_reference",
+      "frozen_candidate"
+    ],
+    "expected_case_count": 32,
+    "expected_policy_run_count": 64,
+    "results_access": "No held-out results during development. One complete final evaluation after candidate freeze. Do not replace, omit or repeat unfavorable cases for tuning.",
+    "selection_method": "A seeded stratified catalog, fixed without executing or scoring any candidate on these transforms. Each column below is independently permuted using random.Random(202609202). Different sensor and valve onset shifts test sequencing; signed sensor multipliers include under-reading. Lower- and higher-rainfall strata are retained regardless of whether they flood.",
+    "selection_seed": 202609202
+  },
+  "holdout_cases": [
+    {
+      "rainfall_multiplier": 1.32,
+      "duration_scale": 1.28,
+      "noise_std_m": 0.025,
+      "sensor_bias_scale": 0.95,
+      "valve_setting_delta": 0.04,
+      "id": "p2h1",
+      "time_shift_s": 0,
+      "fault_time_shift_s": {
+        "sensor_bias": 2700,
+        "valve_stuck": 6000
+      },
+      "seed": 905730
+    },
+    {
+      "rainfall_multiplier": 0.82,
+      "duration_scale": 0.78,
+      "noise_std_m": 0,
+      "sensor_bias_scale": 1.3,
+      "valve_setting_delta": 0.025,
+      "id": "p2h2",
+      "time_shift_s": 0,
+      "fault_time_shift_s": {
+        "sensor_bias": 120,
+        "valve_stuck": 2100
+      },
+      "seed": 475789
+    },
+    {
+      "rainfall_multiplier": 1.42,
+      "duration_scale": 1.4,
+      "noise_std_m": 0.065,
+      "sensor_bias_scale": -0.7,
+      "valve_setting_delta": 0.008,
+      "id": "p2h3",
+      "time_shift_s": 0,
+      "fault_time_shift_s": {
+        "sensor_bias": 750,
+        "valve_stuck": 3300
+      },
+      "seed": 779101
+    },
+    {
+      "rainfall_multiplier": 0.92,
+      "duration_scale": 0.65,
+      "noise_std_m": 0.045,
+      "sensor_bias_scale": 0.8,
+      "valve_setting_delta": -0.032,
+      "id": "p2h4",
+      "time_shift_s": 0,
+      "fault_time_shift_s": {
+        "sensor_bias": 4200,
+        "valve_stuck": 180
+      },
+      "seed": 942786
+    },
+    {
+      "rainfall_multiplier": 1.22,
+      "duration_scale": 1.5,
+      "noise_std_m": 0.015,
+      "sensor_bias_scale": 0.6,
+      "valve_setting_delta": -0.012,
+      "id": "p2h5",
+      "time_shift_s": 0,
+      "fault_time_shift_s": {
+        "sensor_bias": 5700,
+        "valve_stuck": 1050
+      },
+      "seed": 402328
+    },
+    {
+      "rainfall_multiplier": 1.12,
+      "duration_scale": 0.88,
+      "noise_std_m": 0.005,
+      "sensor_bias_scale": -1.2,
+      "valve_setting_delta": 0.06,
+      "id": "p2h6",
+      "time_shift_s": 0,
+      "fault_time_shift_s": {
+        "sensor_bias": -600,
+        "valve_stuck": -1500
+      },
+      "seed": 426317
+    },
+    {
+      "rainfall_multiplier": 1.02,
+      "duration_scale": 1.12,
+      "noise_std_m": 0.035,
+      "sensor_bias_scale": 1.1,
+      "valve_setting_delta": -0.025,
+      "id": "p2h7",
+      "time_shift_s": 0,
+      "fault_time_shift_s": {
+        "sensor_bias": -1800,
+        "valve_stuck": 4800
+      },
+      "seed": 909218
+    },
+    {
+      "rainfall_multiplier": 0.72,
+      "duration_scale": 1.02,
+      "noise_std_m": 0.08,
+      "sensor_bias_scale": 1.5,
+      "valve_setting_delta": 0.08,
+      "id": "p2h8",
+      "time_shift_s": 0,
+      "fault_time_shift_s": {
+        "sensor_bias": 1500,
+        "valve_stuck": -450
+      },
+      "seed": 705566
+    }
+  ],
+  "heldout_usefulness_acceptance": {
+    "require_every_declared_case_and_policy_run": true,
+    "maximum_primary_increase_m3_each_case": 1,
+    "joint_case_aggregate_minimum_absolute_reduction_m3": 80,
+    "joint_case_aggregate_minimum_relative_reduction": 0.1,
+    "minimum_joint_cases_with_10m3_and_10pct_individual_reduction": 4,
+    "uncertainty_note": "Eight deterministic simulated perturbations are a small bounded suite, not independent real storms. Every case and all four subsets must pass guards and primary nonregression; at least four paired cases must individually improve by both 10 m3 and 10 percent, and the aggregate must improve by at least 80 m3 and 10 percent. No relaxed criteria after outcomes.",
+    "require_all_32_case_guards": true
+  },
+  "algorithmic_advantage_protocol": {
+    "required_only_if_algorithmic_superiority_is_claimed": true,
+    "simple_baseline": "Uniform sampling without replacement from the same frozen finite parameter catalog; deterministic random.Random(20260920).sample over the canonically sorted catalog.",
+    "hydraulic_call_budget_per_method": 192,
+    "maximum_unique_parameter_candidates_per_method": 48,
+    "all_candidates_evaluated_on_same_four_development_subsets": true,
+    "rank_rule": "Reject candidates failing the predeclared guards or nonregression checks; among remaining candidates minimize pair flood volume, then pair downstream excess, peak flow, terminal storage, then canonical parameter JSON.",
+    "counting_rule": "Every hydraulic call consumes budget, including failed calls and repeats. Shared precomputed reference cases must be available to both methods; cache hits are reported separately.",
+    "final_comparison": "Freeze each method's chosen policy before heldout execution; evaluate both on every same heldout case. If either campaign or comparison is missing, report a policy comparison only and no optimizer superiority."
+  },
+  "failure_and_storage_rules": {
+    "invalid_run": "Solver, continuity, trace or integrity failure is recorded as invalid, not omitted or replaced by an easier case. It prevents a complete-success claim.",
+    "compressed_evidence": "Independently validate full traces during execution and retain all eight complete compressed packets, base proof, complete outcomes and exact source archive. Invalid or unfavorable cases are retained and cannot be replaced.",
+    "selected_full_packets": "All eight packets are retained; the highest-reference-flood and largest normalized guard-regression cases may be highlighted without deleting any other result.",
+    "source_change": "Any hydraulic, controller or metric source change requires regenerated affected development evidence before candidate freeze."
+  },
+  "claims_not_earned_by_this_protocol": [
+    "Calibrated city flooding, damage avoided, residents protected or real repair efficacy",
+    "General safety certification or all-storm robustness",
+    "Novel simulation physics or absence of related stormwater-control prior art",
+    "Algorithmic advantage without the complete equal-budget comparator",
+    "Cross-platform replay until actually tested on another platform",
+    "A nonlinear synergistic fault interaction based only on crossing a chosen threshold"
+  ],
+  "prior_phase": {
+    "protocol_sha256": "1cd92c48b91c465c9e18c0bca1c39cc112c9993c7e9e510061964f1672eb29b4",
+    "candidate_snapshot_sha256": "99590e22adb316c6639f61088b246f4d4881a3497855856de2c4d60a2b99ea5b",
+    "report_sha256": "a705049c23f2021c5d54dcb5c67810ed4c4ab4af31cd3b494f5c019d83324627",
+    "conclusion": "Phase 1 candidate failed the complete fixed suite. All prior outcomes remain visible; later success cannot revise that result."
+  }
+}

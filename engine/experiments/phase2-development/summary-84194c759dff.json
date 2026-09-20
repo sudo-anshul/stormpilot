@@ -1,0 +1,896 @@
+{
+  "source_sha256": "e6e43a000877c4f154fcd20f50f32c0a65adabf9bcfc203be66c927f8880dfe4",
+  "parameters": {
+    "target_scale": 1.0,
+    "jump_threshold_m": 0.5,
+    "correction_fraction": 0.75
+  },
+  "outcomes": {
+    "original": {
+      "eligible": true,
+      "failures": [],
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49154656318546525,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651018727986262,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49154656318546525,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651018727986262,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49626449249020693,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651020236987016,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49626449249020693,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651020236987016,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4987701146670486,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651019726104906,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4945196752451086,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.6510189192368685,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.004250439421940033,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": -8.068680372730341e-07
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 237.26283682342435,
+            "peak_downstream_flow_m3s": 0.4972025489851599,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651020931774245,
+            "native_flood_volume_m3": 237.26283682342407
+          },
+          "candidate": {
+            "flood_volume_m3": 19.361153168276523,
+            "peak_downstream_flow_m3s": 0.4972025469931333,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651020931774355,
+            "native_flood_volume_m3": 19.361153168276473
+          },
+          "changes": {
+            "flood_volume_m3": -217.90168365514782,
+            "peak_downstream_flow_m3s": -1.9920265992290354e-09,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 1.1013412404281553e-13
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        }
+      },
+      "flood_reduction_m3": 217.90168365514782,
+      "relative_flood_reduction": 0.9183978686780793
+    },
+    "h1": {
+      "eligible": false,
+      "failures": [
+        {
+          "subset": "ab",
+          "criterion": "material_flood_reduction",
+          "absolute_reduction_m3": 0.0,
+          "relative_reduction": null,
+          "minimum_absolute_m3": 10.0,
+          "minimum_relative": 0.1
+        }
+      ],
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4701417162031038,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.631637340625778,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4701417162031038,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.631637340625778,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4841630409514279,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.6316380581469625,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4841630409514279,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.6316380581469625,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4846907632753056,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.631637488486382,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4752024353822643,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.6316374423312245,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.00948832789304127,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": -4.615515702965922e-08
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.488389829854169,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.631638905948515,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4857672716339502,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.631638296926229,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.0026225582202187847,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": -6.090222859356231e-07
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        }
+      },
+      "flood_reduction_m3": 0.0,
+      "relative_flood_reduction": null
+    },
+    "h2": {
+      "eligible": true,
+      "failures": [],
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 313.6804975834418,
+            "peak_downstream_flow_m3s": 0.5048831381282882,
+            "downstream_excess_volume_m3": 2.30348957906702,
+            "downstream_exceedance_duration_s": 1574.6429999999928,
+            "terminal_storage_m3": 4.692993600117081,
+            "native_flood_volume_m3": 313.68049758344176
+          },
+          "candidate": {
+            "flood_volume_m3": 313.6804975834418,
+            "peak_downstream_flow_m3s": 0.5048831381282882,
+            "downstream_excess_volume_m3": 2.30348957906702,
+            "downstream_exceedance_duration_s": 1574.6429999999928,
+            "terminal_storage_m3": 4.692993600117081,
+            "native_flood_volume_m3": 313.68049758344176
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5588570195148849,
+            "downstream_excess_volume_m3": 389.52301358025096,
+            "downstream_exceedance_duration_s": 8106.085999999999,
+            "terminal_storage_m3": 4.692993375035608,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5588570195148849,
+            "downstream_excess_volume_m3": 389.52301358025096,
+            "downstream_exceedance_duration_s": 8106.085999999999,
+            "terminal_storage_m3": 4.692993375035608,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 938.0961782518822,
+            "peak_downstream_flow_m3s": 0.5034935093261113,
+            "downstream_excess_volume_m3": 1.6658969866279862,
+            "downstream_exceedance_duration_s": 1277.9809999999961,
+            "terminal_storage_m3": 4.6929936000896735,
+            "native_flood_volume_m3": 938.0961782518833
+          },
+          "candidate": {
+            "flood_volume_m3": 578.7191158155462,
+            "peak_downstream_flow_m3s": 0.5034934605444699,
+            "downstream_excess_volume_m3": 1.665857195583867,
+            "downstream_exceedance_duration_s": 1277.9809999999961,
+            "terminal_storage_m3": 4.69299360011396,
+            "native_flood_volume_m3": 578.719115815547
+          },
+          "changes": {
+            "flood_volume_m3": -359.377062436336,
+            "peak_downstream_flow_m3s": -4.8781641392992015e-08,
+            "downstream_excess_volume_m3": -3.979104411921952e-05,
+            "terminal_storage_m3": 2.4286350708280224e-11
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 451.7398234815342,
+            "peak_downstream_flow_m3s": 0.5646924409310375,
+            "downstream_excess_volume_m3": 476.8622476437256,
+            "downstream_exceedance_duration_s": 8007.161,
+            "terminal_storage_m3": 4.692993509869389,
+            "native_flood_volume_m3": 451.7398234815339
+          },
+          "candidate": {
+            "flood_volume_m3": 141.50806917748702,
+            "peak_downstream_flow_m3s": 0.5646923861074976,
+            "downstream_excess_volume_m3": 465.51775946597627,
+            "downstream_exceedance_duration_s": 8026.483,
+            "terminal_storage_m3": 4.692993509854784,
+            "native_flood_volume_m3": 141.508069177487
+          },
+          "changes": {
+            "flood_volume_m3": -310.2317543040472,
+            "peak_downstream_flow_m3s": -5.4823539930026755e-08,
+            "downstream_excess_volume_m3": -11.344488177749326,
+            "terminal_storage_m3": -1.460520593354886e-11
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        }
+      },
+      "flood_reduction_m3": 310.2317543040472,
+      "relative_flood_reduction": 0.6867487393807966
+    },
+    "h3": {
+      "eligible": true,
+      "failures": [],
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 2562.335980882447,
+            "peak_downstream_flow_m3s": 0.5115012615718116,
+            "downstream_excess_volume_m3": 11.719130359766238,
+            "downstream_exceedance_duration_s": 4580.6470000000045,
+            "terminal_storage_m3": 4.730083348376737,
+            "native_flood_volume_m3": 2562.3359808824484
+          },
+          "candidate": {
+            "flood_volume_m3": 2562.335980882447,
+            "peak_downstream_flow_m3s": 0.5115012615718116,
+            "downstream_excess_volume_m3": 11.719130359766238,
+            "downstream_exceedance_duration_s": 4580.6470000000045,
+            "terminal_storage_m3": 4.730083348376737,
+            "native_flood_volume_m3": 2562.3359808824484
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 3739.065534408512,
+            "peak_downstream_flow_m3s": 0.5115012615718116,
+            "downstream_excess_volume_m3": 9.99696030839478,
+            "downstream_exceedance_duration_s": 3262.0300000000025,
+            "terminal_storage_m3": 4.730083348376723,
+            "native_flood_volume_m3": 3739.065534408506
+          },
+          "candidate": {
+            "flood_volume_m3": 3739.065534408512,
+            "peak_downstream_flow_m3s": 0.5115012615718116,
+            "downstream_excess_volume_m3": 9.99696030839478,
+            "downstream_exceedance_duration_s": 3262.0300000000025,
+            "terminal_storage_m3": 4.730083348376723,
+            "native_flood_volume_m3": 3739.065534408506
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 3182.211180367316,
+            "peak_downstream_flow_m3s": 0.5044703124880136,
+            "downstream_excess_volume_m3": 2.7639411188807195,
+            "downstream_exceedance_duration_s": 2405.7670000000035,
+            "terminal_storage_m3": 4.73008334837672,
+            "native_flood_volume_m3": 3182.2111803673147
+          },
+          "candidate": {
+            "flood_volume_m3": 2719.4776483576184,
+            "peak_downstream_flow_m3s": 0.5044893114286065,
+            "downstream_excess_volume_m3": 2.920065479265016,
+            "downstream_exceedance_duration_s": 2470.1210000000065,
+            "terminal_storage_m3": 4.730083348376728,
+            "native_flood_volume_m3": 2719.477648357621
+          },
+          "changes": {
+            "flood_volume_m3": -462.7335320096977,
+            "peak_downstream_flow_m3s": 1.899894059298468e-05,
+            "downstream_excess_volume_m3": 0.15612436038429633,
+            "terminal_storage_m3": 7.993605777301127e-15
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 4361.068751588222,
+            "peak_downstream_flow_m3s": 0.5024008698298379,
+            "downstream_excess_volume_m3": 1.2929522941294032,
+            "downstream_exceedance_duration_s": 1171.809000000001,
+            "terminal_storage_m3": 4.730083348376713,
+            "native_flood_volume_m3": 4361.068751588216
+          },
+          "candidate": {
+            "flood_volume_m3": 3896.201150989024,
+            "peak_downstream_flow_m3s": 0.5024008698298379,
+            "downstream_excess_volume_m3": 1.307051326768792,
+            "downstream_exceedance_duration_s": 1197.5870000000032,
+            "terminal_storage_m3": 4.73008334837672,
+            "native_flood_volume_m3": 3896.2011509890153
+          },
+          "changes": {
+            "flood_volume_m3": -464.8676005991979,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.014099032639388831,
+            "terminal_storage_m3": 7.105427357601002e-15
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        }
+      },
+      "flood_reduction_m3": 464.8676005991979,
+      "relative_flood_reduction": 0.1065948800806916
+    },
+    "h4": {
+      "eligible": true,
+      "failures": [],
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49571096276042365,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.661023311149337,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49571096276042365,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.661023311149337,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49682423683616955,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.661025171980343,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49682423683616955,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.661025171980343,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 7.056494221001314,
+            "peak_downstream_flow_m3s": 0.5044519208160037,
+            "downstream_excess_volume_m3": 1.4788225954672656,
+            "downstream_exceedance_duration_s": 1162.4479999999967,
+            "terminal_storage_m3": 4.661025157877802,
+            "native_flood_volume_m3": 7.0564942210013015
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.499276894871951,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.661023670665771,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": -7.056494221001314,
+            "peak_downstream_flow_m3s": -0.005175025944052669,
+            "downstream_excess_volume_m3": -1.4788225954672656,
+            "terminal_storage_m3": -1.4872120308595527e-06
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 258.2969644177143,
+            "peak_downstream_flow_m3s": 0.4977111738074305,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.66102585748181,
+            "native_flood_volume_m3": 258.2969644177142
+          },
+          "candidate": {
+            "flood_volume_m3": 11.740412716735483,
+            "peak_downstream_flow_m3s": 0.4977111404944399,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.661025857477026,
+            "native_flood_volume_m3": 11.74041271673544
+          },
+          "changes": {
+            "flood_volume_m3": -246.55655170097884,
+            "peak_downstream_flow_m3s": -3.331299064379678e-08,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": -4.784617146924575e-12
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        }
+      },
+      "flood_reduction_m3": 246.55655170097884,
+      "relative_flood_reduction": 0.9545468420691579
+    },
+    "h5": {
+      "eligible": false,
+      "failures": [
+        {
+          "subset": "ab",
+          "criterion": "material_flood_reduction",
+          "absolute_reduction_m3": 0.0,
+          "relative_reduction": null,
+          "minimum_absolute_m3": 10.0,
+          "minimum_relative": 0.1
+        }
+      ],
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5135490223297627,
+            "downstream_excess_volume_m3": 15.446780274066844,
+            "downstream_exceedance_duration_s": 1778.4480000000076,
+            "terminal_storage_m3": 4.682759744992106,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5135490223297627,
+            "downstream_excess_volume_m3": 15.446780274066844,
+            "downstream_exceedance_duration_s": 1778.4480000000076,
+            "terminal_storage_m3": 4.682759744992106,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5701066655175464,
+            "downstream_excess_volume_m3": 279.7427724309353,
+            "downstream_exceedance_duration_s": 6911.6550000000025,
+            "terminal_storage_m3": 4.682759500372131,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5701066655175464,
+            "downstream_excess_volume_m3": 279.7427724309353,
+            "downstream_exceedance_duration_s": 6911.6550000000025,
+            "terminal_storage_m3": 4.682759500372131,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5264740413529125,
+            "downstream_excess_volume_m3": 29.314921937933082,
+            "downstream_exceedance_duration_s": 2303.258000000009,
+            "terminal_storage_m3": 4.6827602586347545,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5193419410049938,
+            "downstream_excess_volume_m3": 19.119216862906594,
+            "downstream_exceedance_duration_s": 1822.804999999993,
+            "terminal_storage_m3": 4.682759864091947,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.0071321003479187794,
+            "downstream_excess_volume_m3": -10.195705075026488,
+            "terminal_storage_m3": -3.945428073137691e-07
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.6303687194532442,
+            "downstream_excess_volume_m3": 514.8438364686486,
+            "downstream_exceedance_duration_s": 6983.388000000003,
+            "terminal_storage_m3": 4.682759597356611,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.5928734050837856,
+            "downstream_excess_volume_m3": 364.88637932779375,
+            "downstream_exceedance_duration_s": 6820.782999999999,
+            "terminal_storage_m3": 4.682759508006594,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.03749531436945863,
+            "downstream_excess_volume_m3": -149.9574571408549,
+            "terminal_storage_m3": -8.935001716281477e-08
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        }
+      },
+      "flood_reduction_m3": 0.0,
+      "relative_flood_reduction": null
+    },
+    "h6": {
+      "eligible": true,
+      "failures": [],
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 967.9744162958068,
+            "peak_downstream_flow_m3s": 0.5107287035017123,
+            "downstream_excess_volume_m3": 6.410054643472354,
+            "downstream_exceedance_duration_s": 2982.224999999995,
+            "terminal_storage_m3": 4.710697359412594,
+            "native_flood_volume_m3": 967.9744162958066
+          },
+          "candidate": {
+            "flood_volume_m3": 967.9744162958068,
+            "peak_downstream_flow_m3s": 0.5107287035017123,
+            "downstream_excess_volume_m3": 6.410054643472354,
+            "downstream_exceedance_duration_s": 2982.224999999995,
+            "terminal_storage_m3": 4.710697359412594,
+            "native_flood_volume_m3": 967.9744162958066
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 2790.2825213725246,
+            "peak_downstream_flow_m3s": 0.5107287035017123,
+            "downstream_excess_volume_m3": 4.020888076600777,
+            "downstream_exceedance_duration_s": 1175.449999999997,
+            "terminal_storage_m3": 4.7106974484088955,
+            "native_flood_volume_m3": 2790.2825213725205
+          },
+          "candidate": {
+            "flood_volume_m3": 2790.2825213725246,
+            "peak_downstream_flow_m3s": 0.5107287035017123,
+            "downstream_excess_volume_m3": 4.020888076600777,
+            "downstream_exceedance_duration_s": 1175.449999999997,
+            "terminal_storage_m3": 4.7106974484088955,
+            "native_flood_volume_m3": 2790.2825213725205
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 1657.4105779299705,
+            "peak_downstream_flow_m3s": 0.5023030964206286,
+            "downstream_excess_volume_m3": 0.8983992781021736,
+            "downstream_exceedance_duration_s": 1080.255000000001,
+            "terminal_storage_m3": 4.710697359412604,
+            "native_flood_volume_m3": 1657.4105779299734
+          },
+          "candidate": {
+            "flood_volume_m3": 1184.4834919033565,
+            "peak_downstream_flow_m3s": 0.5023030964206286,
+            "downstream_excess_volume_m3": 0.8983994563472073,
+            "downstream_exceedance_duration_s": 1080.255000000001,
+            "terminal_storage_m3": 4.7106973594125865,
+            "native_flood_volume_m3": 1184.4834919033578
+          },
+          "changes": {
+            "flood_volume_m3": -472.927086026614,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 1.7824503373287115e-07,
+            "terminal_storage_m3": -1.7763568394002505e-14
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 3390.6320044275703,
+            "peak_downstream_flow_m3s": 0.4990863090096927,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.710697448408887,
+            "native_flood_volume_m3": 3390.6320044275662
+          },
+          "candidate": {
+            "flood_volume_m3": 2982.5557210166135,
+            "peak_downstream_flow_m3s": 0.4990863090096927,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.710697448408892,
+            "native_flood_volume_m3": 2982.555721016608
+          },
+          "changes": {
+            "flood_volume_m3": -408.0762834109569,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 5.329070518200751e-15
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        }
+      },
+      "flood_reduction_m3": 408.0762834109569,
+      "relative_flood_reduction": 0.1203540469381758
+    }
+  }
+}

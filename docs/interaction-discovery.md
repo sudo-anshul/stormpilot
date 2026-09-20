@@ -32,9 +32,9 @@ The early measurement error reduces release and consumes storage headroom. The l
 
 ## A controller change with explicit rejection criteria
 
-`balanced_flow` redistributes the configured total target discharge toward basins with greater measured relative filling. Its only dynamic inputs are current measured depths. It has no true-depth channel, fault flag, forecast, future hydraulic trajectory or evaluation result. `target_scale` scales the total target, and `balance_gain` controls redistribution. Geometry and published discharge targets are declared model inputs.
+The default `plausible_depth` candidate estimates abrupt sensor offsets from its own measured-depth history, partially corrects positive offsets, and applies an estimated aggregate discharge cap. It keeps the configured per-basin targets. State is isolated per run; it receives no true-depth channel, fault flag, forecast, future hydraulic trajectory or evaluation result. See [the sensor-plausibility experiment](sensor-plausibility.md) for the causal mechanism, bounded API and limitations.
 
-The default repair grid has 25 parameter combinations and evaluates all four condition subsets for each candidate, plus four reference runs: **104 native calls**. A candidate must reduce joint flooding by at least 10 m³ and 10%, while meeting all of these limits on every matched subset:
+The default repair grid has three correction fractions and evaluates all four condition subsets for each candidate, plus four reference runs: **16 native calls**. A candidate must reduce joint flooding by at least 10 m³ and 10%, while meeting all of these limits on every matched subset:
 
 | Quantity | Maximum allowed increase |
 |---|---:|
@@ -45,7 +45,9 @@ The default repair grid has 25 parameter combinations and evaluates all four con
 
 These allowances were fixed before tuning. They permit small reported changes; they do not mean every quantity is unchanged. Guards are checked before ranking eligible candidates by joint flooding. All rejected candidates remain in the ledger.
 
-In the development run, `target_scale=0.98, balance_gain=2` reduces joint flooding to **11.580060 m³**. The tempting `target_scale=1, balance_gain=2` candidate reaches zero joint flooding but is rejected because its sensor-only downstream peak increases by about **0.002862 m³/s**, exceeding the fixed guard. Twelve of 25 candidates are rejected. The selected candidate's terminal storage increases by about 0.002945 m³, within the explicit 0.1 m³ allowance.
+The phase 2 development candidate (`target_scale=1`, `jump_threshold_m=0.65`, `correction_fraction=0.75`) reduces the original pair's flooding to **19.361153 m³**, a **91.84%** reduction, while passing the guards. Its broader development record contains 293 attempted native calls, including one retained disk-exhaustion failure. Development improvements do not establish independent generalization.
+
+The earlier phase 1 `balanced_flow` grid used 25 candidates and 104 calls. Its selected `target_scale=0.98, balance_gain=2` policy achieved 11.580060 m³ on the original pair but **failed independent evaluation**, increasing aggregate joint flooding. Its exact source, proof and rejection remain archived. The zero-flood `target_scale=1, balance_gain=2` variant was rejected even during development because it exceeded a downstream-peak guard. Explicit legacy grids remain available for reproduction.
 
 ## What the evidence does and does not establish
 

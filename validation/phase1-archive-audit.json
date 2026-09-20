@@ -1,0 +1,480 @@
+{
+  "schema_version": "stormpilot.phase1-archive-audit.v1",
+  "status": "passed_recorded_evidence",
+  "checked_at_utc": "2026-09-20T15:39:53.859653+00:00",
+  "archive_sha256": "33baf99ec58d5dec629cb75b58aead13cc9e54e7b229d3544cfb6b2fa192d1fd",
+  "protocol_sha256": "1cd92c48b91c465c9e18c0bca1c39cc112c9993c7e9e510061964f1672eb29b4",
+  "candidate_snapshot_sha256": "99590e22adb316c6639f61088b246f4d4881a3497855856de2c4d60a2b99ea5b",
+  "original_report_sha256": "a705049c23f2021c5d54dcb5c67810ed4c4ab4af31cd3b494f5c019d83324627",
+  "policy_run_count": 56,
+  "full_trace_row_count": 727771,
+  "validation_counts": {
+    "passed": 1015,
+    "unperformed": 21
+  },
+  "development_outcome": {
+    "primary_violations": {
+      "reference:empty": false,
+      "reference:a": false,
+      "reference:b": false,
+      "reference:ab": true,
+      "candidate:empty": false,
+      "candidate:a": false,
+      "candidate:b": false,
+      "candidate:ab": false
+    },
+    "secondary_violations": {
+      "reference:empty": false,
+      "reference:a": false,
+      "reference:b": false,
+      "reference:ab": true,
+      "candidate:empty": false,
+      "candidate:a": false,
+      "candidate:b": false,
+      "candidate:ab": true
+    },
+    "joint_failure": true,
+    "interaction_excess_m3": 237.2628368234243,
+    "material_superadditivity": true,
+    "comparisons": {
+      "empty": {
+        "reference": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.49154656318546525,
+          "terminal_storage_m3": 4.651018727986262
+        },
+        "candidate": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4776606275993126,
+          "terminal_storage_m3": 4.653964313111837
+        },
+        "changes": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": -0.013885935586152642,
+          "terminal_storage_m3": 0.0029455851255750787
+        },
+        "flood_reduction_m3": -0.0,
+        "relative_flood_reduction": null,
+        "material_flood_improvement": false,
+        "guards": {
+          "downstream_excess_volume_m3": true,
+          "peak_downstream_flow_m3s": true,
+          "terminal_storage_m3": true
+        },
+        "all_guards_pass": true,
+        "largest_normalized_guard_increase": 0.029455851255750787
+      },
+      "a": {
+        "reference": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.49626449249020693,
+          "terminal_storage_m3": 4.651020236987016
+        },
+        "candidate": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4817191208390107,
+          "terminal_storage_m3": 4.6539649456245415
+        },
+        "changes": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": -0.014545371651196237,
+          "terminal_storage_m3": 0.002944708637525828
+        },
+        "flood_reduction_m3": -0.0,
+        "relative_flood_reduction": null,
+        "material_flood_improvement": false,
+        "guards": {
+          "downstream_excess_volume_m3": true,
+          "peak_downstream_flow_m3s": true,
+          "terminal_storage_m3": true
+        },
+        "all_guards_pass": true,
+        "largest_normalized_guard_increase": 0.02944708637525828
+      },
+      "b": {
+        "reference": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4987701146670486,
+          "terminal_storage_m3": 4.651019726104906
+        },
+        "candidate": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4920437548835557,
+          "terminal_storage_m3": 4.653965307740358
+        },
+        "changes": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": -0.006726359783492952,
+          "terminal_storage_m3": 0.0029455816354522213
+        },
+        "flood_reduction_m3": -0.0,
+        "relative_flood_reduction": null,
+        "material_flood_improvement": false,
+        "guards": {
+          "downstream_excess_volume_m3": true,
+          "peak_downstream_flow_m3s": true,
+          "terminal_storage_m3": true
+        },
+        "all_guards_pass": true,
+        "largest_normalized_guard_increase": 0.029455816354522213
+      },
+      "ab": {
+        "reference": {
+          "flood_volume_m3": 237.2628368234243,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4972025489851599,
+          "terminal_storage_m3": 4.651020931774245
+        },
+        "candidate": {
+          "flood_volume_m3": 11.58005995563959,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4869544983385108,
+          "terminal_storage_m3": 4.6539660806491865
+        },
+        "changes": {
+          "flood_volume_m3": -225.6827768677847,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": -0.010248050646649132,
+          "terminal_storage_m3": 0.002945148874941239
+        },
+        "flood_reduction_m3": 225.6827768677847,
+        "relative_flood_reduction": 0.9511931151516253,
+        "material_flood_improvement": true,
+        "guards": {
+          "downstream_excess_volume_m3": true,
+          "peak_downstream_flow_m3s": true,
+          "terminal_storage_m3": true
+        },
+        "all_guards_pass": true,
+        "largest_normalized_guard_increase": 0.02945148874941239
+      }
+    },
+    "all_guards_pass": true,
+    "other_subsets_primary_nonregression": true,
+    "mitigation_passes": true
+  },
+  "aggregate_metrics": {
+    "completeness": "complete",
+    "invalid_cases": [],
+    "all_case_guards_pass": false,
+    "all_case_primary_nonregression": false,
+    "joint_aggregate_reference_flood_m3": 8461.737543915038,
+    "joint_aggregate_candidate_flood_m3": 10361.59785108013,
+    "joint_aggregate_flood_reduction_m3": -1899.8603071650923,
+    "joint_aggregate_relative_flood_reduction": -0.2245236628180828,
+    "individually_material_joint_cases": [
+      "h4"
+    ],
+    "heldout_usefulness_passes": false
+  },
+  "case_validation": [
+    {
+      "case_id": "h1",
+      "validation_counts": {
+        "passed": 145,
+        "unperformed": 3
+      },
+      "trace_records": {
+        "reference:empty": {
+          "run_id": "reference_empty-c8bb7de61f0c",
+          "rows": 12365,
+          "sha256": "eac4405ea692c2393a1dc0d3b4db45f00ec3901c854a380d40ac604f248c9c9a"
+        },
+        "reference:a": {
+          "run_id": "reference_a-4e736337aaf9",
+          "rows": 12385,
+          "sha256": "fd02464a0026e58224aa2aade143527b5f9e92a0fa13a5e5c234ed20a2f4b124"
+        },
+        "reference:b": {
+          "run_id": "reference_b-2c57d3127667",
+          "rows": 12373,
+          "sha256": "39af482bf2bf052398e7a673d74af4b4862fb38adde9a3704a220336befcf410"
+        },
+        "reference:ab": {
+          "run_id": "reference_ab-52b2efbca02a",
+          "rows": 12381,
+          "sha256": "ae522cc37a635825e1a391e5a0761af65ccda50a774e4b34f52ad0997ed4f8ec"
+        },
+        "candidate:empty": {
+          "run_id": "candidate_empty-4dc6b78677d2",
+          "rows": 12360,
+          "sha256": "0c2187cfd8999dde39562a9206001cda2dc1fea15f79e800402def2c127fd061"
+        },
+        "candidate:a": {
+          "run_id": "candidate_a-f9f3330a463e",
+          "rows": 12374,
+          "sha256": "e7a493452d0627054cafe67f0cef8dd04c03f21152d53dac9796928198ee1c1a"
+        },
+        "candidate:b": {
+          "run_id": "candidate_b-fcfae970b756",
+          "rows": 12367,
+          "sha256": "1027ab884226a5af00d482147d2cc5960f3ad801fc31c2ad61af85ad359401ae"
+        },
+        "candidate:ab": {
+          "run_id": "candidate_ab-8f98efa5f1ce",
+          "rows": 12384,
+          "sha256": "88f894e9bda513ad69018d9a8eb9a9c1f20c099573430570c36b6cc214a1fba8"
+        }
+      }
+    },
+    {
+      "case_id": "h2",
+      "validation_counts": {
+        "passed": 145,
+        "unperformed": 3
+      },
+      "trace_records": {
+        "reference:empty": {
+          "run_id": "reference_empty-2fdb4105c260",
+          "rows": 13312,
+          "sha256": "505ddae832c38fef0074043483bc842c13da01a458c03582af453edea522eee1"
+        },
+        "reference:a": {
+          "run_id": "reference_a-a12b4a8938a5",
+          "rows": 13330,
+          "sha256": "0f498062ea795eccf04cc83a0538ac5e1ae772f99f7686f8d0a8517988b522a4"
+        },
+        "reference:b": {
+          "run_id": "reference_b-e37ab0470733",
+          "rows": 13285,
+          "sha256": "af555d1ae10551d7776f342a13108bd11c8a62067f5386dc78cb373e960a8331"
+        },
+        "reference:ab": {
+          "run_id": "reference_ab-e072a79b4de9",
+          "rows": 13302,
+          "sha256": "1b133d7c2f164db9f93dca5a799c85ac0e0afcc0ddd09a88790ebd31e9b3e962"
+        },
+        "candidate:empty": {
+          "run_id": "candidate_empty-30391a0cd7bc",
+          "rows": 13329,
+          "sha256": "bdd7fe29371baa2a2c35aa645c9729cc57692e2493f9eda3ad61c76f8128671f"
+        },
+        "candidate:a": {
+          "run_id": "candidate_a-c602b67aa267",
+          "rows": 13322,
+          "sha256": "b1177e821210cf0445e7cf6c542abb838422b7601f561581b394be6b464462c0"
+        },
+        "candidate:b": {
+          "run_id": "candidate_b-229b346dd648",
+          "rows": 13243,
+          "sha256": "d2b5ddf6c1119a9a040efd2ac767530725a881df2946e6dfccc13732e940096b"
+        },
+        "candidate:ab": {
+          "run_id": "candidate_ab-8681e3d39dd0",
+          "rows": 13252,
+          "sha256": "fc813cc239765c30a180b032bb28019f9d11d9a0e8e76e792650c53c5b15b785"
+        }
+      }
+    },
+    {
+      "case_id": "h3",
+      "validation_counts": {
+        "passed": 145,
+        "unperformed": 3
+      },
+      "trace_records": {
+        "reference:empty": {
+          "run_id": "reference_empty-ed4776031d13",
+          "rows": 13596,
+          "sha256": "02901fcfc9322dcb2a2a38788226beb87a0516db77cdc50c484a1486bdf42f48"
+        },
+        "reference:a": {
+          "run_id": "reference_a-3972afd8fd4e",
+          "rows": 13519,
+          "sha256": "60034d0632028d7a1ed0b087a6dc5b73ed0de0a994c62217f6c90652ab79e337"
+        },
+        "reference:b": {
+          "run_id": "reference_b-fefb0a34ff06",
+          "rows": 13565,
+          "sha256": "9a682fc0e5d76e8dd6ff7995c9aa09f2c429557dbc89925f440d806a58974ef9"
+        },
+        "reference:ab": {
+          "run_id": "reference_ab-07905206cdfb",
+          "rows": 13487,
+          "sha256": "d62278cc038f57cc438edfd20822213d201dfee9d673b16518e6f158c3d85b4a"
+        },
+        "candidate:empty": {
+          "run_id": "candidate_empty-68b5738450fa",
+          "rows": 13588,
+          "sha256": "830e60345c8f30456d2cd8e79e6d81da2ba7e27a7cb9b376dc4b7603248e4f44"
+        },
+        "candidate:a": {
+          "run_id": "candidate_a-75ecfd3821f2",
+          "rows": 13509,
+          "sha256": "6bcce8ca411ae96d1307309cf6ba9b8319dcc1698009cdf5c8d67e2ed295c011"
+        },
+        "candidate:b": {
+          "run_id": "candidate_b-772be70f0b24",
+          "rows": 13519,
+          "sha256": "cba2038847756f590bfaa3fef6d235d2aba2e9ef5d0e72f1ba27527ad3ee0fba"
+        },
+        "candidate:ab": {
+          "run_id": "candidate_ab-ac23f59d7c46",
+          "rows": 13441,
+          "sha256": "6cb087ea1110ee558912d8e6132cc1768e3da42c7aa3adc8e5c003606b9e72ec"
+        }
+      }
+    },
+    {
+      "case_id": "h4",
+      "validation_counts": {
+        "passed": 145,
+        "unperformed": 3
+      },
+      "trace_records": {
+        "reference:empty": {
+          "run_id": "reference_empty-5ae38d10c830",
+          "rows": 12870,
+          "sha256": "fd87406c2036b7e709a58dfa311498b3ea0f101a13818c80103347d819453a41"
+        },
+        "reference:a": {
+          "run_id": "reference_a-12edbb1bf0e8",
+          "rows": 12893,
+          "sha256": "b122d056bf9877a26ec97ae9a6f9517c730d296c508888aaa85e9c06004f8ab9"
+        },
+        "reference:b": {
+          "run_id": "reference_b-6a1146dd41ad",
+          "rows": 12872,
+          "sha256": "f7033cd20dd12823e760681c2318fc185cb2373cf55fb3b74005b416675af075"
+        },
+        "reference:ab": {
+          "run_id": "reference_ab-2598f512747a",
+          "rows": 12875,
+          "sha256": "fbe6e785ff485caaa61d008b85486b7ed15776f5c8c419cc386ba2c0d967f296"
+        },
+        "candidate:empty": {
+          "run_id": "candidate_empty-abbbd1da2774",
+          "rows": 12875,
+          "sha256": "54defbd931d761bb29d05b93205d527e6e6edbb2cc1ab9556d063e4dbf76bd5b"
+        },
+        "candidate:a": {
+          "run_id": "candidate_a-5dfee102a922",
+          "rows": 12888,
+          "sha256": "ad4d5b4f8d5060fa4940eb1d3f66e756d905f3abc56ad3b502d71371eefbbe41"
+        },
+        "candidate:b": {
+          "run_id": "candidate_b-3beadfdb4a2a",
+          "rows": 12890,
+          "sha256": "6bc4693fb92f2f78e134b7d836e9a4b39e2da6b783807031c7cc4a3eb6f6fdca"
+        },
+        "candidate:ab": {
+          "run_id": "candidate_ab-f394309b8b9b",
+          "rows": 12901,
+          "sha256": "af253ce9031e6a98f49f38fdc5df3811aa663979dfe92527beb0eda980bab76c"
+        }
+      }
+    },
+    {
+      "case_id": "h5",
+      "validation_counts": {
+        "passed": 145,
+        "unperformed": 3
+      },
+      "trace_records": {
+        "reference:empty": {
+          "run_id": "reference_empty-124c7cc69fc2",
+          "rows": 12685,
+          "sha256": "9419161b15b9c43f0432af0b7b06d9eb5f85e822df90020e90f2268e0c73f48d"
+        },
+        "reference:a": {
+          "run_id": "reference_a-943bdeffe23e",
+          "rows": 12684,
+          "sha256": "6ca477900b1995c5a07691fd6f1c34f4e45da95f6e0a5290fd442ab9cfb713aa"
+        },
+        "reference:b": {
+          "run_id": "reference_b-a49a33ed9e46",
+          "rows": 12701,
+          "sha256": "6aad6eee1ca4c6c13782d761698887aaf50dc5639e666cc6c1243396fb3ba312"
+        },
+        "reference:ab": {
+          "run_id": "reference_ab-04566cecad56",
+          "rows": 12685,
+          "sha256": "68da46a6aff3d975b96d724e650203d986896e3eeecae716282abc3dc97c6792"
+        },
+        "candidate:empty": {
+          "run_id": "candidate_empty-0c84ca195b2b",
+          "rows": 12707,
+          "sha256": "d797bb5841e2bf3b1c953e788052a2d1323eaa19cdd61bf3f85b22bc38ddb700"
+        },
+        "candidate:a": {
+          "run_id": "candidate_a-2e6799438e21",
+          "rows": 12690,
+          "sha256": "3dbad8b56b8b4bc07a93a3990347850516467c5887268141d9fdbf31eb889458"
+        },
+        "candidate:b": {
+          "run_id": "candidate_b-2d2efc064b18",
+          "rows": 12711,
+          "sha256": "71afba75bb917c129b31d7c1fd36f8b5ba35c4c66590570c1ff8be3164a3958a"
+        },
+        "candidate:ab": {
+          "run_id": "candidate_ab-995ad8672da3",
+          "rows": 12674,
+          "sha256": "ce68df2dc6bb00a5c48ddb2144b1633abebdc32b1b97e4a49e0ebdb98cb1d905"
+        }
+      }
+    },
+    {
+      "case_id": "h6",
+      "validation_counts": {
+        "passed": 145,
+        "unperformed": 3
+      },
+      "trace_records": {
+        "reference:empty": {
+          "run_id": "reference_empty-a88c893a3e97",
+          "rows": 13408,
+          "sha256": "7c0df9b8142db5bf6145d34d9f85940427ff22c5c8f902a54313eb29e722f9e1"
+        },
+        "reference:a": {
+          "run_id": "reference_a-9ff1979a747c",
+          "rows": 13316,
+          "sha256": "0250cd3037b0fbfbba99b60f00eea8148a25bdd9e821ee1d492694e46c31d0cb"
+        },
+        "reference:b": {
+          "run_id": "reference_b-7e345718d32c",
+          "rows": 13374,
+          "sha256": "2e2598a6525f3088ea83d4e1a9043b79f89423aa54b1332a63947b2adfb29f9e"
+        },
+        "reference:ab": {
+          "run_id": "reference_ab-e47554eedf49",
+          "rows": 13284,
+          "sha256": "c2293157ab78c71b666182331654b010168f2adc65e59d9849f947aa564865cc"
+        },
+        "candidate:empty": {
+          "run_id": "candidate_empty-2169e0dbbc63",
+          "rows": 13403,
+          "sha256": "66582fc54c48e4abc1cd5c0ba204cc37f02a435666399d4ffbeb50e99d888d06"
+        },
+        "candidate:a": {
+          "run_id": "candidate_a-a06817216fef",
+          "rows": 13288,
+          "sha256": "4b758573031ceb0152bf46fc8099cdb0d00b3661418322ee12256491bc177637"
+        },
+        "candidate:b": {
+          "run_id": "candidate_b-2f71da7ed878",
+          "rows": 13329,
+          "sha256": "4fe84b4abd81d870ce2e49ddb985800307dc129dbbc2d6acc8130c338efd425e"
+        },
+        "candidate:ab": {
+          "run_id": "candidate_ab-31bc9bda5126",
+          "rows": 13218,
+          "sha256": "81fc20efca0de057e19bc2211331e271c3a1426289ca1caf0521ddd0eb0a00a0"
+        }
+      }
+    }
+  ],
+  "replay_status": "unperformed_by_this_audit",
+  "limitations": [
+    "This audit rechecks all persisted compressed traces against the archived exact source/model bytes. It does not rerun native simulation.",
+    "Phase 1 frozen policy fails the declared heldout usefulness criteria. Its unfavorable result is unchanged."
+  ]
+}

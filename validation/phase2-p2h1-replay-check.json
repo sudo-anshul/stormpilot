@@ -1,0 +1,278 @@
+{
+  "status": "passed",
+  "replay_status": "matched",
+  "scope": "recorded_replay_comparison",
+  "checks": [
+    {
+      "id": "original_evidence",
+      "status": "passed",
+      "message": "Original packet recorded-evidence status is passed."
+    },
+    {
+      "id": "replayed_evidence",
+      "status": "passed",
+      "message": "Replayed packet recorded-evidence status is passed."
+    },
+    {
+      "id": "experiment_identity",
+      "status": "passed",
+      "message": "Experiment, request and executable source identities match."
+    },
+    {
+      "id": "run:reference_empty-7f67903be70e",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 13640
+      }
+    },
+    {
+      "id": "run:reference_a-13afd4601f24",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 13644
+      }
+    },
+    {
+      "id": "run:reference_b-b711150d5bfb",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 13620
+      }
+    },
+    {
+      "id": "run:reference_ab-c70939fd499d",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 13625
+      }
+    },
+    {
+      "id": "run:candidate_empty-d43ff182d6b0",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 13640
+      }
+    },
+    {
+      "id": "run:candidate_a-3b405be67a26",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 13644
+      }
+    },
+    {
+      "id": "run:candidate_b-db5414f93d52",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 13637
+      }
+    },
+    {
+      "id": "run:candidate_ab-b27105c0da77",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 13638
+      }
+    }
+  ],
+  "evidence_status": {
+    "original": "passed",
+    "replayed": "passed"
+  },
+  "limitations": [
+    "The caller must actually run the simulator to produce the replayed packet; comparing a copied packet does not establish execution.",
+    "Recorded cases are replayed; this comparison does not repeat or validate exhaustive search coverage.",
+    "Matched simulation output does not establish field calibration or a safety certificate."
+  ],
+  "execution_evidence": {
+    "command": "python3 engine/cli.py replay --request work/original-p2h1.json --output work/replayed-p2h1.json",
+    "working_directory": "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit",
+    "native_library_supplied_in_archive": false,
+    "rebuilt_from_archived_sources": true,
+    "native_build_manifest": {
+      "source_sha256": "4bb1604b00696aa7b1b0ee7484512d983e8fc87b74bd281ee23fd32908a59840",
+      "epa_tag": "v5.2.4",
+      "epa_commit": "7952ca837988b1c32f791812eccc9fd64547e093",
+      "platform": "macOS-26.5-arm64-arm-64bit-Mach-O",
+      "command": [
+        "/usr/bin/clang",
+        "-O2",
+        "-fPIC",
+        "-dynamiclib",
+        "-I/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/include",
+        "-I/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/climate.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/controls.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/culvert.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/datetime.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/dwflow.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/dynwave.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/error.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/exfil.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/findroot.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/flowrout.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/forcmain.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/gage.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/gwater.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/hash.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/hotstart.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/iface.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/infil.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/inflow.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/inlet.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/input.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/inputrpt.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/keywords.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/kinwave.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/landuse.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/lid.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/lidproc.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/link.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/massbal.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/mathexpr.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/mempool.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/node.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/odesolve.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/output.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/project.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/qualrout.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/rain.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/rdii.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/report.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/roadway.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/routing.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/runoff.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/shape.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/snow.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/stats.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/statsrpt.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/street.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/subcatch.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/surfqual.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/swmm5.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/table.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/toposort.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/transect.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/treatmnt.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/vendor/epa-swmm/src/solver/xsect.c",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/native_bridge.c",
+        "-o",
+        "/Users/anshul/Documents/Codex/2026-09-20/l/work/phase2-independent-audit/engine/build/libswmm5.dylib.building",
+        "-lm",
+        "-Wl,-install_name,@rpath/libswmm5.dylib"
+      ]
+    },
+    "unique_simulator_calls": 8,
+    "original_packet_sha256": "bef334a719eb3383f51a005eaf0966f02e772813ebb8140578d050d1fcdc4d60",
+    "replayed_packet_sha256": "8fb4f134823ef297ae0539a9ba6688f9d90dc78e818660f2de070f28e6d28ede"
+  },
+  "retained_replay_packet": {
+    "path": "evaluation/phase2/p2h1-replay.json.gz",
+    "sha256": "19328dd5adcf0a3c3613c30ab9c18881c05cd3fec2bc381c82c5b14538e64697",
+    "bytes": 3931972
+  }
+}

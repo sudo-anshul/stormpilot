@@ -1,0 +1,20 @@
+{
+  "schema_version": "stormpilot.heldout-execution.v1",
+  "started_at_utc": "2026-09-20T15:51:59.017932+00:00",
+  "protocol_sha256": "15e373f2f634a26a9fd8013853ab6618e1b57ef79877effea7a0ddf2ae1dadd7",
+  "candidate_snapshot_sha256": "742f3f43880930dbb2146bf99d1a8d901f4427df00ae5cdeb101d7c8269e3e4f",
+  "suite_type": "heldout_benchmark",
+  "status": "completed",
+  "completed_cases": [
+    "p2h1",
+    "p2h2",
+    "p2h3",
+    "p2h4",
+    "p2h5",
+    "p2h6",
+    "p2h7",
+    "p2h8"
+  ],
+  "completed_at_utc": "2026-09-20T15:52:29.789697+00:00",
+  "report_sha256": "757b0a7a4095a5cadc2b01ef7efdc364521bbad4d31aef3792c244472c459b98"
+}

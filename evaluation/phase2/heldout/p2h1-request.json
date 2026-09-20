@@ -1,0 +1,43 @@
+{
+  "scenario_id": "theta",
+  "controller_id": "constant_flow",
+  "fallback_controller_id": "plausible_depth",
+  "controller_parameters": {
+    "target_scale": 1.0
+  },
+  "fallback_controller_parameters": {
+    "target_scale": 1.0,
+    "jump_threshold_m": 0.65,
+    "correction_fraction": 0.75
+  },
+  "seed": 905730,
+  "rainfall_multiplier": 1.32,
+  "noise_std_m": 0.025,
+  "faults": [
+    {
+      "id": "partial-valve",
+      "type": "valve_stuck",
+      "asset": "2",
+      "start_s": 27600.0,
+      "end_s": 36816.0,
+      "setting": 0.07500000000000001
+    },
+    {
+      "id": "sensor-bias",
+      "type": "sensor_bias",
+      "asset": "P2",
+      "start_s": 13500.0,
+      "end_s": 27324.0,
+      "bias_m": 0.95
+    }
+  ],
+  "test_contract": {
+    "metric": "flood_volume_m3",
+    "threshold": 100,
+    "tolerance": 1e-06,
+    "units": "m3",
+    "mode": "absolute",
+    "direction": "above",
+    "horizon_s": 280800
+  }
+}

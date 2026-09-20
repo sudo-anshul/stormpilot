@@ -1,0 +1,15 @@
+{
+  "reference": {
+    "controller_id": "constant_flow",
+    "parameters": {
+      "target_scale": 1.0
+    }
+  },
+  "candidate": {
+    "controller_id": "balanced_flow",
+    "parameters": {
+      "target_scale": 0.98,
+      "balance_gain": 2.0
+    }
+  }
+}

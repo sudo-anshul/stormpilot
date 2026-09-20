@@ -1,0 +1,16 @@
+{
+  "reference": {
+    "controller_id": "constant_flow",
+    "parameters": {
+      "target_scale": 1.0
+    }
+  },
+  "candidate": {
+    "controller_id": "plausible_depth",
+    "parameters": {
+      "target_scale": 1.0,
+      "jump_threshold_m": 0.65,
+      "correction_fraction": 0.75
+    }
+  }
+}

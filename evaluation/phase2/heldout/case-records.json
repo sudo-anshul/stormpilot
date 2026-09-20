@@ -1,0 +1,4594 @@
+[
+  {
+    "case_id": "p2h1",
+    "request": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "plausible_depth",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "seed": 905730,
+      "rainfall_multiplier": 1.32,
+      "noise_std_m": 0.025,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 27600.0,
+          "end_s": 36816.0,
+          "setting": 0.07500000000000001
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 13500.0,
+          "end_s": 27324.0,
+          "bias_m": 0.95
+        }
+      ],
+      "test_contract": {
+        "metric": "flood_volume_m3",
+        "threshold": 100,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "mode": "absolute",
+        "direction": "above",
+        "horizon_s": 280800
+      }
+    },
+    "status": "completed",
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 2918.595893056201,
+        "downstream_excess_volume_m3": 7.825909790634867,
+        "peak_downstream_flow_m3s": 0.5118448919574012,
+        "terminal_storage_m3": 4.718729961515224
+      },
+      "reference:a": {
+        "flood_volume_m3": 2571.411685020288,
+        "downstream_excess_volume_m3": 1061.065145588429,
+        "peak_downstream_flow_m3s": 0.6690483949946603,
+        "terminal_storage_m3": 4.718729262585108
+      },
+      "reference:b": {
+        "flood_volume_m3": 3590.8356160761655,
+        "downstream_excess_volume_m3": 0.1473704816331775,
+        "peak_downstream_flow_m3s": 0.5005602839084837,
+        "terminal_storage_m3": 4.718729961515233
+      },
+      "reference:ab": {
+        "flood_volume_m3": 3243.7442411756992,
+        "downstream_excess_volume_m3": 1051.0019575448368,
+        "peak_downstream_flow_m3s": 0.6691372423037767,
+        "terminal_storage_m3": 4.718729262581744
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 2918.595893056201,
+        "downstream_excess_volume_m3": 7.825909790634867,
+        "peak_downstream_flow_m3s": 0.5118448919574012,
+        "terminal_storage_m3": 4.718729961515224
+      },
+      "candidate:a": {
+        "flood_volume_m3": 2571.411685020288,
+        "downstream_excess_volume_m3": 1061.065145588429,
+        "peak_downstream_flow_m3s": 0.6690483949946603,
+        "terminal_storage_m3": 4.718729262585108
+      },
+      "candidate:b": {
+        "flood_volume_m3": 3169.57744890104,
+        "downstream_excess_volume_m3": 0.1473704816334084,
+        "peak_downstream_flow_m3s": 0.5005602839084837,
+        "terminal_storage_m3": 4.7187299615152245
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 2822.424198908249,
+        "downstream_excess_volume_m3": 1052.473091484366,
+        "peak_downstream_flow_m3s": 0.6690790636323999,
+        "terminal_storage_m3": 4.718729262559736
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-7f67903be70e",
+        "rows": 13640,
+        "sha256": "e9361d0dc197071274a9880f351ebf5d18c264af295c99df249989ecf11accc0"
+      },
+      "reference:a": {
+        "run_id": "reference_a-13afd4601f24",
+        "rows": 13644,
+        "sha256": "26499ba14da1ec4e4a32e3cf10e5880d36342ce2f19d968617d85075bd726878"
+      },
+      "reference:b": {
+        "run_id": "reference_b-b711150d5bfb",
+        "rows": 13620,
+        "sha256": "f260ae519a9fd4a4ee76f85431f44accf678967c78a51f150583303ef7d7f91b"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-c70939fd499d",
+        "rows": 13625,
+        "sha256": "56e2604c3a7cffa07edd325d8aba42c740661597a5cf4225b37a46267d6c3425"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-d43ff182d6b0",
+        "rows": 13640,
+        "sha256": "e9361d0dc197071274a9880f351ebf5d18c264af295c99df249989ecf11accc0"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-3b405be67a26",
+        "rows": 13644,
+        "sha256": "26499ba14da1ec4e4a32e3cf10e5880d36342ce2f19d968617d85075bd726878"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-db5414f93d52",
+        "rows": 13637,
+        "sha256": "76f883bd05a2284e5cfb82753dc9575cb02ad8fb09f79d4672d7801d43656344"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-b27105c0da77",
+        "rows": 13638,
+        "sha256": "4bfdfb55aa75336e0f567026e455b4f30917c3d4ae48aaf1c43ec77baa9e238e"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "6c01d3fb2fc37870a52f60c68a60b88cb6844943a98d61796fb5235b2a528725",
+          "rainfall_sha256": "136ec159c6d4afc23ef975aebd4dc577c4a1de8bd616f73f399878168a16bb8f",
+          "exogenous_sha256": "5b41448d87fbd1d4fe8ea291a1c7f40e12bb72de568fa16376bedb53b0f8e5ea",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "6c01d3fb2fc37870a52f60c68a60b88cb6844943a98d61796fb5235b2a528725",
+          "rainfall_sha256": "136ec159c6d4afc23ef975aebd4dc577c4a1de8bd616f73f399878168a16bb8f",
+          "exogenous_sha256": "5b41448d87fbd1d4fe8ea291a1c7f40e12bb72de568fa16376bedb53b0f8e5ea",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "6c01d3fb2fc37870a52f60c68a60b88cb6844943a98d61796fb5235b2a528725",
+          "rainfall_sha256": "136ec159c6d4afc23ef975aebd4dc577c4a1de8bd616f73f399878168a16bb8f",
+          "exogenous_sha256": "5b41448d87fbd1d4fe8ea291a1c7f40e12bb72de568fa16376bedb53b0f8e5ea",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "6c01d3fb2fc37870a52f60c68a60b88cb6844943a98d61796fb5235b2a528725",
+          "rainfall_sha256": "136ec159c6d4afc23ef975aebd4dc577c4a1de8bd616f73f399878168a16bb8f",
+          "exogenous_sha256": "5b41448d87fbd1d4fe8ea291a1c7f40e12bb72de568fa16376bedb53b0f8e5ea",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "6c01d3fb2fc37870a52f60c68a60b88cb6844943a98d61796fb5235b2a528725",
+          "rainfall_sha256": "136ec159c6d4afc23ef975aebd4dc577c4a1de8bd616f73f399878168a16bb8f",
+          "exogenous_sha256": "5b41448d87fbd1d4fe8ea291a1c7f40e12bb72de568fa16376bedb53b0f8e5ea",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "6c01d3fb2fc37870a52f60c68a60b88cb6844943a98d61796fb5235b2a528725",
+          "rainfall_sha256": "136ec159c6d4afc23ef975aebd4dc577c4a1de8bd616f73f399878168a16bb8f",
+          "exogenous_sha256": "5b41448d87fbd1d4fe8ea291a1c7f40e12bb72de568fa16376bedb53b0f8e5ea",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "6c01d3fb2fc37870a52f60c68a60b88cb6844943a98d61796fb5235b2a528725",
+          "rainfall_sha256": "136ec159c6d4afc23ef975aebd4dc577c4a1de8bd616f73f399878168a16bb8f",
+          "exogenous_sha256": "5b41448d87fbd1d4fe8ea291a1c7f40e12bb72de568fa16376bedb53b0f8e5ea",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "6c01d3fb2fc37870a52f60c68a60b88cb6844943a98d61796fb5235b2a528725",
+          "rainfall_sha256": "136ec159c6d4afc23ef975aebd4dc577c4a1de8bd616f73f399878168a16bb8f",
+          "exogenous_sha256": "5b41448d87fbd1d4fe8ea291a1c7f40e12bb72de568fa16376bedb53b0f8e5ea",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": true,
+        "reference:a": true,
+        "reference:b": true,
+        "reference:ab": true,
+        "candidate:empty": true,
+        "candidate:a": true,
+        "candidate:b": true,
+        "candidate:ab": true
+      },
+      "secondary_violations": {
+        "reference:empty": true,
+        "reference:a": true,
+        "reference:b": true,
+        "reference:ab": true,
+        "candidate:empty": true,
+        "candidate:a": true,
+        "candidate:b": true,
+        "candidate:ab": true
+      },
+      "joint_failure": false,
+      "interaction_excess_m3": 0.09283313544665361,
+      "material_superadditivity": false,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 2918.595893056201,
+            "downstream_excess_volume_m3": 7.825909790634867,
+            "peak_downstream_flow_m3s": 0.5118448919574012,
+            "terminal_storage_m3": 4.718729961515224
+          },
+          "candidate": {
+            "flood_volume_m3": 2918.595893056201,
+            "downstream_excess_volume_m3": 7.825909790634867,
+            "peak_downstream_flow_m3s": 0.5118448919574012,
+            "terminal_storage_m3": 4.718729961515224
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 2571.411685020288,
+            "downstream_excess_volume_m3": 1061.065145588429,
+            "peak_downstream_flow_m3s": 0.6690483949946603,
+            "terminal_storage_m3": 4.718729262585108
+          },
+          "candidate": {
+            "flood_volume_m3": 2571.411685020288,
+            "downstream_excess_volume_m3": 1061.065145588429,
+            "peak_downstream_flow_m3s": 0.6690483949946603,
+            "terminal_storage_m3": 4.718729262585108
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 3590.8356160761655,
+            "downstream_excess_volume_m3": 0.1473704816331775,
+            "peak_downstream_flow_m3s": 0.5005602839084837,
+            "terminal_storage_m3": 4.718729961515233
+          },
+          "candidate": {
+            "flood_volume_m3": 3169.57744890104,
+            "downstream_excess_volume_m3": 0.1473704816334084,
+            "peak_downstream_flow_m3s": 0.5005602839084837,
+            "terminal_storage_m3": 4.7187299615152245
+          },
+          "changes": {
+            "flood_volume_m3": -421.25816717512544,
+            "downstream_excess_volume_m3": 2.3089863354641693e-13,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": -8.881784197001252e-15
+          },
+          "flood_reduction_m3": 421.25816717512544,
+          "relative_flood_reduction": 0.11731480140420611,
+          "material_flood_improvement": true,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 2.3089863354641693e-13
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 3243.7442411756992,
+            "downstream_excess_volume_m3": 1051.0019575448368,
+            "peak_downstream_flow_m3s": 0.6691372423037767,
+            "terminal_storage_m3": 4.718729262581744
+          },
+          "candidate": {
+            "flood_volume_m3": 2822.424198908249,
+            "downstream_excess_volume_m3": 1052.473091484366,
+            "peak_downstream_flow_m3s": 0.6690790636323999,
+            "terminal_storage_m3": 4.718729262559736
+          },
+          "changes": {
+            "flood_volume_m3": -421.3200422674504,
+            "downstream_excess_volume_m3": 1.4711339395291816,
+            "peak_downstream_flow_m3s": -5.817867137680732e-05,
+            "terminal_storage_m3": -2.2007284883329703e-11
+          },
+          "flood_reduction_m3": 421.3200422674504,
+          "relative_flood_reduction": 0.12988694882884552,
+          "material_flood_improvement": true,
+          "guards": {
+            "downstream_excess_volume_m3": false,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": false,
+          "largest_normalized_guard_increase": 1.4711339395291816
+        }
+      },
+      "all_guards_pass": false,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": false
+    },
+    "full_packet_sha256": "bef334a719eb3383f51a005eaf0966f02e772813ebb8140578d050d1fcdc4d60",
+    "execution": {
+      "started_runs": 8,
+      "completed_runs": 8,
+      "treatments": [
+        {
+          "policy": "reference",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "reference_empty-7f67903be70e"
+        },
+        {
+          "policy": "reference",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "reference_a-13afd4601f24"
+        },
+        {
+          "policy": "reference",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "reference_b-b711150d5bfb"
+        },
+        {
+          "policy": "reference",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "reference_ab-c70939fd499d"
+        },
+        {
+          "policy": "candidate",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "candidate_empty-d43ff182d6b0"
+        },
+        {
+          "policy": "candidate",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "candidate_a-3b405be67a26"
+        },
+        {
+          "policy": "candidate",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "candidate_b-db5414f93d52"
+        },
+        {
+          "policy": "candidate",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "candidate_ab-b27105c0da77"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "p2h2",
+    "request": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "plausible_depth",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "seed": 475789,
+      "rainfall_multiplier": 0.82,
+      "noise_std_m": 0,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 23700.0,
+          "end_s": 29316.0,
+          "setting": 0.060000000000000005
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 10920.0,
+          "end_s": 19344.0,
+          "bias_m": 1.3
+        }
+      ],
+      "test_contract": {
+        "metric": "flood_volume_m3",
+        "threshold": 100,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "mode": "absolute",
+        "direction": "above",
+        "horizon_s": 280800
+      }
+    },
+    "status": "completed",
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.46345863583628355,
+        "terminal_storage_m3": 4.627668703569681
+      },
+      "reference:a": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4614208421358883,
+        "terminal_storage_m3": 4.627668778736531
+      },
+      "reference:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4790067595842474,
+        "terminal_storage_m3": 4.6276688267849835
+      },
+      "reference:ab": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4790067595842474,
+        "terminal_storage_m3": 4.627668830850312
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.46345863583628355,
+        "terminal_storage_m3": 4.627668703569681
+      },
+      "candidate:a": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4614208421358883,
+        "terminal_storage_m3": 4.627668778736531
+      },
+      "candidate:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4689321732323254,
+        "terminal_storage_m3": 4.627668663867505
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4689309453471414,
+        "terminal_storage_m3": 4.62766879173493
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-b298f85e30fd",
+        "rows": 12275,
+        "sha256": "3e131ca0fe529243b2cbe6e691e3ffcdbf1e4d93f835c9b9a660e3b4fc706ffb"
+      },
+      "reference:a": {
+        "run_id": "reference_a-bed0e666a47c",
+        "rows": 12261,
+        "sha256": "6fc87bcdca5d1d0efbd43cd1222754f74c5dc83c64f9b4ed50666e8d9d5b7a8b"
+      },
+      "reference:b": {
+        "run_id": "reference_b-ae85c1f62074",
+        "rows": 12274,
+        "sha256": "039f7640fba8ec6615bcbe2d67ee037883187b889f4e63afe8e4503a0b3af263"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-739f9c28e95f",
+        "rows": 12270,
+        "sha256": "7d0aa73b79f46af2f2294fde49fc28edd3823040d9ca4224c3eacf9cf30645c2"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-a364c50b0a9d",
+        "rows": 12275,
+        "sha256": "3e131ca0fe529243b2cbe6e691e3ffcdbf1e4d93f835c9b9a660e3b4fc706ffb"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-af346e70ecb8",
+        "rows": 12261,
+        "sha256": "6fc87bcdca5d1d0efbd43cd1222754f74c5dc83c64f9b4ed50666e8d9d5b7a8b"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-a485e2cfa2e0",
+        "rows": 12255,
+        "sha256": "05ce939073fdddbd6cefcb11922f70e095d168d5a16295e72c41c619ab5bcba5"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-d6aaf1a0686a",
+        "rows": 12269,
+        "sha256": "bc50ce194be61a31d61b326e042abec7d1635f770fb2efed64c52dd2be0d5ead"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "1eb87122cb826d81cfd277ba6345b6be32c9a042d4939ca411630b05844ff573",
+          "rainfall_sha256": "451d6b02d5b849d0599adc2f760ce6c9716694ca7269afc2c5761e1c5ed59a60",
+          "exogenous_sha256": "b7f2f2f191ef376a1ed2d18461cdd9f3a43316ad9e2cc48cde34f7417d90747d",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "1eb87122cb826d81cfd277ba6345b6be32c9a042d4939ca411630b05844ff573",
+          "rainfall_sha256": "451d6b02d5b849d0599adc2f760ce6c9716694ca7269afc2c5761e1c5ed59a60",
+          "exogenous_sha256": "b7f2f2f191ef376a1ed2d18461cdd9f3a43316ad9e2cc48cde34f7417d90747d",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "1eb87122cb826d81cfd277ba6345b6be32c9a042d4939ca411630b05844ff573",
+          "rainfall_sha256": "451d6b02d5b849d0599adc2f760ce6c9716694ca7269afc2c5761e1c5ed59a60",
+          "exogenous_sha256": "b7f2f2f191ef376a1ed2d18461cdd9f3a43316ad9e2cc48cde34f7417d90747d",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "1eb87122cb826d81cfd277ba6345b6be32c9a042d4939ca411630b05844ff573",
+          "rainfall_sha256": "451d6b02d5b849d0599adc2f760ce6c9716694ca7269afc2c5761e1c5ed59a60",
+          "exogenous_sha256": "b7f2f2f191ef376a1ed2d18461cdd9f3a43316ad9e2cc48cde34f7417d90747d",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "1eb87122cb826d81cfd277ba6345b6be32c9a042d4939ca411630b05844ff573",
+          "rainfall_sha256": "451d6b02d5b849d0599adc2f760ce6c9716694ca7269afc2c5761e1c5ed59a60",
+          "exogenous_sha256": "b7f2f2f191ef376a1ed2d18461cdd9f3a43316ad9e2cc48cde34f7417d90747d",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "1eb87122cb826d81cfd277ba6345b6be32c9a042d4939ca411630b05844ff573",
+          "rainfall_sha256": "451d6b02d5b849d0599adc2f760ce6c9716694ca7269afc2c5761e1c5ed59a60",
+          "exogenous_sha256": "b7f2f2f191ef376a1ed2d18461cdd9f3a43316ad9e2cc48cde34f7417d90747d",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "1eb87122cb826d81cfd277ba6345b6be32c9a042d4939ca411630b05844ff573",
+          "rainfall_sha256": "451d6b02d5b849d0599adc2f760ce6c9716694ca7269afc2c5761e1c5ed59a60",
+          "exogenous_sha256": "b7f2f2f191ef376a1ed2d18461cdd9f3a43316ad9e2cc48cde34f7417d90747d",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "1eb87122cb826d81cfd277ba6345b6be32c9a042d4939ca411630b05844ff573",
+          "rainfall_sha256": "451d6b02d5b849d0599adc2f760ce6c9716694ca7269afc2c5761e1c5ed59a60",
+          "exogenous_sha256": "b7f2f2f191ef376a1ed2d18461cdd9f3a43316ad9e2cc48cde34f7417d90747d",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": false,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": false,
+        "candidate:empty": false,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": false
+      },
+      "secondary_violations": {
+        "reference:empty": false,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": false,
+        "candidate:empty": false,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": false
+      },
+      "joint_failure": false,
+      "interaction_excess_m3": 0.0,
+      "material_superadditivity": false,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.46345863583628355,
+            "terminal_storage_m3": 4.627668703569681
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.46345863583628355,
+            "terminal_storage_m3": 4.627668703569681
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4614208421358883,
+            "terminal_storage_m3": 4.627668778736531
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4614208421358883,
+            "terminal_storage_m3": 4.627668778736531
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4790067595842474,
+            "terminal_storage_m3": 4.6276688267849835
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4689321732323254,
+            "terminal_storage_m3": 4.627668663867505
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.010074586351921988,
+            "terminal_storage_m3": -1.6291747861885142e-07
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4790067595842474,
+            "terminal_storage_m3": 4.627668830850312
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4689309453471414,
+            "terminal_storage_m3": 4.62766879173493
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.010075814237105962,
+            "terminal_storage_m3": -3.9115382044485614e-08
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        }
+      },
+      "all_guards_pass": true,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": false
+    },
+    "full_packet_sha256": "a9d1eab855e5c01d51ff38864775805cea0cb2426828e5325b33005ab2a07bc4",
+    "execution": {
+      "started_runs": 8,
+      "completed_runs": 8,
+      "treatments": [
+        {
+          "policy": "reference",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "reference_empty-b298f85e30fd"
+        },
+        {
+          "policy": "reference",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "reference_a-bed0e666a47c"
+        },
+        {
+          "policy": "reference",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "reference_b-ae85c1f62074"
+        },
+        {
+          "policy": "reference",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "reference_ab-739f9c28e95f"
+        },
+        {
+          "policy": "candidate",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "candidate_empty-a364c50b0a9d"
+        },
+        {
+          "policy": "candidate",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "candidate_a-af346e70ecb8"
+        },
+        {
+          "policy": "candidate",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "candidate_b-a485e2cfa2e0"
+        },
+        {
+          "policy": "candidate",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "candidate_ab-d6aaf1a0686a"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "p2h3",
+    "request": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "plausible_depth",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "seed": 779101,
+      "rainfall_multiplier": 1.42,
+      "noise_std_m": 0.065,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 24900.0,
+          "end_s": 34980.0,
+          "setting": 0.043000000000000003
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 11550.0,
+          "end_s": 26670.0,
+          "bias_m": -0.7
+        }
+      ],
+      "test_contract": {
+        "metric": "flood_volume_m3",
+        "threshold": 100,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "mode": "absolute",
+        "direction": "above",
+        "horizon_s": 280800
+      }
+    },
+    "status": "completed",
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 4686.828523887713,
+        "downstream_excess_volume_m3": 45.77013586178116,
+        "peak_downstream_flow_m3s": 0.5350641097587309,
+        "terminal_storage_m3": 4.739321409743273
+      },
+      "reference:a": {
+        "flood_volume_m3": 4719.4186352140105,
+        "downstream_excess_volume_m3": 36.08325202630684,
+        "peak_downstream_flow_m3s": 0.5350641097587309,
+        "terminal_storage_m3": 4.739321477420042
+      },
+      "reference:b": {
+        "flood_volume_m3": 2206.898313313772,
+        "downstream_excess_volume_m3": 2989.981165300943,
+        "peak_downstream_flow_m3s": 0.8238309261233525,
+        "terminal_storage_m3": 4.739320865621075
+      },
+      "reference:ab": {
+        "flood_volume_m3": 2289.4035444172523,
+        "downstream_excess_volume_m3": 2508.9124322795083,
+        "peak_downstream_flow_m3s": 0.8238309261233525,
+        "terminal_storage_m3": 4.739321477420021
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 4686.828523887713,
+        "downstream_excess_volume_m3": 45.77013586178116,
+        "peak_downstream_flow_m3s": 0.5350641097587309,
+        "terminal_storage_m3": 4.739321409743273
+      },
+      "candidate:a": {
+        "flood_volume_m3": 4719.4186352140105,
+        "downstream_excess_volume_m3": 36.08325202630684,
+        "peak_downstream_flow_m3s": 0.5350641097587309,
+        "terminal_storage_m3": 4.739321477420042
+      },
+      "candidate:b": {
+        "flood_volume_m3": 2206.898313313772,
+        "downstream_excess_volume_m3": 2989.981165300943,
+        "peak_downstream_flow_m3s": 0.8238309261233525,
+        "terminal_storage_m3": 4.739320865621075
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 2289.4035444172523,
+        "downstream_excess_volume_m3": 2508.9124322795083,
+        "peak_downstream_flow_m3s": 0.8238309261233525,
+        "terminal_storage_m3": 4.739321477420021
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-ab5441b75438",
+        "rows": 13790,
+        "sha256": "797127e1eed5571868877f275d306c3ced4d2c8ecaad30e9db7baf7641d0561d"
+      },
+      "reference:a": {
+        "run_id": "reference_a-438bb0ea649b",
+        "rows": 13789,
+        "sha256": "28b7130a0b7e31ea882ce518d313f9c5abf491c4b9453aa65f2e3cac66961c04"
+      },
+      "reference:b": {
+        "run_id": "reference_b-bbe224d58f5e",
+        "rows": 13905,
+        "sha256": "b6b814243d9480deee2148a1878904da4d86762f16d15a8b37ba0357beac0367"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-0abe90558534",
+        "rows": 13915,
+        "sha256": "255e95e9b908943387b7030b3a0a2b688dc350d9773902622ee4d912c0c0466f"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-61f8d25a0be2",
+        "rows": 13790,
+        "sha256": "797127e1eed5571868877f275d306c3ced4d2c8ecaad30e9db7baf7641d0561d"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-5ddaf19dab24",
+        "rows": 13789,
+        "sha256": "28b7130a0b7e31ea882ce518d313f9c5abf491c4b9453aa65f2e3cac66961c04"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-83bad09e0b40",
+        "rows": 13905,
+        "sha256": "b6b814243d9480deee2148a1878904da4d86762f16d15a8b37ba0357beac0367"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-c4eb6d0fac9c",
+        "rows": 13915,
+        "sha256": "255e95e9b908943387b7030b3a0a2b688dc350d9773902622ee4d912c0c0466f"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "93c462a8a054db6292a0f7150f439ce3bef747c7bd5d5cb1299f518e8c97052a",
+          "rainfall_sha256": "2ae37780f46952396dee29c1bf111ab7d36c9b152f3bef83307e5bc16c461b6c",
+          "exogenous_sha256": "cdffddac8d53ecee49b622e3b8a2d19f877d09e24d0e8b3c2dffc9f92f348eee",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "93c462a8a054db6292a0f7150f439ce3bef747c7bd5d5cb1299f518e8c97052a",
+          "rainfall_sha256": "2ae37780f46952396dee29c1bf111ab7d36c9b152f3bef83307e5bc16c461b6c",
+          "exogenous_sha256": "cdffddac8d53ecee49b622e3b8a2d19f877d09e24d0e8b3c2dffc9f92f348eee",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "93c462a8a054db6292a0f7150f439ce3bef747c7bd5d5cb1299f518e8c97052a",
+          "rainfall_sha256": "2ae37780f46952396dee29c1bf111ab7d36c9b152f3bef83307e5bc16c461b6c",
+          "exogenous_sha256": "cdffddac8d53ecee49b622e3b8a2d19f877d09e24d0e8b3c2dffc9f92f348eee",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "93c462a8a054db6292a0f7150f439ce3bef747c7bd5d5cb1299f518e8c97052a",
+          "rainfall_sha256": "2ae37780f46952396dee29c1bf111ab7d36c9b152f3bef83307e5bc16c461b6c",
+          "exogenous_sha256": "cdffddac8d53ecee49b622e3b8a2d19f877d09e24d0e8b3c2dffc9f92f348eee",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "93c462a8a054db6292a0f7150f439ce3bef747c7bd5d5cb1299f518e8c97052a",
+          "rainfall_sha256": "2ae37780f46952396dee29c1bf111ab7d36c9b152f3bef83307e5bc16c461b6c",
+          "exogenous_sha256": "cdffddac8d53ecee49b622e3b8a2d19f877d09e24d0e8b3c2dffc9f92f348eee",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "93c462a8a054db6292a0f7150f439ce3bef747c7bd5d5cb1299f518e8c97052a",
+          "rainfall_sha256": "2ae37780f46952396dee29c1bf111ab7d36c9b152f3bef83307e5bc16c461b6c",
+          "exogenous_sha256": "cdffddac8d53ecee49b622e3b8a2d19f877d09e24d0e8b3c2dffc9f92f348eee",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "93c462a8a054db6292a0f7150f439ce3bef747c7bd5d5cb1299f518e8c97052a",
+          "rainfall_sha256": "2ae37780f46952396dee29c1bf111ab7d36c9b152f3bef83307e5bc16c461b6c",
+          "exogenous_sha256": "cdffddac8d53ecee49b622e3b8a2d19f877d09e24d0e8b3c2dffc9f92f348eee",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "93c462a8a054db6292a0f7150f439ce3bef747c7bd5d5cb1299f518e8c97052a",
+          "rainfall_sha256": "2ae37780f46952396dee29c1bf111ab7d36c9b152f3bef83307e5bc16c461b6c",
+          "exogenous_sha256": "cdffddac8d53ecee49b622e3b8a2d19f877d09e24d0e8b3c2dffc9f92f348eee",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": true,
+        "reference:a": true,
+        "reference:b": true,
+        "reference:ab": true,
+        "candidate:empty": true,
+        "candidate:a": true,
+        "candidate:b": true,
+        "candidate:ab": true
+      },
+      "secondary_violations": {
+        "reference:empty": true,
+        "reference:a": true,
+        "reference:b": true,
+        "reference:ab": true,
+        "candidate:empty": true,
+        "candidate:a": true,
+        "candidate:b": true,
+        "candidate:ab": true
+      },
+      "joint_failure": false,
+      "interaction_excess_m3": 49.91511977718301,
+      "material_superadditivity": true,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 4686.828523887713,
+            "downstream_excess_volume_m3": 45.77013586178116,
+            "peak_downstream_flow_m3s": 0.5350641097587309,
+            "terminal_storage_m3": 4.739321409743273
+          },
+          "candidate": {
+            "flood_volume_m3": 4686.828523887713,
+            "downstream_excess_volume_m3": 45.77013586178116,
+            "peak_downstream_flow_m3s": 0.5350641097587309,
+            "terminal_storage_m3": 4.739321409743273
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 4719.4186352140105,
+            "downstream_excess_volume_m3": 36.08325202630684,
+            "peak_downstream_flow_m3s": 0.5350641097587309,
+            "terminal_storage_m3": 4.739321477420042
+          },
+          "candidate": {
+            "flood_volume_m3": 4719.4186352140105,
+            "downstream_excess_volume_m3": 36.08325202630684,
+            "peak_downstream_flow_m3s": 0.5350641097587309,
+            "terminal_storage_m3": 4.739321477420042
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 2206.898313313772,
+            "downstream_excess_volume_m3": 2989.981165300943,
+            "peak_downstream_flow_m3s": 0.8238309261233525,
+            "terminal_storage_m3": 4.739320865621075
+          },
+          "candidate": {
+            "flood_volume_m3": 2206.898313313772,
+            "downstream_excess_volume_m3": 2989.981165300943,
+            "peak_downstream_flow_m3s": 0.8238309261233525,
+            "terminal_storage_m3": 4.739320865621075
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 2289.4035444172523,
+            "downstream_excess_volume_m3": 2508.9124322795083,
+            "peak_downstream_flow_m3s": 0.8238309261233525,
+            "terminal_storage_m3": 4.739321477420021
+          },
+          "candidate": {
+            "flood_volume_m3": 2289.4035444172523,
+            "downstream_excess_volume_m3": 2508.9124322795083,
+            "peak_downstream_flow_m3s": 0.8238309261233525,
+            "terminal_storage_m3": 4.739321477420021
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        }
+      },
+      "all_guards_pass": true,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": false
+    },
+    "full_packet_sha256": "dc4c3aeb363bf2bf230a836652d763c69bcc60d5da4ff18112d4248290ac794c",
+    "execution": {
+      "started_runs": 8,
+      "completed_runs": 8,
+      "treatments": [
+        {
+          "policy": "reference",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "reference_empty-ab5441b75438"
+        },
+        {
+          "policy": "reference",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "reference_a-438bb0ea649b"
+        },
+        {
+          "policy": "reference",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "reference_b-bbe224d58f5e"
+        },
+        {
+          "policy": "reference",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "reference_ab-0abe90558534"
+        },
+        {
+          "policy": "candidate",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "candidate_empty-61f8d25a0be2"
+        },
+        {
+          "policy": "candidate",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "candidate_a-5ddaf19dab24"
+        },
+        {
+          "policy": "candidate",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "candidate_b-83bad09e0b40"
+        },
+        {
+          "policy": "candidate",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "candidate_ab-c4eb6d0fac9c"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "p2h4",
+    "request": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "plausible_depth",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "seed": 942786,
+      "rainfall_multiplier": 0.92,
+      "noise_std_m": 0.045,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 21780.0,
+          "end_s": 26460.0,
+          "setting": 0.0030000000000000027
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 15000.0,
+          "end_s": 22020.0,
+          "bias_m": 0.8
+        }
+      ],
+      "test_contract": {
+        "metric": "flood_volume_m3",
+        "threshold": 100,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "mode": "absolute",
+        "direction": "above",
+        "horizon_s": 280800
+      }
+    },
+    "status": "completed",
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 42.45124072807479,
+        "peak_downstream_flow_m3s": 0.6191191576773226,
+        "terminal_storage_m3": 4.685076303553463
+      },
+      "reference:a": {
+        "flood_volume_m3": 99.2927704053233,
+        "downstream_excess_volume_m3": 57.69085343302503,
+        "peak_downstream_flow_m3s": 0.6191191576773226,
+        "terminal_storage_m3": 4.685079488591126
+      },
+      "reference:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 34.269628166455796,
+        "peak_downstream_flow_m3s": 0.571776203133746,
+        "terminal_storage_m3": 4.6850767397409445
+      },
+      "reference:ab": {
+        "flood_volume_m3": 412.0070692760164,
+        "downstream_excess_volume_m3": 39.652939171024634,
+        "peak_downstream_flow_m3s": 0.571776203133746,
+        "terminal_storage_m3": 4.685079488573508
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 42.45124072807479,
+        "peak_downstream_flow_m3s": 0.6191191576773226,
+        "terminal_storage_m3": 4.685076303553463
+      },
+      "candidate:a": {
+        "flood_volume_m3": 99.2927704053233,
+        "downstream_excess_volume_m3": 57.69085343302503,
+        "peak_downstream_flow_m3s": 0.6191191576773226,
+        "terminal_storage_m3": 4.685079488591126
+      },
+      "candidate:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 34.269628166455796,
+        "peak_downstream_flow_m3s": 0.571776203133746,
+        "terminal_storage_m3": 4.6850767397409445
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 412.0070692760164,
+        "downstream_excess_volume_m3": 39.652939171024634,
+        "peak_downstream_flow_m3s": 0.571776203133746,
+        "terminal_storage_m3": 4.685079488573508
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-0d2269e8d53f",
+        "rows": 12591,
+        "sha256": "261c2649b62fdd5105002985d118236de7bac20a921010d40f5cd14828f49d22"
+      },
+      "reference:a": {
+        "run_id": "reference_a-17e233796a45",
+        "rows": 12595,
+        "sha256": "80bfe3cb2c7f339da6c5ac49423143cc5b9d8644cc9ff84662578956585fee1d"
+      },
+      "reference:b": {
+        "run_id": "reference_b-f26497ea3136",
+        "rows": 12601,
+        "sha256": "2fd4cb7552c24993ee0dd2b70913f9a6253765d54c0f1704c5750b7ccf706bd8"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-c07c4a431547",
+        "rows": 12583,
+        "sha256": "8a9bb226f7112a15021e84c0c0762d691bbf688ba8aff0848595735ca380e6b2"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-fa28a1c27a86",
+        "rows": 12591,
+        "sha256": "261c2649b62fdd5105002985d118236de7bac20a921010d40f5cd14828f49d22"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-e9c11c774def",
+        "rows": 12595,
+        "sha256": "80bfe3cb2c7f339da6c5ac49423143cc5b9d8644cc9ff84662578956585fee1d"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-af78ed69c1aa",
+        "rows": 12601,
+        "sha256": "2fd4cb7552c24993ee0dd2b70913f9a6253765d54c0f1704c5750b7ccf706bd8"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-6097a2032e5d",
+        "rows": 12583,
+        "sha256": "8a9bb226f7112a15021e84c0c0762d691bbf688ba8aff0848595735ca380e6b2"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "3b695be00898de1731c8c93c9591b5a16c48747477c7ae75b047058b75a141c3",
+          "rainfall_sha256": "c66e845e397a97adc1316b1ddbda5c25be57f8d5b14c70e9ae43c02ccdb780c9",
+          "exogenous_sha256": "aa100934c238727910c2a1cb2bf62549bd61c8365130f7581463660e7ce82c79",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "3b695be00898de1731c8c93c9591b5a16c48747477c7ae75b047058b75a141c3",
+          "rainfall_sha256": "c66e845e397a97adc1316b1ddbda5c25be57f8d5b14c70e9ae43c02ccdb780c9",
+          "exogenous_sha256": "aa100934c238727910c2a1cb2bf62549bd61c8365130f7581463660e7ce82c79",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "3b695be00898de1731c8c93c9591b5a16c48747477c7ae75b047058b75a141c3",
+          "rainfall_sha256": "c66e845e397a97adc1316b1ddbda5c25be57f8d5b14c70e9ae43c02ccdb780c9",
+          "exogenous_sha256": "aa100934c238727910c2a1cb2bf62549bd61c8365130f7581463660e7ce82c79",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "3b695be00898de1731c8c93c9591b5a16c48747477c7ae75b047058b75a141c3",
+          "rainfall_sha256": "c66e845e397a97adc1316b1ddbda5c25be57f8d5b14c70e9ae43c02ccdb780c9",
+          "exogenous_sha256": "aa100934c238727910c2a1cb2bf62549bd61c8365130f7581463660e7ce82c79",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "3b695be00898de1731c8c93c9591b5a16c48747477c7ae75b047058b75a141c3",
+          "rainfall_sha256": "c66e845e397a97adc1316b1ddbda5c25be57f8d5b14c70e9ae43c02ccdb780c9",
+          "exogenous_sha256": "aa100934c238727910c2a1cb2bf62549bd61c8365130f7581463660e7ce82c79",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "3b695be00898de1731c8c93c9591b5a16c48747477c7ae75b047058b75a141c3",
+          "rainfall_sha256": "c66e845e397a97adc1316b1ddbda5c25be57f8d5b14c70e9ae43c02ccdb780c9",
+          "exogenous_sha256": "aa100934c238727910c2a1cb2bf62549bd61c8365130f7581463660e7ce82c79",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "3b695be00898de1731c8c93c9591b5a16c48747477c7ae75b047058b75a141c3",
+          "rainfall_sha256": "c66e845e397a97adc1316b1ddbda5c25be57f8d5b14c70e9ae43c02ccdb780c9",
+          "exogenous_sha256": "aa100934c238727910c2a1cb2bf62549bd61c8365130f7581463660e7ce82c79",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "3b695be00898de1731c8c93c9591b5a16c48747477c7ae75b047058b75a141c3",
+          "rainfall_sha256": "c66e845e397a97adc1316b1ddbda5c25be57f8d5b14c70e9ae43c02ccdb780c9",
+          "exogenous_sha256": "aa100934c238727910c2a1cb2bf62549bd61c8365130f7581463660e7ce82c79",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": false,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": true,
+        "candidate:empty": false,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": true
+      },
+      "secondary_violations": {
+        "reference:empty": false,
+        "reference:a": true,
+        "reference:b": false,
+        "reference:ab": true,
+        "candidate:empty": false,
+        "candidate:a": true,
+        "candidate:b": false,
+        "candidate:ab": true
+      },
+      "joint_failure": true,
+      "interaction_excess_m3": 312.71429887069314,
+      "material_superadditivity": true,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 42.45124072807479,
+            "peak_downstream_flow_m3s": 0.6191191576773226,
+            "terminal_storage_m3": 4.685076303553463
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 42.45124072807479,
+            "peak_downstream_flow_m3s": 0.6191191576773226,
+            "terminal_storage_m3": 4.685076303553463
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 99.2927704053233,
+            "downstream_excess_volume_m3": 57.69085343302503,
+            "peak_downstream_flow_m3s": 0.6191191576773226,
+            "terminal_storage_m3": 4.685079488591126
+          },
+          "candidate": {
+            "flood_volume_m3": 99.2927704053233,
+            "downstream_excess_volume_m3": 57.69085343302503,
+            "peak_downstream_flow_m3s": 0.6191191576773226,
+            "terminal_storage_m3": 4.685079488591126
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 34.269628166455796,
+            "peak_downstream_flow_m3s": 0.571776203133746,
+            "terminal_storage_m3": 4.6850767397409445
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 34.269628166455796,
+            "peak_downstream_flow_m3s": 0.571776203133746,
+            "terminal_storage_m3": 4.6850767397409445
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 412.0070692760164,
+            "downstream_excess_volume_m3": 39.652939171024634,
+            "peak_downstream_flow_m3s": 0.571776203133746,
+            "terminal_storage_m3": 4.685079488573508
+          },
+          "candidate": {
+            "flood_volume_m3": 412.0070692760164,
+            "downstream_excess_volume_m3": 39.652939171024634,
+            "peak_downstream_flow_m3s": 0.571776203133746,
+            "terminal_storage_m3": 4.685079488573508
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        }
+      },
+      "all_guards_pass": true,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": false
+    },
+    "full_packet_sha256": "59aa61fd3d47402fbaf61776b0ec8a2a12fd81222002a6b2c1f67c3e9dec8041",
+    "execution": {
+      "started_runs": 8,
+      "completed_runs": 8,
+      "treatments": [
+        {
+          "policy": "reference",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "reference_empty-0d2269e8d53f"
+        },
+        {
+          "policy": "reference",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "reference_a-17e233796a45"
+        },
+        {
+          "policy": "reference",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "reference_b-f26497ea3136"
+        },
+        {
+          "policy": "reference",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "reference_ab-c07c4a431547"
+        },
+        {
+          "policy": "candidate",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "candidate_empty-fa28a1c27a86"
+        },
+        {
+          "policy": "candidate",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "candidate_a-e9c11c774def"
+        },
+        {
+          "policy": "candidate",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "candidate_b-af78ed69c1aa"
+        },
+        {
+          "policy": "candidate",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "candidate_ab-6097a2032e5d"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "p2h5",
+    "request": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "plausible_depth",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "seed": 402328,
+      "rainfall_multiplier": 1.22,
+      "noise_std_m": 0.015,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 22650.0,
+          "end_s": 33450.0,
+          "setting": 0.023000000000000003
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 16500.0,
+          "end_s": 32700.0,
+          "bias_m": 0.6
+        }
+      ],
+      "test_contract": {
+        "metric": "flood_volume_m3",
+        "threshold": 100,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "mode": "absolute",
+        "direction": "above",
+        "horizon_s": 280800
+      }
+    },
+    "status": "completed",
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 1300.388419267035,
+        "downstream_excess_volume_m3": 2.3491275033930146,
+        "peak_downstream_flow_m3s": 0.505013642030995,
+        "terminal_storage_m3": 4.700723690815715
+      },
+      "reference:a": {
+        "flood_volume_m3": 2503.523804783079,
+        "downstream_excess_volume_m3": 0.6298463142417698,
+        "peak_downstream_flow_m3s": 0.5034159709952317,
+        "terminal_storage_m3": 4.700723875448432
+      },
+      "reference:b": {
+        "flood_volume_m3": 1799.2436722781795,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.497158954461136,
+        "terminal_storage_m3": 4.700723712824288
+      },
+      "reference:ab": {
+        "flood_volume_m3": 2727.4359433679188,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.49749436652415147,
+        "terminal_storage_m3": 4.700723875448457
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 1300.388419267035,
+        "downstream_excess_volume_m3": 2.3491275033930146,
+        "peak_downstream_flow_m3s": 0.505013642030995,
+        "terminal_storage_m3": 4.700723690815715
+      },
+      "candidate:a": {
+        "flood_volume_m3": 2503.523804783079,
+        "downstream_excess_volume_m3": 0.6298463142417698,
+        "peak_downstream_flow_m3s": 0.5034159709952317,
+        "terminal_storage_m3": 4.700723875448432
+      },
+      "candidate:b": {
+        "flood_volume_m3": 1799.2436722781795,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.497158954461136,
+        "terminal_storage_m3": 4.700723712824288
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 2727.4359433679188,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.49749436652415147,
+        "terminal_storage_m3": 4.700723875448457
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-8731c5c21bf8",
+        "rows": 13449,
+        "sha256": "7b1863876582029f11a22218644f21d1734f786baa54098e314ea84f82ec0bbd"
+      },
+      "reference:a": {
+        "run_id": "reference_a-2cd41c943f78",
+        "rows": 13380,
+        "sha256": "f87bc46a0a3950fa63e6188b31c0dd07e8334d7660bc5e21217d89577e433e5f"
+      },
+      "reference:b": {
+        "run_id": "reference_b-0ba851bfef66",
+        "rows": 13449,
+        "sha256": "e1caf7f90a1c5097fa415e2b5d7c6eae19ec67b29f81511132380e0ab011f3e8"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-646ed33135b2",
+        "rows": 13372,
+        "sha256": "2486a1c82c873b2eed47bc79eb89ca6cf726d3e62bc4f99daf95c8300059761c"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-5b644ca28810",
+        "rows": 13449,
+        "sha256": "7b1863876582029f11a22218644f21d1734f786baa54098e314ea84f82ec0bbd"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-09183aa71335",
+        "rows": 13380,
+        "sha256": "f87bc46a0a3950fa63e6188b31c0dd07e8334d7660bc5e21217d89577e433e5f"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-826b1f9c5768",
+        "rows": 13449,
+        "sha256": "e1caf7f90a1c5097fa415e2b5d7c6eae19ec67b29f81511132380e0ab011f3e8"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-bcae74ffca5f",
+        "rows": 13372,
+        "sha256": "2486a1c82c873b2eed47bc79eb89ca6cf726d3e62bc4f99daf95c8300059761c"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "4a7dc1336ade48b4f8e715db44783c341eb01f8b7f4618c12d496c20cf14df82",
+          "rainfall_sha256": "f521a3c1f63392bb18f9de0b2e120612b2d8e83816e207b9fb78ef1d2b0f14e8",
+          "exogenous_sha256": "8a9e700c0c00268fa2176decdd7f68abb4d8e4b7bf509a6c02d58b730f147b35",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "4a7dc1336ade48b4f8e715db44783c341eb01f8b7f4618c12d496c20cf14df82",
+          "rainfall_sha256": "f521a3c1f63392bb18f9de0b2e120612b2d8e83816e207b9fb78ef1d2b0f14e8",
+          "exogenous_sha256": "8a9e700c0c00268fa2176decdd7f68abb4d8e4b7bf509a6c02d58b730f147b35",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "4a7dc1336ade48b4f8e715db44783c341eb01f8b7f4618c12d496c20cf14df82",
+          "rainfall_sha256": "f521a3c1f63392bb18f9de0b2e120612b2d8e83816e207b9fb78ef1d2b0f14e8",
+          "exogenous_sha256": "8a9e700c0c00268fa2176decdd7f68abb4d8e4b7bf509a6c02d58b730f147b35",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "4a7dc1336ade48b4f8e715db44783c341eb01f8b7f4618c12d496c20cf14df82",
+          "rainfall_sha256": "f521a3c1f63392bb18f9de0b2e120612b2d8e83816e207b9fb78ef1d2b0f14e8",
+          "exogenous_sha256": "8a9e700c0c00268fa2176decdd7f68abb4d8e4b7bf509a6c02d58b730f147b35",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "4a7dc1336ade48b4f8e715db44783c341eb01f8b7f4618c12d496c20cf14df82",
+          "rainfall_sha256": "f521a3c1f63392bb18f9de0b2e120612b2d8e83816e207b9fb78ef1d2b0f14e8",
+          "exogenous_sha256": "8a9e700c0c00268fa2176decdd7f68abb4d8e4b7bf509a6c02d58b730f147b35",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "4a7dc1336ade48b4f8e715db44783c341eb01f8b7f4618c12d496c20cf14df82",
+          "rainfall_sha256": "f521a3c1f63392bb18f9de0b2e120612b2d8e83816e207b9fb78ef1d2b0f14e8",
+          "exogenous_sha256": "8a9e700c0c00268fa2176decdd7f68abb4d8e4b7bf509a6c02d58b730f147b35",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "4a7dc1336ade48b4f8e715db44783c341eb01f8b7f4618c12d496c20cf14df82",
+          "rainfall_sha256": "f521a3c1f63392bb18f9de0b2e120612b2d8e83816e207b9fb78ef1d2b0f14e8",
+          "exogenous_sha256": "8a9e700c0c00268fa2176decdd7f68abb4d8e4b7bf509a6c02d58b730f147b35",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "4a7dc1336ade48b4f8e715db44783c341eb01f8b7f4618c12d496c20cf14df82",
+          "rainfall_sha256": "f521a3c1f63392bb18f9de0b2e120612b2d8e83816e207b9fb78ef1d2b0f14e8",
+          "exogenous_sha256": "8a9e700c0c00268fa2176decdd7f68abb4d8e4b7bf509a6c02d58b730f147b35",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": true,
+        "reference:a": true,
+        "reference:b": true,
+        "reference:ab": true,
+        "candidate:empty": true,
+        "candidate:a": true,
+        "candidate:b": true,
+        "candidate:ab": true
+      },
+      "secondary_violations": {
+        "reference:empty": true,
+        "reference:a": true,
+        "reference:b": true,
+        "reference:ab": true,
+        "candidate:empty": true,
+        "candidate:a": true,
+        "candidate:b": true,
+        "candidate:ab": true
+      },
+      "joint_failure": false,
+      "interaction_excess_m3": -274.94311442630465,
+      "material_superadditivity": false,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 1300.388419267035,
+            "downstream_excess_volume_m3": 2.3491275033930146,
+            "peak_downstream_flow_m3s": 0.505013642030995,
+            "terminal_storage_m3": 4.700723690815715
+          },
+          "candidate": {
+            "flood_volume_m3": 1300.388419267035,
+            "downstream_excess_volume_m3": 2.3491275033930146,
+            "peak_downstream_flow_m3s": 0.505013642030995,
+            "terminal_storage_m3": 4.700723690815715
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 2503.523804783079,
+            "downstream_excess_volume_m3": 0.6298463142417698,
+            "peak_downstream_flow_m3s": 0.5034159709952317,
+            "terminal_storage_m3": 4.700723875448432
+          },
+          "candidate": {
+            "flood_volume_m3": 2503.523804783079,
+            "downstream_excess_volume_m3": 0.6298463142417698,
+            "peak_downstream_flow_m3s": 0.5034159709952317,
+            "terminal_storage_m3": 4.700723875448432
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 1799.2436722781795,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.497158954461136,
+            "terminal_storage_m3": 4.700723712824288
+          },
+          "candidate": {
+            "flood_volume_m3": 1799.2436722781795,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.497158954461136,
+            "terminal_storage_m3": 4.700723712824288
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 2727.4359433679188,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49749436652415147,
+            "terminal_storage_m3": 4.700723875448457
+          },
+          "candidate": {
+            "flood_volume_m3": 2727.4359433679188,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49749436652415147,
+            "terminal_storage_m3": 4.700723875448457
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        }
+      },
+      "all_guards_pass": true,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": false
+    },
+    "full_packet_sha256": "ef336d1f82f3c2c36a1083e7adfbb6889d28c9a33e2e1433a35b1c098c90359c",
+    "execution": {
+      "started_runs": 8,
+      "completed_runs": 8,
+      "treatments": [
+        {
+          "policy": "reference",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "reference_empty-8731c5c21bf8"
+        },
+        {
+          "policy": "reference",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "reference_a-2cd41c943f78"
+        },
+        {
+          "policy": "reference",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "reference_b-0ba851bfef66"
+        },
+        {
+          "policy": "reference",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "reference_ab-646ed33135b2"
+        },
+        {
+          "policy": "candidate",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "candidate_empty-5b644ca28810"
+        },
+        {
+          "policy": "candidate",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "candidate_a-09183aa71335"
+        },
+        {
+          "policy": "candidate",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "candidate_b-826b1f9c5768"
+        },
+        {
+          "policy": "candidate",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "candidate_ab-bcae74ffca5f"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "p2h6",
+    "request": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "plausible_depth",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "seed": 426317,
+      "rainfall_multiplier": 1.12,
+      "noise_std_m": 0.005,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 20100.0,
+          "end_s": 26436.0,
+          "setting": 0.095
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 10200.0,
+          "end_s": 19704.0,
+          "bias_m": -1.2
+        }
+      ],
+      "test_contract": {
+        "metric": "flood_volume_m3",
+        "threshold": 100,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "mode": "absolute",
+        "direction": "above",
+        "horizon_s": 280800
+      }
+    },
+    "status": "completed",
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 117.98555069776675,
+        "downstream_excess_volume_m3": 0.11912719166109782,
+        "peak_downstream_flow_m3s": 0.5008567363845915,
+        "terminal_storage_m3": 4.671063647302294
+      },
+      "reference:a": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 793.2404162832149,
+        "peak_downstream_flow_m3s": 0.6306315250456611,
+        "terminal_storage_m3": 4.671062401524984
+      },
+      "reference:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 332.9778529867849,
+        "peak_downstream_flow_m3s": 0.6122559763960789,
+        "terminal_storage_m3": 4.6710627044112805
+      },
+      "reference:ab": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 695.0244750069091,
+        "peak_downstream_flow_m3s": 0.6122559763960789,
+        "terminal_storage_m3": 4.671062536713811
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 117.98555069776675,
+        "downstream_excess_volume_m3": 0.11912719166109782,
+        "peak_downstream_flow_m3s": 0.5008567363845915,
+        "terminal_storage_m3": 4.671063647302294
+      },
+      "candidate:a": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 793.2404162832149,
+        "peak_downstream_flow_m3s": 0.6306315250456611,
+        "terminal_storage_m3": 4.671062401524984
+      },
+      "candidate:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 332.9778529867849,
+        "peak_downstream_flow_m3s": 0.6122559763960789,
+        "terminal_storage_m3": 4.6710627044112805
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 695.0244750069091,
+        "peak_downstream_flow_m3s": 0.6122559763960789,
+        "terminal_storage_m3": 4.671062536713811
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-bd29d3635ecb",
+        "rows": 13218,
+        "sha256": "ace30447de9b79e135a7c817bc613809b40b3e9339b06ff4053c4d8c1411ae9e"
+      },
+      "reference:a": {
+        "run_id": "reference_a-ee5de07482ac",
+        "rows": 13217,
+        "sha256": "c0f2241a8e0f7847c7ad5df3ad2dd3b9e967a4a2821894c148fb08bbd2b0752a"
+      },
+      "reference:b": {
+        "run_id": "reference_b-443c3cb340ac",
+        "rows": 13229,
+        "sha256": "00094229f013359c88b611bcba08e86f01cf61250343c5357cdb0ecd47641603"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-d0eeb6defe65",
+        "rows": 13225,
+        "sha256": "29e6f3d2a518f3e11b6be2b1307ba8a8203923a8e91a3b0e7199e374818eea59"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-62bef2a6f8dc",
+        "rows": 13218,
+        "sha256": "ace30447de9b79e135a7c817bc613809b40b3e9339b06ff4053c4d8c1411ae9e"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-adab79d37033",
+        "rows": 13217,
+        "sha256": "c0f2241a8e0f7847c7ad5df3ad2dd3b9e967a4a2821894c148fb08bbd2b0752a"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-01b69e4d279c",
+        "rows": 13229,
+        "sha256": "00094229f013359c88b611bcba08e86f01cf61250343c5357cdb0ecd47641603"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-1b8d61f0fa05",
+        "rows": 13225,
+        "sha256": "29e6f3d2a518f3e11b6be2b1307ba8a8203923a8e91a3b0e7199e374818eea59"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "fc52027c0d217e7ccfb37e652c67923541876a24a37c806e13316ef2b26fb747",
+          "rainfall_sha256": "ba44065a4e0b47f8319025a7886ee322dd932e073d21f699a21658452114567e",
+          "exogenous_sha256": "56e968b203bab9cbf02fe1b90e9c6e26df4eda70be4ea3aa955807ed34399953",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "fc52027c0d217e7ccfb37e652c67923541876a24a37c806e13316ef2b26fb747",
+          "rainfall_sha256": "ba44065a4e0b47f8319025a7886ee322dd932e073d21f699a21658452114567e",
+          "exogenous_sha256": "56e968b203bab9cbf02fe1b90e9c6e26df4eda70be4ea3aa955807ed34399953",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "fc52027c0d217e7ccfb37e652c67923541876a24a37c806e13316ef2b26fb747",
+          "rainfall_sha256": "ba44065a4e0b47f8319025a7886ee322dd932e073d21f699a21658452114567e",
+          "exogenous_sha256": "56e968b203bab9cbf02fe1b90e9c6e26df4eda70be4ea3aa955807ed34399953",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "fc52027c0d217e7ccfb37e652c67923541876a24a37c806e13316ef2b26fb747",
+          "rainfall_sha256": "ba44065a4e0b47f8319025a7886ee322dd932e073d21f699a21658452114567e",
+          "exogenous_sha256": "56e968b203bab9cbf02fe1b90e9c6e26df4eda70be4ea3aa955807ed34399953",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "fc52027c0d217e7ccfb37e652c67923541876a24a37c806e13316ef2b26fb747",
+          "rainfall_sha256": "ba44065a4e0b47f8319025a7886ee322dd932e073d21f699a21658452114567e",
+          "exogenous_sha256": "56e968b203bab9cbf02fe1b90e9c6e26df4eda70be4ea3aa955807ed34399953",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "fc52027c0d217e7ccfb37e652c67923541876a24a37c806e13316ef2b26fb747",
+          "rainfall_sha256": "ba44065a4e0b47f8319025a7886ee322dd932e073d21f699a21658452114567e",
+          "exogenous_sha256": "56e968b203bab9cbf02fe1b90e9c6e26df4eda70be4ea3aa955807ed34399953",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "fc52027c0d217e7ccfb37e652c67923541876a24a37c806e13316ef2b26fb747",
+          "rainfall_sha256": "ba44065a4e0b47f8319025a7886ee322dd932e073d21f699a21658452114567e",
+          "exogenous_sha256": "56e968b203bab9cbf02fe1b90e9c6e26df4eda70be4ea3aa955807ed34399953",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "fc52027c0d217e7ccfb37e652c67923541876a24a37c806e13316ef2b26fb747",
+          "rainfall_sha256": "ba44065a4e0b47f8319025a7886ee322dd932e073d21f699a21658452114567e",
+          "exogenous_sha256": "56e968b203bab9cbf02fe1b90e9c6e26df4eda70be4ea3aa955807ed34399953",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": true,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": false,
+        "candidate:empty": true,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": false
+      },
+      "secondary_violations": {
+        "reference:empty": true,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": false,
+        "candidate:empty": true,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": false
+      },
+      "joint_failure": false,
+      "interaction_excess_m3": 117.98555069776675,
+      "material_superadditivity": true,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 117.98555069776675,
+            "downstream_excess_volume_m3": 0.11912719166109782,
+            "peak_downstream_flow_m3s": 0.5008567363845915,
+            "terminal_storage_m3": 4.671063647302294
+          },
+          "candidate": {
+            "flood_volume_m3": 117.98555069776675,
+            "downstream_excess_volume_m3": 0.11912719166109782,
+            "peak_downstream_flow_m3s": 0.5008567363845915,
+            "terminal_storage_m3": 4.671063647302294
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 793.2404162832149,
+            "peak_downstream_flow_m3s": 0.6306315250456611,
+            "terminal_storage_m3": 4.671062401524984
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 793.2404162832149,
+            "peak_downstream_flow_m3s": 0.6306315250456611,
+            "terminal_storage_m3": 4.671062401524984
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 332.9778529867849,
+            "peak_downstream_flow_m3s": 0.6122559763960789,
+            "terminal_storage_m3": 4.6710627044112805
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 332.9778529867849,
+            "peak_downstream_flow_m3s": 0.6122559763960789,
+            "terminal_storage_m3": 4.6710627044112805
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 695.0244750069091,
+            "peak_downstream_flow_m3s": 0.6122559763960789,
+            "terminal_storage_m3": 4.671062536713811
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 695.0244750069091,
+            "peak_downstream_flow_m3s": 0.6122559763960789,
+            "terminal_storage_m3": 4.671062536713811
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        }
+      },
+      "all_guards_pass": true,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": false
+    },
+    "full_packet_sha256": "4bd6c89d09fa0131e47ac9feb7afaec3ddfaf6254512c04832f33a8e0bc47513",
+    "execution": {
+      "started_runs": 8,
+      "completed_runs": 8,
+      "treatments": [
+        {
+          "policy": "reference",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "reference_empty-bd29d3635ecb"
+        },
+        {
+          "policy": "reference",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "reference_a-ee5de07482ac"
+        },
+        {
+          "policy": "reference",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "reference_b-443c3cb340ac"
+        },
+        {
+          "policy": "reference",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "reference_ab-d0eeb6defe65"
+        },
+        {
+          "policy": "candidate",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "candidate_empty-62bef2a6f8dc"
+        },
+        {
+          "policy": "candidate",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "candidate_a-adab79d37033"
+        },
+        {
+          "policy": "candidate",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "candidate_b-01b69e4d279c"
+        },
+        {
+          "policy": "candidate",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "candidate_ab-1b8d61f0fa05"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "p2h7",
+    "request": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "plausible_depth",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "seed": 909218,
+      "rainfall_multiplier": 1.02,
+      "noise_std_m": 0.035,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 26400.0,
+          "end_s": 34464.0,
+          "setting": 0.010000000000000002
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 9000.0,
+          "end_s": 21096.0,
+          "bias_m": 1.1
+        }
+      ],
+      "test_contract": {
+        "metric": "flood_volume_m3",
+        "threshold": 100,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "mode": "absolute",
+        "direction": "above",
+        "horizon_s": 280800
+      }
+    },
+    "status": "completed",
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 1.2297697553601723,
+        "peak_downstream_flow_m3s": 0.5060014619293053,
+        "terminal_storage_m3": 4.691198623591918
+      },
+      "reference:a": {
+        "flood_volume_m3": 721.4477819937358,
+        "downstream_excess_volume_m3": 2.96218720218597,
+        "peak_downstream_flow_m3s": 0.5082842469874556,
+        "terminal_storage_m3": 4.691203890335317
+      },
+      "reference:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 12.627201009429154,
+        "peak_downstream_flow_m3s": 0.5128987086955991,
+        "terminal_storage_m3": 4.691200241788708
+      },
+      "reference:ab": {
+        "flood_volume_m3": 1167.502154908862,
+        "downstream_excess_volume_m3": 11.742565558504207,
+        "peak_downstream_flow_m3s": 0.5128987086955991,
+        "terminal_storage_m3": 4.691203890340743
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 1.2297697553601723,
+        "peak_downstream_flow_m3s": 0.5060014619293053,
+        "terminal_storage_m3": 4.691198623591918
+      },
+      "candidate:a": {
+        "flood_volume_m3": 721.4477819937358,
+        "downstream_excess_volume_m3": 2.96218720218597,
+        "peak_downstream_flow_m3s": 0.5082842469874556,
+        "terminal_storage_m3": 4.691203890335317
+      },
+      "candidate:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 3.569912558269779,
+        "peak_downstream_flow_m3s": 0.5084592315040496,
+        "terminal_storage_m3": 4.691198990848481
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 871.4510677418178,
+        "downstream_excess_volume_m3": 4.746189649656925,
+        "peak_downstream_flow_m3s": 0.5084592315040496,
+        "terminal_storage_m3": 4.691203898472659
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-cc0f699ed283",
+        "rows": 12916,
+        "sha256": "34090be4c347a8dbad51e58c2d1f57ae095604c13a8e079cad6293b677f42518"
+      },
+      "reference:a": {
+        "run_id": "reference_a-e5c5695d0c1c",
+        "rows": 12882,
+        "sha256": "99b90f27221222fc6090199af148644a69e995744ac616224d02aee1702b2c87"
+      },
+      "reference:b": {
+        "run_id": "reference_b-075ac2e5f320",
+        "rows": 12920,
+        "sha256": "daac0ddcdc82f9e27c74c9bc3200d5ac91e114f33d8fa1be8e3257d52bfbe94b"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-ac2fc3a3cddd",
+        "rows": 12863,
+        "sha256": "6eb2f71df81acc95fbcc943f86cae93a10520541b7d29aa4b31c3b0334d6512b"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-9965f9076b48",
+        "rows": 12916,
+        "sha256": "34090be4c347a8dbad51e58c2d1f57ae095604c13a8e079cad6293b677f42518"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-6a44167b3ff7",
+        "rows": 12882,
+        "sha256": "99b90f27221222fc6090199af148644a69e995744ac616224d02aee1702b2c87"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-f010a8b337de",
+        "rows": 12917,
+        "sha256": "4ffe145acc237ca222e2e2343a6ae8387c64a105c78d9f18146dd0f46064f78f"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-83cdd1c052b0",
+        "rows": 12882,
+        "sha256": "d79b5736350f27470f5e56acffb6d29e6a10cfa021057ed3823d5ba619abb5a9"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "83ae8f5de82d37e03ce5387249569163853fa89affbd9643e4ddf8bf783f87db",
+          "rainfall_sha256": "f39697f05a4c5de1877b49f969986e17152ee8c670cc9d43ea7a65637d5c46cb",
+          "exogenous_sha256": "5e50f5721c783d66597e80533a15b0927c459a8c366988e462eb9500c464595e",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "83ae8f5de82d37e03ce5387249569163853fa89affbd9643e4ddf8bf783f87db",
+          "rainfall_sha256": "f39697f05a4c5de1877b49f969986e17152ee8c670cc9d43ea7a65637d5c46cb",
+          "exogenous_sha256": "5e50f5721c783d66597e80533a15b0927c459a8c366988e462eb9500c464595e",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "83ae8f5de82d37e03ce5387249569163853fa89affbd9643e4ddf8bf783f87db",
+          "rainfall_sha256": "f39697f05a4c5de1877b49f969986e17152ee8c670cc9d43ea7a65637d5c46cb",
+          "exogenous_sha256": "5e50f5721c783d66597e80533a15b0927c459a8c366988e462eb9500c464595e",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "83ae8f5de82d37e03ce5387249569163853fa89affbd9643e4ddf8bf783f87db",
+          "rainfall_sha256": "f39697f05a4c5de1877b49f969986e17152ee8c670cc9d43ea7a65637d5c46cb",
+          "exogenous_sha256": "5e50f5721c783d66597e80533a15b0927c459a8c366988e462eb9500c464595e",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "83ae8f5de82d37e03ce5387249569163853fa89affbd9643e4ddf8bf783f87db",
+          "rainfall_sha256": "f39697f05a4c5de1877b49f969986e17152ee8c670cc9d43ea7a65637d5c46cb",
+          "exogenous_sha256": "5e50f5721c783d66597e80533a15b0927c459a8c366988e462eb9500c464595e",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "83ae8f5de82d37e03ce5387249569163853fa89affbd9643e4ddf8bf783f87db",
+          "rainfall_sha256": "f39697f05a4c5de1877b49f969986e17152ee8c670cc9d43ea7a65637d5c46cb",
+          "exogenous_sha256": "5e50f5721c783d66597e80533a15b0927c459a8c366988e462eb9500c464595e",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "83ae8f5de82d37e03ce5387249569163853fa89affbd9643e4ddf8bf783f87db",
+          "rainfall_sha256": "f39697f05a4c5de1877b49f969986e17152ee8c670cc9d43ea7a65637d5c46cb",
+          "exogenous_sha256": "5e50f5721c783d66597e80533a15b0927c459a8c366988e462eb9500c464595e",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "83ae8f5de82d37e03ce5387249569163853fa89affbd9643e4ddf8bf783f87db",
+          "rainfall_sha256": "f39697f05a4c5de1877b49f969986e17152ee8c670cc9d43ea7a65637d5c46cb",
+          "exogenous_sha256": "5e50f5721c783d66597e80533a15b0927c459a8c366988e462eb9500c464595e",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": false,
+        "reference:a": true,
+        "reference:b": false,
+        "reference:ab": true,
+        "candidate:empty": false,
+        "candidate:a": true,
+        "candidate:b": false,
+        "candidate:ab": true
+      },
+      "secondary_violations": {
+        "reference:empty": false,
+        "reference:a": true,
+        "reference:b": false,
+        "reference:ab": true,
+        "candidate:empty": false,
+        "candidate:a": true,
+        "candidate:b": false,
+        "candidate:ab": true
+      },
+      "joint_failure": false,
+      "interaction_excess_m3": 446.0543729151261,
+      "material_superadditivity": true,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 1.2297697553601723,
+            "peak_downstream_flow_m3s": 0.5060014619293053,
+            "terminal_storage_m3": 4.691198623591918
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 1.2297697553601723,
+            "peak_downstream_flow_m3s": 0.5060014619293053,
+            "terminal_storage_m3": 4.691198623591918
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 721.4477819937358,
+            "downstream_excess_volume_m3": 2.96218720218597,
+            "peak_downstream_flow_m3s": 0.5082842469874556,
+            "terminal_storage_m3": 4.691203890335317
+          },
+          "candidate": {
+            "flood_volume_m3": 721.4477819937358,
+            "downstream_excess_volume_m3": 2.96218720218597,
+            "peak_downstream_flow_m3s": 0.5082842469874556,
+            "terminal_storage_m3": 4.691203890335317
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": -0.0,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 12.627201009429154,
+            "peak_downstream_flow_m3s": 0.5128987086955991,
+            "terminal_storage_m3": 4.691200241788708
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 3.569912558269779,
+            "peak_downstream_flow_m3s": 0.5084592315040496,
+            "terminal_storage_m3": 4.691198990848481
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": -9.057288451159375,
+            "peak_downstream_flow_m3s": -0.004439477191549468,
+            "terminal_storage_m3": -1.2509402278482185e-06
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": -1.2509402278482185e-05
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 1167.502154908862,
+            "downstream_excess_volume_m3": 11.742565558504207,
+            "peak_downstream_flow_m3s": 0.5128987086955991,
+            "terminal_storage_m3": 4.691203890340743
+          },
+          "candidate": {
+            "flood_volume_m3": 871.4510677418178,
+            "downstream_excess_volume_m3": 4.746189649656925,
+            "peak_downstream_flow_m3s": 0.5084592315040496,
+            "terminal_storage_m3": 4.691203898472659
+          },
+          "changes": {
+            "flood_volume_m3": -296.0510871670441,
+            "downstream_excess_volume_m3": -6.996375908847282,
+            "peak_downstream_flow_m3s": -0.004439477191549468,
+            "terminal_storage_m3": 8.13191558535209e-09
+          },
+          "flood_reduction_m3": 296.0510871670441,
+          "relative_flood_reduction": 0.2535764802850874,
+          "material_flood_improvement": true,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 8.13191558535209e-08
+        }
+      },
+      "all_guards_pass": true,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": true
+    },
+    "full_packet_sha256": "5a9d0f86888044f60438ed42110c11168b6d6ec4aa7bc818d5b7d1fc1662bc61",
+    "execution": {
+      "started_runs": 8,
+      "completed_runs": 8,
+      "treatments": [
+        {
+          "policy": "reference",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "reference_empty-cc0f699ed283"
+        },
+        {
+          "policy": "reference",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "reference_a-e5c5695d0c1c"
+        },
+        {
+          "policy": "reference",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "reference_b-075ac2e5f320"
+        },
+        {
+          "policy": "reference",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "reference_ab-ac2fc3a3cddd"
+        },
+        {
+          "policy": "candidate",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "candidate_empty-9965f9076b48"
+        },
+        {
+          "policy": "candidate",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "candidate_a-6a44167b3ff7"
+        },
+        {
+          "policy": "candidate",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "candidate_b-f010a8b337de"
+        },
+        {
+          "policy": "candidate",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "candidate_ab-83cdd1c052b0"
+        }
+      ]
+    }
+  },
+  {
+    "case_id": "p2h8",
+    "request": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "plausible_depth",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "seed": 705566,
+      "rainfall_multiplier": 0.72,
+      "noise_std_m": 0.08,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 21150.0,
+          "end_s": 28494.0,
+          "setting": 0.115
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 12300.0,
+          "end_s": 23316.0,
+          "bias_m": 1.5
+        }
+      ],
+      "test_contract": {
+        "metric": "flood_volume_m3",
+        "threshold": 100,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "mode": "absolute",
+        "direction": "above",
+        "horizon_s": 280800
+      }
+    },
+    "status": "completed",
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 12.391797475189609,
+        "peak_downstream_flow_m3s": 0.6013637350015154,
+        "terminal_storage_m3": 4.668427757051716
+      },
+      "reference:a": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 12.391797475189609,
+        "peak_downstream_flow_m3s": 0.6013637350015154,
+        "terminal_storage_m3": 4.668427722886683
+      },
+      "reference:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 3.5570604554011735,
+        "peak_downstream_flow_m3s": 0.5492632246666616,
+        "terminal_storage_m3": 4.668428203053477
+      },
+      "reference:ab": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 64.56589175275627,
+        "peak_downstream_flow_m3s": 0.5646503880700628,
+        "terminal_storage_m3": 4.668427738535389
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 12.391797475189609,
+        "peak_downstream_flow_m3s": 0.6013637350015154,
+        "terminal_storage_m3": 4.668427757051716
+      },
+      "candidate:a": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 12.391797475189609,
+        "peak_downstream_flow_m3s": 0.6013637350015154,
+        "terminal_storage_m3": 4.668427722886683
+      },
+      "candidate:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4800665243976835,
+        "terminal_storage_m3": 4.668427862613329
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 19.394568020851917,
+        "peak_downstream_flow_m3s": 0.541988827069507,
+        "terminal_storage_m3": 4.668427737714987
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-b722c69a61fb",
+        "rows": 11909,
+        "sha256": "706113424f941b11b04a6735cd7f281dd076037627d8389a6f457c12987472c0"
+      },
+      "reference:a": {
+        "run_id": "reference_a-177ab715461f",
+        "rows": 11910,
+        "sha256": "912597c98d8fd42c1edc5e01eb71442679851632a76572ba3e7c2822d4927e73"
+      },
+      "reference:b": {
+        "run_id": "reference_b-c712a495d5d2",
+        "rows": 11907,
+        "sha256": "d337ad98600cd727243f2c93d439663922f7bca19bd9765b2d89c7202fa45f2c"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-af5ac80711df",
+        "rows": 11908,
+        "sha256": "fb9c13d14a98d4d5b068b01127c0b2e51400a8612f94f8dadbf946466853124a"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-6141895e23ce",
+        "rows": 11909,
+        "sha256": "706113424f941b11b04a6735cd7f281dd076037627d8389a6f457c12987472c0"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-6aa116e197c9",
+        "rows": 11910,
+        "sha256": "912597c98d8fd42c1edc5e01eb71442679851632a76572ba3e7c2822d4927e73"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-42892a83bcc3",
+        "rows": 11916,
+        "sha256": "2f069cd1d3809b011a20c353b1cc819ed80cdcde14ab49df9310a3cbb1385fab"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-702a0faf5d0b",
+        "rows": 11906,
+        "sha256": "5a495b64eac38f57e68cb4020b1a14afe89ac447d43dbb3f6f53030e5f86971b"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "ae649b4ddf196b09a3c6fad205024b1f1e6c111d53f83f7ef1ba4f4e486dad63",
+          "rainfall_sha256": "398d307c09e1459ca8fee1cc417871ca11b945bb1cd6e13c3e9e26464f4b298d",
+          "exogenous_sha256": "f3981d244ce14f161838a93c8a3e6fc02837903ea6f8eb04e6880cb36cf6b83f",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "ae649b4ddf196b09a3c6fad205024b1f1e6c111d53f83f7ef1ba4f4e486dad63",
+          "rainfall_sha256": "398d307c09e1459ca8fee1cc417871ca11b945bb1cd6e13c3e9e26464f4b298d",
+          "exogenous_sha256": "f3981d244ce14f161838a93c8a3e6fc02837903ea6f8eb04e6880cb36cf6b83f",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "ae649b4ddf196b09a3c6fad205024b1f1e6c111d53f83f7ef1ba4f4e486dad63",
+          "rainfall_sha256": "398d307c09e1459ca8fee1cc417871ca11b945bb1cd6e13c3e9e26464f4b298d",
+          "exogenous_sha256": "f3981d244ce14f161838a93c8a3e6fc02837903ea6f8eb04e6880cb36cf6b83f",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "ae649b4ddf196b09a3c6fad205024b1f1e6c111d53f83f7ef1ba4f4e486dad63",
+          "rainfall_sha256": "398d307c09e1459ca8fee1cc417871ca11b945bb1cd6e13c3e9e26464f4b298d",
+          "exogenous_sha256": "f3981d244ce14f161838a93c8a3e6fc02837903ea6f8eb04e6880cb36cf6b83f",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "ae649b4ddf196b09a3c6fad205024b1f1e6c111d53f83f7ef1ba4f4e486dad63",
+          "rainfall_sha256": "398d307c09e1459ca8fee1cc417871ca11b945bb1cd6e13c3e9e26464f4b298d",
+          "exogenous_sha256": "f3981d244ce14f161838a93c8a3e6fc02837903ea6f8eb04e6880cb36cf6b83f",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "ae649b4ddf196b09a3c6fad205024b1f1e6c111d53f83f7ef1ba4f4e486dad63",
+          "rainfall_sha256": "398d307c09e1459ca8fee1cc417871ca11b945bb1cd6e13c3e9e26464f4b298d",
+          "exogenous_sha256": "f3981d244ce14f161838a93c8a3e6fc02837903ea6f8eb04e6880cb36cf6b83f",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "ae649b4ddf196b09a3c6fad205024b1f1e6c111d53f83f7ef1ba4f4e486dad63",
+          "rainfall_sha256": "398d307c09e1459ca8fee1cc417871ca11b945bb1cd6e13c3e9e26464f4b298d",
+          "exogenous_sha256": "f3981d244ce14f161838a93c8a3e6fc02837903ea6f8eb04e6880cb36cf6b83f",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "plausible_depth",
+          "source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "description": "Track abrupt sensor offsets from past measured depths, conservatively correct positive offsets, and cap aggregate commands using a recent measured-head estimate."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "ae649b4ddf196b09a3c6fad205024b1f1e6c111d53f83f7ef1ba4f4e486dad63",
+          "rainfall_sha256": "398d307c09e1459ca8fee1cc417871ca11b945bb1cd6e13c3e9e26464f4b298d",
+          "exogenous_sha256": "f3981d244ce14f161838a93c8a3e6fc02837903ea6f8eb04e6880cb36cf6b83f",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-history-feedback-v2"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": false,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": false,
+        "candidate:empty": false,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": false
+      },
+      "secondary_violations": {
+        "reference:empty": false,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": false,
+        "candidate:empty": false,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": false
+      },
+      "joint_failure": false,
+      "interaction_excess_m3": 0.0,
+      "material_superadditivity": false,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 12.391797475189609,
+            "peak_downstream_flow_m3s": 0.6013637350015154,
+            "terminal_storage_m3": 4.668427757051716
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 12.391797475189609,
+            "peak_downstream_flow_m3s": 0.6013637350015154,
+            "terminal_storage_m3": 4.668427757051716
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 12.391797475189609,
+            "peak_downstream_flow_m3s": 0.6013637350015154,
+            "terminal_storage_m3": 4.668427722886683
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 12.391797475189609,
+            "peak_downstream_flow_m3s": 0.6013637350015154,
+            "terminal_storage_m3": 4.668427722886683
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.0
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 3.5570604554011735,
+            "peak_downstream_flow_m3s": 0.5492632246666616,
+            "terminal_storage_m3": 4.668428203053477
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4800665243976835,
+            "terminal_storage_m3": 4.668427862613329
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": -3.5570604554011735,
+            "peak_downstream_flow_m3s": -0.06919670026897806,
+            "terminal_storage_m3": -3.4044014807221856e-07
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": -3.4044014807221856e-06
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 64.56589175275627,
+            "peak_downstream_flow_m3s": 0.5646503880700628,
+            "terminal_storage_m3": 4.668427738535389
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 19.394568020851917,
+            "peak_downstream_flow_m3s": 0.541988827069507,
+            "terminal_storage_m3": 4.668427737714987
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": -45.17132373190435,
+            "peak_downstream_flow_m3s": -0.02266156100055583,
+            "terminal_storage_m3": -8.204015244928087e-10
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": -8.204015244928087e-09
+        }
+      },
+      "all_guards_pass": true,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": false
+    },
+    "full_packet_sha256": "899b53fdfc74bbb6fafac289b7900be7c09585f9c094211e95ec07dd64d9f9d6",
+    "execution": {
+      "started_runs": 8,
+      "completed_runs": 8,
+      "treatments": [
+        {
+          "policy": "reference",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "reference_empty-b722c69a61fb"
+        },
+        {
+          "policy": "reference",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "reference_a-177ab715461f"
+        },
+        {
+          "policy": "reference",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "reference_b-c712a495d5d2"
+        },
+        {
+          "policy": "reference",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "reference_ab-af5ac80711df"
+        },
+        {
+          "policy": "candidate",
+          "subset": "empty",
+          "status": "completed",
+          "run_id": "candidate_empty-6141895e23ce"
+        },
+        {
+          "policy": "candidate",
+          "subset": "a",
+          "status": "completed",
+          "run_id": "candidate_a-6aa116e197c9"
+        },
+        {
+          "policy": "candidate",
+          "subset": "b",
+          "status": "completed",
+          "run_id": "candidate_b-42892a83bcc3"
+        },
+        {
+          "policy": "candidate",
+          "subset": "ab",
+          "status": "completed",
+          "run_id": "candidate_ab-702a0faf5d0b"
+        }
+      ]
+    }
+  }
+]

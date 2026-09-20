@@ -51,7 +51,8 @@ def holdout_request(snapshot: Mapping, transform: Mapping, protocol: Mapping) ->
         duration = min((fault["end_s"] - fault["start_s"]) * transform["duration_scale"], horizon)
         if duration <= 0:
             raise EvidenceError("transformed fault has no positive duration")
-        start = min(max(fault["start_s"] + transform["time_shift_s"], 0), horizon - duration)
+        shift = transform.get("fault_time_shift_s", {}).get(fault["type"], transform["time_shift_s"])
+        start = min(max(fault["start_s"] + shift, 0), horizon - duration)
         fault.update(start_s=start, end_s=start + duration)
         if fault["type"] == "valve_stuck" and fault.get("setting") is not None:
             fault["setting"] = min(1.0, max(0.0, fault["setting"] + transform["valve_setting_delta"]))
@@ -124,6 +125,15 @@ def assess_case(packet: Mapping, snapshot: Mapping, expected_request: Mapping, p
             raise EvidenceError(f"evaluated request differs from its fixed case: {key}")
     if packet["experiment"]["horizon_s"] != protocol["horizon_s"]:
         raise EvidenceError("case changed the evaluation horizon")
+    expected_boundary = protocol["information_boundary_id"]
+    clarification = snapshot.get("information_boundary_clarification")
+    if clarification is not None:
+        content = clarification["content"]
+        if content["protocol_sha256"] != snapshot["protocol_sha256"] or content["declared_information_boundary_id"] != expected_boundary:
+            raise EvidenceError("information-boundary clarification belongs to a different protocol")
+        expected_boundary = content["execution_information_boundary_id"]
+    if packet["experiment"]["information_boundary_id"] != expected_boundary:
+        raise EvidenceError("case information boundary differs from the protocol or disclosed clarification")
     expected_faults = subset_ids(expected_request["faults"])
     table, traces, treatments = {}, {}, {}
     for run in packet["runs"]:
@@ -188,4 +198,4 @@ def assess_campaign(cases: list[Mapping], snapshot: Mapping, protocol: Mapping) 
                 joint_aggregate_reference_flood_m3=joint_before, joint_aggregate_candidate_flood_m3=joint_after,
                 joint_aggregate_flood_reduction_m3=reduction, joint_aggregate_relative_flood_reduction=relative,
                 individually_material_joint_cases=material_cases, heldout_usefulness_passes=useful,
-                claim_scope="Only the six fixed simulated perturbations and declared guard allowances.")
+                claim_scope=f"Only the {len(expected)} fixed simulated perturbations and declared guard allowances.")

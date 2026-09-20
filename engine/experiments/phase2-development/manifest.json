@@ -1,0 +1,175 @@
+{
+  "schema_version": "stormpilot.development-ledger.v2",
+  "phase": 2,
+  "frozen_development_budget": 512,
+  "attempted_native_calls": 293,
+  "completed_native_calls": 292,
+  "failed_native_calls": 1,
+  "ledger": "ledger.jsonl.gz",
+  "ledger_uncompressed_sha256": "8c145cf988943cd47e2c4dc81dd25077e794c63eb63745369f4b5a44f12640a7",
+  "ledger_compressed_sha256": "48d6e8ee56f0ad2d2ddb0beffd268a1b2a535835343c83e6eea7d60803b33b61",
+  "native_calls_accounting": "Every started run in controller exploration and final proof generation is represented. Call 122 failed due to local disk exhaustion and is retained. Pure unit checks did not invoke the solver.",
+  "data_scope": "Original phase1 witness, explicitly disclosed phase1 evaluation cases, and four additional declared high-noise positive/negative development variants. No phase2 evaluation case was read or run.",
+  "row_fields": {
+    "call": "Contiguous 1-based attempt number",
+    "request_sha256": "Canonical normalized request hash; requests retained in plan files",
+    "source_sha256": "Canonical engine Python source manifest hash; exact files under sources/",
+    "parameters": "Configured controller parameters",
+    "subset": "empty, a, b, or ab, using sorted request fault IDs",
+    "status": "completed or failed",
+    "metrics": "Native run reported metrics; selected final proof is independently validated",
+    "trace_sha256": "Hash of complete routing trace at execution",
+    "full_run_file": "Local scratch full run filename; nonselected full traces are not part of this compact archival package",
+    "full_run_sha256": "Hash of local scratch gzip full run"
+  },
+  "selected_policy": {
+    "controller_id": "plausible_depth",
+    "parameters": {
+      "target_scale": 1.0,
+      "jump_threshold_m": 0.65,
+      "correction_fraction": 0.75
+    },
+    "development_ledger_calls": 293,
+    "source_sha256": "2b474d488cda938a21fb23ed8f9546a129b6b838004c67be0b94118b73a237e3",
+    "controller_source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+    "selected": {
+      "candidate_id": "policy-e5eab8e18bf8",
+      "controller_id": "plausible_depth",
+      "parameters": {
+        "target_scale": 1.0,
+        "jump_threshold_m": 0.65,
+        "correction_fraction": 0.75
+      },
+      "call_numbers": [
+        13,
+        14,
+        15,
+        16
+      ],
+      "eligible": true,
+      "failures": [],
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49154656318546525,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651018727986262,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49154656318546525,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651018727986262,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49626449249020693,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651020236987016,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49626449249020693,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651020236987016,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 0.0
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4987701146670486,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651019726104906,
+            "native_flood_volume_m3": 0.0
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4945196752451086,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.6510189192368685,
+            "native_flood_volume_m3": 0.0
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.004250439421940033,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": -8.068680372730341e-07
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 237.26283682342435,
+            "peak_downstream_flow_m3s": 0.4972025489851599,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651020931774245,
+            "native_flood_volume_m3": 237.26283682342407
+          },
+          "candidate": {
+            "flood_volume_m3": 19.361153168276523,
+            "peak_downstream_flow_m3s": 0.4972025469931333,
+            "downstream_excess_volume_m3": 0.0,
+            "downstream_exceedance_duration_s": 0.0,
+            "terminal_storage_m3": 4.651020931774355,
+            "native_flood_volume_m3": 19.361153168276473
+          },
+          "changes": {
+            "flood_volume_m3": -217.90168365514782,
+            "peak_downstream_flow_m3s": -1.9920265992290354e-09,
+            "downstream_excess_volume_m3": 0.0,
+            "terminal_storage_m3": 1.1013412404281553e-13
+          },
+          "guards": {
+            "peak_downstream_flow_m3s": true,
+            "downstream_excess_volume_m3": true,
+            "terminal_storage_m3": true
+          }
+        }
+      },
+      "flood_reduction_m3": 217.90168365514782,
+      "relative_flood_reduction": 0.9183978686780793
+    }
+  },
+  "validation_scope": "Final default repair proof was independently checked against full retained traces. Earlier compact ledger metrics are execution records, not independently reintegrated here.",
+  "phase1_rejection_preserved": "evaluation/phase1-evidence.zip"
+}

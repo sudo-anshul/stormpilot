@@ -1,0 +1,2302 @@
+{
+  "schema_version": "stormpilot.evaluation-report.v1",
+  "suite_type": "heldout_benchmark",
+  "status": "completed",
+  "completed_at_utc": "2026-09-20T15:52:29.787503+00:00",
+  "protocol": {
+    "id": "joint-failure-and-mitigation-2026-09-20-phase2-v1",
+    "sha256": "15e373f2f634a26a9fd8013853ab6618e1b57ef79877effea7a0ddf2ae1dadd7",
+    "frozen_at_utc": "2026-09-20T15:37:21.451715+00:00"
+  },
+  "candidate_snapshot_sha256": "742f3f43880930dbb2146bf99d1a8d901f4427df00ae5cdeb101d7c8269e3e4f",
+  "matching_identity": {
+    "development_request_sha256": "1ac04dd90c09548c98208ba33190a1235bc252a0d90a9f102e75941a54a50794",
+    "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+    "controller_source_sha256": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+    "engine_source_sha256": "4bb1604b00696aa7b1b0ee7484512d983e8fc87b74bd281ee23fd32908a59840",
+    "runner_source_sha256": "72544202df43fe39907159b789737a2ac2730ae8f28402fcf341e0b36c1f1a52"
+  },
+  "reference": {
+    "controller_id": "constant_flow",
+    "parameters": {
+      "target_scale": 1.0
+    }
+  },
+  "candidate": {
+    "controller_id": "plausible_depth",
+    "parameters": {
+      "target_scale": 1.0,
+      "jump_threshold_m": 0.65,
+      "correction_fraction": 0.75
+    }
+  },
+  "development": {
+    "primary_violations": {
+      "reference:empty": false,
+      "reference:a": false,
+      "reference:b": false,
+      "reference:ab": true,
+      "candidate:empty": false,
+      "candidate:a": false,
+      "candidate:b": false,
+      "candidate:ab": false
+    },
+    "secondary_violations": {
+      "reference:empty": false,
+      "reference:a": false,
+      "reference:b": false,
+      "reference:ab": true,
+      "candidate:empty": false,
+      "candidate:a": false,
+      "candidate:b": false,
+      "candidate:ab": true
+    },
+    "joint_failure": true,
+    "interaction_excess_m3": 237.2628368234243,
+    "material_superadditivity": true,
+    "comparisons": {
+      "empty": {
+        "reference": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.49154656318546525,
+          "terminal_storage_m3": 4.651018727986262
+        },
+        "candidate": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.49154656318546525,
+          "terminal_storage_m3": 4.651018727986262
+        },
+        "changes": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "flood_reduction_m3": -0.0,
+        "relative_flood_reduction": null,
+        "material_flood_improvement": false,
+        "guards": {
+          "downstream_excess_volume_m3": true,
+          "peak_downstream_flow_m3s": true,
+          "terminal_storage_m3": true
+        },
+        "all_guards_pass": true,
+        "largest_normalized_guard_increase": 0.0
+      },
+      "a": {
+        "reference": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.49626449249020693,
+          "terminal_storage_m3": 4.651020236987016
+        },
+        "candidate": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.49626449249020693,
+          "terminal_storage_m3": 4.651020236987016
+        },
+        "changes": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "flood_reduction_m3": -0.0,
+        "relative_flood_reduction": null,
+        "material_flood_improvement": false,
+        "guards": {
+          "downstream_excess_volume_m3": true,
+          "peak_downstream_flow_m3s": true,
+          "terminal_storage_m3": true
+        },
+        "all_guards_pass": true,
+        "largest_normalized_guard_increase": 0.0
+      },
+      "b": {
+        "reference": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4987701146670486,
+          "terminal_storage_m3": 4.651019726104906
+        },
+        "candidate": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4945196752451086,
+          "terminal_storage_m3": 4.6510189192368685
+        },
+        "changes": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": -0.004250439421940033,
+          "terminal_storage_m3": -8.068680372730341e-07
+        },
+        "flood_reduction_m3": -0.0,
+        "relative_flood_reduction": null,
+        "material_flood_improvement": false,
+        "guards": {
+          "downstream_excess_volume_m3": true,
+          "peak_downstream_flow_m3s": true,
+          "terminal_storage_m3": true
+        },
+        "all_guards_pass": true,
+        "largest_normalized_guard_increase": 0.0
+      },
+      "ab": {
+        "reference": {
+          "flood_volume_m3": 237.2628368234243,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4972025489851599,
+          "terminal_storage_m3": 4.651020931774245
+        },
+        "candidate": {
+          "flood_volume_m3": 19.36115316827653,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.4972025469931333,
+          "terminal_storage_m3": 4.651020931774355
+        },
+        "changes": {
+          "flood_volume_m3": -217.90168365514776,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": -1.9920265992290354e-09,
+          "terminal_storage_m3": 1.1013412404281553e-13
+        },
+        "flood_reduction_m3": 217.90168365514776,
+        "relative_flood_reduction": 0.9183978686780793,
+        "material_flood_improvement": true,
+        "guards": {
+          "downstream_excess_volume_m3": true,
+          "peak_downstream_flow_m3s": true,
+          "terminal_storage_m3": true
+        },
+        "all_guards_pass": true,
+        "largest_normalized_guard_increase": 1.1013412404281553e-12
+      }
+    },
+    "all_guards_pass": true,
+    "other_subsets_primary_nonregression": true,
+    "mitigation_passes": true
+  },
+  "development_request": {
+    "scenario_id": "theta",
+    "controller_id": "constant_flow",
+    "fallback_controller_id": "plausible_depth",
+    "controller_parameters": {
+      "target_scale": 1.0
+    },
+    "fallback_controller_parameters": {
+      "target_scale": 1.0,
+      "jump_threshold_m": 0.65,
+      "correction_fraction": 0.75
+    },
+    "seed": 42,
+    "rainfall_multiplier": 1.0,
+    "noise_std_m": 0.0,
+    "faults": [
+      {
+        "id": "partial-valve",
+        "type": "valve_stuck",
+        "asset": "2",
+        "start_s": 21600.0,
+        "end_s": 28800.0,
+        "setting": 0.035
+      },
+      {
+        "id": "sensor-bias",
+        "type": "sensor_bias",
+        "asset": "P2",
+        "start_s": 10800.0,
+        "end_s": 21600.0,
+        "bias_m": 1.0
+      }
+    ],
+    "test_contract": {
+      "mode": "absolute",
+      "direction": "above",
+      "metric": "flood_volume_m3",
+      "threshold": 100.0,
+      "tolerance": 1e-06,
+      "units": "m3",
+      "horizon_s": 280800.0
+    }
+  },
+  "development_packet": {
+    "path": "evaluation/phase2/development-packet.json.gz",
+    "sha256": "039de0fccddfd873a712c16891f7f0fee614c211d1e89ff2a1b1d9ca2544b4a2"
+  },
+  "holdout": {
+    "case_count": 8,
+    "policy_run_count": 64,
+    "expected_policy_run_count": 64,
+    "criteria": {
+      "require_every_declared_case_and_policy_run": true,
+      "maximum_primary_increase_m3_each_case": 1,
+      "joint_case_aggregate_minimum_absolute_reduction_m3": 80,
+      "joint_case_aggregate_minimum_relative_reduction": 0.1,
+      "minimum_joint_cases_with_10m3_and_10pct_individual_reduction": 4,
+      "uncertainty_note": "Eight deterministic simulated perturbations are a small bounded suite, not independent real storms. Every case and all four subsets must pass guards and primary nonregression; at least four paired cases must individually improve by both 10 m3 and 10 percent, and the aggregate must improve by at least 80 m3 and 10 percent. No relaxed criteria after outcomes.",
+      "require_all_32_case_guards": true
+    },
+    "guard_allowances": {
+      "downstream_excess_volume_m3": 1,
+      "peak_downstream_flow_m3s": 0.001,
+      "terminal_storage_m3": 0.1
+    },
+    "aggregate_metrics": {
+      "completeness": "complete",
+      "invalid_cases": [],
+      "all_case_guards_pass": false,
+      "all_case_primary_nonregression": true,
+      "joint_aggregate_reference_flood_m3": 9840.092953145748,
+      "joint_aggregate_candidate_flood_m3": 9122.721823711254,
+      "joint_aggregate_flood_reduction_m3": 717.3711294344939,
+      "joint_aggregate_relative_flood_reduction": 0.07290288139048116,
+      "individually_material_joint_cases": [
+        "p2h1",
+        "p2h7"
+      ],
+      "heldout_usefulness_passes": false
+    },
+    "cases": [
+      {
+        "case_id": "p2h1",
+        "transform": {
+          "rainfall_multiplier": 1.32,
+          "duration_scale": 1.28,
+          "noise_std_m": 0.025,
+          "sensor_bias_scale": 0.95,
+          "valve_setting_delta": 0.04,
+          "id": "p2h1",
+          "time_shift_s": 0,
+          "fault_time_shift_s": {
+            "sensor_bias": 2700,
+            "valve_stuck": 6000
+          },
+          "seed": 905730
+        },
+        "status": "completed",
+        "request": {
+          "scenario_id": "theta",
+          "controller_id": "constant_flow",
+          "fallback_controller_id": "plausible_depth",
+          "controller_parameters": {
+            "target_scale": 1.0
+          },
+          "fallback_controller_parameters": {
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "seed": 905730,
+          "rainfall_multiplier": 1.32,
+          "noise_std_m": 0.025,
+          "faults": [
+            {
+              "id": "partial-valve",
+              "type": "valve_stuck",
+              "asset": "2",
+              "start_s": 27600.0,
+              "end_s": 36816.0,
+              "setting": 0.07500000000000001
+            },
+            {
+              "id": "sensor-bias",
+              "type": "sensor_bias",
+              "asset": "P2",
+              "start_s": 13500.0,
+              "end_s": 27324.0,
+              "bias_m": 0.95
+            }
+          ],
+          "test_contract": {
+            "metric": "flood_volume_m3",
+            "threshold": 100,
+            "tolerance": 1e-06,
+            "units": "m3",
+            "mode": "absolute",
+            "direction": "above",
+            "horizon_s": 280800
+          }
+        },
+        "subsets": [
+          {
+            "subset": "empty",
+            "active_fault_ids": [],
+            "reference_metrics": {
+              "flood_volume_m3": 2918.595893056201,
+              "downstream_excess_volume_m3": 7.825909790634867,
+              "peak_downstream_flow_m3s": 0.5118448919574012,
+              "terminal_storage_m3": 4.718729961515224
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 2918.595893056201,
+              "downstream_excess_volume_m3": 7.825909790634867,
+              "peak_downstream_flow_m3s": 0.5118448919574012,
+              "terminal_storage_m3": 4.718729961515224
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "a",
+            "active_fault_ids": [
+              "partial-valve"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 2571.411685020288,
+              "downstream_excess_volume_m3": 1061.065145588429,
+              "peak_downstream_flow_m3s": 0.6690483949946603,
+              "terminal_storage_m3": 4.718729262585108
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 2571.411685020288,
+              "downstream_excess_volume_m3": 1061.065145588429,
+              "peak_downstream_flow_m3s": 0.6690483949946603,
+              "terminal_storage_m3": 4.718729262585108
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "b",
+            "active_fault_ids": [
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 3590.8356160761655,
+              "downstream_excess_volume_m3": 0.1473704816331775,
+              "peak_downstream_flow_m3s": 0.5005602839084837,
+              "terminal_storage_m3": 4.718729961515233
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 3169.57744890104,
+              "downstream_excess_volume_m3": 0.1473704816334084,
+              "peak_downstream_flow_m3s": 0.5005602839084837,
+              "terminal_storage_m3": 4.7187299615152245
+            },
+            "changes": {
+              "flood_volume_m3": -421.25816717512544,
+              "downstream_excess_volume_m3": 2.3089863354641693e-13,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": -8.881784197001252e-15
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": true,
+            "flood_reduction_m3": 421.25816717512544,
+            "relative_flood_reduction": 0.11731480140420611
+          },
+          {
+            "subset": "ab",
+            "active_fault_ids": [
+              "partial-valve",
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 3243.7442411756992,
+              "downstream_excess_volume_m3": 1051.0019575448368,
+              "peak_downstream_flow_m3s": 0.6691372423037767,
+              "terminal_storage_m3": 4.718729262581744
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 2822.424198908249,
+              "downstream_excess_volume_m3": 1052.473091484366,
+              "peak_downstream_flow_m3s": 0.6690790636323999,
+              "terminal_storage_m3": 4.718729262559736
+            },
+            "changes": {
+              "flood_volume_m3": -421.3200422674504,
+              "downstream_excess_volume_m3": 1.4711339395291816,
+              "peak_downstream_flow_m3s": -5.817867137680732e-05,
+              "terminal_storage_m3": -2.2007284883329703e-11
+            },
+            "guards": {
+              "downstream_excess_volume_m3": false,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": false,
+            "material_flood_improvement": true,
+            "flood_reduction_m3": 421.3200422674504,
+            "relative_flood_reduction": 0.12988694882884552
+          }
+        ],
+        "trace_records": {
+          "reference:empty": {
+            "run_id": "reference_empty-7f67903be70e",
+            "rows": 13640,
+            "sha256": "e9361d0dc197071274a9880f351ebf5d18c264af295c99df249989ecf11accc0"
+          },
+          "reference:a": {
+            "run_id": "reference_a-13afd4601f24",
+            "rows": 13644,
+            "sha256": "26499ba14da1ec4e4a32e3cf10e5880d36342ce2f19d968617d85075bd726878"
+          },
+          "reference:b": {
+            "run_id": "reference_b-b711150d5bfb",
+            "rows": 13620,
+            "sha256": "f260ae519a9fd4a4ee76f85431f44accf678967c78a51f150583303ef7d7f91b"
+          },
+          "reference:ab": {
+            "run_id": "reference_ab-c70939fd499d",
+            "rows": 13625,
+            "sha256": "56e2604c3a7cffa07edd325d8aba42c740661597a5cf4225b37a46267d6c3425"
+          },
+          "candidate:empty": {
+            "run_id": "candidate_empty-d43ff182d6b0",
+            "rows": 13640,
+            "sha256": "e9361d0dc197071274a9880f351ebf5d18c264af295c99df249989ecf11accc0"
+          },
+          "candidate:a": {
+            "run_id": "candidate_a-3b405be67a26",
+            "rows": 13644,
+            "sha256": "26499ba14da1ec4e4a32e3cf10e5880d36342ce2f19d968617d85075bd726878"
+          },
+          "candidate:b": {
+            "run_id": "candidate_b-db5414f93d52",
+            "rows": 13637,
+            "sha256": "76f883bd05a2284e5cfb82753dc9575cb02ad8fb09f79d4672d7801d43656344"
+          },
+          "candidate:ab": {
+            "run_id": "candidate_ab-b27105c0da77",
+            "rows": 13638,
+            "sha256": "4bfdfb55aa75336e0f567026e455b4f30917c3d4ae48aaf1c43ec77baa9e238e"
+          }
+        },
+        "validation_counts": {
+          "passed": 145,
+          "unperformed": 3
+        }
+      },
+      {
+        "case_id": "p2h2",
+        "transform": {
+          "rainfall_multiplier": 0.82,
+          "duration_scale": 0.78,
+          "noise_std_m": 0,
+          "sensor_bias_scale": 1.3,
+          "valve_setting_delta": 0.025,
+          "id": "p2h2",
+          "time_shift_s": 0,
+          "fault_time_shift_s": {
+            "sensor_bias": 120,
+            "valve_stuck": 2100
+          },
+          "seed": 475789
+        },
+        "status": "completed",
+        "request": {
+          "scenario_id": "theta",
+          "controller_id": "constant_flow",
+          "fallback_controller_id": "plausible_depth",
+          "controller_parameters": {
+            "target_scale": 1.0
+          },
+          "fallback_controller_parameters": {
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "seed": 475789,
+          "rainfall_multiplier": 0.82,
+          "noise_std_m": 0,
+          "faults": [
+            {
+              "id": "partial-valve",
+              "type": "valve_stuck",
+              "asset": "2",
+              "start_s": 23700.0,
+              "end_s": 29316.0,
+              "setting": 0.060000000000000005
+            },
+            {
+              "id": "sensor-bias",
+              "type": "sensor_bias",
+              "asset": "P2",
+              "start_s": 10920.0,
+              "end_s": 19344.0,
+              "bias_m": 1.3
+            }
+          ],
+          "test_contract": {
+            "metric": "flood_volume_m3",
+            "threshold": 100,
+            "tolerance": 1e-06,
+            "units": "m3",
+            "mode": "absolute",
+            "direction": "above",
+            "horizon_s": 280800
+          }
+        },
+        "subsets": [
+          {
+            "subset": "empty",
+            "active_fault_ids": [],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.46345863583628355,
+              "terminal_storage_m3": 4.627668703569681
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.46345863583628355,
+              "terminal_storage_m3": 4.627668703569681
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "a",
+            "active_fault_ids": [
+              "partial-valve"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.4614208421358883,
+              "terminal_storage_m3": 4.627668778736531
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.4614208421358883,
+              "terminal_storage_m3": 4.627668778736531
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "b",
+            "active_fault_ids": [
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.4790067595842474,
+              "terminal_storage_m3": 4.6276688267849835
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.4689321732323254,
+              "terminal_storage_m3": 4.627668663867505
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": -0.010074586351921988,
+              "terminal_storage_m3": -1.6291747861885142e-07
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "ab",
+            "active_fault_ids": [
+              "partial-valve",
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.4790067595842474,
+              "terminal_storage_m3": 4.627668830850312
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.4689309453471414,
+              "terminal_storage_m3": 4.62766879173493
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": -0.010075814237105962,
+              "terminal_storage_m3": -3.9115382044485614e-08
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          }
+        ],
+        "trace_records": {
+          "reference:empty": {
+            "run_id": "reference_empty-b298f85e30fd",
+            "rows": 12275,
+            "sha256": "3e131ca0fe529243b2cbe6e691e3ffcdbf1e4d93f835c9b9a660e3b4fc706ffb"
+          },
+          "reference:a": {
+            "run_id": "reference_a-bed0e666a47c",
+            "rows": 12261,
+            "sha256": "6fc87bcdca5d1d0efbd43cd1222754f74c5dc83c64f9b4ed50666e8d9d5b7a8b"
+          },
+          "reference:b": {
+            "run_id": "reference_b-ae85c1f62074",
+            "rows": 12274,
+            "sha256": "039f7640fba8ec6615bcbe2d67ee037883187b889f4e63afe8e4503a0b3af263"
+          },
+          "reference:ab": {
+            "run_id": "reference_ab-739f9c28e95f",
+            "rows": 12270,
+            "sha256": "7d0aa73b79f46af2f2294fde49fc28edd3823040d9ca4224c3eacf9cf30645c2"
+          },
+          "candidate:empty": {
+            "run_id": "candidate_empty-a364c50b0a9d",
+            "rows": 12275,
+            "sha256": "3e131ca0fe529243b2cbe6e691e3ffcdbf1e4d93f835c9b9a660e3b4fc706ffb"
+          },
+          "candidate:a": {
+            "run_id": "candidate_a-af346e70ecb8",
+            "rows": 12261,
+            "sha256": "6fc87bcdca5d1d0efbd43cd1222754f74c5dc83c64f9b4ed50666e8d9d5b7a8b"
+          },
+          "candidate:b": {
+            "run_id": "candidate_b-a485e2cfa2e0",
+            "rows": 12255,
+            "sha256": "05ce939073fdddbd6cefcb11922f70e095d168d5a16295e72c41c619ab5bcba5"
+          },
+          "candidate:ab": {
+            "run_id": "candidate_ab-d6aaf1a0686a",
+            "rows": 12269,
+            "sha256": "bc50ce194be61a31d61b326e042abec7d1635f770fb2efed64c52dd2be0d5ead"
+          }
+        },
+        "validation_counts": {
+          "passed": 145,
+          "unperformed": 3
+        }
+      },
+      {
+        "case_id": "p2h3",
+        "transform": {
+          "rainfall_multiplier": 1.42,
+          "duration_scale": 1.4,
+          "noise_std_m": 0.065,
+          "sensor_bias_scale": -0.7,
+          "valve_setting_delta": 0.008,
+          "id": "p2h3",
+          "time_shift_s": 0,
+          "fault_time_shift_s": {
+            "sensor_bias": 750,
+            "valve_stuck": 3300
+          },
+          "seed": 779101
+        },
+        "status": "completed",
+        "request": {
+          "scenario_id": "theta",
+          "controller_id": "constant_flow",
+          "fallback_controller_id": "plausible_depth",
+          "controller_parameters": {
+            "target_scale": 1.0
+          },
+          "fallback_controller_parameters": {
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "seed": 779101,
+          "rainfall_multiplier": 1.42,
+          "noise_std_m": 0.065,
+          "faults": [
+            {
+              "id": "partial-valve",
+              "type": "valve_stuck",
+              "asset": "2",
+              "start_s": 24900.0,
+              "end_s": 34980.0,
+              "setting": 0.043000000000000003
+            },
+            {
+              "id": "sensor-bias",
+              "type": "sensor_bias",
+              "asset": "P2",
+              "start_s": 11550.0,
+              "end_s": 26670.0,
+              "bias_m": -0.7
+            }
+          ],
+          "test_contract": {
+            "metric": "flood_volume_m3",
+            "threshold": 100,
+            "tolerance": 1e-06,
+            "units": "m3",
+            "mode": "absolute",
+            "direction": "above",
+            "horizon_s": 280800
+          }
+        },
+        "subsets": [
+          {
+            "subset": "empty",
+            "active_fault_ids": [],
+            "reference_metrics": {
+              "flood_volume_m3": 4686.828523887713,
+              "downstream_excess_volume_m3": 45.77013586178116,
+              "peak_downstream_flow_m3s": 0.5350641097587309,
+              "terminal_storage_m3": 4.739321409743273
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 4686.828523887713,
+              "downstream_excess_volume_m3": 45.77013586178116,
+              "peak_downstream_flow_m3s": 0.5350641097587309,
+              "terminal_storage_m3": 4.739321409743273
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "a",
+            "active_fault_ids": [
+              "partial-valve"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 4719.4186352140105,
+              "downstream_excess_volume_m3": 36.08325202630684,
+              "peak_downstream_flow_m3s": 0.5350641097587309,
+              "terminal_storage_m3": 4.739321477420042
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 4719.4186352140105,
+              "downstream_excess_volume_m3": 36.08325202630684,
+              "peak_downstream_flow_m3s": 0.5350641097587309,
+              "terminal_storage_m3": 4.739321477420042
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "b",
+            "active_fault_ids": [
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 2206.898313313772,
+              "downstream_excess_volume_m3": 2989.981165300943,
+              "peak_downstream_flow_m3s": 0.8238309261233525,
+              "terminal_storage_m3": 4.739320865621075
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 2206.898313313772,
+              "downstream_excess_volume_m3": 2989.981165300943,
+              "peak_downstream_flow_m3s": 0.8238309261233525,
+              "terminal_storage_m3": 4.739320865621075
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "ab",
+            "active_fault_ids": [
+              "partial-valve",
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 2289.4035444172523,
+              "downstream_excess_volume_m3": 2508.9124322795083,
+              "peak_downstream_flow_m3s": 0.8238309261233525,
+              "terminal_storage_m3": 4.739321477420021
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 2289.4035444172523,
+              "downstream_excess_volume_m3": 2508.9124322795083,
+              "peak_downstream_flow_m3s": 0.8238309261233525,
+              "terminal_storage_m3": 4.739321477420021
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          }
+        ],
+        "trace_records": {
+          "reference:empty": {
+            "run_id": "reference_empty-ab5441b75438",
+            "rows": 13790,
+            "sha256": "797127e1eed5571868877f275d306c3ced4d2c8ecaad30e9db7baf7641d0561d"
+          },
+          "reference:a": {
+            "run_id": "reference_a-438bb0ea649b",
+            "rows": 13789,
+            "sha256": "28b7130a0b7e31ea882ce518d313f9c5abf491c4b9453aa65f2e3cac66961c04"
+          },
+          "reference:b": {
+            "run_id": "reference_b-bbe224d58f5e",
+            "rows": 13905,
+            "sha256": "b6b814243d9480deee2148a1878904da4d86762f16d15a8b37ba0357beac0367"
+          },
+          "reference:ab": {
+            "run_id": "reference_ab-0abe90558534",
+            "rows": 13915,
+            "sha256": "255e95e9b908943387b7030b3a0a2b688dc350d9773902622ee4d912c0c0466f"
+          },
+          "candidate:empty": {
+            "run_id": "candidate_empty-61f8d25a0be2",
+            "rows": 13790,
+            "sha256": "797127e1eed5571868877f275d306c3ced4d2c8ecaad30e9db7baf7641d0561d"
+          },
+          "candidate:a": {
+            "run_id": "candidate_a-5ddaf19dab24",
+            "rows": 13789,
+            "sha256": "28b7130a0b7e31ea882ce518d313f9c5abf491c4b9453aa65f2e3cac66961c04"
+          },
+          "candidate:b": {
+            "run_id": "candidate_b-83bad09e0b40",
+            "rows": 13905,
+            "sha256": "b6b814243d9480deee2148a1878904da4d86762f16d15a8b37ba0357beac0367"
+          },
+          "candidate:ab": {
+            "run_id": "candidate_ab-c4eb6d0fac9c",
+            "rows": 13915,
+            "sha256": "255e95e9b908943387b7030b3a0a2b688dc350d9773902622ee4d912c0c0466f"
+          }
+        },
+        "validation_counts": {
+          "passed": 145,
+          "unperformed": 3
+        }
+      },
+      {
+        "case_id": "p2h4",
+        "transform": {
+          "rainfall_multiplier": 0.92,
+          "duration_scale": 0.65,
+          "noise_std_m": 0.045,
+          "sensor_bias_scale": 0.8,
+          "valve_setting_delta": -0.032,
+          "id": "p2h4",
+          "time_shift_s": 0,
+          "fault_time_shift_s": {
+            "sensor_bias": 4200,
+            "valve_stuck": 180
+          },
+          "seed": 942786
+        },
+        "status": "completed",
+        "request": {
+          "scenario_id": "theta",
+          "controller_id": "constant_flow",
+          "fallback_controller_id": "plausible_depth",
+          "controller_parameters": {
+            "target_scale": 1.0
+          },
+          "fallback_controller_parameters": {
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "seed": 942786,
+          "rainfall_multiplier": 0.92,
+          "noise_std_m": 0.045,
+          "faults": [
+            {
+              "id": "partial-valve",
+              "type": "valve_stuck",
+              "asset": "2",
+              "start_s": 21780.0,
+              "end_s": 26460.0,
+              "setting": 0.0030000000000000027
+            },
+            {
+              "id": "sensor-bias",
+              "type": "sensor_bias",
+              "asset": "P2",
+              "start_s": 15000.0,
+              "end_s": 22020.0,
+              "bias_m": 0.8
+            }
+          ],
+          "test_contract": {
+            "metric": "flood_volume_m3",
+            "threshold": 100,
+            "tolerance": 1e-06,
+            "units": "m3",
+            "mode": "absolute",
+            "direction": "above",
+            "horizon_s": 280800
+          }
+        },
+        "subsets": [
+          {
+            "subset": "empty",
+            "active_fault_ids": [],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 42.45124072807479,
+              "peak_downstream_flow_m3s": 0.6191191576773226,
+              "terminal_storage_m3": 4.685076303553463
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 42.45124072807479,
+              "peak_downstream_flow_m3s": 0.6191191576773226,
+              "terminal_storage_m3": 4.685076303553463
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "a",
+            "active_fault_ids": [
+              "partial-valve"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 99.2927704053233,
+              "downstream_excess_volume_m3": 57.69085343302503,
+              "peak_downstream_flow_m3s": 0.6191191576773226,
+              "terminal_storage_m3": 4.685079488591126
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 99.2927704053233,
+              "downstream_excess_volume_m3": 57.69085343302503,
+              "peak_downstream_flow_m3s": 0.6191191576773226,
+              "terminal_storage_m3": 4.685079488591126
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "b",
+            "active_fault_ids": [
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 34.269628166455796,
+              "peak_downstream_flow_m3s": 0.571776203133746,
+              "terminal_storage_m3": 4.6850767397409445
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 34.269628166455796,
+              "peak_downstream_flow_m3s": 0.571776203133746,
+              "terminal_storage_m3": 4.6850767397409445
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "ab",
+            "active_fault_ids": [
+              "partial-valve",
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 412.0070692760164,
+              "downstream_excess_volume_m3": 39.652939171024634,
+              "peak_downstream_flow_m3s": 0.571776203133746,
+              "terminal_storage_m3": 4.685079488573508
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 412.0070692760164,
+              "downstream_excess_volume_m3": 39.652939171024634,
+              "peak_downstream_flow_m3s": 0.571776203133746,
+              "terminal_storage_m3": 4.685079488573508
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          }
+        ],
+        "trace_records": {
+          "reference:empty": {
+            "run_id": "reference_empty-0d2269e8d53f",
+            "rows": 12591,
+            "sha256": "261c2649b62fdd5105002985d118236de7bac20a921010d40f5cd14828f49d22"
+          },
+          "reference:a": {
+            "run_id": "reference_a-17e233796a45",
+            "rows": 12595,
+            "sha256": "80bfe3cb2c7f339da6c5ac49423143cc5b9d8644cc9ff84662578956585fee1d"
+          },
+          "reference:b": {
+            "run_id": "reference_b-f26497ea3136",
+            "rows": 12601,
+            "sha256": "2fd4cb7552c24993ee0dd2b70913f9a6253765d54c0f1704c5750b7ccf706bd8"
+          },
+          "reference:ab": {
+            "run_id": "reference_ab-c07c4a431547",
+            "rows": 12583,
+            "sha256": "8a9bb226f7112a15021e84c0c0762d691bbf688ba8aff0848595735ca380e6b2"
+          },
+          "candidate:empty": {
+            "run_id": "candidate_empty-fa28a1c27a86",
+            "rows": 12591,
+            "sha256": "261c2649b62fdd5105002985d118236de7bac20a921010d40f5cd14828f49d22"
+          },
+          "candidate:a": {
+            "run_id": "candidate_a-e9c11c774def",
+            "rows": 12595,
+            "sha256": "80bfe3cb2c7f339da6c5ac49423143cc5b9d8644cc9ff84662578956585fee1d"
+          },
+          "candidate:b": {
+            "run_id": "candidate_b-af78ed69c1aa",
+            "rows": 12601,
+            "sha256": "2fd4cb7552c24993ee0dd2b70913f9a6253765d54c0f1704c5750b7ccf706bd8"
+          },
+          "candidate:ab": {
+            "run_id": "candidate_ab-6097a2032e5d",
+            "rows": 12583,
+            "sha256": "8a9bb226f7112a15021e84c0c0762d691bbf688ba8aff0848595735ca380e6b2"
+          }
+        },
+        "validation_counts": {
+          "passed": 145,
+          "unperformed": 3
+        }
+      },
+      {
+        "case_id": "p2h5",
+        "transform": {
+          "rainfall_multiplier": 1.22,
+          "duration_scale": 1.5,
+          "noise_std_m": 0.015,
+          "sensor_bias_scale": 0.6,
+          "valve_setting_delta": -0.012,
+          "id": "p2h5",
+          "time_shift_s": 0,
+          "fault_time_shift_s": {
+            "sensor_bias": 5700,
+            "valve_stuck": 1050
+          },
+          "seed": 402328
+        },
+        "status": "completed",
+        "request": {
+          "scenario_id": "theta",
+          "controller_id": "constant_flow",
+          "fallback_controller_id": "plausible_depth",
+          "controller_parameters": {
+            "target_scale": 1.0
+          },
+          "fallback_controller_parameters": {
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "seed": 402328,
+          "rainfall_multiplier": 1.22,
+          "noise_std_m": 0.015,
+          "faults": [
+            {
+              "id": "partial-valve",
+              "type": "valve_stuck",
+              "asset": "2",
+              "start_s": 22650.0,
+              "end_s": 33450.0,
+              "setting": 0.023000000000000003
+            },
+            {
+              "id": "sensor-bias",
+              "type": "sensor_bias",
+              "asset": "P2",
+              "start_s": 16500.0,
+              "end_s": 32700.0,
+              "bias_m": 0.6
+            }
+          ],
+          "test_contract": {
+            "metric": "flood_volume_m3",
+            "threshold": 100,
+            "tolerance": 1e-06,
+            "units": "m3",
+            "mode": "absolute",
+            "direction": "above",
+            "horizon_s": 280800
+          }
+        },
+        "subsets": [
+          {
+            "subset": "empty",
+            "active_fault_ids": [],
+            "reference_metrics": {
+              "flood_volume_m3": 1300.388419267035,
+              "downstream_excess_volume_m3": 2.3491275033930146,
+              "peak_downstream_flow_m3s": 0.505013642030995,
+              "terminal_storage_m3": 4.700723690815715
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 1300.388419267035,
+              "downstream_excess_volume_m3": 2.3491275033930146,
+              "peak_downstream_flow_m3s": 0.505013642030995,
+              "terminal_storage_m3": 4.700723690815715
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "a",
+            "active_fault_ids": [
+              "partial-valve"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 2503.523804783079,
+              "downstream_excess_volume_m3": 0.6298463142417698,
+              "peak_downstream_flow_m3s": 0.5034159709952317,
+              "terminal_storage_m3": 4.700723875448432
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 2503.523804783079,
+              "downstream_excess_volume_m3": 0.6298463142417698,
+              "peak_downstream_flow_m3s": 0.5034159709952317,
+              "terminal_storage_m3": 4.700723875448432
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "b",
+            "active_fault_ids": [
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 1799.2436722781795,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.497158954461136,
+              "terminal_storage_m3": 4.700723712824288
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 1799.2436722781795,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.497158954461136,
+              "terminal_storage_m3": 4.700723712824288
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "ab",
+            "active_fault_ids": [
+              "partial-valve",
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 2727.4359433679188,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.49749436652415147,
+              "terminal_storage_m3": 4.700723875448457
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 2727.4359433679188,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.49749436652415147,
+              "terminal_storage_m3": 4.700723875448457
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          }
+        ],
+        "trace_records": {
+          "reference:empty": {
+            "run_id": "reference_empty-8731c5c21bf8",
+            "rows": 13449,
+            "sha256": "7b1863876582029f11a22218644f21d1734f786baa54098e314ea84f82ec0bbd"
+          },
+          "reference:a": {
+            "run_id": "reference_a-2cd41c943f78",
+            "rows": 13380,
+            "sha256": "f87bc46a0a3950fa63e6188b31c0dd07e8334d7660bc5e21217d89577e433e5f"
+          },
+          "reference:b": {
+            "run_id": "reference_b-0ba851bfef66",
+            "rows": 13449,
+            "sha256": "e1caf7f90a1c5097fa415e2b5d7c6eae19ec67b29f81511132380e0ab011f3e8"
+          },
+          "reference:ab": {
+            "run_id": "reference_ab-646ed33135b2",
+            "rows": 13372,
+            "sha256": "2486a1c82c873b2eed47bc79eb89ca6cf726d3e62bc4f99daf95c8300059761c"
+          },
+          "candidate:empty": {
+            "run_id": "candidate_empty-5b644ca28810",
+            "rows": 13449,
+            "sha256": "7b1863876582029f11a22218644f21d1734f786baa54098e314ea84f82ec0bbd"
+          },
+          "candidate:a": {
+            "run_id": "candidate_a-09183aa71335",
+            "rows": 13380,
+            "sha256": "f87bc46a0a3950fa63e6188b31c0dd07e8334d7660bc5e21217d89577e433e5f"
+          },
+          "candidate:b": {
+            "run_id": "candidate_b-826b1f9c5768",
+            "rows": 13449,
+            "sha256": "e1caf7f90a1c5097fa415e2b5d7c6eae19ec67b29f81511132380e0ab011f3e8"
+          },
+          "candidate:ab": {
+            "run_id": "candidate_ab-bcae74ffca5f",
+            "rows": 13372,
+            "sha256": "2486a1c82c873b2eed47bc79eb89ca6cf726d3e62bc4f99daf95c8300059761c"
+          }
+        },
+        "validation_counts": {
+          "passed": 145,
+          "unperformed": 3
+        }
+      },
+      {
+        "case_id": "p2h6",
+        "transform": {
+          "rainfall_multiplier": 1.12,
+          "duration_scale": 0.88,
+          "noise_std_m": 0.005,
+          "sensor_bias_scale": -1.2,
+          "valve_setting_delta": 0.06,
+          "id": "p2h6",
+          "time_shift_s": 0,
+          "fault_time_shift_s": {
+            "sensor_bias": -600,
+            "valve_stuck": -1500
+          },
+          "seed": 426317
+        },
+        "status": "completed",
+        "request": {
+          "scenario_id": "theta",
+          "controller_id": "constant_flow",
+          "fallback_controller_id": "plausible_depth",
+          "controller_parameters": {
+            "target_scale": 1.0
+          },
+          "fallback_controller_parameters": {
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "seed": 426317,
+          "rainfall_multiplier": 1.12,
+          "noise_std_m": 0.005,
+          "faults": [
+            {
+              "id": "partial-valve",
+              "type": "valve_stuck",
+              "asset": "2",
+              "start_s": 20100.0,
+              "end_s": 26436.0,
+              "setting": 0.095
+            },
+            {
+              "id": "sensor-bias",
+              "type": "sensor_bias",
+              "asset": "P2",
+              "start_s": 10200.0,
+              "end_s": 19704.0,
+              "bias_m": -1.2
+            }
+          ],
+          "test_contract": {
+            "metric": "flood_volume_m3",
+            "threshold": 100,
+            "tolerance": 1e-06,
+            "units": "m3",
+            "mode": "absolute",
+            "direction": "above",
+            "horizon_s": 280800
+          }
+        },
+        "subsets": [
+          {
+            "subset": "empty",
+            "active_fault_ids": [],
+            "reference_metrics": {
+              "flood_volume_m3": 117.98555069776675,
+              "downstream_excess_volume_m3": 0.11912719166109782,
+              "peak_downstream_flow_m3s": 0.5008567363845915,
+              "terminal_storage_m3": 4.671063647302294
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 117.98555069776675,
+              "downstream_excess_volume_m3": 0.11912719166109782,
+              "peak_downstream_flow_m3s": 0.5008567363845915,
+              "terminal_storage_m3": 4.671063647302294
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "a",
+            "active_fault_ids": [
+              "partial-valve"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 793.2404162832149,
+              "peak_downstream_flow_m3s": 0.6306315250456611,
+              "terminal_storage_m3": 4.671062401524984
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 793.2404162832149,
+              "peak_downstream_flow_m3s": 0.6306315250456611,
+              "terminal_storage_m3": 4.671062401524984
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "b",
+            "active_fault_ids": [
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 332.9778529867849,
+              "peak_downstream_flow_m3s": 0.6122559763960789,
+              "terminal_storage_m3": 4.6710627044112805
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 332.9778529867849,
+              "peak_downstream_flow_m3s": 0.6122559763960789,
+              "terminal_storage_m3": 4.6710627044112805
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "ab",
+            "active_fault_ids": [
+              "partial-valve",
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 695.0244750069091,
+              "peak_downstream_flow_m3s": 0.6122559763960789,
+              "terminal_storage_m3": 4.671062536713811
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 695.0244750069091,
+              "peak_downstream_flow_m3s": 0.6122559763960789,
+              "terminal_storage_m3": 4.671062536713811
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          }
+        ],
+        "trace_records": {
+          "reference:empty": {
+            "run_id": "reference_empty-bd29d3635ecb",
+            "rows": 13218,
+            "sha256": "ace30447de9b79e135a7c817bc613809b40b3e9339b06ff4053c4d8c1411ae9e"
+          },
+          "reference:a": {
+            "run_id": "reference_a-ee5de07482ac",
+            "rows": 13217,
+            "sha256": "c0f2241a8e0f7847c7ad5df3ad2dd3b9e967a4a2821894c148fb08bbd2b0752a"
+          },
+          "reference:b": {
+            "run_id": "reference_b-443c3cb340ac",
+            "rows": 13229,
+            "sha256": "00094229f013359c88b611bcba08e86f01cf61250343c5357cdb0ecd47641603"
+          },
+          "reference:ab": {
+            "run_id": "reference_ab-d0eeb6defe65",
+            "rows": 13225,
+            "sha256": "29e6f3d2a518f3e11b6be2b1307ba8a8203923a8e91a3b0e7199e374818eea59"
+          },
+          "candidate:empty": {
+            "run_id": "candidate_empty-62bef2a6f8dc",
+            "rows": 13218,
+            "sha256": "ace30447de9b79e135a7c817bc613809b40b3e9339b06ff4053c4d8c1411ae9e"
+          },
+          "candidate:a": {
+            "run_id": "candidate_a-adab79d37033",
+            "rows": 13217,
+            "sha256": "c0f2241a8e0f7847c7ad5df3ad2dd3b9e967a4a2821894c148fb08bbd2b0752a"
+          },
+          "candidate:b": {
+            "run_id": "candidate_b-01b69e4d279c",
+            "rows": 13229,
+            "sha256": "00094229f013359c88b611bcba08e86f01cf61250343c5357cdb0ecd47641603"
+          },
+          "candidate:ab": {
+            "run_id": "candidate_ab-1b8d61f0fa05",
+            "rows": 13225,
+            "sha256": "29e6f3d2a518f3e11b6be2b1307ba8a8203923a8e91a3b0e7199e374818eea59"
+          }
+        },
+        "validation_counts": {
+          "passed": 145,
+          "unperformed": 3
+        }
+      },
+      {
+        "case_id": "p2h7",
+        "transform": {
+          "rainfall_multiplier": 1.02,
+          "duration_scale": 1.12,
+          "noise_std_m": 0.035,
+          "sensor_bias_scale": 1.1,
+          "valve_setting_delta": -0.025,
+          "id": "p2h7",
+          "time_shift_s": 0,
+          "fault_time_shift_s": {
+            "sensor_bias": -1800,
+            "valve_stuck": 4800
+          },
+          "seed": 909218
+        },
+        "status": "completed",
+        "request": {
+          "scenario_id": "theta",
+          "controller_id": "constant_flow",
+          "fallback_controller_id": "plausible_depth",
+          "controller_parameters": {
+            "target_scale": 1.0
+          },
+          "fallback_controller_parameters": {
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "seed": 909218,
+          "rainfall_multiplier": 1.02,
+          "noise_std_m": 0.035,
+          "faults": [
+            {
+              "id": "partial-valve",
+              "type": "valve_stuck",
+              "asset": "2",
+              "start_s": 26400.0,
+              "end_s": 34464.0,
+              "setting": 0.010000000000000002
+            },
+            {
+              "id": "sensor-bias",
+              "type": "sensor_bias",
+              "asset": "P2",
+              "start_s": 9000.0,
+              "end_s": 21096.0,
+              "bias_m": 1.1
+            }
+          ],
+          "test_contract": {
+            "metric": "flood_volume_m3",
+            "threshold": 100,
+            "tolerance": 1e-06,
+            "units": "m3",
+            "mode": "absolute",
+            "direction": "above",
+            "horizon_s": 280800
+          }
+        },
+        "subsets": [
+          {
+            "subset": "empty",
+            "active_fault_ids": [],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 1.2297697553601723,
+              "peak_downstream_flow_m3s": 0.5060014619293053,
+              "terminal_storage_m3": 4.691198623591918
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 1.2297697553601723,
+              "peak_downstream_flow_m3s": 0.5060014619293053,
+              "terminal_storage_m3": 4.691198623591918
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "a",
+            "active_fault_ids": [
+              "partial-valve"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 721.4477819937358,
+              "downstream_excess_volume_m3": 2.96218720218597,
+              "peak_downstream_flow_m3s": 0.5082842469874556,
+              "terminal_storage_m3": 4.691203890335317
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 721.4477819937358,
+              "downstream_excess_volume_m3": 2.96218720218597,
+              "peak_downstream_flow_m3s": 0.5082842469874556,
+              "terminal_storage_m3": 4.691203890335317
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": -0.0
+          },
+          {
+            "subset": "b",
+            "active_fault_ids": [
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 12.627201009429154,
+              "peak_downstream_flow_m3s": 0.5128987086955991,
+              "terminal_storage_m3": 4.691200241788708
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 3.569912558269779,
+              "peak_downstream_flow_m3s": 0.5084592315040496,
+              "terminal_storage_m3": 4.691198990848481
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": -9.057288451159375,
+              "peak_downstream_flow_m3s": -0.004439477191549468,
+              "terminal_storage_m3": -1.2509402278482185e-06
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "ab",
+            "active_fault_ids": [
+              "partial-valve",
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 1167.502154908862,
+              "downstream_excess_volume_m3": 11.742565558504207,
+              "peak_downstream_flow_m3s": 0.5128987086955991,
+              "terminal_storage_m3": 4.691203890340743
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 871.4510677418178,
+              "downstream_excess_volume_m3": 4.746189649656925,
+              "peak_downstream_flow_m3s": 0.5084592315040496,
+              "terminal_storage_m3": 4.691203898472659
+            },
+            "changes": {
+              "flood_volume_m3": -296.0510871670441,
+              "downstream_excess_volume_m3": -6.996375908847282,
+              "peak_downstream_flow_m3s": -0.004439477191549468,
+              "terminal_storage_m3": 8.13191558535209e-09
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": true,
+            "flood_reduction_m3": 296.0510871670441,
+            "relative_flood_reduction": 0.2535764802850874
+          }
+        ],
+        "trace_records": {
+          "reference:empty": {
+            "run_id": "reference_empty-cc0f699ed283",
+            "rows": 12916,
+            "sha256": "34090be4c347a8dbad51e58c2d1f57ae095604c13a8e079cad6293b677f42518"
+          },
+          "reference:a": {
+            "run_id": "reference_a-e5c5695d0c1c",
+            "rows": 12882,
+            "sha256": "99b90f27221222fc6090199af148644a69e995744ac616224d02aee1702b2c87"
+          },
+          "reference:b": {
+            "run_id": "reference_b-075ac2e5f320",
+            "rows": 12920,
+            "sha256": "daac0ddcdc82f9e27c74c9bc3200d5ac91e114f33d8fa1be8e3257d52bfbe94b"
+          },
+          "reference:ab": {
+            "run_id": "reference_ab-ac2fc3a3cddd",
+            "rows": 12863,
+            "sha256": "6eb2f71df81acc95fbcc943f86cae93a10520541b7d29aa4b31c3b0334d6512b"
+          },
+          "candidate:empty": {
+            "run_id": "candidate_empty-9965f9076b48",
+            "rows": 12916,
+            "sha256": "34090be4c347a8dbad51e58c2d1f57ae095604c13a8e079cad6293b677f42518"
+          },
+          "candidate:a": {
+            "run_id": "candidate_a-6a44167b3ff7",
+            "rows": 12882,
+            "sha256": "99b90f27221222fc6090199af148644a69e995744ac616224d02aee1702b2c87"
+          },
+          "candidate:b": {
+            "run_id": "candidate_b-f010a8b337de",
+            "rows": 12917,
+            "sha256": "4ffe145acc237ca222e2e2343a6ae8387c64a105c78d9f18146dd0f46064f78f"
+          },
+          "candidate:ab": {
+            "run_id": "candidate_ab-83cdd1c052b0",
+            "rows": 12882,
+            "sha256": "d79b5736350f27470f5e56acffb6d29e6a10cfa021057ed3823d5ba619abb5a9"
+          }
+        },
+        "validation_counts": {
+          "passed": 145,
+          "unperformed": 3
+        }
+      },
+      {
+        "case_id": "p2h8",
+        "transform": {
+          "rainfall_multiplier": 0.72,
+          "duration_scale": 1.02,
+          "noise_std_m": 0.08,
+          "sensor_bias_scale": 1.5,
+          "valve_setting_delta": 0.08,
+          "id": "p2h8",
+          "time_shift_s": 0,
+          "fault_time_shift_s": {
+            "sensor_bias": 1500,
+            "valve_stuck": -450
+          },
+          "seed": 705566
+        },
+        "status": "completed",
+        "request": {
+          "scenario_id": "theta",
+          "controller_id": "constant_flow",
+          "fallback_controller_id": "plausible_depth",
+          "controller_parameters": {
+            "target_scale": 1.0
+          },
+          "fallback_controller_parameters": {
+            "target_scale": 1.0,
+            "jump_threshold_m": 0.65,
+            "correction_fraction": 0.75
+          },
+          "seed": 705566,
+          "rainfall_multiplier": 0.72,
+          "noise_std_m": 0.08,
+          "faults": [
+            {
+              "id": "partial-valve",
+              "type": "valve_stuck",
+              "asset": "2",
+              "start_s": 21150.0,
+              "end_s": 28494.0,
+              "setting": 0.115
+            },
+            {
+              "id": "sensor-bias",
+              "type": "sensor_bias",
+              "asset": "P2",
+              "start_s": 12300.0,
+              "end_s": 23316.0,
+              "bias_m": 1.5
+            }
+          ],
+          "test_contract": {
+            "metric": "flood_volume_m3",
+            "threshold": 100,
+            "tolerance": 1e-06,
+            "units": "m3",
+            "mode": "absolute",
+            "direction": "above",
+            "horizon_s": 280800
+          }
+        },
+        "subsets": [
+          {
+            "subset": "empty",
+            "active_fault_ids": [],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 12.391797475189609,
+              "peak_downstream_flow_m3s": 0.6013637350015154,
+              "terminal_storage_m3": 4.668427757051716
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 12.391797475189609,
+              "peak_downstream_flow_m3s": 0.6013637350015154,
+              "terminal_storage_m3": 4.668427757051716
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "a",
+            "active_fault_ids": [
+              "partial-valve"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 12.391797475189609,
+              "peak_downstream_flow_m3s": 0.6013637350015154,
+              "terminal_storage_m3": 4.668427722886683
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 12.391797475189609,
+              "peak_downstream_flow_m3s": 0.6013637350015154,
+              "terminal_storage_m3": 4.668427722886683
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.0,
+              "terminal_storage_m3": 0.0
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "b",
+            "active_fault_ids": [
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 3.5570604554011735,
+              "peak_downstream_flow_m3s": 0.5492632246666616,
+              "terminal_storage_m3": 4.668428203053477
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 0.0,
+              "peak_downstream_flow_m3s": 0.4800665243976835,
+              "terminal_storage_m3": 4.668427862613329
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": -3.5570604554011735,
+              "peak_downstream_flow_m3s": -0.06919670026897806,
+              "terminal_storage_m3": -3.4044014807221856e-07
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          },
+          {
+            "subset": "ab",
+            "active_fault_ids": [
+              "partial-valve",
+              "sensor-bias"
+            ],
+            "reference_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 64.56589175275627,
+              "peak_downstream_flow_m3s": 0.5646503880700628,
+              "terminal_storage_m3": 4.668427738535389
+            },
+            "candidate_metrics": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": 19.394568020851917,
+              "peak_downstream_flow_m3s": 0.541988827069507,
+              "terminal_storage_m3": 4.668427737714987
+            },
+            "changes": {
+              "flood_volume_m3": 0.0,
+              "downstream_excess_volume_m3": -45.17132373190435,
+              "peak_downstream_flow_m3s": -0.02266156100055583,
+              "terminal_storage_m3": -8.204015244928087e-10
+            },
+            "guards": {
+              "downstream_excess_volume_m3": true,
+              "peak_downstream_flow_m3s": true,
+              "terminal_storage_m3": true
+            },
+            "all_guards_pass": true,
+            "material_flood_improvement": false,
+            "flood_reduction_m3": -0.0,
+            "relative_flood_reduction": null
+          }
+        ],
+        "trace_records": {
+          "reference:empty": {
+            "run_id": "reference_empty-b722c69a61fb",
+            "rows": 11909,
+            "sha256": "706113424f941b11b04a6735cd7f281dd076037627d8389a6f457c12987472c0"
+          },
+          "reference:a": {
+            "run_id": "reference_a-177ab715461f",
+            "rows": 11910,
+            "sha256": "912597c98d8fd42c1edc5e01eb71442679851632a76572ba3e7c2822d4927e73"
+          },
+          "reference:b": {
+            "run_id": "reference_b-c712a495d5d2",
+            "rows": 11907,
+            "sha256": "d337ad98600cd727243f2c93d439663922f7bca19bd9765b2d89c7202fa45f2c"
+          },
+          "reference:ab": {
+            "run_id": "reference_ab-af5ac80711df",
+            "rows": 11908,
+            "sha256": "fb9c13d14a98d4d5b068b01127c0b2e51400a8612f94f8dadbf946466853124a"
+          },
+          "candidate:empty": {
+            "run_id": "candidate_empty-6141895e23ce",
+            "rows": 11909,
+            "sha256": "706113424f941b11b04a6735cd7f281dd076037627d8389a6f457c12987472c0"
+          },
+          "candidate:a": {
+            "run_id": "candidate_a-6aa116e197c9",
+            "rows": 11910,
+            "sha256": "912597c98d8fd42c1edc5e01eb71442679851632a76572ba3e7c2822d4927e73"
+          },
+          "candidate:b": {
+            "run_id": "candidate_b-42892a83bcc3",
+            "rows": 11916,
+            "sha256": "2f069cd1d3809b011a20c353b1cc819ed80cdcde14ab49df9310a3cbb1385fab"
+          },
+          "candidate:ab": {
+            "run_id": "candidate_ab-702a0faf5d0b",
+            "rows": 11906,
+            "sha256": "5a495b64eac38f57e68cb4020b1a14afe89ac447d43dbb3f6f53030e5f86971b"
+          }
+        },
+        "validation_counts": {
+          "passed": 145,
+          "unperformed": 3
+        }
+      }
+    ]
+  },
+  "acceptance": {
+    "development_joint_failure": true,
+    "development_mitigation": true,
+    "heldout_usefulness": false,
+    "overall": false
+  },
+  "conclusion": "The frozen candidate does not meet every predeclared criterion; inspect the complete case table and guard failures.",
+  "retained_packets": [
+    {
+      "case_id": "p2h1",
+      "path": "evaluation/phase2/heldout/p2h1-packet.json.gz",
+      "sha256": "4b8111be430bfed0f73ec2832dac3ffa2955ce9cd58dab33cb72fde3a47faeee",
+      "validation_status": "completed",
+      "highlighted_by_predeclared_rule": true
+    },
+    {
+      "case_id": "p2h2",
+      "path": "evaluation/phase2/heldout/p2h2-packet.json.gz",
+      "sha256": "b9aa7a1b9a5b4a9aa4a2e25f457fa1d7641a739d090f61fa46a91a99f3a7f10f",
+      "validation_status": "completed",
+      "highlighted_by_predeclared_rule": false
+    },
+    {
+      "case_id": "p2h3",
+      "path": "evaluation/phase2/heldout/p2h3-packet.json.gz",
+      "sha256": "9b77eb91656052c3bce076f81b203f032acd48fa1cbf2bcdfd3b927e2c1b70cb",
+      "validation_status": "completed",
+      "highlighted_by_predeclared_rule": false
+    },
+    {
+      "case_id": "p2h4",
+      "path": "evaluation/phase2/heldout/p2h4-packet.json.gz",
+      "sha256": "634e1b25b96e66ac1ba86ddc7849605725880855b3c6d7eac04768f913929bac",
+      "validation_status": "completed",
+      "highlighted_by_predeclared_rule": false
+    },
+    {
+      "case_id": "p2h5",
+      "path": "evaluation/phase2/heldout/p2h5-packet.json.gz",
+      "sha256": "17adb64d1c4cc3a13faf28ef0b325db5dd8984c0eed91a0b94af08a452315ed5",
+      "validation_status": "completed",
+      "highlighted_by_predeclared_rule": false
+    },
+    {
+      "case_id": "p2h6",
+      "path": "evaluation/phase2/heldout/p2h6-packet.json.gz",
+      "sha256": "3f420929c2903571a9af395ae5c7fa526aceb6effb7319c7e75bc992d35f0dc0",
+      "validation_status": "completed",
+      "highlighted_by_predeclared_rule": false
+    },
+    {
+      "case_id": "p2h7",
+      "path": "evaluation/phase2/heldout/p2h7-packet.json.gz",
+      "sha256": "3aaafb610d081c6a64608434f855ea422c60666d0edaf9278af9c89a1ac647a2",
+      "validation_status": "completed",
+      "highlighted_by_predeclared_rule": false
+    },
+    {
+      "case_id": "p2h8",
+      "path": "evaluation/phase2/heldout/p2h8-packet.json.gz",
+      "sha256": "1a02704599955ef19a0f73ab822a872dec8edaeb5f05fffeef847810d66b1326",
+      "validation_status": "completed",
+      "highlighted_by_predeclared_rule": false
+    }
+  ],
+  "limitations": [
+    "Fixed Theta benchmark and 8 simulated perturbations; no field calibration or general safety claim.",
+    "The heldout suite was executed once after candidate freeze; unfavorable and invalid cases are retained in the table.",
+    "All complete traces were independently checked during execution and retained in compressed case packets. Extra retention was authorized before outcomes without changing any criteria.",
+    "This is a fixed policy comparison. No algorithmic superiority is claimed without a complete equal-budget optimization baseline.",
+    "Phase 2 used causal-depth-history-feedback-v2 instead of the protocol's v1 identifier. A pre-execution clarification records isolated history of the same permitted observations; no transforms or acceptance criteria changed."
+  ],
+  "information_boundary_clarification": {
+    "content": {
+      "schema_version": "stormpilot.protocol-clarification.v1",
+      "recorded_at_utc": "2026-09-20T15:46:26.132266+00:00",
+      "protocol_sha256": "15e373f2f634a26a9fd8013853ab6618e1b57ef79877effea7a0ddf2ae1dadd7",
+      "declared_information_boundary_id": "causal-depth-feedback-v1",
+      "execution_information_boundary_id": "causal-depth-history-feedback-v2",
+      "category": "pre_execution_semantic_clarification_and_metadata_deviation",
+      "change": "The v2 identifier names isolated per-run memory of current and past instances of the same permitted depth observations. It introduces no additional observation source.",
+      "permitted_information": [
+        "Current possibly noisy or biased measured depths",
+        "Earlier instances of those same measured depths stored in isolated per-run state",
+        "Declared static model geometry and controller parameters"
+      ],
+      "prohibited_information": [
+        "Noise-free true simulator depth as a separate control input",
+        "Active fault catalog, timing, type or hidden status",
+        "Rainfall realization or forecast",
+        "Future observations, terminal metrics or heldout outcomes"
+      ],
+      "invariant_requirements": [
+        "Every reference and candidate run uses the same v2 experiment/context information-boundary identifier",
+        "Controller state is constructed empty inside every run_simulation invocation",
+        "Controller code receives only observations, static geometry, parameters and its isolated state"
+      ],
+      "unchanged": [
+        "All frozen perturbation transforms",
+        "All development and heldout acceptance thresholds",
+        "The fixed development pair and reference policy",
+        "The one-candidate-before-unseen-execution rule"
+      ],
+      "chronology": "This clarification is recorded after phase 2 controller development began but before any phase 2 heldout execution or outcome. It is a disclosed identifier deviation, not a revision of the frozen protocol bytes.",
+      "authorization": "Root agent accepted this semantic treatment before phase 2 execution; genuine expansion of the observable set is not authorized by this clarification.",
+      "required_report_statement": "Phase 2 used causal-depth-history-feedback-v2 instead of the protocol's v1 identifier. A pre-execution clarification records isolated history of the same permitted observations; no transforms or acceptance criteria changed."
+    },
+    "sha256": "79693d55b10a98befd4351257c5920a8f25a25a9f0e244854dda7ad31b96ce6d",
+    "path": "evaluation/phase2/information-boundary-clarification.json"
+  },
+  "development_search_ledger": {
+    "path": "evaluation/phase2/development-ledger.jsonl.gz",
+    "sha256": "48d6e8ee56f0ad2d2ddb0beffd268a1b2a535835343c83e6eea7d60803b33b61",
+    "source_filename": "ledger.jsonl.gz",
+    "scope": "Complete recorded development ledger, including rejected and failed attempts; no optimizer-superiority claim."
+  }
+}

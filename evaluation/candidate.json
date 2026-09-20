@@ -1,0 +1,918 @@
+{
+  "schema_version": "stormpilot.candidate-freeze.v1",
+  "frozen_at_utc": "2026-09-20T15:33:51.046568+00:00",
+  "protocol_sha256": "1cd92c48b91c465c9e18c0bca1c39cc112c9993c7e9e510061964f1672eb29b4",
+  "request": {
+    "scenario_id": "theta",
+    "controller_id": "constant_flow",
+    "fallback_controller_id": "balanced_flow",
+    "controller_parameters": {
+      "target_scale": 1.0
+    },
+    "fallback_controller_parameters": {
+      "target_scale": 0.98,
+      "balance_gain": 2.0
+    },
+    "seed": 42,
+    "rainfall_multiplier": 1.0,
+    "noise_std_m": 0.0,
+    "faults": [
+      {
+        "id": "partial-valve",
+        "type": "valve_stuck",
+        "asset": "2",
+        "start_s": 21600.0,
+        "end_s": 28800.0,
+        "setting": 0.035
+      },
+      {
+        "id": "sensor-bias",
+        "type": "sensor_bias",
+        "asset": "P2",
+        "start_s": 10800.0,
+        "end_s": 21600.0,
+        "bias_m": 1.0
+      }
+    ],
+    "test_contract": {
+      "mode": "absolute",
+      "direction": "above",
+      "metric": "flood_volume_m3",
+      "threshold": 100.0,
+      "tolerance": 1e-06,
+      "units": "m3",
+      "horizon_s": 280800.0
+    }
+  },
+  "reference": {
+    "controller_id": "constant_flow",
+    "parameters": {
+      "target_scale": 1.0
+    }
+  },
+  "candidate": {
+    "controller_id": "balanced_flow",
+    "parameters": {
+      "target_scale": 0.98,
+      "balance_gain": 2.0
+    }
+  },
+  "artifacts": [
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/CMakeLists.txt",
+      "sha256": "456578d247a73635199295a5e23700015bfcc4b7555fcf38e731aae98aa3c9df"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/Roadmap.txt",
+      "sha256": "b04536337ea9ce1721a4e1c1bfd38e70064b8d1f37f1096fb168e583c52f0514"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/climate.c",
+      "sha256": "47291d64a489b677dbabd4cc855f589cd353f16e54aa2d99e109c5d28bf72ccf"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/consts.h",
+      "sha256": "bfed1085bc3ef6ce5e198445de7a867dec9f5d1b8a9e058ddb72ac51b84ac5dc"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/controls.c",
+      "sha256": "5fb39fcfec2c5bf00b0599698fafc9fbb40d6716ded325fb6e557bac0fa01ff2"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/culvert.c",
+      "sha256": "979f3caa546c07fdef509b2407329654e1035b3bffee2e35282d23e5236c7466"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/datetime.c",
+      "sha256": "5f5f3e6a0ab70aa313f09f2613427d5849933977aeebba7c8338f9acc6c385fa"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/datetime.h",
+      "sha256": "016a4d1445cd2af0dc75aab8def3f289971904db07cdcf1e847fe073f7505fb6"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/dwflow.c",
+      "sha256": "2a3373b2b98daa98765f0dc90cb7605def1e1665147952b0cee4810139822bae"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/dynwave.c",
+      "sha256": "d6ead221e938fdfea392c1defd0c39e00a94ac132cdc01cb48ad3bad92045e8e"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/enums.h",
+      "sha256": "4335e503d53ce29d4d0f6d6787b8e988641e29da3d7eec2fd505296a3cb29776"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/error.c",
+      "sha256": "4f59de60856a3eb1dca06ddc51ebb6526edf508cfaef1c6f5973f51eb2a2aac3"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/error.h",
+      "sha256": "22daf0f3707e5e01e17b65c77ac4841c189a9b90d80e38cc737ea6b78067e26a"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/error.txt",
+      "sha256": "bf349f7c933a1c3dfb9ebcb7cda6b8559c3cd56c1911dcff58df5e139f2de48f"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/exfil.c",
+      "sha256": "e40f956da500c2e48adb88fde019ed79c1267e908139e0c2c160b0fc60a25e93"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/exfil.h",
+      "sha256": "a158b9aab8a92433d497801ec1321d55708c6a89d21d45723f47554eb000db11"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/findroot.c",
+      "sha256": "48d78d1c0a1e21667684db7f0060a38e0d7fdf54abf4e6d8c177fd8f8ee0b6e7"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/findroot.h",
+      "sha256": "1a42cfc01bb2958dd761483b141486485b1f1bdff33107ea1625ef3fce81bc0f"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/flowrout.c",
+      "sha256": "409d5e0c729f30684ae8488080b8756941f67673cd9cc6137404cebc4ffbc63d"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/forcmain.c",
+      "sha256": "302b94f0294d2c99d202b875fe9a8b613d93e547a09095401e92dabc0295f6a0"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/funcs.h",
+      "sha256": "113b74c7afcaa1cd0cb57b26071ef2c88f275dd70fd63efc7d1735050b87c9c8"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/gage.c",
+      "sha256": "3f96712207b58e923ad6ac8f198a0278d3d4efda6f0a670f8e536e0f078738a8"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/globals.h",
+      "sha256": "79e72f2a2ffae07e600bf826c70de028b50058942b4836a8658d3660dafaf2e0"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/gwater.c",
+      "sha256": "38c5229962ae1d1ccc9eeba8dd4787d87d820b2ace1e02997637bc7fcb2ff17a"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/hash.c",
+      "sha256": "ce334c97a08f4e29a0944c4ab304b11eadb40915cb93eccdd9c453fc1d673e61"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/hash.h",
+      "sha256": "27d274e6dc916907f82dd8bb6564dd0d6367b2d57e5d670d02dc897b80cce746"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/headers.h",
+      "sha256": "2db90509573693bad480f1087dafd6acfe21155db58976908eaa4160f93401fe"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/hotstart.c",
+      "sha256": "d76f15dfaf0a99dfc43ebcb33b803295ebc2471ae9d2dbee6a167b05a2ec134b"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/iface.c",
+      "sha256": "d817d1f71c0d918bcd693d098f20584fcf4006805521ce2cc8692dddc6521f3e"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/include/swmm5.h",
+      "sha256": "c5a1c2e5ef00f3ab0ccae33ea8e3ea2ced4775725b476d0158d0a7b7b99a9d93"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/infil.c",
+      "sha256": "4b86c2080752bee770a4a2d1f8f6bdc5469a110305316440e2a7cba7dde31124"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/infil.h",
+      "sha256": "ff483f01cd72768482a49e732649fd1c37239359d68bee0ba801c4d58fe580a6"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/inflow.c",
+      "sha256": "d0ff0cfcafa6005f51b9bfafc0f15a731bd5ffc56c3571a4fce96e751f0484b8"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/inlet.c",
+      "sha256": "e900fdeb2bb96a5edbbdde2028daf8e8ecccb46e0c591a55eb2a8f57ffbf9c00"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/inlet.h",
+      "sha256": "2c0b9f0adcb1b697c24752f7912ce9c39dab14582047bac6505f9e164241ed12"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/input.c",
+      "sha256": "c4cf75a41f201ad78a6de336007847aae1c21045d79f4102976a6bce86bd2154"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/inputrpt.c",
+      "sha256": "4153d14b9cd32353f8983b162b194acc48a754a2b28e0448dc29f3258a73ee3b"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/keywords.c",
+      "sha256": "72b57bdeeef2a0dcb13fda205366b8c4fdad645b39b6afe822797f08866474fe"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/keywords.h",
+      "sha256": "f30589b258912e89f2d4bb60e3f63e4598b9ab0318a23d31852794cf400a8ea5"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/kinwave.c",
+      "sha256": "6b9c88b45f3ea73939856934cfcfd3548746e71de27742442a9819968d335e35"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/landuse.c",
+      "sha256": "a717841a738fd40a7655c23a13cd40412d6ce336c3b8efeb2bda7b6c5303b878"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/lid.c",
+      "sha256": "8e041662b29a78fe70385b750ac864de00d84919d829f46a9ec886d9ae499f8c"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/lid.h",
+      "sha256": "fb15d5e0be9ce04164204ef020d7cfe1f9a76e55f2b220555cd72adc41c7d379"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/lidproc.c",
+      "sha256": "0cf62f6d9843f0fc2d9e58fd5dc91efe8083dfc6672086e67151f6d74f293335"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/link.c",
+      "sha256": "7073e8f39d3a3cebb323ffb586abe626d81ba555e8dc3c2bd854d5ebbc139d46"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/macros.h",
+      "sha256": "80547f6e70cb455723f749b5f7079c58de36b69158c50dd633593eabe40fb649"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/massbal.c",
+      "sha256": "9c9a52a98d32066309dc10f3ffba337247941bc8e08cbc3b43710c0993e381d4"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/mathexpr.c",
+      "sha256": "4a1d31fb54f3ea568e0cf95f329738c7a3e6841f5f1a3244cd6d8768b0aea08f"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/mathexpr.h",
+      "sha256": "05e8aa8ef1415559f7e925d4f765361676b45cfb6dee9cee00e5235fc5a66c2e"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/mempool.c",
+      "sha256": "50ef663e1c30ed01a5895ca52cd67f8d009b266d544769999a3cd1ae6424fafb"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/mempool.h",
+      "sha256": "749d79aace3205e3c908ccbffe3afbf461fbc327c0c2b5b44de72fb6fcbe7a6f"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/node.c",
+      "sha256": "9974190dd3691cec0161f8969ad707dc8d1b0daea53f1c0810777bf8bea96db8"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/objects.h",
+      "sha256": "453a3acc2086c478fcb8e2f02bae314a58dcae5e5929f1ff5799d418beee2cfc"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/odesolve.c",
+      "sha256": "759d86cbf40dbb8962754d7a449e298319fa9bebee9175b285435c1a20512b52"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/odesolve.h",
+      "sha256": "e44abe97d4a6df635f100053cc9da5aab30e0e0bb3c55fa955a7475192f43f2a"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/output.c",
+      "sha256": "ade098b1e6588ea7a2fbe1250777961728990b53384576d0dd01be9a2f4532f6"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/project.c",
+      "sha256": "e3c05dacbe0bc7c64382ea871117ceb3f9507f87060989fdf0393a45b124b38e"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/qualrout.c",
+      "sha256": "4344ab9f2f1171e5a4b2e55448b7d6cb50669a5569d5ecab6adb6518d244f46a"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/rain.c",
+      "sha256": "e7af51924cc01ec8d1f37d40dc8f7dbff9836489f7cb2b7f2e9c2943de1e2a8f"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/rdii.c",
+      "sha256": "3b3ba209de73ca1590137269d96251a0397b18d23fffac54b433a509f58844ca"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/report.c",
+      "sha256": "0237998af9a36a6e397ca7a3c07d333a0c78188a668bcf82ed4b0d000c0f3efb"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/roadway.c",
+      "sha256": "799adbfa4d37ce217b9de3105ae33f0acf968975c8f7475c869897a85b1748bb"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/routing.c",
+      "sha256": "34ca4468fbbad460ea7ead8b97e43cb3b0f831bb91f48b4b0187b7141ef2f3f3"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/runoff.c",
+      "sha256": "3d8f55d0575a165178c48d0ed321ac05b983a2f09d75c31fb5edde9b809d335e"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/shape.c",
+      "sha256": "170f633e555fc6b8e0aa62732a88d84ea759d03145be84b42336f7dbb9577c34"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/snow.c",
+      "sha256": "55d7c98f82b9b0a0fbfa0b681208cd9a871c7e34721e5a327f432ec274bd2f2e"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/stats.c",
+      "sha256": "7aacab9b1603296e5715a43a3fbd7f3d18c5254f3ab0298b0f2f59bd0d2973b0"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/statsrpt.c",
+      "sha256": "7a7b58f620a9ba3dd6acf57a1464f2d7b6833d7f19a1c1bb173f92f17dc96b4b"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/street.c",
+      "sha256": "41852d02d7762480e4afe7addb8250c0758603d4857488ee421fc9a19aca3cc0"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/street.h",
+      "sha256": "38bd28a7ed28eae55c8276406e96105bb7f206ee9c0275c676fb75e88c555e9c"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/subcatch.c",
+      "sha256": "9bc546ea65ea8cc9eb8e563ec2129df2f37818727ebcb83280f16b58ded7f250"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/surfqual.c",
+      "sha256": "d7c9776f56e2fcf36a0f7a7862614ed37290fd35934e7385673f9fe9a30cb43e"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/swmm5.c",
+      "sha256": "fac69d9d4438ae17043889b683747305229740caed2e60e2ff9f0a1186ee06ac"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/table.c",
+      "sha256": "5a9a7485445cdb5a1ab34d1aea219ba5f0e50730cfebd31949b60f5db9b5972e"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/text.h",
+      "sha256": "ee576830c3f25ffc009ddd67805fc5221676eb8937fe2bc9fc98f9ebd327049b"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/toposort.c",
+      "sha256": "5fbe49f7994da4ab4ca640ef88449fcfd1ada16ed9d3d46c8db7b15572e56b4b"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/transect.c",
+      "sha256": "ed1789f82c90fdda58d94173e8ee8555831a19f1ae24ae3f0fe115d6b6e3f7ce"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/treatmnt.c",
+      "sha256": "d02328fcbbc9ef952209191cdebc46f59526723bb82e62aae8d3017dca739ee2"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/xsect.c",
+      "sha256": "fd7e09e7cf59778f13e8c5242f9f5c94a92e0f7c5caf67756f9984e309b92c3a"
+    },
+    {
+      "path": "engine/vendor/epa-swmm/src/solver/xsect.dat",
+      "sha256": "f378f90cac29ca16d49e2ce36bf59f2a7207b8e73b939ffbdd4060886d481ce5"
+    },
+    {
+      "path": "engine/build.py",
+      "sha256": "a584eb6ef0f7920e1860a51b599a67e9fc86d2bef6a9a0298c1edf3f785209af"
+    },
+    {
+      "path": "engine/campaign.py",
+      "sha256": "b8d40dc5999c0c2d94722ad4af4a67eb02068b351157dc0334cec2b8a6dfd885"
+    },
+    {
+      "path": "engine/cli.py",
+      "sha256": "feafd244c9194b899376c9cf4d969e4e6f37008b93782ae838a509c28f05856f"
+    },
+    {
+      "path": "engine/controllers.py",
+      "sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c"
+    },
+    {
+      "path": "engine/investigate.py",
+      "sha256": "a83e263b0cbf03e0f26f8e8f4f4325153c8e00a6fc7a20505bec17c7511f7dc3"
+    },
+    {
+      "path": "engine/models.py",
+      "sha256": "e36c8409ab9a54a12d84048c41bd1d946fd261f0db843e7f4820f339cd9c23eb"
+    },
+    {
+      "path": "engine/repair.py",
+      "sha256": "37c52ce5116007c0bc376c5beeaceeb0d40746f86bce5743cce107e9ccd8e0b4"
+    },
+    {
+      "path": "engine/replay.py",
+      "sha256": "f954f4e55f35f8c710045295677cbe0192ef95c0163607188ce2e7a4b41bdeb4"
+    },
+    {
+      "path": "engine/runner.py",
+      "sha256": "f0ea01ac9034790be49c2aadf7c13f488d36c4733193bd842fe0c3829a63b7d8"
+    },
+    {
+      "path": "engine/swmm.py",
+      "sha256": "5c09e65fb0fd3ee2138b3fff7707c8be5f7e698537b40fb0ca086edab60ac9c3"
+    },
+    {
+      "path": "engine/native_bridge.c",
+      "sha256": "9c46acb69c6e5d3431fd6f4b76aa0c26fa5cbda6cea48a36f03fc75127be7bca"
+    },
+    {
+      "path": "engine/data/theta.inp",
+      "sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8"
+    }
+  ],
+  "provenance": {
+    "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+    "engine_source_sha256": "4bb1604b00696aa7b1b0ee7484512d983e8fc87b74bd281ee23fd32908a59840",
+    "runner_source_sha256": "f0ea01ac9034790be49c2aadf7c13f488d36c4733193bd842fe0c3829a63b7d8",
+    "source_url": "https://github.com/kLabUM/pystorms/blob/20cc6086433449df99177d4f9103940639ef3af0/pystorms/networks/theta.inp",
+    "model_path": "engine/data/theta.inp",
+    "epa_version": "5.2.4",
+    "epa_commit": "7952ca837988b1c32f791812eccc9fd64547e093",
+    "pystorms_commit": "20cc6086433449df99177d4f9103940639ef3af0",
+    "epa_source_url": "https://github.com/USEPA/Stormwater-Management-Model/tree/7952ca837988b1c32f791812eccc9fd64547e093",
+    "conversion": "All flow/volume outputs converted from SWMM internal feet units with exact 0.028316846592; solver equations unchanged."
+  },
+  "development_packet_sha256": "6076bf0bbda81b5ee0a2bb885076549b6c316e2ace91e540aadccad3e70e27d3",
+  "development_request_sha256": "c89bb53d6ff8668a47bf799b953819f4d6d59206f6d26a6468f1ef23c1d8ac31",
+  "development": {
+    "evidence_status": "passed_at_execution",
+    "evidence_basis": "Full routing traces independently checked in this execution.",
+    "validation_counts": {
+      "passed": 145,
+      "unperformed": 3
+    },
+    "table": {
+      "reference:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.49154656318546525,
+        "terminal_storage_m3": 4.651018727986262
+      },
+      "reference:a": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.49626449249020693,
+        "terminal_storage_m3": 4.651020236987016
+      },
+      "reference:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4987701146670486,
+        "terminal_storage_m3": 4.651019726104906
+      },
+      "reference:ab": {
+        "flood_volume_m3": 237.2628368234243,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4972025489851599,
+        "terminal_storage_m3": 4.651020931774245
+      },
+      "candidate:empty": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4776606275993126,
+        "terminal_storage_m3": 4.653964313111837
+      },
+      "candidate:a": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4817191208390107,
+        "terminal_storage_m3": 4.6539649456245415
+      },
+      "candidate:b": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4920437548835557,
+        "terminal_storage_m3": 4.653965307740358
+      },
+      "candidate:ab": {
+        "flood_volume_m3": 11.58005995563959,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4869544983385108,
+        "terminal_storage_m3": 4.6539660806491865
+      }
+    },
+    "trace_records": {
+      "reference:empty": {
+        "run_id": "reference_empty-f987e7f0f32d",
+        "rows": 12867,
+        "sha256": "fe5ef95f3cb7a67cbefa0d952c2d06ae10f7dbb1cb28cc47fb65a7800916be1c"
+      },
+      "reference:a": {
+        "run_id": "reference_a-e3f1539e9c10",
+        "rows": 12877,
+        "sha256": "17adf5f1f1159a5d05f3ffb8892397823ad1eed6f5cdcdd8ac48256681337bc2"
+      },
+      "reference:b": {
+        "run_id": "reference_b-a58e6b423deb",
+        "rows": 12861,
+        "sha256": "ff0c9c52b0575a670a80914cbbbda2bda46ec1bbf21165a7f62b72bc48574b0d"
+      },
+      "reference:ab": {
+        "run_id": "reference_ab-e6ab2f251f65",
+        "rows": 12857,
+        "sha256": "a3194d0f75c64f65edc2e95ca99ba64d259dea7c6b500779f2d9a1e0e1ab7cbb"
+      },
+      "candidate:empty": {
+        "run_id": "candidate_empty-f5138ae09b9f",
+        "rows": 12873,
+        "sha256": "c2afd78cc50ac6eaf9d5a9ac6f3e91a83b144579445e7df5f53a7b3b248bd2d3"
+      },
+      "candidate:a": {
+        "run_id": "candidate_a-5f074e5b618e",
+        "rows": 12886,
+        "sha256": "31e0b2390c6a4ba6932c3c66dbaae363b7f996f25d7f3867ce82cdacd974069d"
+      },
+      "candidate:b": {
+        "run_id": "candidate_b-17646ca2c6f5",
+        "rows": 12869,
+        "sha256": "a7064c6d4b5acc36b80682cb9adaa245ac21c368e3ab22458d5223fc6b5d7aeb"
+      },
+      "candidate:ab": {
+        "run_id": "candidate_ab-46497d7e260a",
+        "rows": 12872,
+        "sha256": "fc6783c59a1743d7e1e547dc5b180f8945b70186f506edd128f2d0b25f520217"
+      }
+    },
+    "treatments": {
+      "reference:empty": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "2e857e2388c6160d1e6b886d1f7e477adfbf33f088636026deceb4788869bcc0",
+          "rainfall_sha256": "20fc176501a47238b059a710a25b24c4ac74c54f353dda3435f46729b3ce94da",
+          "exogenous_sha256": "ff43b37e0b988ed932a13359c5b61dd4200df734781ad36e5536720007ca8591",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-feedback-v1"
+        },
+        "active_fault_ids": []
+      },
+      "reference:a": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "2e857e2388c6160d1e6b886d1f7e477adfbf33f088636026deceb4788869bcc0",
+          "rainfall_sha256": "20fc176501a47238b059a710a25b24c4ac74c54f353dda3435f46729b3ce94da",
+          "exogenous_sha256": "ff43b37e0b988ed932a13359c5b61dd4200df734781ad36e5536720007ca8591",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-feedback-v1"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "reference:b": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "2e857e2388c6160d1e6b886d1f7e477adfbf33f088636026deceb4788869bcc0",
+          "rainfall_sha256": "20fc176501a47238b059a710a25b24c4ac74c54f353dda3435f46729b3ce94da",
+          "exogenous_sha256": "ff43b37e0b988ed932a13359c5b61dd4200df734781ad36e5536720007ca8591",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-feedback-v1"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "reference:ab": {
+        "controller": {
+          "id": "constant_flow",
+          "source_sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c",
+          "parameters": {
+            "targets_m3s": [
+              0.243551408837705,
+              0.2734532846977572
+            ],
+            "control_interval_s": 300,
+            "target_scale": 1.0
+          },
+          "description": "Throttle each bottom orifice from measured depth toward a fixed target discharge."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "2e857e2388c6160d1e6b886d1f7e477adfbf33f088636026deceb4788869bcc0",
+          "rainfall_sha256": "20fc176501a47238b059a710a25b24c4ac74c54f353dda3435f46729b3ce94da",
+          "exogenous_sha256": "ff43b37e0b988ed932a13359c5b61dd4200df734781ad36e5536720007ca8591",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-feedback-v1"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      },
+      "candidate:empty": {
+        "controller": {
+          "id": "balanced_flow",
+          "source_sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c",
+          "parameters": {
+            "targets_m3s": [
+              0.2386803806609509,
+              0.26798421900380204
+            ],
+            "control_interval_s": 300,
+            "target_scale": 0.98,
+            "balance_gain": 2.0
+          },
+          "description": "Redistribute a bounded total target discharge toward basins with greater measured relative filling; no forecast or hidden fault access."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "2e857e2388c6160d1e6b886d1f7e477adfbf33f088636026deceb4788869bcc0",
+          "rainfall_sha256": "20fc176501a47238b059a710a25b24c4ac74c54f353dda3435f46729b3ce94da",
+          "exogenous_sha256": "ff43b37e0b988ed932a13359c5b61dd4200df734781ad36e5536720007ca8591",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-feedback-v1"
+        },
+        "active_fault_ids": []
+      },
+      "candidate:a": {
+        "controller": {
+          "id": "balanced_flow",
+          "source_sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c",
+          "parameters": {
+            "targets_m3s": [
+              0.2386803806609509,
+              0.26798421900380204
+            ],
+            "control_interval_s": 300,
+            "target_scale": 0.98,
+            "balance_gain": 2.0
+          },
+          "description": "Redistribute a bounded total target discharge toward basins with greater measured relative filling; no forecast or hidden fault access."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "2e857e2388c6160d1e6b886d1f7e477adfbf33f088636026deceb4788869bcc0",
+          "rainfall_sha256": "20fc176501a47238b059a710a25b24c4ac74c54f353dda3435f46729b3ce94da",
+          "exogenous_sha256": "ff43b37e0b988ed932a13359c5b61dd4200df734781ad36e5536720007ca8591",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-feedback-v1"
+        },
+        "active_fault_ids": [
+          "partial-valve"
+        ]
+      },
+      "candidate:b": {
+        "controller": {
+          "id": "balanced_flow",
+          "source_sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c",
+          "parameters": {
+            "targets_m3s": [
+              0.2386803806609509,
+              0.26798421900380204
+            ],
+            "control_interval_s": 300,
+            "target_scale": 0.98,
+            "balance_gain": 2.0
+          },
+          "description": "Redistribute a bounded total target discharge toward basins with greater measured relative filling; no forecast or hidden fault access."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "2e857e2388c6160d1e6b886d1f7e477adfbf33f088636026deceb4788869bcc0",
+          "rainfall_sha256": "20fc176501a47238b059a710a25b24c4ac74c54f353dda3435f46729b3ce94da",
+          "exogenous_sha256": "ff43b37e0b988ed932a13359c5b61dd4200df734781ad36e5536720007ca8591",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-feedback-v1"
+        },
+        "active_fault_ids": [
+          "sensor-bias"
+        ]
+      },
+      "candidate:ab": {
+        "controller": {
+          "id": "balanced_flow",
+          "source_sha256": "e39f279f14c8dacf354d176988eebfbc5e98c4a212bebe6988741c3e0806858c",
+          "parameters": {
+            "targets_m3s": [
+              0.2386803806609509,
+              0.26798421900380204
+            ],
+            "control_interval_s": 300,
+            "target_scale": 0.98,
+            "balance_gain": 2.0
+          },
+          "description": "Redistribute a bounded total target discharge toward basins with greater measured relative filling; no forecast or hidden fault access."
+        },
+        "context": {
+          "base_model_sha256": "fd21e88ef578d33d8497e467e0f2d9c547bd7ae0b42d0cdeea3e200ee752d4c8",
+          "effective_model_sha256": "2e857e2388c6160d1e6b886d1f7e477adfbf33f088636026deceb4788869bcc0",
+          "rainfall_sha256": "20fc176501a47238b059a710a25b24c4ac74c54f353dda3435f46729b3ce94da",
+          "exogenous_sha256": "ff43b37e0b988ed932a13359c5b61dd4200df734781ad36e5536720007ca8591",
+          "solver_settings_sha256": "a55cd918c3a9867b55ddf7c9dcf7ff5cc6a1ff579f0c0f1e73d2410f5684f3da",
+          "horizon_s": 280800.0,
+          "information_boundary_id": "causal-depth-feedback-v1"
+        },
+        "active_fault_ids": [
+          "partial-valve",
+          "sensor-bias"
+        ]
+      }
+    },
+    "outcome": {
+      "primary_violations": {
+        "reference:empty": false,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": true,
+        "candidate:empty": false,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": false
+      },
+      "secondary_violations": {
+        "reference:empty": false,
+        "reference:a": false,
+        "reference:b": false,
+        "reference:ab": true,
+        "candidate:empty": false,
+        "candidate:a": false,
+        "candidate:b": false,
+        "candidate:ab": true
+      },
+      "joint_failure": true,
+      "interaction_excess_m3": 237.2628368234243,
+      "material_superadditivity": true,
+      "comparisons": {
+        "empty": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49154656318546525,
+            "terminal_storage_m3": 4.651018727986262
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4776606275993126,
+            "terminal_storage_m3": 4.653964313111837
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.013885935586152642,
+            "terminal_storage_m3": 0.0029455851255750787
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.029455851255750787
+        },
+        "a": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.49626449249020693,
+            "terminal_storage_m3": 4.651020236987016
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4817191208390107,
+            "terminal_storage_m3": 4.6539649456245415
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.014545371651196237,
+            "terminal_storage_m3": 0.002944708637525828
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.02944708637525828
+        },
+        "b": {
+          "reference": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4987701146670486,
+            "terminal_storage_m3": 4.651019726104906
+          },
+          "candidate": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4920437548835557,
+            "terminal_storage_m3": 4.653965307740358
+          },
+          "changes": {
+            "flood_volume_m3": 0.0,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.006726359783492952,
+            "terminal_storage_m3": 0.0029455816354522213
+          },
+          "flood_reduction_m3": -0.0,
+          "relative_flood_reduction": null,
+          "material_flood_improvement": false,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.029455816354522213
+        },
+        "ab": {
+          "reference": {
+            "flood_volume_m3": 237.2628368234243,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4972025489851599,
+            "terminal_storage_m3": 4.651020931774245
+          },
+          "candidate": {
+            "flood_volume_m3": 11.58005995563959,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": 0.4869544983385108,
+            "terminal_storage_m3": 4.6539660806491865
+          },
+          "changes": {
+            "flood_volume_m3": -225.6827768677847,
+            "downstream_excess_volume_m3": 0.0,
+            "peak_downstream_flow_m3s": -0.010248050646649132,
+            "terminal_storage_m3": 0.002945148874941239
+          },
+          "flood_reduction_m3": 225.6827768677847,
+          "relative_flood_reduction": 0.9511931151516253,
+          "material_flood_improvement": true,
+          "guards": {
+            "downstream_excess_volume_m3": true,
+            "peak_downstream_flow_m3s": true,
+            "terminal_storage_m3": true
+          },
+          "all_guards_pass": true,
+          "largest_normalized_guard_increase": 0.02945148874941239
+        }
+      },
+      "all_guards_pass": true,
+      "other_subsets_primary_nonregression": true,
+      "mitigation_passes": true
+    }
+  },
+  "development_packet": {
+    "path": "evaluation/development-packet.json.gz",
+    "sha256": "38b1c040cf961088b406e6339e4a2585e2e62677b60e048c7c20cc00556e0e76"
+  }
+}

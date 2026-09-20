@@ -1,0 +1,309 @@
+{
+  "created_at": "2026-09-20T15:42:15.928525+00:00",
+  "source_sha256": "e6e43a000877c4f154fcd20f50f32c0a65adabf9bcfc203be66c927f8880dfe4",
+  "development_data": "Original phase1 witness plus now-disclosed phase1 heldout cases; phase2 heldout remains unseen.",
+  "requests": {
+    "original": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "balanced_flow",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 0.98,
+        "balance_gain": 2.0
+      },
+      "seed": 42,
+      "rainfall_multiplier": 1.0,
+      "noise_std_m": 0.0,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 21600.0,
+          "end_s": 28800.0,
+          "setting": 0.035
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 10800.0,
+          "end_s": 21600.0,
+          "bias_m": 1.0
+        }
+      ],
+      "test_contract": {
+        "mode": "absolute",
+        "direction": "above",
+        "metric": "flood_volume_m3",
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "horizon_s": 280800.0
+      }
+    },
+    "h1": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "balanced_flow",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 0.98,
+        "balance_gain": 2.0
+      },
+      "seed": 1987,
+      "rainfall_multiplier": 0.85,
+      "noise_std_m": 0.0,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 21900.0,
+          "end_s": 28380.0,
+          "setting": 0.035
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 11100.0,
+          "end_s": 20820.0,
+          "bias_m": 0.9
+        }
+      ],
+      "test_contract": {
+        "mode": "absolute",
+        "direction": "above",
+        "metric": "flood_volume_m3",
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "horizon_s": 280800.0
+      }
+    },
+    "h2": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "balanced_flow",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 0.98,
+        "balance_gain": 2.0
+      },
+      "seed": 6847,
+      "rainfall_multiplier": 1.15,
+      "noise_std_m": 0.02,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 22500.0,
+          "end_s": 30420.0,
+          "setting": 0.05500000000000001
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 11700.0,
+          "end_s": 23580.0,
+          "bias_m": 1.1
+        }
+      ],
+      "test_contract": {
+        "mode": "absolute",
+        "direction": "above",
+        "metric": "flood_volume_m3",
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "horizon_s": 280800.0
+      }
+    },
+    "h3": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "balanced_flow",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 0.98,
+        "balance_gain": 2.0
+      },
+      "seed": 4919,
+      "rainfall_multiplier": 1.3,
+      "noise_std_m": 0.04,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 23400.0,
+          "end_s": 30600.0,
+          "setting": 0.015000000000000003
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 12600.0,
+          "end_s": 23400.0,
+          "bias_m": 1.2
+        }
+      ],
+      "test_contract": {
+        "mode": "absolute",
+        "direction": "above",
+        "metric": "flood_volume_m3",
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "horizon_s": 280800.0
+      }
+    },
+    "h4": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "balanced_flow",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 0.98,
+        "balance_gain": 2.0
+      },
+      "seed": 10601,
+      "rainfall_multiplier": 1.0,
+      "noise_std_m": 0.01,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 22200.0,
+          "end_s": 31200.0,
+          "setting": 0.035
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 11400.0,
+          "end_s": 24900.0,
+          "bias_m": 1.0
+        }
+      ],
+      "test_contract": {
+        "mode": "absolute",
+        "direction": "above",
+        "metric": "flood_volume_m3",
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "horizon_s": 280800.0
+      }
+    },
+    "h5": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "balanced_flow",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 0.98,
+        "balance_gain": 2.0
+      },
+      "seed": 24029,
+      "rainfall_multiplier": 0.95,
+      "noise_std_m": 0.05,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 22800.0,
+          "end_s": 28560.0,
+          "setting": 0.085
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 12000.0,
+          "end_s": 20640.0,
+          "bias_m": 0.8
+        }
+      ],
+      "test_contract": {
+        "mode": "absolute",
+        "direction": "above",
+        "metric": "flood_volume_m3",
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "horizon_s": 280800.0
+      }
+    },
+    "h6": {
+      "scenario_id": "theta",
+      "controller_id": "constant_flow",
+      "fallback_controller_id": "balanced_flow",
+      "controller_parameters": {
+        "target_scale": 1.0
+      },
+      "fallback_controller_parameters": {
+        "target_scale": 0.98,
+        "balance_gain": 2.0
+      },
+      "seed": 65537,
+      "rainfall_multiplier": 1.2,
+      "noise_std_m": 0.03,
+      "faults": [
+        {
+          "id": "partial-valve",
+          "type": "valve_stuck",
+          "asset": "2",
+          "start_s": 24000.0,
+          "end_s": 32280.0,
+          "setting": 0.0050000000000000044
+        },
+        {
+          "id": "sensor-bias",
+          "type": "sensor_bias",
+          "asset": "P2",
+          "start_s": 13200.0,
+          "end_s": 25620.0,
+          "bias_m": 1.15
+        }
+      ],
+      "test_contract": {
+        "mode": "absolute",
+        "direction": "above",
+        "metric": "flood_volume_m3",
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3",
+        "horizon_s": 280800.0
+      }
+    }
+  },
+  "candidates": [
+    {
+      "target_scale": 1.0,
+      "jump_threshold_m": 0.5,
+      "correction_fraction": 1.0
+    }
+  ],
+  "global_call_budget": 512
+}

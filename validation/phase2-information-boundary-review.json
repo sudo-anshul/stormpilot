@@ -1,0 +1,63 @@
+{
+  "schema_version": "stormpilot.information-boundary-review.v1",
+  "reviewed_at_utc": "2026-09-20T15:52:32.033466+00:00",
+  "candidate_snapshot_sha256": "742f3f43880930dbb2146bf99d1a8d901f4427df00ae5cdeb101d7c8269e3e4f",
+  "source_sha256": {
+    "engine/controllers.py": "40c9412f947e96288c06f889acc1c293b6d371f993d6e8e4a354b5c6b42ed1d8",
+    "engine/runner.py": "72544202df43fe39907159b789737a2ac2730ae8f28402fcf341e0b36c1f1a52"
+  },
+  "review_method": "Manual source/interface review tied to exact frozen source bytes; separate from automatic trace arithmetic.",
+  "findings": [
+    "run_simulation constructs controller_state={} as a local variable for every invocation, so previous runs cannot share filter history.",
+    "Depth observations are sampled at the common control schedule. Bias/dropout/noise are applied before commands receives the observation dictionary.",
+    "The command interface receives controller ID, current perturbed observations, static asset geometry/max-depths, configured parameters, and only that run's local state.",
+    "The controller stores previous measured depth, a short increment history, offset hypothesis and control-depth history; its aggregate cap uses current and prior control-depth estimates.",
+    "Controller source imports math and statistics.median and reads no files, request catalog, solver object, rainfall, seed, future state, heldout results or post-run metrics.",
+    "Reference and candidate retain the same v2 information-boundary identifier in all eight checked development treatment contexts.",
+    "The final metadata-only difference from the 88-call cap-development source is resetting aggregate_cap_scale=1.0 for displayed diagnostics. Policy formulas and explicit selected parameters are unchanged."
+  ],
+  "conclusion": "The inspected fixed controller uses causal memory of the same permitted depth observations, with isolated state and no expanded external observable set.",
+  "clarification": {
+    "content": {
+      "schema_version": "stormpilot.protocol-clarification.v1",
+      "recorded_at_utc": "2026-09-20T15:46:26.132266+00:00",
+      "protocol_sha256": "15e373f2f634a26a9fd8013853ab6618e1b57ef79877effea7a0ddf2ae1dadd7",
+      "declared_information_boundary_id": "causal-depth-feedback-v1",
+      "execution_information_boundary_id": "causal-depth-history-feedback-v2",
+      "category": "pre_execution_semantic_clarification_and_metadata_deviation",
+      "change": "The v2 identifier names isolated per-run memory of current and past instances of the same permitted depth observations. It introduces no additional observation source.",
+      "permitted_information": [
+        "Current possibly noisy or biased measured depths",
+        "Earlier instances of those same measured depths stored in isolated per-run state",
+        "Declared static model geometry and controller parameters"
+      ],
+      "prohibited_information": [
+        "Noise-free true simulator depth as a separate control input",
+        "Active fault catalog, timing, type or hidden status",
+        "Rainfall realization or forecast",
+        "Future observations, terminal metrics or heldout outcomes"
+      ],
+      "invariant_requirements": [
+        "Every reference and candidate run uses the same v2 experiment/context information-boundary identifier",
+        "Controller state is constructed empty inside every run_simulation invocation",
+        "Controller code receives only observations, static geometry, parameters and its isolated state"
+      ],
+      "unchanged": [
+        "All frozen perturbation transforms",
+        "All development and heldout acceptance thresholds",
+        "The fixed development pair and reference policy",
+        "The one-candidate-before-unseen-execution rule"
+      ],
+      "chronology": "This clarification is recorded after phase 2 controller development began but before any phase 2 heldout execution or outcome. It is a disclosed identifier deviation, not a revision of the frozen protocol bytes.",
+      "authorization": "Root agent accepted this semantic treatment before phase 2 execution; genuine expansion of the observable set is not authorized by this clarification.",
+      "required_report_statement": "Phase 2 used causal-depth-history-feedback-v2 instead of the protocol's v1 identifier. A pre-execution clarification records isolated history of the same permitted observations; no transforms or acceptance criteria changed."
+    },
+    "sha256": "79693d55b10a98befd4351257c5920a8f25a25a9f0e244854dda7ad31b96ce6d",
+    "path": "evaluation/phase2/information-boundary-clarification.json"
+  },
+  "limitations": [
+    "This is a source review of the included fixed implementation, not a sandbox proof for arbitrary uploaded controllers.",
+    "An estimated sensor offset or aggregate-flow cap is not the true hydraulic state and cannot guarantee downstream flow or field safety.",
+    "The recorded v1-to-v2 identifier deviation remains explicit; frozen perturbations and criteria were not changed."
+  ]
+}

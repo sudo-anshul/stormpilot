@@ -18,6 +18,7 @@ from typing import Any
 
 from .metrics import EvidenceError, METRIC_UNITS, close_enough, compute_metrics, finite_number
 from .properties import compare_fallback, evaluate_property
+from .repair import audit_repair
 
 
 SCHEMA_VERSION = "stormpilot.evidence.v1"
@@ -629,6 +630,16 @@ def validate_packet(packet: Mapping[str, Any], root_path: str | Path | None = No
             _check(report, "fallback_comparison", "failed", str(exc))
 
     _verify_search(packet, by_id, property_results, report)
+
+    if "repair" in packet:
+        try:
+            audited = audit_repair(packet, report["runs"])
+            report["claims"]["repair"] = audited
+            _check(report, "repair_ledger_consistency", "passed",
+                   "Declared grid, call accounting, rejected candidates and policy selection independently recomputed; retained full traces match their ledger entries.", **audited)
+            report["limitations"].extend(audited["limitations"])
+        except (EvidenceError, KeyError, TypeError, ValueError) as exc:
+            _check(report, "repair_ledger_consistency", "failed", str(exc))
 
     _check(report, "independent_replay", "unperformed", "This invocation checks records; it does not execute the hydraulic engine.", required=False)
     _check(report, "controller_information_access", "unperformed", "Recorded information boundaries require separate source/interface review.", required=False)
