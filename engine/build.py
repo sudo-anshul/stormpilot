@@ -1,6 +1,7 @@
 """Build the vendored public-domain EPA solver with the system C compiler."""
 from pathlib import Path
 import hashlib
+import fcntl
 import json
 import os
 import platform
@@ -21,7 +22,7 @@ def source_hash():
     return digest.hexdigest()
 
 
-def build(force=False):
+def _build_unlocked(force=False):
     manifest_path = ROOT / "build/build.json"
     signature = source_hash()
     if not force and LIBRARY.exists() and manifest_path.exists():
@@ -35,13 +36,25 @@ def build(force=False):
     command = [compiler, "-O2", "-fPIC", "-dynamiclib" if sys.platform == "darwin" else "-shared",
                "-I" + str(SOURCE / "include"), "-I" + str(SOURCE)]
     command += [str(p) for p in sorted(SOURCE.glob("*.c"))]
-    command += [str(ROOT / "native_bridge.c"), "-o", str(LIBRARY), "-lm"]
+    temporary_library = LIBRARY.with_name(LIBRARY.name + ".building")
+    command += [str(ROOT / "native_bridge.c"), "-o", str(temporary_library), "-lm"]
+    if sys.platform == "darwin":
+        command += ["-Wl,-install_name,@rpath/libswmm5.dylib"]
     subprocess.run(command, check=True, stdout=sys.stderr, stderr=sys.stderr)
+    temporary_library.replace(LIBRARY)
     manifest = {"source_sha256": signature, "epa_tag": "v5.2.4",
                 "epa_commit": "7952ca837988b1c32f791812eccc9fd64547e093",
                 "platform": platform.platform(), "command": command}
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
     return LIBRARY
+
+
+def build(force=False):
+    LIBRARY.parent.mkdir(exist_ok=True)
+    # Separate worker processes must not race while the first native build runs.
+    with (LIBRARY.parent / ".build.lock").open("w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        return _build_unlocked(force)
 
 
 if __name__ == "__main__":

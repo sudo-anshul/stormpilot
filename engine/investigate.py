@@ -67,6 +67,7 @@ def investigate(request):
         stopping_reason = "witness_found" if found else ("envelope_exhausted" if exhausted else "budget_exhausted")
 
     if found:
+        reduction_origin = selected
         # Greedy deletion is followed by checking every single deletion of the
         # final set. Only that final complete neighborhood earns '1-minimal'.
         changed = True
@@ -106,7 +107,7 @@ def investigate(request):
         runs.append(fallback)
     result = packet(normalized, runs)
     result["ablations"] = ablations
-    result["witness"] = ({"run_id": selected["run_id"], "original_run_id": original["run_id"],
+    result["witness"] = ({"run_id": selected["run_id"], "original_run_id": reduction_origin["run_id"],
                            "claim": "1-minimal" if one_minimal else "reduced",
                            "single_removals": single_removals,
                            "guarantee": "No single remaining condition can be removed while retaining this violation under the tested model." if one_minimal else "Reduction is incomplete within the declared budget; no minimality claim."} if found else None)

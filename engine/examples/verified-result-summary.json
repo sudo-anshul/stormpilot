@@ -1,0 +1,213 @@
+{
+  "experiment_id": "1841c184f7f7d0b3fbcb",
+  "engine_source_sha256": "4bb1604b00696aa7b1b0ee7484512d983e8fc87b74bd281ee23fd32908a59840",
+  "source_request": "engine/examples/reduction-request.json",
+  "search": {
+    "status": "witness_found",
+    "method": "declared-condition-subset-sweep-and-single-deletion-v1",
+    "budget": 8,
+    "simulator_calls": 5,
+    "cache_hits": 1,
+    "nominal_passes": true,
+    "stopping_reason": "single_deletion_neighborhood_complete",
+    "envelope_fault_ids": [
+      "f1",
+      "f2"
+    ],
+    "candidates": [
+      {
+        "run_id": "nominal-dcaacbc4a0ec",
+        "active_fault_ids": [],
+        "phase": "nominal",
+        "violated": false,
+        "metric": "flood_volume_m3",
+        "value": 0.0,
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3"
+      },
+      {
+        "run_id": "stress-ced676ac404b",
+        "active_fault_ids": [
+          "f1",
+          "f2"
+        ],
+        "phase": "supplied_stress",
+        "violated": true,
+        "metric": "flood_volume_m3",
+        "value": 1621.4521074469549,
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3"
+      },
+      {
+        "run_id": "ablation-824eb067b70c",
+        "active_fault_ids": [
+          "f2"
+        ],
+        "phase": "condition_removal",
+        "violated": false,
+        "metric": "flood_volume_m3",
+        "value": 0.0,
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3"
+      },
+      {
+        "run_id": "ablation-df73fd63bb7c",
+        "active_fault_ids": [
+          "f1"
+        ],
+        "phase": "condition_removal",
+        "violated": true,
+        "metric": "flood_volume_m3",
+        "value": 1621.4521074469549,
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3"
+      },
+      {
+        "run_id": "nominal-dcaacbc4a0ec",
+        "active_fault_ids": [],
+        "phase": "condition_removal",
+        "violated": false,
+        "metric": "flood_volume_m3",
+        "value": 0.0,
+        "threshold": 100.0,
+        "tolerance": 1e-06,
+        "units": "m3"
+      }
+    ],
+    "global_minimality_claimed": false,
+    "fallback_metric_deltas": {
+      "flood_volume_m3": -346.034110097698,
+      "peak_downstream_flow_m3s": 5.865256773733097,
+      "downstream_excess_volume_m3": 2661.9254749096385,
+      "terminal_storage_m3": -0.0599954976174093
+    },
+    "coverage_note": "Only subsets of the supplied conditions were tested. Durations, severity, rainfall and unlisted faults were not globally searched."
+  },
+  "witness": {
+    "run_id": "ablation-df73fd63bb7c",
+    "original_run_id": "stress-ced676ac404b",
+    "claim": "1-minimal",
+    "single_removals": [
+      {
+        "fault_id": "f1",
+        "run_id": "nominal-dcaacbc4a0ec"
+      }
+    ],
+    "guarantee": "No single remaining condition can be removed while retaining this violation under the tested model."
+  },
+  "runs": [
+    {
+      "role": "nominal",
+      "run_id": "nominal-dcaacbc4a0ec",
+      "active_fault_ids": [],
+      "metrics": {
+        "flood_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.49154656318546525,
+        "downstream_excess_volume_m3": 0.0,
+        "downstream_exceedance_duration_s": 0.0,
+        "terminal_storage_m3": 4.651018727986262,
+        "native_flood_volume_m3": 0.0
+      },
+      "continuity": {
+        "runoff_error_pct": -0.003330647712573409,
+        "routing_error_pct": 9.999999974752427e-07,
+        "quality_error_pct": 0.0
+      },
+      "routing_steps": 12866,
+      "runtime_s": 0.9376557909999974
+    },
+    {
+      "role": "original_stress",
+      "run_id": "stress-ced676ac404b",
+      "active_fault_ids": [
+        "f1",
+        "f2"
+      ],
+      "metrics": {
+        "flood_volume_m3": 1621.4521074469549,
+        "peak_downstream_flow_m3s": 0.4900879260745975,
+        "downstream_excess_volume_m3": 0.0,
+        "downstream_exceedance_duration_s": 0.0,
+        "terminal_storage_m3": 4.671742777733744,
+        "native_flood_volume_m3": 1621.4521074469546
+      },
+      "continuity": {
+        "runoff_error_pct": -0.003330647712573409,
+        "routing_error_pct": -0.016558852046728134,
+        "quality_error_pct": 0.0
+      },
+      "routing_steps": 12639,
+      "runtime_s": 0.2594043330173008
+    },
+    {
+      "role": "ablation",
+      "run_id": "ablation-824eb067b70c",
+      "active_fault_ids": [
+        "f2"
+      ],
+      "metrics": {
+        "flood_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.49154656318546525,
+        "downstream_excess_volume_m3": 0.0,
+        "downstream_exceedance_duration_s": 0.0,
+        "terminal_storage_m3": 4.6717431344399145,
+        "native_flood_volume_m3": 0.0
+      },
+      "continuity": {
+        "runoff_error_pct": -0.003330647712573409,
+        "routing_error_pct": 9.999999974752427e-07,
+        "quality_error_pct": 0.0
+      },
+      "routing_steps": 12866,
+      "runtime_s": 0.27010729198809713
+    },
+    {
+      "role": "stress",
+      "run_id": "ablation-df73fd63bb7c",
+      "active_fault_ids": [
+        "f1"
+      ],
+      "metrics": {
+        "flood_volume_m3": 1621.4521074469549,
+        "peak_downstream_flow_m3s": 0.4900879260745975,
+        "downstream_excess_volume_m3": 0.0,
+        "downstream_exceedance_duration_s": 0.0,
+        "terminal_storage_m3": 4.651018391855007,
+        "native_flood_volume_m3": 1621.4521074469546
+      },
+      "continuity": {
+        "runoff_error_pct": -0.003330647712573409,
+        "routing_error_pct": -0.0166584774851799,
+        "quality_error_pct": 0.0
+      },
+      "routing_steps": 12639,
+      "runtime_s": 0.25456954102264717
+    },
+    {
+      "role": "fallback",
+      "run_id": "fallback-47f9e29ebb4a",
+      "active_fault_ids": [
+        "f1"
+      ],
+      "metrics": {
+        "flood_volume_m3": 1275.417997349257,
+        "peak_downstream_flow_m3s": 6.355344699807694,
+        "downstream_excess_volume_m3": 2661.9254749096385,
+        "downstream_exceedance_duration_s": 7636.499,
+        "terminal_storage_m3": 4.5910228942375975,
+        "native_flood_volume_m3": 1275.417997349259
+      },
+      "continuity": {
+        "runoff_error_pct": -0.003330647712573409,
+        "routing_error_pct": -0.11487609148025513,
+        "quality_error_pct": 0.0
+      },
+      "routing_steps": 12541,
+      "runtime_s": 0.24134170799516141
+    }
+  ]
+}

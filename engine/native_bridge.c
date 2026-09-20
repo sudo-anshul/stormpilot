@@ -1,9 +1,19 @@
-/* Read-only instrumentation for pinned EPA SWMM 5.2.4.
+/* Instrumentation for pinned EPA SWMM 5.2.4.
  * SWMM's internal hydraulic volumes use cubic feet, including for SI inputs.
  * No solver equations or physical states are changed by this bridge.
+ * The timestep cap preserves adaptive routing, unlike the public setter,
+ * which explicitly sets CourantFactor=0 (fixed-step routing).
  */
 #include "headers.h"
 extern TNodeStats *NodeStats;
+static double configured_min_step;
+
+void stormpilot_init_instrumentation(void) { configured_min_step = MinRouteStep; }
+void stormpilot_set_max_step_s(double maximum) {
+    if (maximum < 0.001) maximum = 0.001;
+    RouteStep = maximum;
+    MinRouteStep = maximum < configured_min_step ? maximum : configured_min_step;
+}
 
 double stormpilot_time_seconds(void) { return NewRoutingTime / 1000.0; }
 double stormpilot_duration_seconds(void) { return TotalDuration / 1000.0; }

@@ -93,7 +93,7 @@ def prepare(request):
     model_text, rain_hash = rainfall_model(scenario_id, multiplier)
     options = sections(model_text)["[OPTIONS]"]
     solver_settings = {"input_options": options, "control_interval_s": 300,
-                       "routing_boundary_protocol": "clip-max-step-at-control-and-fault-boundaries-v1",
+                       "routing_boundary_protocol": "preserve-adaptive-routing-clip-max-and-min-step-at-control-and-fault-boundaries-v2",
                        "output_conversion": "internal-ft3-to-m3-exact-0.028316846592-v1"}
     exogenous = {"seed": seed, "noise_std_m": noise, "noise_protocol": "sha256-box-muller-asset-control-time-v1",
                  "faults": normalized_faults, "rainfall_sha256": rain_hash}
@@ -132,6 +132,7 @@ def run_simulation(request, role="stress", controller_id=None, active_fault_ids=
     parameters = {"targets_m3s": model["targets_m3s"], "equal_filling_gain": 1.0, "control_interval_s": 300}
     run_id = role + "-" + digest({"request": normalized, "controller": controller_id, "active_fault_ids": sorted(active_ids)})[:12]
     trace, display, observations, held_commands, frozen = [], [], {}, {}, {}
+    extrema, peak_values = {}, {"flow": -1.0, "flood": -1.0, "storage": -1.0}
     max_depths = {n["id"]: n["max_depth_m"] for n in model["nodes"] if n["type"] == "basin"}
     peak_depths = {node: 0.0 for node in max_depths}
     metric = {"flood_volume_m3": 0.0, "peak_downstream_flow_m3s": 0.0,
@@ -178,8 +179,11 @@ def run_simulation(request, role="stress", controller_id=None, active_fault_ids=
                         if fault["start_s"] <= now < fault["end_s"]:
                             if fault["type"] == "sensor_bias":
                                 observations[fault["asset"]] += fault["bias_m"]
-                            elif fault["type"] == "sensor_dropout":
-                                observations[fault["asset"]] = 0.0
+                    # A zero-reading failure overrides bias and noise regardless
+                    # of fault-id ordering; simultaneous biases are additive.
+                    for fault in faults:
+                        if fault["type"] == "sensor_dropout" and fault["start_s"] <= now < fault["end_s"]:
+                            observations[fault["asset"]] = 0.0
                     held_commands = commands(controller_id, observations, model["assets"], max_depths, parameters)
                     next_control += 300.0
                 # Apply every actuator command; a physical fault overrides only that asset.
@@ -194,9 +198,11 @@ def run_simulation(request, role="stress", controller_id=None, active_fault_ids=
                     sim.set(407, sim.links[asset_id], setting)
                 if not display or now - display[-1]["time_s"] >= 300 - 1e-6:
                     display.append(display_sample())
+                if any(abs(now-b) < 1e-6 for b in envelope_boundaries):
+                    extrema["boundary:" + str(now)] = display_sample()
                 upcoming = [b for b in envelope_boundaries if b > now + 1e-7]
                 boundary = min(next_control, sim.duration_s, upcoming[0] if upcoming else sim.duration_s)
-                sim.set(3, 0, min(max_step, max(0.001, boundary - now)))
+                sim.lib.stormpilot_set_max_step_s(min(max_step, max(0.001, boundary - now)))
                 previous = current
                 running = sim.step()
                 current = sample()
@@ -210,10 +216,20 @@ def run_simulation(request, role="stress", controller_id=None, active_fault_ids=
                 metric["downstream_excess_volume_m3"] += excess * dt
                 if excess > 0:
                     metric["downstream_exceedance_duration_s"] += dt
+                for key, field in [("flow", "downstream_flow_m3s"), ("flood", "total_flooding_m3s"), ("storage", "total_storage_m3")]:
+                    if current[field] > peak_values[key]:
+                        peak_values[key] = current[field]
+                        extrema["global_peak_" + key] = display_sample()
+                if current["total_flooding_m3s"] > 1e-9 and "first_overflow" not in extrema:
+                    extrema["first_overflow"] = display_sample()
                 for node, depth in depths().items():
-                    peak_depths[node] = max(peak_depths[node], depth)
+                    if depth > peak_depths[node]:
+                        peak_depths[node] = depth
+                        extrema["peak_depth:" + node] = display_sample()
             if display[-1]["time_s"] != current["time_s"]:
                 display.append(display_sample())
+            display = list({row["time_s"]: row for row in display + list(extrema.values())}.values())
+            display.sort(key=lambda row: row["time_s"])
             metric["terminal_storage_m3"] = current["total_storage_m3"]
             node_volumes = sim.native_flood_volumes()
             metric["native_flood_volume_m3"] = sum(node_volumes.values())

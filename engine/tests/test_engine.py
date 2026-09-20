@@ -28,6 +28,8 @@ class EngineTests(unittest.TestCase):
         integrated = sum(b["total_flooding_m3s"]*(b["time_s"]-a["time_s"])
                          for a,b in zip(first["trace"],first["trace"][1:]))
         self.assertAlmostEqual(integrated, first["metrics"]["native_flood_volume_m3"], places=6)
+        self.assertEqual(max(row["downstream_flow_m3s"] for row in first["display_trace"]),first["metrics"]["peak_downstream_flow_m3s"])
+        self.assertEqual(max(row["total_flooding_m3s"] for row in first["display_trace"]),max(row["total_flooding_m3s"] for row in first["trace"]))
 
     def test_perturbation_and_fallback_tradeoff(self):
         result = packet(self.request)
@@ -58,6 +60,7 @@ class EngineTests(unittest.TestCase):
         self.assertTrue(result["search"]["nominal_passes"])
         self.assertFalse(result["search"]["global_minimality_claimed"])
         replayed = replay(result)
+        self.assertEqual(replayed["request"],result["request"])
         by_id = {r["run_id"]: r for r in replayed["runs"]}
         for run in result["runs"]:
             self.assertEqual(run["trace"], by_id[run["run_id"]]["trace"])

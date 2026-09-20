@@ -25,6 +25,8 @@ class Simulation:
             ("stormpilot_node_volume_m3", [C.c_int], C.c_double),
             ("stormpilot_link_flow_m3s", [C.c_int], C.c_double),
             ("stormpilot_link_volume_m3", [C.c_int], C.c_double),
+            ("stormpilot_init_instrumentation", [], None),
+            ("stormpilot_set_max_step_s", [C.c_double], None),
         ]:
             fn = getattr(self.lib, name)
             fn.argtypes, fn.restype = args, result
@@ -34,6 +36,7 @@ class Simulation:
         self.opened = True
         self.check(self.lib.swmm_start(0))
         self.started = True
+        self.lib.stormpilot_init_instrumentation()
         self.nodes = self.names(2)
         self.links = self.names(3)
         self.duration_s = self.lib.stormpilot_duration_seconds()

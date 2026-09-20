@@ -16,6 +16,7 @@ def replay(original):
         run = {**cache[key], "role": old["role"], "run_id": old["run_id"]}
         runs.append(run)
     result = packet(request, runs)
+    result["request"] = dict(request)
     for field in ["ablations", "witness", "fallback", "search"]:
         if field in original:
             result[field] = original[field]
