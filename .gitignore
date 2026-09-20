@@ -14,10 +14,13 @@ work/
 *.rpt
 engine/native/build/
 engine/native/source/
+engine/build/
+engine/runs/
+engine/vendor/**/.git/
 *.dylib
 *.so
 *.dll
 *.exe
 test-results/
 playwright-report/
-
+validation/*-check.json

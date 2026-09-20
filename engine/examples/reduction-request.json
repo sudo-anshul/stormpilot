@@ -1,0 +1,32 @@
+{
+  "scenario_id": "theta",
+  "controller_id": "constant_flow",
+  "fallback_controller_id": "uncontrolled",
+  "seed": 42,
+  "rainfall_multiplier": 1,
+  "noise_std_m": 0,
+  "faults": [
+    {
+      "id": "f1",
+      "type": "valve_stuck",
+      "asset": "1",
+      "start_s": 3600,
+      "end_s": 21600,
+      "setting": 0
+    },
+    {
+      "id": "f2",
+      "type": "valve_stuck",
+      "asset": "2",
+      "start_s": 108000,
+      "end_s": 111600,
+      "setting": 0
+    }
+  ],
+  "test_contract": {
+    "metric": "flood_volume_m3",
+    "threshold": 100,
+    "tolerance": 1e-06
+  },
+  "search_budget": 8
+}

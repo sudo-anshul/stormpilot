@@ -1,0 +1,3 @@
+# Preserve exact upstream bytes because evidence manifests include their hashes.
+engine/data/*.inp -text
+engine/vendor/** -text
