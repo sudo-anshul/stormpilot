@@ -1,17 +1,31 @@
 #!/usr/bin/env python3
-"""Record a genuine two-condition investigation for the welcome screen."""
+"""Record the bounded compound-fault discovery for the welcome screen."""
 import gzip
 import sys
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from service.common import ROOT, JOBS, digest, read_json, write_json
+from service.common import ROOT, JOBS, read_json, write_json
 from service.present import normalize_config
 from service.worker import execute
 
-config = normalize_config({"additional_faults": [{"asset": "2", "start_hour": 30, "duration_hours": 1}]})
-job_id = digest({"welcome_config": config})[:16]
+envelope = read_json(ROOT / "engine" / "examples" / "discovery-request.json")
+config = normalize_config({
+    "mode": "discover", "controller_id": "constant_flow",
+    "controller_parameters": envelope["controller_parameters"],
+    "fallback_controller_id": envelope["fallback_controller_id"],
+    "fallback_controller_parameters": envelope["fallback_controller_parameters"],
+    "fault_asset": "P2", "fault_kind": "sensor_bias", "sensor_bias_m": 1,
+    "start_hour": 3, "duration_hours": 3,
+    "additional_faults": [{"asset": "2", "kind": "valve_stuck", "setting": 0.035,
+                           "start_hour": 6, "duration_hours": 2}],
+    "discovery": envelope["discovery"],
+})
+# A new recording may use revised sources even when its settings are unchanged.
+# Never reuse an immutable cloud job id for that new result.
+job_id = uuid.uuid4().hex[:16]
 request = {"id": job_id, "config": config, "created_at": datetime.now(timezone.utc).isoformat(), "replay_of": None}
 folder = JOBS / job_id
 write_json(folder / "request.json", request)

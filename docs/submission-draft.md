@@ -1,84 +1,55 @@
-# StormPilot — submission draft
+# StormPilot — submission copy
 
-Prepared copy; no entry has been submitted.
+Prepared copy; no Devpost entry has been submitted.
 
-**Tagline:** Crash-test a stormwater control plan before relying on it.  
-**Track:** Earth Forward  
-**Private code:** https://github.com/sudo-anshul/stormpilot
+**Tagline:** Find the stormwater failures that individual fault tests miss.
+**Track:** Earth Forward
+**Live demo:** https://stormpilot.vercel.app
+**Private source:** https://github.com/sudo-anshul/stormpilot
+**Intended user:** A stormwater modeler testing a proposed controller before recommending it.
 
 ## Inspiration
 
-A control plan can satisfy its checks under normal conditions and fail when an
-outlet sticks. An apparently helpful fallback can shift the problem downstream.
-Planning needs an experiment whose assumptions and tradeoffs can be inspected.
+A sensor fault can pass a test. A restricted valve can pass a test. Their combination can still cause a flood. And a response that looks excellent in one storm can make a different storm worse. We wanted a stormwater planning tool that exposes both mistakes before a controller is trusted.
 
 ## What it does
 
-StormPilot runs published stormwater benchmarks with the actual EPA SWMM engine.
-The user declares a policy, performance check and outlet faults. It tests the
-nominal plan, searches within the supplied conditions, removes conditions through
-reruns and compares another policy under the same external conditions. The
-workbench links conclusions to traces, fault windows, node depths, removal tests
-and complete physical outcomes.
+StormPilot helps stormwater modelers test proposed controllers before recommending them. Import a supported SWMM model or use a published benchmark. Declare the performance requirement, sensor and valve faults, timing and search budget. StormPilot runs the real EPA SWMM solver, finds interacting failures, checks each condition separately, searches bounded control responses and tests the selected candidate against declared physical guards.
 
-The downloaded archive includes source and evidence. Another user can compile
-the included solver, replay every case and independently compare the result.
+The workbench connects the decision to the evidence: complete outcomes, individual and joint traces, sensor observations versus estimated control depth, every tested candidate, rejection reasons, independent evaluation reports, and a source-complete replay archive. A judge can change the inputs and execute a new experiment on the hosted app.
 
-## Demonstrated finding
+## The result we can prove
 
-The included Theta nominal policy produces zero flooding. Two declared faults
-produce 1,621.45 m³. Removing the later fault leaves the violation; the early
-outlet-1 fault is a 1-minimal witness. Five native simulations and one cached
-reuse establish the finding.
+In Theta, a published two-basin benchmark, the no-fault case produces zero flooding. A +1 m sensor bias at basin P2 during hours 3–6 also produces zero. A valve fixed at 0.035 opening during hours 6–8 produces zero alone. Together they produce **237.263 m³**, violating the fixed 100 m³ check. At hour 6, the biased-sensor case already holds **469.544 m³ more water** than the no-fault case. The faults act at different times; the earlier disturbance changes storage before the valve restriction arrives.
 
-The outlets-open fallback reduces flooding to 1,275.42 m³ but raises peak
-downstream flow from 0.49009 to 6.35534 m³/s and causes 2,661.93 m³ of excess
-discharge above the declared 0.5 m³/s threshold. It still fails the 100 m³
-flooding check. That tradeoff is visible and reproducible.
+The bounded grid uses 21 native calls, including five retained full-proof simulations. A causal sensor-plausibility candidate reduces the development case to **19.361 m³**, a **91.84% reduction**.
 
-## How it was built
+We then tried to disprove that apparent success. In a separately frozen eight-case evaluation, all 64 simulations were valid and no flood subset worsened beyond tolerance. But the aggregate improvement was only **7.29%**, below the required 10%; only two of eight cases improved materially, and one downstream guard failed. **The candidate was rejected.** An earlier candidate also failed its own evaluation, increasing aggregate flooding by 22.45%. Both results remain visible and downloadable.
 
-Pinned EPA C source is compiled and called through a Python bridge. Native
-processes isolate solver state. Deterministic bounded subset search and deletion
-experiments produce a witness. A separate checker recomputes physical metrics
-and checks source hashes, matched conditions, search accounting and claims.
+The achievement is an inspectable discovery and an evidence-based rejection—not a claim that an unvalidated controller protects a real neighborhood.
 
-React, TypeScript and original SVG charts/schematics distinguish draft settings,
-recorded results, fresh execution, partial findings and verified replay. Numerical
-outcomes come from the native solver.
+## How we built it
 
-## Challenges and implementation lessons
+Pinned EPA SWMM 5.2.4 C source runs through a small Python bridge with isolated native processes. Deterministic fault search and paired subset experiments establish the interaction. Parameter search evaluates all declared physical guards. A separately implemented validator recomputes physical quantities from full routing-step traces and checks source, input, pairing, budget and claim integrity.
 
-- The packaged library failed to load; compiling official source restored
-  reproducible execution.
-- A timestep API silently disabled adaptive routing. Testing Gamma exposed a
-  severe continuity error. Preserving adaptive stepping fixed it without
-  relaxing the acceptance threshold.
-- Independent checks exposed an incomplete stored-water total and native-unit
-  conversion errors that a plausible chart would not reveal.
-- Primary-metric improvement concealed downstream regressions. The full outcome
-  vector and explicit guards became central to the product.
+React, TypeScript and SVG form the workbench. A bounded `.inp` import flow preserves exact input bytes, SI mappings and provenance. Vercel builds and runs the Linux native solver in a container. Private Blob storage preserves evidence across instance loss and serves source ZIPs through expiring signed URLs.
 
-The entrant should adapt this section to their own learning and disclose AI
-assistance accurately where the submission asks for it.
+## Implementation lessons
 
-## Attribution and scope
+Three concrete lessons shaped the implementation. First, a timestep API disabled adaptive routing, and a second benchmark exposed the continuity error; preserving the solver's adaptive behavior became an explicit requirement. Second, independent recomputation caught omitted link storage and inconsistent native-unit conversions, so complete routing traces and native cumulative totals are now checked separately. Third, minimizing flood volume alone selected misleading responses: a zero-flood candidate worsened downstream flow, and reserved evaluation rejected two candidates that improved the development case.
 
-EPA SWMM supplies established hydraulics; pystorms supplies public models and
-control foundations. Fault testing and deletion are established methods.
-StormPilot contributes the complete investigation, reduction, paired comparison,
-inspection and replayable evidence workflow. No field flood prevention, calibrated
-city performance, operator savings or actual deployment is claimed.
+The resulting workbench retains failed experiments, frozen protocols and exact sources. Its output is a decision another reviewer can challenge and reproduce, including an explicit rejection when the criteria fail.
 
-## Delivery handoff
+Development used AI coding assistance and parallel technical/product reviews. Advisor-named skills supplied interpretations of public reasoning; the named people did not review or endorse the project. These are documented implementation lessons, without a claim about the entrant's prior experience or personal learning.
 
-Deadline previously verified: September 20, 2026, 17:00 EDT / September 21,
-02:30 IST. Recheck the contest page before submitting.
+## What is original, and what is next
 
-- Arrange judge access while preserving the requested private repository.
-- Deploy the Docker app to a Python/container-capable host and verify a fresh
-  run, export and replay there. A static-only host is insufficient.
-- Record the four-minute demonstration using `demo-narration.md`, preserving
-  the selected packet identity and record-check/replay distinction.
-- Complete eligibility/team information accurately and submit through Devpost.
-  This workspace has not sent an entry, invited judges or published the repo.
+EPA SWMM supplies the established hydraulic solver. Pystorms supplies public benchmark networks and control foundations. Fault injection, ablation, parameter search and evaluation are established techniques. Our contribution is connecting them into a working stormwater decision workflow with editable models, causal inspection, explicit rejection and portable evidence.
+
+The next evidence needed is an operator study on a calibrated partner network: can a planning analyst find a missed interaction and reject a bad response faster than their current workflow? We have not measured that yet. We also do not claim field calibration, real avoided flooding, a universal controller, or a winning probability.
+
+## Submission handoff
+
+Deadline previously verified: September 20, 2026, 17:00 EDT / September 21, 02:30 IST. Confirm the current contest page before submitting.
+
+The live app is available. The repository stays private. [SOURCE-ACCESS.md](../SOURCE-ACCESS.md) explains how to share the local full-app code ZIP with judges or grant repository access explicitly. An experiment replay archive supports numerical reproduction but is not a substitute for access to the complete app code. Upload the finished demonstration video to an account you control, complete eligibility/team details accurately, and submit through Devpost. No code-sharing invitation or Devpost submission has been sent by this workspace.

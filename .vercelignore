@@ -1,0 +1,13 @@
+.git
+node_modules
+runtime
+work
+.env*
+engine/build
+engine/runs
+engine/data/imports
+validation/runs
+**/__pycache__
+**/*.pyc
+test-results
+playwright-report

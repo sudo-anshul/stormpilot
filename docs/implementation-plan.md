@@ -1,22 +1,23 @@
 # StormPilot implementation plan
 
-Status: working implementation completed locally, September 20, 2026; final delivery checks and hosting handoff in progress. The contest deadline previously verified is September 20, 2026, 17:00 EDT / September 21, 02:30 IST.
+Status: improved implementation deployed to Vercel, September 20, 2026; final release verification and demonstration assets in progress. The contest deadline previously verified is September 20, 2026, 17:00 EDT / September 21, 02:30 IST.
 
 ## Product result and scope
 
-### Execution status
+### Execution status — improved release
 
 | Milestone | Actual result |
 |---|---|
-| 0 — repository and plan | Private `sudo-anshul/stormpilot` created; scope, architecture and advisor feedback recorded and committed. |
-| 1 — actual engine | Pinned official EPA source compiles; Theta and Gamma execute; adaptive-step bug found and fixed without relaxing checks. |
-| 2 — investigation and reduction | A two-condition case reduces to one retained condition through 5 native calls; matched fallback exposes downstream regressions. |
-| 3 — workbench | Production React app supports fresh runs, recorded demo, trace/time/fault inspection, removal evidence, comparison, export and replay. Desktop, 390px and 320px flows inspected. |
-| 4 — independent evidence | 60 local tests pass. Five recorded configurations replay exactly on this Mac. Exported archive compiles/replays in a separate directory without repo access. |
-| 5 — delivery | Setup, Dockerfile, GitHub Actions, source attribution, four-minute narration and submission copy prepared. Hosting account selection, final video recording and actual submission remain. GitHub blocks CI runners because of account billing; no Ubuntu pass claimed. |
+| Repository | Private `sudo-anshul/stormpilot`; milestone commits and pushes. |
+| Native engine | Pinned EPA SWMM 5.2.4 executes on macOS and the Vercel Linux container. |
+| Discovery | 3×3 bounded grid; 21 calls; selected faults produce 0 m³ alone and 237.263 m³ together. |
+| User workflow | Supported `.inp` import, SI mapping, sensor/valve controls, policy parameters, search/rejection ledger and causal sensor inspection. |
+| Candidate development | Sensor plausibility reduces the compound development case to 19.361 m³; 293 attempted development calls are disclosed. |
+| Independent evaluation | Phase 1 rejected (+22.45% aggregate flooding); Phase 2 rejected (−7.29%, one downstream guard failure). All 112 reserved runs valid. Exact protocols, sources and full proofs preserved. |
+| Evidence | Separate record validation, actual replay, portable source ZIPs, decision reports and declared user-triggered robustness suites. |
+| Hosting | Live at https://stormpilot.vercel.app with a Linux native container and private Blob persistence. Final cloud regression checks and demo recording are recorded in the verification document. |
 
-Current local app: `http://127.0.0.1:8787`. Tracked welcome fixture:
-`fixtures/demo-packet.json.gz`, experiment `a3fd3abf0ac0fe120dcb`.
+The stronger welcome discovery is UI job `6174a80795372955`, experiment `9df1ca1d7273778d8e7c`. Neither evaluated response is recommended for field use. No score or winning guarantee follows from these milestones.
 
 The plan below retains milestone acceptance and technical rationale. A planned
 capability is not an executed result unless marked above or in the decision log.

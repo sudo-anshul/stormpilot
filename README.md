@@ -1,18 +1,52 @@
 # StormPilot
 
-**Crash-test a stormwater control plan before relying on it.**
+**Find the stormwater failures that individual fault tests miss.**
 
-StormPilot runs a published drainage model, introduces declared outlet faults,
-isolates a failure by removing conditions and rerunning the solver, and compares
-another policy under the same conditions. The result is an inspectable experiment
-with a self-contained source and replay archive.
+[Open the live workbench](https://stormpilot.vercel.app) · [Submission story](docs/submission-draft.md) · [Executed verification](docs/verification.md)
 
-Built for NextStep Hacks 2026, **Earth Forward**. This repository is private.
+StormPilot connects an actual hydraulic simulator to a decision workflow: import a supported drainage model, discover interacting failures, search candidate responses, challenge them on a separate evaluation, and export the evidence. Built for NextStep Hacks 2026, **Earth Forward**. The GitHub repository remains private; the live demo is accessible without a GitHub account.
+
+## The finding
+
+In the public Theta benchmark, neither a biased sensor nor a restricted valve causes flooding on its own. Together, they cause **237.263 m³** over the full 78-hour simulation. The faults do not even overlap: the sensor reads 1 m high during hours 3–6, then outlet 2 is fixed at 0.035 opening during hours 6–8. The earlier disturbance changes the storage available when the second fault arrives.
+
+| Tested condition | Flooding (m³) |
+|---|---:|
+| No fault | 0 |
+| Sensor bias alone | 0 |
+| Valve restriction alone | 0 |
+| Both faults | 237.263 |
+| Both, with the candidate sensor-plausibility policy | 19.361 |
+
+The declared 3×3 grid uses **21 native calls**: 16 screening calls and five retained full-proof calls. Screening is summary-only; the selected interaction is independently checked against complete traces. The fixed flooding contract is 100 m³. These are simulated benchmark outcomes, not real-world avoided flooding.
+
+## The response did not pass final evaluation
+
+The 91.84% development reduction is promising, but it is not the final verdict. StormPilot keeps the counterevidence:
+
+| Frozen evaluation | Valid runs | Aggregate joint flooding change | Decision |
+|---|---:|---:|---|
+| Phase 1: balanced-flow candidate | 48 | **22.45% worse** | Rejected |
+| Phase 2: sensor-plausibility candidate | 64 | **7.29% better** | Rejected |
+
+Phase 2 required at least 10% aggregate improvement and material improvement in four of eight transformations; it achieved two. All 32 flood nonregression comparisons passed, but one downstream-excess guard failed: +1.471 m³ against a 1 m³ allowance. Candidate selection and protocols were frozen before their respective reserved suites. Those cases are now seen and cannot become a new holdout by rerunning them.
+
+This is the useful decision: a striking development result is **not sufficient to recommend the controller**. Both phase reports, full proofs, source snapshots and rejection criteria are retained in [evaluation/](evaluation/README.md). Subsequent user-triggered tests are explicitly labeled **declared robustness suites**, not unseen evaluations.
+
+## Try the complete workflow
+
+1. Open the labeled recorded discovery, inspect the declared search envelope, then start a fresh **Discover interacting faults** run.
+2. Compare no-fault, sensor-only, valve-only and combined traces. Inspect fault timing and the complete physical outcome table.
+3. Search a guarded response. The parameter grid, call budget and every candidate rejection remain visible.
+4. Inspect sensor plausibility at hour 3: physical depth, observed depth and the controller's estimated control depth are distinct. The estimated sensor offset is a hypothesis, not truth available to the policy.
+5. Run a declared robustness suite or open the separate Phase 1 and Phase 2 recorded evaluations. Read the failure reasons before the detailed table.
+6. Download a decision report and source-complete evidence ZIP. **Replay run** executes the recorded configurations again and compares their results.
+
+Bring your own self-contained `.inp` model through **Import model**. Inspection exposes native units, horizon and available controls; downstream mapping and targets are explicit. The current supported envelope includes bounded DYNWAVE storage/orifice networks with inline rainfall. [Import scope and limits](docs/model-import.md) explain rejected features.
 
 ## Run locally
 
-Requirements: **Python 3.10+**, **Node.js 22.12+**, and **clang or GCC** on macOS
-or Linux. Python uses the standard library. No API keys are needed.
+Requirements: **Python 3.10+**, **Node.js 22.12+**, and **clang or GCC** on macOS or Linux. The hydraulic/validation backend uses Python's standard library; the local workflow needs no API key.
 
 ```sh
 npm ci
@@ -20,128 +54,35 @@ npm run build
 python3 server.py --port 8787
 ```
 
-Open **http://127.0.0.1:8787**. The welcome investigation is a genuine recorded
-simulation, labeled as such. Click **Investigate plan** to execute a new one.
-The first fresh run compiles the vendored EPA source if necessary.
-
-For interface development, keep the Python server running and use `npm run dev`
-in another terminal. Vite proxies `/api` to port 8787.
-
-## Try the complete investigation
-
-1. Keep the recorded Theta benchmark and constant-flow policy. Its declared
-   flooding limit is 100 m³ over 78 hours.
-2. Investigate the two stuck-closed outlets: outlet 1 during hours 1–6 and
-   outlet 2 during hours 30–31.
-3. Inspect original and reduced traces. **Focus on fault** enlarges the selected
-   disturbance window without changing the full-horizon metrics.
-4. Read which conditions remain and inspect the actual removal tests.
-5. Compare the reduced witness with the outlets-open fallback and its
-   downstream costs.
-6. **Export evidence packet** downloads inputs, complete physical traces, exact
-   engine/model sources, validator and executable replay instructions.
-   **Replay run** executes all recorded configurations before comparing them.
-
-Change the flooding threshold to 100,000 m³ and rerun for a valid no-violation
-outcome. Previous results retain their original settings until the new run ends.
-Gamma supplies a second public 11-basin benchmark with a 156-hour horizon.
-
-## The recorded result
-
-These are simulated outcomes for the included Theta experiment, not estimates
-of real-world flood protection.
-
-| Case | Flooding (m³) | Peak downstream flow (m³/s) | Excess above 0.5 m³/s (m³) |
-|---|---:|---:|---:|
-| Nominal, no faults | 0 | 0.49155 | 0 |
-| Both declared faults | 1,621.45 | 0.49009 | 0 |
-| Reduced: early outlet-1 fault | 1,621.45 | 0.49009 | 0 |
-| Alternative: outlets open, same remaining fault | 1,275.42 | 6.35534 | 2,661.93 |
-
-Five native simulations and one cached reuse establish a **1-minimal witness**:
-no single remaining condition can be deleted while preserving the violation.
-The later outlet-2 fault alone produces zero flooding. This does not establish
-global minimality across other storms, timings or faults.
-
-The alternative reduces flooding by 346.03 m³ but still exceeds the 100 m³
-check and increases downstream flow and excess discharge. The interface
-preserves the tradeoff, including terminal storage.
-
-## Verify and replay
+Open http://127.0.0.1:8787. The first fresh run compiles pinned EPA source if needed. For frontend development, keep the server running and use `npm run dev` (Vite proxies `/api` to port 8787).
 
 ```sh
 npm test
 npm run build
+python3 engine/cli.py discover --request engine/examples/discovery-request.json --output runtime/discovery.json
+python3 -m validation.validate_packet runtime/discovery.json --root . --output runtime/check.json
+python3 engine/cli.py replay --request runtime/discovery.json --output runtime/replayed.json
+python3 -m validation.replay runtime/discovery.json runtime/replayed.json --root . --output runtime/replay-check.json
 ```
 
-The suite has **60 tests**: 7 native-engine behavioral tests, 40 independent
-validation/negative tests, and 13 service/API tests. It includes a real HTTP
-investigation, export, fresh source compilation from an extracted archive and
-actual replay. GitHub Actions is configured for Ubuntu; see the
-[executed verification record](docs/verification.md) for CI and platform status.
+Record validation and fresh simulator replay have different scopes. Only an executed matching replay receives `replay_status: matched`. Plot sampling never replaces the complete routing-step evidence.
 
-Engine-only commands:
+## Architecture and contribution
 
-```sh
-python3 engine/cli.py catalog
-python3 engine/cli.py investigate --request engine/examples/reduction-request.json --output runtime/packet.json
-python3 -m validation.validate_packet runtime/packet.json --root . --output runtime/check.json
-python3 engine/cli.py replay --request runtime/packet.json --output runtime/replayed.json
-python3 -m validation.replay runtime/packet.json runtime/replayed.json --root . --output runtime/replay-check.json
-```
+- **Hydraulics:** pinned official EPA SWMM 5.2.4 C source, compiled through a Python/ctypes bridge. Native subprocesses isolate solver state; adaptive routing and fault/control boundaries are preserved.
+- **Experiments:** bounded deterministic compound search; matched ablations; parameter search with flood, downstream and terminal guards; causal sensor-history diagnostics.
+- **Independent evidence:** a separate validator recomputes metrics, checks physical traces, source/input identity, paired external conditions, search accounting and claims. Frozen evaluations keep failures as results.
+- **Workbench:** React, TypeScript, SVG plots/schematics, model import, fault/policy controls, immutable run links, candidate/rejection tables and report/export/replay.
+- **Hosting:** Vercel native container builds the Linux solver. Private Vercel Blob stores completed jobs, source archives and imported model artifacts. Native computation runs within the active request; completed evidence survives container cache loss. Downloads use expiring signed links.
 
-Record validation and fresh simulator replay have different scopes. Only an
-executed, matching replay produces `replay_status: matched`. Complete routing-step
-traces remain in the packet; only the displayed plot is sampled.
+EPA SWMM supplies established hydraulics; pystorms supplies the public benchmarks and control foundations. Fault injection, parameter search and holdout evaluation are established methods. StormPilot contributes their connected, inspectable workflow around a stormwater planning decision. It does not claim novel hydraulic physics or a trained AI forecasting model.
 
-To intentionally regenerate the tracked welcome fixture after an engine change,
-run `python3 scripts/record_demo.py` and restart the server. Saved evidence is
-tied to its original sources and must not be relabeled after edits.
+## Limits and attribution
 
-## Architecture and original contribution
+Theta and Gamma are idealized public benchmarks, not calibrated city networks. The network view is a schematic, not an inundation map. We have no municipal partner, operator study, measured time savings or field-protection result. The hosted app is a bounded research prototype; the selected controller failed its declared reserved evaluation. A valid simulation is not a safe deployment recommendation.
 
-- **Engine:** official EPA SWMM 5.2.4 pinned C source and a Python/ctypes bridge.
-  Adaptive routing is preserved while steps align with policy/fault boundaries.
-  Separate native processes isolate solver state.
-- **Investigation:** deterministic, bounded subset search and condition deletion
-  over explicitly supplied faults. Native calls count toward the budget;
-  identical cases are cached and fallback reserves its required call.
-- **Independent checks:** a separate package recomputes SI metrics and checks
-  horizon, continuity, native flooding, hashes, exogenous pairing, search
-  accounting, removals and comparison claims.
-- **Workbench:** React, TypeScript, SVG traces/schematic, fault/time inspection,
-  conditional results, responsive comparison, exports and actual replay.
+The welcome fixture is a genuine recorded discovery: UI job `6174a80795372955`, experiment `9df1ca1d7273778d8e7c`. Regenerate intentionally with `python3 scripts/record_demo.py` after an engine change; never relabel old evidence with new sources.
 
-EPA SWMM supplies established hydraulics. Public benchmarks and control
-foundations come from pystorms. StormPilot contributes the connected
-investigation, reduction, comparison, inspection and evidence workflow.
+See [implementation decisions](docs/implementation-plan.md), [interaction discovery](docs/interaction-discovery.md), [sensor plausibility](docs/sensor-plausibility.md), [validation](docs/validation.md), [deployment](docs/deployment.md) and [demo narration](docs/demo-narration.md).
 
-## Limits and delivery
-
-The models are published idealized benchmarks, not calibrated city networks.
-Schematics are not inundation maps. Source/input checks cannot certify arbitrary
-third-party policies. No field deployment, operator study or avoided-flood
-estimate is claimed.
-
-The HTTP service allows two concurrent workers, four queued/running jobs, bounded
-inputs and execution time limits. It is a prototype with local file storage.
-Runtime files remain in `runtime/`; use persistent storage when retention matters.
-
-The Dockerfile targets a host supporting a persistent Python process. A static
-frontend host alone cannot execute the native solver. Hosted preview, video and
-judge access are separate delivery steps; the source repo remains private.
-
-## Documentation and attribution
-
-- [Implementation plan and advisor decisions](docs/implementation-plan.md)
-- [Engine protocol and sources](engine/README.md)
-- [Independent validation and executed checks](docs/validation.md)
-- [Product and rendered review](docs/product-review.md)
-- [Four-minute demo narration](docs/demo-narration.md)
-- [Submission draft](docs/submission-draft.md)
-- [EPA SWMM](https://www.epa.gov/water-research/storm-water-management-model-swmm)
-- [pystorms](https://github.com/kLabUM/pystorms), revision `20cc6086433449df99177d4f9103940639ef3af0`
-
-EPA solver source retains its public-domain notices. Included pystorms material
-retains its GPLv3 license; this project uses GPLv3. See [LICENSE](LICENSE) and
-[the model license](engine/data/PYSTORMS-LICENSE).
+[EPA SWMM](https://www.epa.gov/water-research/storm-water-management-model-swmm) retains its public-domain notices. Included [pystorms](https://github.com/kLabUM/pystorms) material is pinned to revision `20cc6086433449df99177d4f9103940639ef3af0` and retains GPLv3. This project uses [GPLv3](LICENSE); see [the model license](engine/data/PYSTORMS-LICENSE).

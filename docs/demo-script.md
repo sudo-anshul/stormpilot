@@ -1,6 +1,6 @@
 # StormPilot — conditional four-minute demonstration
 
-Status: **conditional recording template. A numerical four-minute take is now prepared in `demo-narration.md` from tracked experiment `a3fd3abf0ac0fe120dcb`; final browser/recording actions still require verification.** This template supplies honest alternate branches if the chosen result changes.
+Status: conditional fallback template. Use `demo-narration.md` for the current compound-discovery recording and its exact artifact identity; this document supplies alternative branches if a newly selected experiment differs.
 
 ## Recording contract
 

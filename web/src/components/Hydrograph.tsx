@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { ArrowLeft, ArrowRight, ChartNoAxesCombined } from 'lucide-react';
-import { nearestPoint, number, ROLE_LABELS, timeLabel } from '../types';
+import { nearestPoint, number, caseRoleLabel, timeLabel } from '../types';
 import type { InvestigationView, RunCase, TracePoint } from '../types';
 
 type Quantity = 'total_flooding_m3s' | 'downstream_flow_m3s' | 'total_storage_m3';
@@ -49,7 +49,8 @@ export default function Hydrograph({ view, time, setTime, selectedCase, setSelec
   const active = view.cases.find(c => c.id === selectedCase) ?? view.cases.find(c => c.role === 'reduced') ?? view.cases.find(c => c.role === 'stress') ?? view.cases[0];
   const faults = [{ id: 'primary', asset: view.config.fault_asset, start_s: view.config.start_hour * 3600, end_s: (view.config.start_hour + view.config.duration_hours) * 3600 }, ...(view.config.additional_faults ?? []).map((fault, i) => ({ id: `extra-${i}`, asset: fault.asset, start_s: fault.start_hour * 3600, end_s: (fault.start_hour + fault.duration_hours) * 3600 }))];
   const activeFaults = active?.faults.map((fault, index) => ({ id: String(fault.id ?? index), asset: String(fault.asset ?? ''), start_s: Number(fault.start_s), end_s: Number(fault.end_s) })).filter(fault => Number.isFinite(fault.start_s) && Number.isFinite(fault.end_s)) ?? [];
-  const focusOptions = activeFaults.length ? activeFaults : faults;
+  const individualOptions = activeFaults.length ? activeFaults : faults;
+  const focusOptions = individualOptions.length > 1 ? [{ id: 'all', asset: 'All active faults', start_s: Math.min(...individualOptions.map(fault => fault.start_s)), end_s: Math.max(...individualOptions.map(fault => fault.end_s)) }, ...individualOptions] : individualOptions;
   const focusFault = focusOptions.find(fault => fault.id === focusFaultId) ?? focusOptions[0];
   const padding = focusFault ? Math.max(900, (focusFault.end_s - focusFault.start_s) * .2) : 0;
   const rangeStart = focused && focusFault ? Math.max(0, focusFault.start_s - padding) : 0;
@@ -85,8 +86,8 @@ export default function Hydrograph({ view, time, setTime, selectedCase, setSelec
       <div><div className="section-index"><ChartNoAxesCombined size={15} /> Trace explorer</div><h2 id="hydrograph-title">Follow the water.</h2></div>
       <div className="segmented" aria-label="Chart quantity">{QUANTITIES.map(q => <button key={q.key} aria-pressed={quantity === q.key} onClick={() => setQuantity(q.key)}>{q.label}</button>)}</div>
     </div>
-    <div className="chart-legend" aria-label="Cases">{view.cases.map(c => <button key={c.id} className={`legend-item ${selectedCase === c.id ? 'selected' : ''}`} aria-pressed={selectedCase === c.id} onClick={() => setSelectedCase(c.id)}><span className={`line-key ${c.role}`} />{ROLE_LABELS[c.role]}<span className="sr-only">: {c.label}</span></button>)}</div>
-    <div className="chart-range-controls"><div className="range-buttons" aria-label="Plot time range"><button aria-pressed={!focused} onClick={() => setFocused(false)}>Full horizon</button><button aria-pressed={focused} onClick={() => setFocused(true)} disabled={!focusFault}>Focus on fault</button></div>{focused && focusOptions.length > 1 && <select aria-label="Fault window to focus" value={focusFault?.id} onChange={event => setFocusFaultId(event.target.value)}>{focusOptions.map(fault => <option key={fault.id} value={fault.id}>Outlet {fault.asset}: {timeLabel(fault.start_s)}–{timeLabel(fault.end_s)}</option>)}</select>}<span>{timeLabel(rangeStart)}–{timeLabel(rangeEnd)} <span className="range-scale-note">{focused ? '· visible-range scale' : '· full horizon'}</span></span></div>
+    <div className="chart-legend" aria-label="Cases">{view.cases.map(c => <button key={c.id} className={`legend-item ${selectedCase === c.id ? 'selected' : ''}`} aria-pressed={selectedCase === c.id} onClick={() => setSelectedCase(c.id)}><span className={`line-key ${c.role}`} />{caseRoleLabel(c.role, Boolean(view.repair))}<span className="sr-only">: {c.label}</span></button>)}</div>
+    <div className="chart-range-controls"><div className="range-buttons" aria-label="Plot time range"><button aria-pressed={!focused} onClick={() => setFocused(false)}>Full horizon</button><button aria-pressed={focused} onClick={() => setFocused(true)} disabled={!focusFault}>Focus on fault</button></div>{focused && focusOptions.length > 1 && <select aria-label="Fault window to focus" value={focusFault?.id} onChange={event => setFocusFaultId(event.target.value)}>{focusOptions.map(fault => <option key={fault.id} value={fault.id}>{fault.id === 'all' ? fault.asset : `Asset ${fault.asset}` }: {timeLabel(fault.start_s)}–{timeLabel(fault.end_s)}</option>)}</select>}<span>{timeLabel(rangeStart)}–{timeLabel(rangeEnd)} <span className="range-scale-note">{focused ? '· visible-range scale' : '· full horizon'}</span></span></div>
     {!plottedCases.length ? <p className="chart-missing">No trace is available for this experiment.</p> : <>
       <p className="horizontal-scroll-hint">Scroll horizontally to inspect the full chart.</p>
       <div className="plot-wrap" role="region" aria-label="Hydraulic trace chart. Scroll horizontally on narrow screens." tabIndex={0}>
@@ -111,8 +112,8 @@ export default function Hydrograph({ view, time, setTime, selectedCase, setSelec
         <input id="inspection-time" type="range" min={rangeStart} max={rangeEnd} step={Math.max(1, span / 1000)} value={clampTime(time)} onChange={e => setTime(Number(e.target.value))} aria-valuetext={`${timeLabel(clampTime(time))} elapsed simulation time`} />
         <button className="icon-button" aria-label="Inspect one hour later" onClick={() => setTime(clampTime(time + 3600))}><ArrowRight size={15} /></button>
       </div>
-      <div className="time-readings" style={{ '--case-count': Math.max(1, view.cases.length) } as CSSProperties}>{view.cases.map((c: RunCase) => { const p = nearestPoint(c.trace, inspectedTime); return <div key={c.id} className={`time-reading ${c.id === selectedCase ? 'active' : ''}`}><span><i className={`legend-dot ${c.role}`} />{ROLE_LABELS[c.role]}</span><strong>{number(p?.[quantity], 4)} <small>{meta.unit}</small></strong><small>Sample at {timeLabel(p?.time_s)}</small></div>; })}</div>
-      <p className="chart-note">{focused ? 'Focused view; all outcome metrics still cover the full horizon. ' : 'Elapsed simulation time. '}Plot vertices may be reduced for display; reported metrics come from the evidence packet.</p>
+      <div className="time-readings" style={{ '--case-count': Math.max(1, view.cases.length > 5 ? 4 : view.cases.length) } as CSSProperties}>{view.cases.map((c: RunCase) => { const p = nearestPoint(c.trace, inspectedTime); return <div key={c.id} className={`time-reading ${c.id === selectedCase ? 'active' : ''}`}><span><i className={`legend-dot ${c.role}`} />{caseRoleLabel(c.role, Boolean(view.repair))}</span><strong>{number(p?.[quantity], 4)} <small>{meta.unit}</small></strong><small>Sample at {timeLabel(p?.time_s)}</small></div>; })}</div>
+      <p className="chart-note">{focused ? 'Focused view; all outcome metrics still cover the full horizon. ' : 'Use Focus on fault to inspect the disturbance window. '}Plot vertices may be reduced for display; reported metrics come from the evidence packet.</p>
     </>}
   </section>;
 }

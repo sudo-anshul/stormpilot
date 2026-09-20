@@ -15,3 +15,6 @@ for args in commands:
     result = subprocess.run([sys.executable, *args], cwd=root)
     if result.returncode:
         raise SystemExit(result.returncode)
+result = subprocess.run(["node", "--test", "scripts/blob.test.mjs"], cwd=root)
+if result.returncode:
+    raise SystemExit(result.returncode)

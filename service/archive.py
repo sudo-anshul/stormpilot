@@ -74,3 +74,43 @@ def build_archive(folder: Path) -> Path:
             bundle.writestr(name, content)
     temporary.replace(archive)
     return archive
+
+
+def build_evaluation_archive(folder: Path, source_folder: Path) -> Path:
+    """Export the recorded source investigation and every retained suite proof."""
+    archive = folder / "evidence.zip"
+    source = source_folder / "evidence.zip"
+    if not source.exists():
+        source = build_archive(source_folder)
+    files = {}
+    with zipfile.ZipFile(source) as original:
+        for name in original.namelist():
+            if name != "MANIFEST.json":
+                files[name] = original.read(name)
+    for base in (folder / "suite", folder / "evaluator-source"):
+        for path in base.rglob("*"):
+            if path.is_file() and path.suffix in {".py", ".json", ".gz", ".sha256"}:
+                name = str(path.relative_to(base)) if base.name == "evaluator-source" else "suite/" + str(path.relative_to(base))
+                files[name] = path.read_bytes()
+    files["robustness-report.json"] = (folder / "report.json").read_bytes()
+    files["robustness-request.json"] = (folder / "request.json").read_bytes()
+    request = read_json(folder / "request.json")
+    args = " ".join("--pair-id " + key for key in request["pair_ids"])
+    files["ROBUSTNESS.md"] = (
+        "# Recorded robustness evaluation\n\nThis export contains the source investigation, full retained suite packets, "
+        "the declared protocol, policies and all outcomes, including rejected cases.\n\n"
+        "These transforms are visible and reusable. Re-execution is a declared suite, not a new held-out evaluation.\n\n"
+        "Replay the source investigation using REPLAY.md. To rerun the declared robustness suite in a new directory:\n\n"
+        "```sh\npython3 -m evaluation.declared --packet packet.json "
+        f"--reference-run-id {request['reference_run_id']} --candidate-run-id {request['candidate_run_id']} "
+        f"{args} --output-dir fresh-suite --report fresh-robustness-report.json\n```\n"
+    ).encode()
+    files["MANIFEST.json"] = json.dumps({"schema_version": "stormpilot.robustness-archive.v1", "files": [
+        {"path": name, "sha256": hashlib.sha256(content).hexdigest()} for name, content in sorted(files.items())
+    ]}, indent=2).encode()
+    temporary = folder / "evidence.zip.tmp"
+    with zipfile.ZipFile(temporary, "w", zipfile.ZIP_DEFLATED, compresslevel=6) as bundle:
+        for name, content in sorted(files.items()):
+            bundle.writestr(name, content)
+    temporary.replace(archive)
+    return archive

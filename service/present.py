@@ -232,7 +232,9 @@ def compact_trace(run, maximum=1000):
     # traces, commands and settings remain in the downloadable evidence packet.
     fields = ("time_s", "total_flooding_m3s", "total_storage_m3", "downstream_flow_m3s")
     return [{**{field: row[field] for field in fields},
-             "node_depths_m": row.get("basin_depth_m", row.get("node_depths_m", {}))}
+             "node_depths_m": row.get("basin_depth_m", row.get("node_depths_m", {})),
+             **({"observed_depth_m": row["observed_depth_m"], "controller_diagnostics": row["controller_diagnostics"]}
+                if "controller_diagnostics" in row else {})}
             for row in selected]
 
 

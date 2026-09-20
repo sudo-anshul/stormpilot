@@ -1,5 +1,6 @@
 # StormPilot product acceptance and design review
 
+Historical review of the first prototype. The improved release and current rendered checks are documented in [new-product-review.md](new-product-review.md).
 Status: **implementation, desktop/narrow review and core browser interactions completed locally.** Final observations are recorded below and in `verification.md`; hosted and participant checks remain separate.
 
 Owner: Sam advisory lens / product review. The perspective is a researched interpretation of Sam Altman's public reasoning, not his endorsement. This document records recommendations and testable acceptance, not user research or a completed accessibility audit. Root owns the interface, Andrej the engine, and Dario the evaluation contract. This review changes no code.

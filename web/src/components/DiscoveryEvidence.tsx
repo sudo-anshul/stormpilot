@@ -1,0 +1,28 @@
+import { CheckCircle2, ChevronDown, ScanSearch, TriangleAlert } from 'lucide-react';
+import { METRICS, number } from '../types';
+import type { InvestigationView } from '../types';
+
+export default function DiscoveryEvidence({ view }: { view: InvestigationView }) {
+  const result = view.discovery;
+  if (!result && !view.repair) return null;
+  const referenceCases = ['nominal', 'single_a', 'single_b', 'stress'].map(role => view.cases.find(run => run.role === role));
+  const retainedValues = referenceCases.every(Boolean) ? { nominal: referenceCases[0]!.metrics[view.config.metric] ?? NaN, sensor_only: referenceCases[1]!.metrics[view.config.metric] ?? NaN, valve_only: referenceCases[2]!.metrics[view.config.metric] ?? NaN, joint: referenceCases[3]!.metrics[view.config.metric] ?? NaN, interaction_excess: 0 } : null;
+  if (retainedValues) retainedValues.interaction_excess = retainedValues.joint - retainedValues.sensor_only - retainedValues.valve_only + retainedValues.nominal;
+  const values = result?.interaction_values ?? retainedValues;
+  const pairVerified = result?.joint_proof_verified_by_engine ?? Boolean(view.repair && view.repair.status !== 'reference_not_joint_failure');
+  const verified = pairVerified && ['pass', 'passed', 'verified'].includes(view.validation.status);
+  const metric = METRICS[view.config.metric];
+  const rows = values ? [
+    { id: 'empty', label: 'Clean reference', note: 'Neither condition', value: values.nominal },
+    { id: 'a', label: result ? 'Sensor only' : 'Condition A only', note: result ? `Basin ${result.declared_grid.sensor_asset}` : `Asset ${String(referenceCases[1]?.faults[0]?.asset ?? 'A')}`, value: values.sensor_only },
+    { id: 'b', label: result ? 'Valve only' : 'Condition B only', note: result ? `Outlet ${result.declared_grid.valve_asset}` : `Asset ${String(referenceCases[2]?.faults[0]?.asset ?? 'B')}`, value: values.valve_only },
+    { id: 'ab', label: 'Both conditions', note: 'Same model and policy', value: values.joint },
+  ] : [];
+  return <section id="discovery-evidence" className="discovery-evidence panel" aria-labelledby="discovery-title"><div className="section-heading"><div><div className="section-index"><ScanSearch size={15} />{result ? 'Compound-fault discovery' : 'Retained reference proof'}</div><h2 id="discovery-title" tabIndex={-1}>{verified ? 'Two passing faults. One failing pair.' : result?.status === 'baseline_failed' ? 'The clean reference already fails.' : values ? 'Inspect the retained pair.' : 'No qualifying pair found in this grid.'}</h2></div><span className={`small-badge ${verified ? 'verified' : ''}`}>{verified ? 'Retained proof checked' : 'Bounded search'}</span></div>
+    <p className="section-description">{verified ? 'The same policy, rainfall and horizon were tested with neither condition, each condition alone, and both together. Each condition is necessary for this pair to exceed the declared check.' : result?.status === 'baseline_failed' ? 'A fault-specific interaction is not established when the clean reference already exceeds the check.' : 'The recorded search covers the declared grid and budget. An untested pair or a different model may behave differently.'}</p>
+    {!!rows.length && <div className="paired-proof" aria-label={`${metric.label} for the retained four-case comparison`}>{rows.map(row => { const passes = row.value <= view.finding.threshold + .000001; return <div key={row.id} className={`paired-proof-case ${row.id === 'ab' ? 'joint' : ''}`}><span className="treatment-code">{row.id === 'empty' ? '∅' : row.id.toUpperCase()}</span><h3>{row.label}</h3><p>{row.note}</p><strong>{number(row.value, 3)}<small>{metric.unit}</small></strong><span className={`criterion-result ${passes ? 'pass' : 'fail'}`}>{passes ? <CheckCircle2 size={12} /> : <TriangleAlert size={12} />}{passes ? 'Within check' : 'Exceeds check'}</span></div>; })}</div>}
+    {values && <div className="interaction-statistic"><span>Interaction excess</span><strong>{number(values.interaction_excess, 3)} {metric.unit}</strong><p>Both − condition A only − condition B only + clean reference. This statistic describes the retained model experiment.</p></div>}
+    {result ? <><div className="discovery-accounting"><div><strong>{number(result.simulator_calls, 0)}<small> / {number(result.budget, 0)}</small></strong><span>Total simulator calls / budget</span></div><div><strong>{number(result.screened_pairs, 0)}<small> / {number(result.declared_pairs, 0)}</small></strong><span>Pairs screened / declared</span></div><div><strong>{number(result.proof_simulator_calls, 0)}</strong><span>Retained proof calls</span></div><div><strong>{result.grid_exhausted ? 'Complete' : 'Partial'}</strong><span>Declared grid coverage</span></div></div>
+    <details className="campaign-details"><summary>Inspect search scope and selection <ChevronDown size={13} /></summary><p>{result.coverage_note}</p><p>{result.selection_rule}</p><dl><div><dt>Sensor offsets</dt><dd>{result.declared_grid.bias_values_m.map(value => number(value, 4)).join(', ')} m</dd></div><div><dt>Valve openings</dt><dd>{result.declared_grid.valve_settings.map(value => number(value, 4)).join(', ')}</dd></div><div><dt>Stopped because</dt><dd>{result.stopping_reason.replaceAll('_', ' ')}</dd></div><div><dt>Grid SHA-256</dt><dd><code>{result.grid_sha256}</code></dd></div></dl><p className="scope-caveat">{result.verification_scope}</p></details></> : <p className="paired-proof-note">These four reference treatments are retained alongside the selected candidate’s four treatments. Parameter-search coverage is reported with the response below.</p>}
+  </section>;
+}
