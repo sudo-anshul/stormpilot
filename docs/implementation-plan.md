@@ -1,8 +1,25 @@
 # StormPilot implementation plan
 
-Status: implementation started, September 20, 2026. This is a living plan; completed work, changed assumptions and advisor feedback will be recorded below. The contest deadline previously verified is September 20, 2026, 17:00 EDT / September 21, 02:30 IST.
+Status: working implementation completed locally, September 20, 2026; final delivery checks and hosting handoff in progress. The contest deadline previously verified is September 20, 2026, 17:00 EDT / September 21, 02:30 IST.
 
 ## Product result and scope
+
+### Execution status
+
+| Milestone | Actual result |
+|---|---|
+| 0 — repository and plan | Private `sudo-anshul/stormpilot` created; scope, architecture and advisor feedback recorded and committed. |
+| 1 — actual engine | Pinned official EPA source compiles; Theta and Gamma execute; adaptive-step bug found and fixed without relaxing checks. |
+| 2 — investigation and reduction | A two-condition case reduces to one retained condition through 5 native calls; matched fallback exposes downstream regressions. |
+| 3 — workbench | Production React app supports fresh runs, recorded demo, trace/time/fault inspection, removal evidence, comparison, export and replay. Desktop, 390px and 320px flows inspected. |
+| 4 — independent evidence | 60 local tests pass. Five recorded configurations replay exactly on this Mac. Exported archive compiles/replays in a separate directory without repo access. |
+| 5 — delivery | Setup, Dockerfile, GitHub Actions, source attribution, four-minute narration and submission copy prepared. Hosting account selection, final video recording and actual submission remain. CI startup is being diagnosed; no Ubuntu pass claimed yet. |
+
+Current local app: `http://127.0.0.1:8787`. Tracked welcome fixture:
+`fixtures/demo-packet.json.gz`, experiment `a3fd3abf0ac0fe120dcb`.
+
+The plan below retains milestone acceptance and technical rationale. A planned
+capability is not an executed result unless marked above or in the decision log.
 
 Build a complete workbench that answers: **under the tested conditions, where does this stormwater control plan fail, what causes the failure in the model, and what does another policy change?**
 
@@ -61,7 +78,7 @@ Commit: `chore: establish StormPilot project and implementation plan`.
 
 1. Resolve engine loading without silently replacing SWMM with toy hydraulics. Try a source build from a pinned official EPA revision with installed clang if necessary.
 2. Run a small curated published model to completion and preserve the input hash and engine version.
-3. Capture fixed-time samples, terminal state and simulator diagnostics. Preserve native calculation precision; convert units explicitly for display.
+3. Capture every routing step, terminal state and simulator diagnostics. Preserve native calculation precision; convert units explicitly for display. Downsample only the display trace, never the independent integration evidence.
 4. Repeat the baseline with identical external inputs and compare results within stated numeric tolerances.
 5. Apply one supported controlled perturbation and show that the result is produced by the native model.
 6. Ask Andrej to review runtime, units and baseline, and Dario to review the information boundary and physical metrics.
@@ -153,4 +170,7 @@ Initial decision: keep the project; make failure investigation the core. Existin
 
 - Plan initialized; repository creation and engine source-build investigation in progress.
 - Sam review requested for workflow and rendered-review acceptance; Dario review requested for independent evidence contract; Andrej implementation assigned actual engine proof.
-
+- Private repository created and verified: `sudo-anshul/stormpilot`; initial plan pushed at `49a1ea8`.
+- Official EPA SWMM 5.2.4 source builds with installed clang and loads successfully, resolving the previous native-wheel blocker. A complete theta run and controlled stuck-outlet run have produced real traces.
+- Sam architecture feedback accepted: freeze an immutable Test Contract/run identity; pull independent packet validation and replay into the first engine proof; ensure no-violation, tied fallback and no-reduction outcomes remain complete user journeys.
+- Andrej feedback accepted: retain full routing-step samples for independent numerical checks and downsample only for presentation.

@@ -184,6 +184,14 @@ A copy of the genuine final packet was deliberately altered by subtracting 100 m
 
 Source review produced three implemented corrections before this final evidence was generated: total terminal water now includes node and link volumes; sensor “dropout” is explicitly a zero-reading failure; and timestep caps preserve adaptive routing instead of invoking the public route-step setter that silently disables it. The current `commands` interface receives perturbed observations from its own run, static geometry and policy parameters, without future rainfall or a fault catalog. That is a source review of this fixed implementation, not a proof about arbitrary uploaded controllers. Source and metric changes require new packets and checks.
 
+## Export portability check
+
+A fresh two-condition API export, job `cffb0edfb52c40ce`, was extracted into a new directory outside the repository. All **111 files** listed in its archive manifest matched their hashes. No native library was supplied; the exported EPA/bridge sources were compiled locally using the installed compiler. The compile command referenced only the extracted source tree, with no dependency on the original checkout.
+
+All four commands in the archive's `REPLAY.md` succeeded: recorded packet validation, actual solver replay, replayed packet validation, and independent original/replay comparison. Both record reports passed 131 checks; the replay comparison passed eight. All five cases and 63,556 physical trace rows matched, with maximum observed difference zero. No Python package installation was required. `validation/archive-portability-check.json` records the archive SHA-256, commands and observed results in the local workspace.
+
+This verifies an independent-directory rebuild and replay on the same macOS host with its installed Python/compiler. Linux and other host/compiler combinations remain untested here; exact cross-platform identity and field validity are not claimed. The archive review also identified two optional regression-request JSON files referenced by this document but absent from the initial archive; they should be included under `validation/cases/` in subsequent exports. The primary documented replay path was complete and passed.
+
 ## Source basis
 
 - [EPA SWMM](https://www.epa.gov/water-research/storm-water-management-model-swmm): model scope and numerical simulation context.

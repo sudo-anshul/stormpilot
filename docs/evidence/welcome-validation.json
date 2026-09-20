@@ -1,0 +1,1437 @@
+{
+  "checks": [
+    {
+      "id": "packet_schema",
+      "status": "passed",
+      "message": "Versioned packet has uniquely identified runs.",
+      "required": true
+    },
+    {
+      "id": "nominal-655feb3be6af:run_identity",
+      "status": "passed",
+      "message": "Run, controller and fault identities are explicit.",
+      "required": true
+    },
+    {
+      "id": "nominal-655feb3be6af:shared_context",
+      "status": "passed",
+      "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+      "required": true
+    },
+    {
+      "id": "nominal-655feb3be6af:trace_metrics",
+      "status": "passed",
+      "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+      "required": true,
+      "details": {
+        "mismatches": [],
+        "sample_count": 12867,
+        "tolerances": {
+          "absolute": 1e-06,
+          "relative": 1e-08,
+          "time_s": 1e-06,
+          "continuity_pct": 1.0
+        }
+      }
+    },
+    {
+      "id": "nominal-655feb3be6af:routing_step_coverage",
+      "status": "passed",
+      "message": "Recorded routing-step count matches trace interval count.",
+      "required": true
+    },
+    {
+      "id": "nominal-655feb3be6af:native_flood_crosscheck",
+      "status": "passed",
+      "message": "Native cumulative flooding and integrated trace agree.",
+      "required": true,
+      "details": {
+        "native_flood_volume_m3": 0.0,
+        "trace_flood_volume_m3": 0.0
+      }
+    },
+    {
+      "id": "nominal-655feb3be6af:continuity",
+      "status": "passed",
+      "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+      "required": true,
+      "details": {
+        "values": {
+          "runoff_error_pct": -0.003330647712573409,
+          "routing_error_pct": 9.999999974752427e-07
+        },
+        "absolute_limit_pct": 1.0
+      }
+    },
+    {
+      "id": "stress-0814b8e2f61c:run_identity",
+      "status": "passed",
+      "message": "Run, controller and fault identities are explicit.",
+      "required": true
+    },
+    {
+      "id": "stress-0814b8e2f61c:shared_context",
+      "status": "passed",
+      "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+      "required": true
+    },
+    {
+      "id": "stress-0814b8e2f61c:trace_metrics",
+      "status": "passed",
+      "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+      "required": true,
+      "details": {
+        "mismatches": [],
+        "sample_count": 12640,
+        "tolerances": {
+          "absolute": 1e-06,
+          "relative": 1e-08,
+          "time_s": 1e-06,
+          "continuity_pct": 1.0
+        }
+      }
+    },
+    {
+      "id": "stress-0814b8e2f61c:routing_step_coverage",
+      "status": "passed",
+      "message": "Recorded routing-step count matches trace interval count.",
+      "required": true
+    },
+    {
+      "id": "stress-0814b8e2f61c:native_flood_crosscheck",
+      "status": "passed",
+      "message": "Native cumulative flooding and integrated trace agree.",
+      "required": true,
+      "details": {
+        "native_flood_volume_m3": 1621.4521074469546,
+        "trace_flood_volume_m3": 1621.4521074469558
+      }
+    },
+    {
+      "id": "stress-0814b8e2f61c:continuity",
+      "status": "passed",
+      "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+      "required": true,
+      "details": {
+        "values": {
+          "runoff_error_pct": -0.003330647712573409,
+          "routing_error_pct": -0.016558852046728134
+        },
+        "absolute_limit_pct": 1.0
+      }
+    },
+    {
+      "id": "ablation-870ba4cc05d9:run_identity",
+      "status": "passed",
+      "message": "Run, controller and fault identities are explicit.",
+      "required": true
+    },
+    {
+      "id": "ablation-870ba4cc05d9:shared_context",
+      "status": "passed",
+      "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+      "required": true
+    },
+    {
+      "id": "ablation-870ba4cc05d9:trace_metrics",
+      "status": "passed",
+      "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+      "required": true,
+      "details": {
+        "mismatches": [],
+        "sample_count": 12867,
+        "tolerances": {
+          "absolute": 1e-06,
+          "relative": 1e-08,
+          "time_s": 1e-06,
+          "continuity_pct": 1.0
+        }
+      }
+    },
+    {
+      "id": "ablation-870ba4cc05d9:routing_step_coverage",
+      "status": "passed",
+      "message": "Recorded routing-step count matches trace interval count.",
+      "required": true
+    },
+    {
+      "id": "ablation-870ba4cc05d9:native_flood_crosscheck",
+      "status": "passed",
+      "message": "Native cumulative flooding and integrated trace agree.",
+      "required": true,
+      "details": {
+        "native_flood_volume_m3": 0.0,
+        "trace_flood_volume_m3": 0.0
+      }
+    },
+    {
+      "id": "ablation-870ba4cc05d9:continuity",
+      "status": "passed",
+      "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+      "required": true,
+      "details": {
+        "values": {
+          "runoff_error_pct": -0.003330647712573409,
+          "routing_error_pct": 9.999999974752427e-07
+        },
+        "absolute_limit_pct": 1.0
+      }
+    },
+    {
+      "id": "ablation-c8acb59f2e93:run_identity",
+      "status": "passed",
+      "message": "Run, controller and fault identities are explicit.",
+      "required": true
+    },
+    {
+      "id": "ablation-c8acb59f2e93:shared_context",
+      "status": "passed",
+      "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+      "required": true
+    },
+    {
+      "id": "ablation-c8acb59f2e93:trace_metrics",
+      "status": "passed",
+      "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+      "required": true,
+      "details": {
+        "mismatches": [],
+        "sample_count": 12640,
+        "tolerances": {
+          "absolute": 1e-06,
+          "relative": 1e-08,
+          "time_s": 1e-06,
+          "continuity_pct": 1.0
+        }
+      }
+    },
+    {
+      "id": "ablation-c8acb59f2e93:routing_step_coverage",
+      "status": "passed",
+      "message": "Recorded routing-step count matches trace interval count.",
+      "required": true
+    },
+    {
+      "id": "ablation-c8acb59f2e93:native_flood_crosscheck",
+      "status": "passed",
+      "message": "Native cumulative flooding and integrated trace agree.",
+      "required": true,
+      "details": {
+        "native_flood_volume_m3": 1621.4521074469546,
+        "trace_flood_volume_m3": 1621.4521074469558
+      }
+    },
+    {
+      "id": "ablation-c8acb59f2e93:continuity",
+      "status": "passed",
+      "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+      "required": true,
+      "details": {
+        "values": {
+          "runoff_error_pct": -0.003330647712573409,
+          "routing_error_pct": -0.0166584774851799
+        },
+        "absolute_limit_pct": 1.0
+      }
+    },
+    {
+      "id": "fallback-577499b3fae9:run_identity",
+      "status": "passed",
+      "message": "Run, controller and fault identities are explicit.",
+      "required": true
+    },
+    {
+      "id": "fallback-577499b3fae9:shared_context",
+      "status": "passed",
+      "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+      "required": true
+    },
+    {
+      "id": "fallback-577499b3fae9:trace_metrics",
+      "status": "passed",
+      "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+      "required": true,
+      "details": {
+        "mismatches": [],
+        "sample_count": 12542,
+        "tolerances": {
+          "absolute": 1e-06,
+          "relative": 1e-08,
+          "time_s": 1e-06,
+          "continuity_pct": 1.0
+        }
+      }
+    },
+    {
+      "id": "fallback-577499b3fae9:routing_step_coverage",
+      "status": "passed",
+      "message": "Recorded routing-step count matches trace interval count.",
+      "required": true
+    },
+    {
+      "id": "fallback-577499b3fae9:native_flood_crosscheck",
+      "status": "passed",
+      "message": "Native cumulative flooding and integrated trace agree.",
+      "required": true,
+      "details": {
+        "native_flood_volume_m3": 1275.417997349259,
+        "trace_flood_volume_m3": 1275.4179973492585
+      }
+    },
+    {
+      "id": "fallback-577499b3fae9:continuity",
+      "status": "passed",
+      "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+      "required": true,
+      "details": {
+        "values": {
+          "runoff_error_pct": -0.003330647712573409,
+          "routing_error_pct": -0.11487609148025513
+        },
+        "absolute_limit_pct": 1.0
+      }
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/CMakeLists.txt",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/Roadmap.txt",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/climate.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/consts.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/controls.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/culvert.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/datetime.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/datetime.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/dwflow.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/dynwave.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/enums.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/error.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/error.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/error.txt",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/exfil.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/exfil.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/findroot.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/findroot.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/flowrout.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/forcmain.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/funcs.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/gage.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/globals.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/gwater.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/hash.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/hash.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/headers.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/hotstart.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/iface.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/include/swmm5.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/infil.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/infil.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/inflow.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/inlet.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/inlet.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/input.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/inputrpt.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/keywords.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/keywords.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/kinwave.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/landuse.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/lid.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/lid.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/lidproc.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/link.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/macros.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/massbal.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/mathexpr.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/mathexpr.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/mempool.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/mempool.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/node.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/objects.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/odesolve.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/odesolve.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/output.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/project.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/qualrout.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/rain.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/rdii.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/report.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/roadway.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/routing.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/runoff.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/shape.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/snow.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/stats.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/statsrpt.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/street.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/street.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/subcatch.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/surfqual.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/swmm5.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/table.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/text.h",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/toposort.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/transect.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/treatmnt.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/xsect.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/vendor/epa-swmm/src/solver/xsect.dat",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/build.py",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/cli.py",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/controllers.py",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/investigate.py",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/models.py",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/replay.py",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/runner.py",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/swmm.py",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/native_bridge.c",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "artifact:engine/data/theta.inp",
+      "status": "passed",
+      "message": "Included bytes match the manifest.",
+      "required": true
+    },
+    {
+      "id": "canonical_fingerprints",
+      "status": "passed",
+      "message": "Exogenous stream, solver settings and test contract match canonical content hashes; active faults belong to that catalog.",
+      "required": true
+    },
+    {
+      "id": "source_provenance",
+      "status": "passed",
+      "message": "Exact base model, controller, runner and solver/bridge source bytes match recorded provenance.",
+      "required": true
+    },
+    {
+      "id": "rainfall_provenance",
+      "status": "passed",
+      "message": "Rainfall and effective-model hashes independently reconstructed from base bytes and the declared multiplier.",
+      "required": true
+    },
+    {
+      "id": "property_declaration",
+      "status": "passed",
+      "message": "Explicit physical property evaluated from independently recomputed metrics.",
+      "required": true
+    },
+    {
+      "id": "ablation:0",
+      "status": "passed",
+      "message": "Only the named faults were removed with policy and context held fixed.",
+      "required": true
+    },
+    {
+      "id": "ablation:1",
+      "status": "passed",
+      "message": "Only the named faults were removed with policy and context held fixed.",
+      "required": true
+    },
+    {
+      "id": "ablation:2",
+      "status": "passed",
+      "message": "Only the named faults were removed with policy and context held fixed.",
+      "required": true
+    },
+    {
+      "id": "witness",
+      "status": "passed",
+      "message": "Violation and the declared reduction guarantee are supported.",
+      "required": true,
+      "details": {
+        "run_id": "ablation-c8acb59f2e93",
+        "claim": "1-minimal",
+        "active_fault_ids": [
+          "outlet-1"
+        ],
+        "tested_removals": [
+          "outlet-1"
+        ],
+        "necessary_faults": [
+          "outlet-1"
+        ],
+        "globally_minimal": false
+      }
+    },
+    {
+      "id": "fallback_comparison",
+      "status": "passed",
+      "message": "Fallback uses matched faults and reports every physical metric.",
+      "required": true,
+      "details": {
+        "conclusion": "tradeoff_or_incomplete_guards"
+      }
+    },
+    {
+      "id": "search_consistency",
+      "status": "passed",
+      "message": "Recorded treatments, budget, candidate outcomes and declared stopping condition are consistent.",
+      "required": true,
+      "details": {
+        "unique_treatments": 5,
+        "budget": 8,
+        "search_status": "witness_found",
+        "limitation": "This checks recorded coverage, not unlogged execution or global search completeness."
+      }
+    },
+    {
+      "id": "independent_replay",
+      "status": "unperformed",
+      "message": "This invocation checks records; it does not execute the hydraulic engine.",
+      "required": false
+    },
+    {
+      "id": "controller_information_access",
+      "status": "unperformed",
+      "message": "Recorded information boundaries require separate source/interface review.",
+      "required": false
+    },
+    {
+      "id": "field_calibration",
+      "status": "unperformed",
+      "message": "No site calibration or real-world impact is established.",
+      "required": false
+    }
+  ],
+  "runs": {
+    "nominal-655feb3be6af": {
+      "run_id": "nominal-655feb3be6af",
+      "checks": [
+        {
+          "id": "run_identity",
+          "status": "passed",
+          "message": "Run, controller and fault identities are explicit.",
+          "required": true
+        },
+        {
+          "id": "shared_context",
+          "status": "passed",
+          "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+          "required": true
+        },
+        {
+          "id": "trace_metrics",
+          "status": "passed",
+          "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+          "required": true,
+          "details": {
+            "mismatches": [],
+            "sample_count": 12867,
+            "tolerances": {
+              "absolute": 1e-06,
+              "relative": 1e-08,
+              "time_s": 1e-06,
+              "continuity_pct": 1.0
+            }
+          }
+        },
+        {
+          "id": "routing_step_coverage",
+          "status": "passed",
+          "message": "Recorded routing-step count matches trace interval count.",
+          "required": true
+        },
+        {
+          "id": "native_flood_crosscheck",
+          "status": "passed",
+          "message": "Native cumulative flooding and integrated trace agree.",
+          "required": true,
+          "details": {
+            "native_flood_volume_m3": 0.0,
+            "trace_flood_volume_m3": 0.0
+          }
+        },
+        {
+          "id": "continuity",
+          "status": "passed",
+          "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+          "required": true,
+          "details": {
+            "values": {
+              "runoff_error_pct": -0.003330647712573409,
+              "routing_error_pct": 9.999999974752427e-07
+            },
+            "absolute_limit_pct": 1.0
+          }
+        }
+      ],
+      "computed_metrics": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.49154656318546525,
+        "terminal_storage_m3": 4.651018727986262
+      },
+      "limitations": [
+        "Checks establish consistency of recorded evidence, not hydraulic calibration or field outcomes.",
+        "Matching declared context cannot prove that arbitrary policy code lacked hidden information.",
+        "A passing packet check is not an independently executed simulator replay or safety certificate."
+      ],
+      "status": "passed",
+      "scope": "recorded_evidence",
+      "replay_status": "unperformed"
+    },
+    "stress-0814b8e2f61c": {
+      "run_id": "stress-0814b8e2f61c",
+      "checks": [
+        {
+          "id": "run_identity",
+          "status": "passed",
+          "message": "Run, controller and fault identities are explicit.",
+          "required": true
+        },
+        {
+          "id": "shared_context",
+          "status": "passed",
+          "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+          "required": true
+        },
+        {
+          "id": "trace_metrics",
+          "status": "passed",
+          "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+          "required": true,
+          "details": {
+            "mismatches": [],
+            "sample_count": 12640,
+            "tolerances": {
+              "absolute": 1e-06,
+              "relative": 1e-08,
+              "time_s": 1e-06,
+              "continuity_pct": 1.0
+            }
+          }
+        },
+        {
+          "id": "routing_step_coverage",
+          "status": "passed",
+          "message": "Recorded routing-step count matches trace interval count.",
+          "required": true
+        },
+        {
+          "id": "native_flood_crosscheck",
+          "status": "passed",
+          "message": "Native cumulative flooding and integrated trace agree.",
+          "required": true,
+          "details": {
+            "native_flood_volume_m3": 1621.4521074469546,
+            "trace_flood_volume_m3": 1621.4521074469558
+          }
+        },
+        {
+          "id": "continuity",
+          "status": "passed",
+          "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+          "required": true,
+          "details": {
+            "values": {
+              "runoff_error_pct": -0.003330647712573409,
+              "routing_error_pct": -0.016558852046728134
+            },
+            "absolute_limit_pct": 1.0
+          }
+        }
+      ],
+      "computed_metrics": {
+        "flood_volume_m3": 1621.4521074469558,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4900879260745975,
+        "terminal_storage_m3": 4.671742777733744
+      },
+      "limitations": [
+        "Checks establish consistency of recorded evidence, not hydraulic calibration or field outcomes.",
+        "Matching declared context cannot prove that arbitrary policy code lacked hidden information.",
+        "A passing packet check is not an independently executed simulator replay or safety certificate."
+      ],
+      "status": "passed",
+      "scope": "recorded_evidence",
+      "replay_status": "unperformed"
+    },
+    "ablation-870ba4cc05d9": {
+      "run_id": "ablation-870ba4cc05d9",
+      "checks": [
+        {
+          "id": "run_identity",
+          "status": "passed",
+          "message": "Run, controller and fault identities are explicit.",
+          "required": true
+        },
+        {
+          "id": "shared_context",
+          "status": "passed",
+          "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+          "required": true
+        },
+        {
+          "id": "trace_metrics",
+          "status": "passed",
+          "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+          "required": true,
+          "details": {
+            "mismatches": [],
+            "sample_count": 12867,
+            "tolerances": {
+              "absolute": 1e-06,
+              "relative": 1e-08,
+              "time_s": 1e-06,
+              "continuity_pct": 1.0
+            }
+          }
+        },
+        {
+          "id": "routing_step_coverage",
+          "status": "passed",
+          "message": "Recorded routing-step count matches trace interval count.",
+          "required": true
+        },
+        {
+          "id": "native_flood_crosscheck",
+          "status": "passed",
+          "message": "Native cumulative flooding and integrated trace agree.",
+          "required": true,
+          "details": {
+            "native_flood_volume_m3": 0.0,
+            "trace_flood_volume_m3": 0.0
+          }
+        },
+        {
+          "id": "continuity",
+          "status": "passed",
+          "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+          "required": true,
+          "details": {
+            "values": {
+              "runoff_error_pct": -0.003330647712573409,
+              "routing_error_pct": 9.999999974752427e-07
+            },
+            "absolute_limit_pct": 1.0
+          }
+        }
+      ],
+      "computed_metrics": {
+        "flood_volume_m3": 0.0,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.49154656318546525,
+        "terminal_storage_m3": 4.6717431344399145
+      },
+      "limitations": [
+        "Checks establish consistency of recorded evidence, not hydraulic calibration or field outcomes.",
+        "Matching declared context cannot prove that arbitrary policy code lacked hidden information.",
+        "A passing packet check is not an independently executed simulator replay or safety certificate."
+      ],
+      "status": "passed",
+      "scope": "recorded_evidence",
+      "replay_status": "unperformed"
+    },
+    "ablation-c8acb59f2e93": {
+      "run_id": "ablation-c8acb59f2e93",
+      "checks": [
+        {
+          "id": "run_identity",
+          "status": "passed",
+          "message": "Run, controller and fault identities are explicit.",
+          "required": true
+        },
+        {
+          "id": "shared_context",
+          "status": "passed",
+          "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+          "required": true
+        },
+        {
+          "id": "trace_metrics",
+          "status": "passed",
+          "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+          "required": true,
+          "details": {
+            "mismatches": [],
+            "sample_count": 12640,
+            "tolerances": {
+              "absolute": 1e-06,
+              "relative": 1e-08,
+              "time_s": 1e-06,
+              "continuity_pct": 1.0
+            }
+          }
+        },
+        {
+          "id": "routing_step_coverage",
+          "status": "passed",
+          "message": "Recorded routing-step count matches trace interval count.",
+          "required": true
+        },
+        {
+          "id": "native_flood_crosscheck",
+          "status": "passed",
+          "message": "Native cumulative flooding and integrated trace agree.",
+          "required": true,
+          "details": {
+            "native_flood_volume_m3": 1621.4521074469546,
+            "trace_flood_volume_m3": 1621.4521074469558
+          }
+        },
+        {
+          "id": "continuity",
+          "status": "passed",
+          "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+          "required": true,
+          "details": {
+            "values": {
+              "runoff_error_pct": -0.003330647712573409,
+              "routing_error_pct": -0.0166584774851799
+            },
+            "absolute_limit_pct": 1.0
+          }
+        }
+      ],
+      "computed_metrics": {
+        "flood_volume_m3": 1621.4521074469558,
+        "downstream_excess_volume_m3": 0.0,
+        "peak_downstream_flow_m3s": 0.4900879260745975,
+        "terminal_storage_m3": 4.651018391855007
+      },
+      "limitations": [
+        "Checks establish consistency of recorded evidence, not hydraulic calibration or field outcomes.",
+        "Matching declared context cannot prove that arbitrary policy code lacked hidden information.",
+        "A passing packet check is not an independently executed simulator replay or safety certificate."
+      ],
+      "status": "passed",
+      "scope": "recorded_evidence",
+      "replay_status": "unperformed"
+    },
+    "fallback-577499b3fae9": {
+      "run_id": "fallback-577499b3fae9",
+      "checks": [
+        {
+          "id": "run_identity",
+          "status": "passed",
+          "message": "Run, controller and fault identities are explicit.",
+          "required": true
+        },
+        {
+          "id": "shared_context",
+          "status": "passed",
+          "message": "Declared model, weather, exogenous stream, settings, horizon and information boundary match.",
+          "required": true
+        },
+        {
+          "id": "trace_metrics",
+          "status": "passed",
+          "message": "SI metrics recomputed from a strictly ordered trace covering the full horizon.",
+          "required": true,
+          "details": {
+            "mismatches": [],
+            "sample_count": 12542,
+            "tolerances": {
+              "absolute": 1e-06,
+              "relative": 1e-08,
+              "time_s": 1e-06,
+              "continuity_pct": 1.0
+            }
+          }
+        },
+        {
+          "id": "routing_step_coverage",
+          "status": "passed",
+          "message": "Recorded routing-step count matches trace interval count.",
+          "required": true
+        },
+        {
+          "id": "native_flood_crosscheck",
+          "status": "passed",
+          "message": "Native cumulative flooding and integrated trace agree.",
+          "required": true,
+          "details": {
+            "native_flood_volume_m3": 1275.417997349259,
+            "trace_flood_volume_m3": 1275.4179973492585
+          }
+        },
+        {
+          "id": "continuity",
+          "status": "passed",
+          "message": "Native runoff and routing continuity diagnostics are finite and within the declared bound.",
+          "required": true,
+          "details": {
+            "values": {
+              "runoff_error_pct": -0.003330647712573409,
+              "routing_error_pct": -0.11487609148025513
+            },
+            "absolute_limit_pct": 1.0
+          }
+        }
+      ],
+      "computed_metrics": {
+        "flood_volume_m3": 1275.4179973492585,
+        "downstream_excess_volume_m3": 2661.9254749096376,
+        "peak_downstream_flow_m3s": 6.355344699807694,
+        "terminal_storage_m3": 4.5910228942375975
+      },
+      "limitations": [
+        "Checks establish consistency of recorded evidence, not hydraulic calibration or field outcomes.",
+        "Matching declared context cannot prove that arbitrary policy code lacked hidden information.",
+        "A passing packet check is not an independently executed simulator replay or safety certificate."
+      ],
+      "status": "passed",
+      "scope": "recorded_evidence",
+      "replay_status": "unperformed"
+    }
+  },
+  "claims": {
+    "properties": {
+      "nominal-655feb3be6af": {
+        "metric": "flood_volume_m3",
+        "unit": "m3",
+        "value": 0.0,
+        "reference_value": null,
+        "bound": 100.0,
+        "tolerance": 1e-06,
+        "margin": -100.0,
+        "violated": false
+      },
+      "stress-0814b8e2f61c": {
+        "metric": "flood_volume_m3",
+        "unit": "m3",
+        "value": 1621.4521074469558,
+        "reference_value": null,
+        "bound": 100.0,
+        "tolerance": 1e-06,
+        "margin": 1521.4521074469558,
+        "violated": true
+      },
+      "ablation-870ba4cc05d9": {
+        "metric": "flood_volume_m3",
+        "unit": "m3",
+        "value": 0.0,
+        "reference_value": null,
+        "bound": 100.0,
+        "tolerance": 1e-06,
+        "margin": -100.0,
+        "violated": false
+      },
+      "ablation-c8acb59f2e93": {
+        "metric": "flood_volume_m3",
+        "unit": "m3",
+        "value": 1621.4521074469558,
+        "reference_value": null,
+        "bound": 100.0,
+        "tolerance": 1e-06,
+        "margin": 1521.4521074469558,
+        "violated": true
+      },
+      "fallback-577499b3fae9": {
+        "metric": "flood_volume_m3",
+        "unit": "m3",
+        "value": 1275.4179973492585,
+        "reference_value": null,
+        "bound": 100.0,
+        "tolerance": 1e-06,
+        "margin": 1175.4179973492585,
+        "violated": true
+      }
+    },
+    "witness": {
+      "run_id": "ablation-c8acb59f2e93",
+      "claim": "1-minimal",
+      "active_fault_ids": [
+        "outlet-1"
+      ],
+      "tested_removals": [
+        "outlet-1"
+      ],
+      "necessary_faults": [
+        "outlet-1"
+      ],
+      "globally_minimal": false
+    },
+    "fallback": {
+      "primary_metric": "flood_volume_m3",
+      "primary_improvement": 346.0341100976973,
+      "primary_improved": true,
+      "changes": {
+        "flood_volume_m3": {
+          "unit": "m3",
+          "stressed": 1621.4521074469558,
+          "fallback": 1275.4179973492585,
+          "change": -346.0341100976973,
+          "maximum_increase": null,
+          "guard_passed": null
+        },
+        "downstream_excess_volume_m3": {
+          "unit": "m3",
+          "stressed": 0.0,
+          "fallback": 2661.9254749096376,
+          "change": 2661.9254749096376,
+          "maximum_increase": 0.0,
+          "guard_passed": false
+        },
+        "peak_downstream_flow_m3s": {
+          "unit": "m3/s",
+          "stressed": 0.4900879260745975,
+          "fallback": 6.355344699807694,
+          "change": 5.865256773733097,
+          "maximum_increase": 0.0,
+          "guard_passed": false
+        },
+        "terminal_storage_m3": {
+          "unit": "m3",
+          "stressed": 4.651018391855007,
+          "fallback": 4.5910228942375975,
+          "change": -0.0599954976174093,
+          "maximum_increase": 0.0,
+          "guard_passed": true
+        }
+      },
+      "missing_guards": [],
+      "all_specified_guards_pass": false,
+      "guarded_improvement": false,
+      "conclusion": "tradeoff_or_incomplete_guards"
+    }
+  },
+  "limitations": [
+    "Checks establish consistency of recorded evidence, not hydraulic calibration or field outcomes.",
+    "Matching declared context cannot prove that arbitrary policy code lacked hidden information.",
+    "A passing packet check is not an independently executed simulator replay or safety certificate."
+  ],
+  "status": "passed",
+  "scope": "recorded_evidence",
+  "replay_status": "unperformed"
+}

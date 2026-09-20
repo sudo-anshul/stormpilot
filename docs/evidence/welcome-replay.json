@@ -1,0 +1,132 @@
+{
+  "status": "passed",
+  "replay_status": "matched",
+  "scope": "recorded_replay_comparison",
+  "checks": [
+    {
+      "id": "original_evidence",
+      "status": "passed",
+      "message": "Original packet recorded-evidence status is passed."
+    },
+    {
+      "id": "replayed_evidence",
+      "status": "passed",
+      "message": "Replayed packet recorded-evidence status is passed."
+    },
+    {
+      "id": "experiment_identity",
+      "status": "passed",
+      "message": "Experiment, request and executable source identities match."
+    },
+    {
+      "id": "run:nominal-655feb3be6af",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 12867
+      }
+    },
+    {
+      "id": "run:stress-0814b8e2f61c",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 12640
+      }
+    },
+    {
+      "id": "run:ablation-870ba4cc05d9",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 12867
+      }
+    },
+    {
+      "id": "run:ablation-c8acb59f2e93",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 12640
+      }
+    },
+    {
+      "id": "run:fallback-577499b3fae9",
+      "status": "passed",
+      "message": "Controller treatment, complete trace and physical metrics match within tolerance.",
+      "details": {
+        "metric_differences": {
+          "flood_volume_m3": 0.0,
+          "downstream_excess_volume_m3": 0.0,
+          "peak_downstream_flow_m3s": 0.0,
+          "terminal_storage_m3": 0.0
+        },
+        "maximum_trace_differences": {
+          "time_s": 0.0,
+          "total_flooding_m3s": 0.0,
+          "downstream_flow_m3s": 0.0,
+          "total_storage_m3": 0.0
+        },
+        "trace_rows": 12542
+      }
+    }
+  ],
+  "evidence_status": {
+    "original": "passed",
+    "replayed": "passed"
+  },
+  "limitations": [
+    "The caller must actually run the simulator to produce the replayed packet; comparing a copied packet does not establish execution.",
+    "Recorded cases are replayed; this comparison does not repeat or validate exhaustive search coverage.",
+    "Matched simulation output does not establish field calibration or a safety certificate."
+  ],
+  "original_run_id": "67e33999ffac61fa"
+}
