@@ -11,7 +11,7 @@ from runner import FAULT_TYPES, packet
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["catalog", "run", "investigate", "replay"])
+    parser.add_argument("command", choices=["catalog", "run", "investigate", "discover", "repair", "replay"])
     parser.add_argument("--request", type=Path)
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
@@ -30,6 +30,12 @@ def main():
             if args.command == "replay":
                 from replay import replay
                 result = replay(request)
+            elif args.command == "discover":
+                from campaign import discover
+                result = discover(request)
+            elif args.command == "repair":
+                from repair import repair
+                result = repair(request)
             elif args.command == "investigate":
                 from investigate import investigate
                 result = investigate(request)

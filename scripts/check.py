@@ -8,6 +8,7 @@ root = Path(__file__).resolve().parent.parent
 commands = [
     ["-m", "unittest", "discover", "-s", "engine/tests", "-v"],
     ["-m", "unittest", "discover", "-s", "validation", "-t", ".", "-p", "test_*.py", "-v"],
+    ["-m", "unittest", "discover", "-s", "evaluation", "-t", ".", "-p", "test_*.py", "-v"],
     ["-m", "unittest", "discover", "-s", "service/tests", "-t", ".", "-p", "test_*.py", "-v"],
 ]
 for args in commands:

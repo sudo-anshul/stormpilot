@@ -16,6 +16,7 @@ engine/native/build/
 engine/native/source/
 engine/build/
 engine/runs/
+engine/data/imports/
 engine/vendor/**/.git/
 *.dylib
 *.so

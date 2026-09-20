@@ -6,7 +6,7 @@ import sys
 import traceback
 
 from service.common import JOBS, ROOT, read_json, write_json
-from service.present import engine_request, make_view
+from service.present import engine_request, make_view, config_from_native
 from service.archive import build_archive
 from validation.validate_packet import validate_packet
 from validation.replay import compare_replay
@@ -22,9 +22,11 @@ def execute(job_id):
     try:
         progress("Preparing experiment", "Freezing the model, policy, fault and performance check.")
         config = request["config"]
-        native_request = engine_request(config)
+        native_request = request.get("native_request") or engine_request(config)
         write_json(folder / "engine-request.json", native_request)
-        command = "investigate" if config["mode"] == "investigate" else "run"
+        command = config["mode"]
+        if request.get("action") == "repair":
+            command = "repair"
         input_path = folder / "engine-request.json"
         if request.get("replay_of"):
             command = "replay"
@@ -38,6 +40,9 @@ def execute(job_id):
         if completed.returncode:
             raise RuntimeError((completed.stderr or completed.stdout or "Simulation failed without a result.")[-1800:])
         packet = read_json(folder / "packet.json")
+        if request.get("action") == "repair":
+            request["config"] = config_from_native(packet["request"], config)
+            write_json(folder / "request.json", request)
         progress("Checking evidence", "Independently recomputing metrics and checking paired inputs and provenance.")
         validation = validate_packet(packet, root_path=ROOT)
         if request.get("replay_of"):

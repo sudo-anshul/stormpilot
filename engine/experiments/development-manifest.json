@@ -1,0 +1,140 @@
+{
+  "schema_version": "stormpilot.development-record.v1",
+  "scope": "Exploratory development runs, separate from final heldout verification and production campaign call counts.",
+  "total_runs": 365,
+  "files": [
+    {
+      "file": "baselines.jsonl.gz",
+      "records": 2,
+      "uncompressed_sha256": "98bdffe8a793df8349154766281e81169206833b11eacdda18ac6bb8f29da30c",
+      "compressed_sha256": "dcdb23042280e34062a564b1eaf888be8548080831bc0733c15ab28911d8a307",
+      "errors": 0
+    },
+    {
+      "file": "theta-screen1.jsonl.gz",
+      "records": 130,
+      "uncompressed_sha256": "4697a8a4b8ee096ca066df825edd8d1f74e4003ee4d489b3badca045c9857456",
+      "compressed_sha256": "f122c67a480aa1aa0d0623fa8c6393cd05542541139ab4248fa3495284853b1e",
+      "errors": 0
+    },
+    {
+      "file": "theta-screen2.jsonl.gz",
+      "records": 69,
+      "uncompressed_sha256": "f326e287dd1676ea665969788bd7e5817e9f8d478ab6a91508e782a8470e07b4",
+      "compressed_sha256": "8f8f7c0f35894c2e5b4d516c384921470160f84d78eef7c84ea6049c2a0da0a9",
+      "errors": 0
+    },
+    {
+      "file": "tuning1.jsonl.gz",
+      "records": 104,
+      "uncompressed_sha256": "6869dc0ae525252037842cb3f6761bf0470bb966023470a1a91e9f2fcfd83f81",
+      "compressed_sha256": "5918e82b357819f7791afdb87068644f3fd3425da92c698a493d68891f04825a",
+      "errors": 0
+    },
+    {
+      "file": "tuning2.jsonl.gz",
+      "records": 60,
+      "uncompressed_sha256": "55520acda146259eeff371f884e9c7c82b60659355d744a5045465cdcc6e4409",
+      "compressed_sha256": "381b1d02f3b9d66a29610147537cfd2d2557238d70e23e275a79750a8b998a23",
+      "errors": 0
+    }
+  ],
+  "contract": {
+    "primary_flood_threshold_m3": 100,
+    "secondary_flood_threshold_m3": 1,
+    "note": "Coordinated before any fault screening; primary preserves original project requirement."
+  },
+  "heldout_results_used_for_selection": false,
+  "legacy_screening_limit": "The first two exploratory fault screens predate the per-row source-fingerprint helper. They retain exact requests and reported metrics, not complete routing traces. Definitive selected claims require the final source-complete proof/replay packets.",
+  "baseline_exclusion": {
+    "scenario": "gamma",
+    "reason": "Constant-flow baseline violates the100m\u00b3 primary requirement under the supplied design storm.",
+    "nominal_flood_m3": 8559.331070283875
+  },
+  "final_candidate": {
+    "reference": {
+      "controller_id": "constant_flow",
+      "parameters": {
+        "target_scale": 1.0
+      }
+    },
+    "candidate": {
+      "controller_id": "balanced_flow",
+      "parameters": {
+        "target_scale": 0.98,
+        "balance_gain": 2.0
+      }
+    }
+  },
+  "selected_request": {
+    "scenario_id": "theta",
+    "controller_id": "constant_flow",
+    "rainfall_multiplier": 1,
+    "seed": 42,
+    "noise_std_m": 0,
+    "test_contract": {
+      "metric": "flood_volume_m3",
+      "threshold": 100,
+      "tolerance": 1e-06
+    },
+    "faults": [
+      {
+        "id": "sensor-bias",
+        "type": "sensor_bias",
+        "asset": "P2",
+        "bias_m": 1,
+        "start_s": 10800,
+        "end_s": 21600
+      },
+      {
+        "id": "partial-valve",
+        "type": "valve_stuck",
+        "asset": "2",
+        "setting": 0.035,
+        "start_s": 21600,
+        "end_s": 28800
+      }
+    ],
+    "controller_parameters": {
+      "target_scale": 1.0
+    },
+    "fallback_controller_id": "balanced_flow",
+    "fallback_controller_parameters": {
+      "target_scale": 0.98,
+      "balance_gain": 2.0
+    }
+  },
+  "original_predeclaration": {
+    "schema_version": "stormpilot.discovery-predeclaration.v1",
+    "declared_at": "2026-09-20T15:10:46Z",
+    "primary_contract": {
+      "metric": "flood_volume_m3",
+      "threshold": 100.0,
+      "tolerance": 1e-06
+    },
+    "rationale": "Avoid material modeled surface flooding; 1 cubic metre permits numerical and negligible hydraulic artifacts. This is an analytical benchmark contract, not an operator regulation.",
+    "discovery_rainfall_multiplier": 1.0,
+    "discovery_noise_std_m": 0.0,
+    "discovery_seed": 42,
+    "interaction_rule": "Nominal and each individual fault must meet the fixed primary contract; the combined faults must violate it. Preserve continuous metrics and failed screens.",
+    "scenarios": [
+      "theta",
+      "gamma"
+    ],
+    "secondary_metrics": [
+      "peak_downstream_flow_m3s",
+      "downstream_excess_volume_m3",
+      "terminal_storage_m3"
+    ],
+    "policy_selection": "Favor Pareto improvements of flood, downstream peak/excess, terminal storage; freeze parameters before independent held-out evaluation. Never relabel a tradeoff as safe.",
+    "held_out_owner": "/root/dario_winners",
+    "exclusion": "No real-world safety, field-protection or globally optimal controller claim. Screening data is development data.",
+    "prior_observations": "Only fault-free baseline runs observed before this persisted timestamp; fixed 1 m\u00b3 contract already selected before those baselines.",
+    "secondary_contract": {
+      "metric": "flood_volume_m3",
+      "threshold": 1.0,
+      "tolerance": 1e-06
+    },
+    "contract_alignment": "Before any fault screening, coordinated with independent verifier to retain project preexisting 100 m\u00b3 primary requirement. Initial stricter 1 m\u00b3 proposal remains secondary; no threshold chosen using joint outcomes."
+  }
+}

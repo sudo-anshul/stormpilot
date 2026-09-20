@@ -225,6 +225,45 @@ class PacketEvidenceTests(unittest.TestCase):
         report = validate_packet(self.packet)
         self.assertEqual(report["status"], "partial", report)
 
+    def add_imported_model(self):
+        old_path = self.root / self.model_rel
+        custom = dict(name="Synthetic imported fixture", inp_text=old_path.read_text(), downstream_link="out",
+                      downstream_threshold_m3s=1.0, targets_m3s=[0.5])
+        scenario = "custom_" + canonical_sha256(custom)[:24]
+        new_rel = f"engine/data/imports/{scenario}.inp"
+        new_path = self.root / new_rel
+        new_path.parent.mkdir(parents=True)
+        old_path.rename(new_path)
+        self.packet["request"].update(custom_model=custom, scenario_id=scenario)
+        self.packet["experiment"]["scenario_id"] = scenario
+        self.packet["provenance"]["model_path"] = new_rel
+        self.packet["model"] = dict(id=scenario, origin="imported", base_model_sha256=self.packet["experiment"]["base_model_sha256"],
+                                     downstream_link="out", threshold_m3s=1.0, targets_m3s=[0.5],
+                                     mapping_sha256=canonical_sha256({k: v for k, v in custom.items() if k != "inp_text"}))
+        for artifact in self.packet["artifacts"]:
+            if artifact["path"] == self.model_rel:
+                artifact["path"] = new_rel
+        self.model_rel = new_rel
+
+    def test_complete_imported_identity_passes(self):
+        self.add_imported_model()
+        self.assertEqual(self.report()["status"], "passed")
+
+    def test_imported_mapping_change_is_rejected(self):
+        self.add_imported_model()
+        self.packet["model"]["downstream_link"] = "different-link"
+        self.assert_failed_check("custom_model_identity")
+
+    def test_imported_text_change_is_rejected(self):
+        self.add_imported_model()
+        self.packet["request"]["custom_model"]["inp_text"] += "; new bytes\n"
+        self.assert_failed_check("custom_model_identity")
+
+    def test_imported_payload_cannot_be_omitted(self):
+        self.add_imported_model()
+        del self.packet["request"]["custom_model"]
+        self.assert_failed_check("custom_model_identity")
+
 
 if __name__ == "__main__":
     unittest.main()

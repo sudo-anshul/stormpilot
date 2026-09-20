@@ -55,7 +55,8 @@ def build_archive(folder: Path) -> Path:
         files[relative] = content
     for pattern in ("validation/*.py", "validation/cases/*.json", "engine/data/*", "engine/examples/*.json"):
         for path in ROOT.glob(pattern):
-            files[str(path.relative_to(ROOT))] = path.read_bytes()
+            if path.is_file():
+                files[str(path.relative_to(ROOT))] = path.read_bytes()
     for relative in ("LICENSE", "engine/README.md", "docs/validation.md"):
         files[relative] = (ROOT / relative).read_bytes()
     for name in ("packet.json", "validation.json", "request.json", "engine-request.json", "replay.json"):

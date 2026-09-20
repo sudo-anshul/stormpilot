@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT))
 import server
 from service import worker
+from service import evaluation_worker
 from service.common import read_json, write_json
 
 
@@ -35,11 +36,12 @@ class HttpBoundaryTests(unittest.TestCase):
         cls.executor = ThreadPoolExecutor(max_workers=1)
         def actual_worker(job_id):
             try:
-                return worker.execute(job_id)
+                request = read_json(cls.jobs/job_id/"request.json")
+                return evaluation_worker.execute(job_id) if request.get("action") == "evaluate" else worker.execute(job_id)
             finally:
                 with server.LOCK:
                     server.PENDING.discard(job_id)
-        cls.patches = [patch.object(server,"JOBS",cls.jobs), patch.object(worker,"JOBS",cls.jobs),
+        cls.patches = [patch.object(server,"JOBS",cls.jobs), patch.object(worker,"JOBS",cls.jobs), patch.object(evaluation_worker,"JOBS",cls.jobs),
                        patch.object(server,"PENDING",set()), patch.object(server,"EXECUTOR",cls.executor),
                        patch.object(server,"run_worker",actual_worker)]
         for item in cls.patches:
@@ -175,6 +177,41 @@ class HttpBoundaryTests(unittest.TestCase):
         replayed=read_json(self.jobs/replay_state["id"]/"packet.json")
         self.assertEqual({r["run_id"] for r in original["runs"]},{r["run_id"] for r in replayed["runs"]})
         self.assertEqual(len(original["runs"]),5)
+
+    def test_real_discovery_repair_and_declared_evaluation_keep_recorded_identity(self):
+        config = {"mode":"discover", "fallback_controller_id":"balanced_flow",
+                  "fallback_controller_parameters":{"target_scale":0.98,"balance_gain":2},
+                  "discovery":{"sensor_asset":"P2","valve_asset":"2","bias_values_m":[1],
+                               "sensor_windows_s":[[10800,21600]],"valve_settings":[0.035],
+                               "valve_windows_s":[[21600,28800]],"budget":12}}
+        status, state = self.post("/api/jobs",config)
+        self.assertEqual(status,202,state)
+        self.wait_complete(state["id"])
+        _,_,body = self.request("GET",f"/api/jobs/{state['id']}/result")
+        discovery = json.loads(body)
+        self.assertEqual(discovery["validation"]["status"],"passed")
+        self.assertEqual(discovery["discovery"]["status"],"interaction_found")
+        self.assertEqual(discovery["discovery"]["interaction_values"]["sensor_only"],0)
+        self.assertEqual(discovery["discovery"]["interaction_values"]["valve_only"],0)
+        status, repaired = self.post(f"/api/jobs/{state['id']}/repair",{"target_scales":[0.98,1],"balance_gains":[2],"budget":12})
+        self.assertEqual(status,202,repaired)
+        self.wait_complete(repaired["id"])
+        _,_,body = self.request("GET",f"/api/jobs/{repaired['id']}/result")
+        repaired_view = json.loads(body)
+        self.assertEqual(repaired_view["validation"]["status"],"passed")
+        self.assertTrue(repaired_view["repair"]["selected"]["eligible"])
+        self.assertEqual(repaired_view["config"]["fallback_controller_parameters"],{"target_scale":0.98,"balance_gain":2})
+        status, evaluated = self.post(f"/api/jobs/{repaired['id']}/evaluate",{})
+        self.assertEqual(status,202,evaluated)
+        self.wait_complete(evaluated["id"])
+        status,_,body = self.request("GET",f"/api/evaluations/{evaluated['id']}/result")
+        self.assertEqual(status,200)
+        report = json.loads(body)
+        self.assertEqual(report["suite_type"],"declared_robustness")
+        self.assertEqual(report["status"],"completed")
+        self.assertEqual(report["holdout"]["policy_run_count"],48)
+        self.assertNotIn("heldout_usefulness",report["acceptance"])
+        self.assertEqual(report["candidate"]["parameters"],{"target_scale":0.98,"balance_gain":2})
 
 
 if __name__ == "__main__":

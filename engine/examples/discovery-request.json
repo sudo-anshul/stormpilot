@@ -1,0 +1,21 @@
+{
+  "scenario_id": "theta",
+  "controller_id": "constant_flow",
+  "controller_parameters": {"target_scale": 1.0},
+  "fallback_controller_id": "balanced_flow",
+  "fallback_controller_parameters": {"target_scale": 0.98, "balance_gain": 2.0},
+  "rainfall_multiplier": 1.0,
+  "noise_std_m": 0,
+  "seed": 42,
+  "faults": [],
+  "test_contract": {"metric": "flood_volume_m3", "threshold": 100, "tolerance": 0.000001},
+  "discovery": {
+    "sensor_asset": "P2",
+    "valve_asset": "2",
+    "bias_values_m": [0.25, 0.5, 1.0],
+    "sensor_windows_s": [[10800, 21600]],
+    "valve_settings": [0.03, 0.035, 0.04],
+    "valve_windows_s": [[21600, 28800]],
+    "budget": 40
+  }
+}

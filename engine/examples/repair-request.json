@@ -1,0 +1,18 @@
+{
+  "scenario_id": "theta",
+  "controller_id": "constant_flow",
+  "controller_parameters": {"target_scale": 1.0},
+  "rainfall_multiplier": 1.0,
+  "noise_std_m": 0,
+  "seed": 42,
+  "faults": [
+    {"id": "sensor-3", "type": "sensor_bias", "asset": "P2", "bias_m": 1.0, "start_s": 10800, "end_s": 21600},
+    {"id": "valve-2", "type": "valve_stuck", "asset": "2", "setting": 0.035, "start_s": 21600, "end_s": 28800}
+  ],
+  "test_contract": {"metric": "flood_volume_m3", "threshold": 100, "tolerance": 0.000001},
+  "repair": {
+    "target_scales": [0.90, 0.94, 0.96, 0.98, 1.0],
+    "balance_gains": [0.5, 1.0, 2.0, 4.0, 8.0],
+    "budget": 120
+  }
+}

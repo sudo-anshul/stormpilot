@@ -5,6 +5,7 @@ runtime
 work
 engine/build
 engine/runs
+engine/data/imports
 validation/runs
 **/__pycache__
 **/*.pyc

@@ -240,6 +240,7 @@ def _verify_artifacts(packet: Mapping, root_path: Path | None, report: dict):
 
 def _verify_fingerprints(packet: Mapping, root_path: Path | None, report: dict):
     experiment = packet["experiment"]
+    _verify_custom_model(packet, report)
     try:
         for field in ("exogenous", "solver_settings"):
             value = _object(experiment.get(field), field)
@@ -334,10 +335,9 @@ def _verify_rainfall(packet: Mapping, base_text: str, report: dict):
             raise EvidenceError("base model has no declared rainfall gauges")
         names = set()
         for row in gauges:
-            if "TIMESERIES" not in row:
+            if len(row) < 6 or row[4].upper() != "TIMESERIES":
                 raise EvidenceError("validator supports curated inline rainfall time series only")
-            index = row.index("TIMESERIES") + 1
-            names.add(row[index])
+            names.add(row[5])
         output, rain_rows = [], []
         in_series = False
         for line in base_text.splitlines():
@@ -358,6 +358,52 @@ def _verify_rainfall(packet: Mapping, base_text: str, report: dict):
         _check(report, "rainfall_provenance", "passed", "Rainfall and effective-model hashes independently reconstructed from base bytes and the declared multiplier.")
     except (EvidenceError, IndexError, ValueError) as exc:
         _check(report, "rainfall_provenance", "failed", str(exc))
+
+
+def _verify_custom_model(packet: Mapping, report: dict):
+    request = packet.get("request")
+    if not isinstance(request, Mapping):
+        return
+    custom = request.get("custom_model")
+    scenario = packet.get("experiment", {}).get("scenario_id", "")
+    if custom is None:
+        if isinstance(scenario, str) and scenario.startswith("custom_"):
+            _check(report, "custom_model_identity", "failed", "Imported scenario lacks its exact input and declared mapping.")
+        return
+    try:
+        custom = _object(custom, "custom_model")
+        model = _object(packet.get("model"), "model metadata")
+        experiment = packet["experiment"]
+        text = custom.get("inp_text")
+        if not isinstance(text, str) or not text:
+            raise EvidenceError("custom_model must retain exact nonempty input text")
+        if set(custom) != {"name", "inp_text", "downstream_link", "downstream_threshold_m3s", "targets_m3s"}:
+            raise EvidenceError("custom_model must contain the complete normalized input/mapping fields")
+        expected_id = "custom_" + canonical_sha256(custom)[:24]
+        if request.get("scenario_id") != expected_id or scenario != expected_id or model.get("id") != expected_id:
+            raise EvidenceError("imported scenario ID differs from the canonical input/mapping payload")
+        raw_hash = hashlib.sha256(text.encode("utf-8")).hexdigest()
+        if raw_hash != experiment.get("base_model_sha256") or raw_hash != model.get("base_model_sha256"):
+            raise EvidenceError("imported input text differs from the declared base-model bytes")
+        if model.get("downstream_link") != custom.get("downstream_link"):
+            raise EvidenceError("imported downstream link differs from the user-declared mapping")
+        threshold = finite_number(custom.get("downstream_threshold_m3s"), "imported downstream threshold")
+        if threshold <= 0 or model.get("threshold_m3s") != threshold or experiment.get("threshold_m3s") != threshold:
+            raise EvidenceError("imported downstream threshold differs from its mapping or is invalid")
+        targets = custom.get("targets_m3s")
+        if not isinstance(targets, list) or not targets or any(finite_number(v, "imported target") <= 0 for v in targets):
+            raise EvidenceError("imported targets must be finite positive numbers")
+        if model.get("targets_m3s") != targets:
+            raise EvidenceError("imported target discharges differ from the user-declared mapping")
+        mapping_hash = canonical_sha256({key: value for key, value in custom.items() if key != "inp_text"})
+        if model.get("mapping_sha256") != mapping_hash:
+            raise EvidenceError("imported mapping metadata does not match its canonical hash")
+        expected_path = f"engine/data/imports/{expected_id}.inp"
+        if packet.get("provenance", {}).get("model_path") != expected_path:
+            raise EvidenceError("imported model artifact path differs from its content-addressed identity")
+        _check(report, "custom_model_identity", "passed", "Exact imported input, scenario identity and downstream/target mapping agree; no calibration claim follows.")
+    except (EvidenceError, TypeError, ValueError) as exc:
+        _check(report, "custom_model_identity", "failed", str(exc))
 
 
 def _same_policy(a: Mapping, b: Mapping):

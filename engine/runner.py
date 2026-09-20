@@ -12,8 +12,8 @@ import tempfile
 import time
 
 from build import source_hash
-from controllers import POLICIES, commands
-from models import ROOT, EPA_COMMIT, PYSTORMS_COMMIT, digest, metadata, rainfall_model, sections
+from controllers import POLICIES, commands, normalize_parameters
+from models import ROOT, EPA_COMMIT, PYSTORMS_COMMIT, digest, metadata, rainfall_model, sections, normalize_custom_model, custom_model_id
 from swmm import Simulation
 
 INFORMATION_BOUNDARY = "causal-depth-feedback-v1"
@@ -32,13 +32,16 @@ def finite(value, name, lower, upper):
 def prepare(request):
     if not isinstance(request, dict):
         raise ValueError("Request must be a JSON object.")
-    scenario_id = request.get("scenario_id", "theta")
-    model = metadata(scenario_id)
+    custom_model = normalize_custom_model(request["custom_model"]) if request.get("custom_model") is not None else None
+    scenario_id = request.get("scenario_id", custom_model_id(custom_model) if custom_model is not None else "theta")
+    model = metadata(scenario_id, custom_model)
     policies = {p["id"] for p in POLICIES}
     controller = request.get("controller_id", "constant_flow")
     fallback = request.get("fallback_controller_id", "uncontrolled")
     if controller not in policies or fallback not in policies:
         raise ValueError("Unsupported controller_id or fallback_controller_id.")
+    controller_parameters = normalize_parameters(controller, request.get("controller_parameters"))
+    fallback_parameters = normalize_parameters(fallback, request.get("fallback_controller_parameters"))
     seed = request.get("seed", 42)
     if isinstance(seed, bool) or not isinstance(seed, int) or not 0 <= seed <= 2**32-1:
         raise ValueError("seed must be an integer in [0, 4294967295].")
@@ -88,9 +91,12 @@ def prepare(request):
                      "tolerance": finite(contract.get("tolerance", 1e-6), "test tolerance", 0, 1e3),
                      "units": METRICS[metric], "horizon_s": model["horizon_s"]}
     normalized = {"scenario_id": scenario_id, "controller_id": controller, "fallback_controller_id": fallback,
+                  "controller_parameters": controller_parameters, "fallback_controller_parameters": fallback_parameters,
                   "seed": seed, "rainfall_multiplier": multiplier, "noise_std_m": noise,
                   "faults": normalized_faults, "test_contract": test_contract}
-    model_text, rain_hash = rainfall_model(scenario_id, multiplier)
+    if custom_model is not None:
+        normalized["custom_model"] = custom_model
+    model_text, rain_hash = rainfall_model(scenario_id, multiplier, custom_model)
     options = sections(model_text)["[OPTIONS]"]
     solver_settings = {"input_options": options, "control_interval_s": 300,
                        "routing_boundary_protocol": "preserve-adaptive-routing-clip-max-and-min-step-at-control-and-fault-boundaries-v2",
@@ -118,19 +124,27 @@ def evaluate_contract(metrics, contract):
             "tolerance": contract["tolerance"], "units": contract["units"]}
 
 
-def run_simulation(request, role="stress", controller_id=None, active_fault_ids=None):
+def run_simulation(request, role="stress", controller_id=None, active_fault_ids=None, controller_parameters=None):
     started = time.monotonic()
     normalized, model, model_text, context, solver_settings, exogenous = prepare(request)
     controller_id = controller_id or normalized["controller_id"]
     if controller_id not in {p["id"] for p in POLICIES}:
         raise ValueError("Unsupported controller.")
+    if controller_parameters is None:
+        if controller_id == normalized["controller_id"]:
+            controller_parameters = normalized["controller_parameters"]
+        elif controller_id == normalized["fallback_controller_id"]:
+            controller_parameters = normalized["fallback_controller_parameters"]
+    configuration = normalize_parameters(controller_id, controller_parameters)
     all_ids = {f["id"] for f in normalized["faults"]}
     active_ids = all_ids if active_fault_ids is None else set(active_fault_ids)
     if not active_ids <= all_ids:
         raise ValueError("active_fault_ids must be present in the exogenous fault envelope.")
     faults = [f for f in normalized["faults"] if f["id"] in active_ids]
-    parameters = {"targets_m3s": model["targets_m3s"], "equal_filling_gain": 1.0, "control_interval_s": 300}
-    run_id = role + "-" + digest({"request": normalized, "controller": controller_id, "active_fault_ids": sorted(active_ids)})[:12]
+    parameters = {"targets_m3s": [target * configuration.get("target_scale", 1.0) for target in model["targets_m3s"]],
+                  "control_interval_s": 300, **configuration}
+    run_id = role + "-" + digest({"request": normalized, "controller": controller_id, "parameters": configuration,
+                               "active_fault_ids": sorted(active_ids)})[:12]
     trace, display, observations, held_commands, frozen = [], [], {}, {}, {}
     extrema, peak_values = {}, {"flow": -1.0, "flood": -1.0, "storage": -1.0}
     max_depths = {n["id"]: n["max_depth_m"] for n in model["nodes"] if n["type"] == "basin"}
@@ -146,7 +160,7 @@ def run_simulation(request, role="stress", controller_id=None, active_fault_ids=
         input_path.write_text(model_text)
         sim = Simulation(input_path, folder / "model.rpt", folder / "model.out")
         try:
-            length_factor = 0.3048 if model["input_units"] == "CFS" else 1.0
+            length_factor = 0.3048 if model["input_units"].upper() in {"CFS", "GPM", "MGD"} else 1.0
             def sample():
                 signed_flow = sim.lib.stormpilot_link_flow_m3s(sim.links[model["downstream_link"]])
                 return {"time_s": sim.time_s,
@@ -253,7 +267,8 @@ def packet(request, runs=None):
     if runs is None:
         runs = [run_simulation(normalized, "nominal", active_fault_ids=[]),
                 run_simulation(normalized, "stress"),
-                run_simulation(normalized, "fallback", controller_id=normalized["fallback_controller_id"])]
+                run_simulation(normalized, "fallback", controller_id=normalized["fallback_controller_id"],
+                               controller_parameters=normalized["fallback_controller_parameters"])]
     experiment = {"scenario_id": model["id"], **context, "threshold_m3s": model["threshold_m3s"],
                   "metric_protocol": METRIC_PROTOCOL, "test_contract": normalized["test_contract"],
                   "faults": normalized["faults"], "exogenous": exogenous, "solver_settings": settings}
@@ -261,7 +276,7 @@ def packet(request, runs=None):
               "created_at": datetime.now(timezone.utc).isoformat(), "request": normalized,
               "provenance": {"base_model_sha256": model["base_model_sha256"], "engine_source_sha256": source_hash(),
                              "runner_source_sha256": digest((ROOT / "runner.py").read_bytes()),
-                             "source_url": model["source_url"], "model_path": f"engine/data/{model['id']}.inp",
+                             "source_url": model["source_url"], "model_path": model["model_path"],
                              "epa_version": "5.2.4", "epa_commit": EPA_COMMIT, "pystorms_commit": PYSTORMS_COMMIT,
                              "epa_source_url": f"https://github.com/USEPA/Stormwater-Management-Model/tree/{EPA_COMMIT}",
                              "conversion": "All flow/volume outputs converted from SWMM internal feet units with exact 0.028316846592; solver equations unchanged."},
@@ -272,6 +287,6 @@ def packet(request, runs=None):
                                    "No repair costs, residents protected, or real-city flood predictions are inferred."]}}
     result["test_contract_sha256"] = digest(normalized["test_contract"])
     source_files = sorted(p for p in (ROOT / "vendor/epa-swmm/src/solver").rglob("*") if p.is_file())
-    source_files += sorted(ROOT.glob("*.py")) + [ROOT / "native_bridge.c", ROOT / "data" / f"{model['id']}.inp"]
+    source_files += sorted(ROOT.glob("*.py")) + [ROOT / "native_bridge.c", ROOT.parent / model["model_path"]]
     result["artifacts"] = [{"path": "engine/" + str(path.relative_to(ROOT)), "sha256": digest(path.read_bytes())} for path in source_files]
     return result

@@ -4,6 +4,7 @@ Every call, including nominal and fallback, consumes budget. Cached identical
 experiments do not. We search only the explicitly supplied fault envelope.
 """
 from itertools import combinations
+from models import digest
 from runner import METRICS, packet, prepare, run_simulation
 
 
@@ -16,16 +17,17 @@ def investigate(request):
     cache, runs, candidates, ablations = {}, [], [], []
     calls = hits = 0
 
-    def evaluate(active, role, controller=None):
+    def evaluate(active, role, controller=None, parameters=None):
         nonlocal calls, hits
         controller = controller or normalized["controller_id"]
-        key = (controller, tuple(sorted(active)))
+        parameters = parameters if parameters is not None else normalized["controller_parameters"]
+        key = (controller, digest(parameters), tuple(sorted(active)))
         if key in cache:
             hits += 1
             return cache[key]
         if calls >= budget:
             return None
-        run = run_simulation(normalized, role, controller, active)
+        run = run_simulation(normalized, role, controller, active, parameters)
         calls += 1
         cache[key] = run
         runs.append(run)
@@ -75,7 +77,7 @@ def investigate(request):
             changed = False
             for fault_id in list(selected["active_fault_ids"]):
                 subset = [i for i in selected["active_fault_ids"] if i != fault_id]
-                key = (normalized["controller_id"], tuple(sorted(subset)))
+                key = (normalized["controller_id"], digest(normalized["controller_parameters"]), tuple(sorted(subset)))
                 if key not in cache and calls >= budget - 1:
                     stopping_reason = "budget_exhausted"
                     break
@@ -95,11 +97,12 @@ def investigate(request):
     if found:
         for fault_id in selected["active_fault_ids"]:
             subset = tuple(i for i in selected["active_fault_ids"] if i != fault_id)
-            run = cache.get((normalized["controller_id"], tuple(sorted(subset))))
+            run = cache.get((normalized["controller_id"], digest(normalized["controller_parameters"]), tuple(sorted(subset))))
             if run is not None and not run["contract_result"]["violated"]:
                 single_removals.append({"fault_id": fault_id, "run_id": run["run_id"]})
     one_minimal = found and len(single_removals) == len(selected["active_fault_ids"])
-    fallback = evaluate(selected["active_fault_ids"], "fallback", normalized["fallback_controller_id"])
+    fallback = evaluate(selected["active_fault_ids"], "fallback", normalized["fallback_controller_id"],
+                        normalized["fallback_controller_parameters"])
     if fallback is None:
         raise RuntimeError("Search budget accounting failed to reserve a fallback run.")
     if fallback in [nominal, original, selected] or fallback["role"] != "fallback":
