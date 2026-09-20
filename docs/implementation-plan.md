@@ -1,6 +1,6 @@
 # StormPilot implementation plan
 
-Status: improved implementation deployed to Vercel, September 20, 2026; final release verification and demonstration assets in progress. The contest deadline previously verified is September 20, 2026, 17:00 EDT / September 21, 02:30 IST.
+Status: improved implementation deployed to Vercel, final production verification passed, and the 3:34 demonstration passed full decode and sampled visual checks, September 20, 2026. The accompanying compact source ZIP identifies its exact commit in `SOURCE-MANIFEST.json`. The contest deadline previously verified is September 20, 2026, 17:00 EDT / September 21, 02:30 IST.
 
 ## Product result and scope
 
@@ -15,9 +15,12 @@ Status: improved implementation deployed to Vercel, September 20, 2026; final re
 | Candidate development | Sensor plausibility reduces the compound development case to 19.361 m³; 293 attempted development calls are disclosed. |
 | Independent evaluation | Phase 1 rejected (+22.45% aggregate flooding); Phase 2 rejected (−7.29%, one downstream guard failure). All 112 reserved runs valid. Exact protocols, sources and full proofs preserved. |
 | Evidence | Separate record validation, actual replay, portable source ZIPs, decision reports and declared user-triggered robustness suites. |
-| Hosting | Live at https://stormpilot.vercel.app with a Linux native container and private Blob persistence. Final cloud regression checks and demo recording are recorded in the verification document. |
+| Hosting | Live at https://stormpilot.vercel.app from `ca5349f`, with a Linux native container and private Blob persistence. Final production discovery, response, declared evaluation, exports, actual replay and browser model import all passed. |
+| Delivery | [Demonstration video](../../stormpilot-demo.mp4): 214.000272 seconds, H.264 1440×1040 / 25 fps and AAC mono 44.1 kHz. Full decode passes; sampled frames show the evidence and rejection clearly. The compact full-app source ZIP records its exact commit and included file hashes in its manifest. |
 
 The stronger welcome discovery is UI job `6174a80795372955`, experiment `9df1ca1d7273778d8e7c`. Neither evaluated response is recommended for field use. No score or winning guarantee follows from these milestones.
+
+The final production record is [production-release.json](evidence/production-release.json), completed September 20 at 16:25:55 UTC. It identifies fresh discovery `14b596cd9e2b4d35`, response `669cc1f0e264448b`, declared robustness `56b486cd0c624402`, actual matched replay `b00bbe326bf047fc` and browser-import run `e36d5a5d02514afa`. The declared suite's 16.71% aggregate improvement is a separate reusable test result; it does not change either frozen rejection. See [verification.md](verification.md) for executed checks and delivery limits. Local `node_modules` was removed only to reclaim disk space; `npm ci` restores it.
 
 The plan below retains milestone acceptance and technical rationale. A planned
 capability is not an executed result unless marked above or in the decision log.

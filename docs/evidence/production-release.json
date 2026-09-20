@@ -1,0 +1,215 @@
+{
+  "url": "https://stormpilot.vercel.app",
+  "started_at": "2026-09-20T16:21:00.555136+00:00",
+  "checks": [
+    {
+      "name": "linux_engine_ready",
+      "status": "passed"
+    },
+    {
+      "name": "recorded_discovery",
+      "status": "passed",
+      "id": "6174a80795372955"
+    },
+    {
+      "name": "demo_export",
+      "status": "passed",
+      "size_bytes": 2741813,
+      "files": 120,
+      "manifest_checks": 119,
+      "download_host": "ocqgmcnw85ncvdo9.private.blob.vercel-storage.com",
+      "sha256": "74606b526657589b8aefd8eabab069cd27b6b688ecb7294e71d6e9e167935c80"
+    },
+    {
+      "name": "fresh_discovery",
+      "status": "passed",
+      "id": "14b596cd9e2b4d35",
+      "seconds": 27.33,
+      "calls": 21,
+      "interaction_values": {
+        "nominal": 0,
+        "sensor_only": 0,
+        "valve_only": 0,
+        "joint": 237.26283682342424,
+        "interaction_excess": 237.26283682342424
+      }
+    },
+    {
+      "name": "response_after_demo_export",
+      "status": "passed",
+      "id": "669cc1f0e264448b",
+      "seconds": 19.93,
+      "case_count": 8,
+      "metrics": {
+        "nominal": {
+          "flood_volume_m3": 0,
+          "peak_downstream_flow_m3s": 0.49154656318545603,
+          "downstream_excess_volume_m3": 0,
+          "downstream_exceedance_duration_s": 0,
+          "terminal_storage_m3": 4.651018727986275,
+          "native_flood_volume_m3": 0
+        },
+        "single_a": {
+          "flood_volume_m3": 0,
+          "peak_downstream_flow_m3s": 0.4987701146670486,
+          "downstream_excess_volume_m3": 0,
+          "downstream_exceedance_duration_s": 0,
+          "terminal_storage_m3": 4.6510197261048924,
+          "native_flood_volume_m3": 0
+        },
+        "single_b": {
+          "flood_volume_m3": 0,
+          "peak_downstream_flow_m3s": 0.49626449249020693,
+          "downstream_excess_volume_m3": 0,
+          "downstream_exceedance_duration_s": 0,
+          "terminal_storage_m3": 4.651020236987231,
+          "native_flood_volume_m3": 0
+        },
+        "stress": {
+          "flood_volume_m3": 237.26283682342424,
+          "peak_downstream_flow_m3s": 0.49720254898515986,
+          "downstream_excess_volume_m3": 0,
+          "downstream_exceedance_duration_s": 0,
+          "terminal_storage_m3": 4.651020931774288,
+          "native_flood_volume_m3": 237.26283682342387
+        },
+        "mitigation_empty": {
+          "flood_volume_m3": 0,
+          "peak_downstream_flow_m3s": 0.49154656318545603,
+          "downstream_excess_volume_m3": 0,
+          "downstream_exceedance_duration_s": 0,
+          "terminal_storage_m3": 4.651018727986275,
+          "native_flood_volume_m3": 0
+        },
+        "mitigation_a": {
+          "flood_volume_m3": 0,
+          "peak_downstream_flow_m3s": 0.4945196752451086,
+          "downstream_excess_volume_m3": 0,
+          "downstream_exceedance_duration_s": 0,
+          "terminal_storage_m3": 4.651018919237098,
+          "native_flood_volume_m3": 0
+        },
+        "mitigation_b": {
+          "flood_volume_m3": 0,
+          "peak_downstream_flow_m3s": 0.49626449249020693,
+          "downstream_excess_volume_m3": 0,
+          "downstream_exceedance_duration_s": 0,
+          "terminal_storage_m3": 4.651020236987231,
+          "native_flood_volume_m3": 0
+        },
+        "fallback": {
+          "flood_volume_m3": 19.361153168276527,
+          "peak_downstream_flow_m3s": 0.49720254699312316,
+          "downstream_excess_volume_m3": 0,
+          "downstream_exceedance_duration_s": 0,
+          "terminal_storage_m3": 4.651020931774357,
+          "native_flood_volume_m3": 19.36115316827647
+        }
+      }
+    },
+    {
+      "name": "declared_robustness",
+      "status": "passed",
+      "id": "56b486cd0c624402",
+      "seconds": 70.7,
+      "acceptance": {
+        "development_joint_failure": true,
+        "development_mitigation": true,
+        "overall": true,
+        "suite_usefulness": true
+      },
+      "aggregate": {
+        "completeness": "complete",
+        "invalid_cases": [],
+        "all_case_guards_pass": true,
+        "all_case_primary_nonregression": true,
+        "joint_aggregate_reference_flood_m3": 8461.73754391504,
+        "joint_aggregate_candidate_flood_m3": 7048.140403124211,
+        "joint_aggregate_flood_reduction_m3": 1413.5971407908291,
+        "joint_aggregate_relative_flood_reduction": 0.1670575497590761,
+        "individually_material_joint_cases": [
+          "h2",
+          "h3",
+          "h4",
+          "h6"
+        ],
+        "heldout_usefulness_passes": true
+      }
+    },
+    {
+      "name": "suite_export",
+      "status": "passed",
+      "size_bytes": 29188513,
+      "files": 161,
+      "manifest_checks": 160,
+      "download_host": "ocqgmcnw85ncvdo9.private.blob.vercel-storage.com",
+      "sha256": "ce5bb6bd009c120b7b23bbcc8c9da86a3c5ae77e7b9179622577f63ebe574501"
+    },
+    {
+      "name": "response_export",
+      "status": "passed",
+      "size_bytes": 4081863,
+      "files": 120,
+      "manifest_checks": 119,
+      "download_host": "ocqgmcnw85ncvdo9.private.blob.vercel-storage.com",
+      "sha256": "4a68a2c079454adbd1284bffa6438dbeb881a07e6f1346d81343337fbdff4a46"
+    },
+    {
+      "name": "actual_replay",
+      "status": "passed",
+      "id": "b00bbe326bf047fc",
+      "seconds": 25.38,
+      "replay_status": "matched"
+    },
+    {
+      "name": "phase1_rejection_preserved",
+      "status": "passed",
+      "policy_runs": 48,
+      "acceptance": {
+        "development_joint_failure": true,
+        "development_mitigation": true,
+        "heldout_usefulness": false,
+        "overall": false
+      }
+    },
+    {
+      "name": "phase1_export",
+      "status": "passed",
+      "size_bytes": 33511063,
+      "files": 151,
+      "manifest_checks": 150,
+      "download_host": "ocqgmcnw85ncvdo9.private.blob.vercel-storage.com",
+      "sha256": "33baf99ec58d5dec629cb75b58aead13cc9e54e7b229d3544cfb6b2fa192d1fd"
+    },
+    {
+      "name": "phase2_rejection_preserved",
+      "status": "passed",
+      "policy_runs": 64,
+      "acceptance": {
+        "development_joint_failure": true,
+        "development_mitigation": true,
+        "heldout_usefulness": false,
+        "overall": false
+      }
+    },
+    {
+      "name": "phase2_export",
+      "status": "passed",
+      "size_bytes": 33118591,
+      "files": 220,
+      "manifest_checks": 218,
+      "download_host": "ocqgmcnw85ncvdo9.private.blob.vercel-storage.com",
+      "sha256": "8210a09aa32d5da9808b3f9f730f2c6bbbc8c5ae07b59d10899d6129131c1223"
+    },
+    {
+      "name": "browser_model_import_and_native_execution",
+      "status": "passed",
+      "id": "e36d5a5d02514afa",
+      "model_id": "custom_5a7eeb60e3019a6b5f81b1c8",
+      "finding": "no_violation"
+    }
+  ],
+  "verification_client_note": "The local verification client ran out of disk while starting a ZIP download. Space was reclaimed and verification resumed from the same completed production jobs; no native test was rerun to change an outcome.",
+  "status": "passed",
+  "completed_at": "2026-09-20T16:25:55.137917+00:00"
+}

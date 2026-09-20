@@ -37,10 +37,22 @@ See [new-product-review.md](new-product-review.md) for the executed details. Ear
 
 ## Hosting and delivery
 
-The first Vercel deployment successfully built and executed the native solver on Linux. Production job `8490cd47a9444985` passed validation and matched the corresponding Mac example metrics. Local cloud-adapter tests separately demonstrated result restoration after deleting its local cache and a real signed private-Blob export.
+The release is live at **https://stormpilot.vercel.app**, deployed from source commit `ca5349fc02f038236599d31b5a34c0916065b1b6`. The Vercel Linux container builds and executes EPA SWMM. The final production gate passed on September 20, 2026, completing at 16:25:55 UTC. Its machine-readable record is [production-release.json](evidence/production-release.json).
 
-The final release adds retryable immutable publication, bounded cloud deadlines, safe source leases and frozen-evaluation downloads. A fresh production discovery → response → declared evaluation → export → replay check is the final release gate; results will be recorded here and in `docs/evidence/production-release.json` after execution.
+| Production check | Recorded result |
+|---|---|
+| Fresh discovery | Job `14b596cd9e2b4d35`; 21 calls in 27.33 seconds; 0 m³ nominal and with either fault alone, 237.262837 m³ jointly. |
+| Response after recorded-demo export | Job `669cc1f0e264448b`; eight retained cases in 19.93 seconds; candidate joint flooding 19.361153 m³. This also exercises the export-then-response regression. |
+| Declared robustness | Job `56b486cd0c624402`; completed in 70.70 seconds; 16.71% aggregate improvement and all declared criteria pass. This reusable declared suite does not replace either rejected reserved evaluation. |
+| Actual native replay | Job `b00bbe326bf047fc`; completed in 25.38 seconds with replay status `matched`. |
+| Browser import and execution | Job `e36d5a5d02514afa`, imported model `custom_5a7eeb60e3019a6b5f81b1c8`; native execution completes with `no_violation`. |
+| Evidence downloads | Recorded discovery: 120 ZIP entries / 119 manifest checks; response: 120 / 119; declared suite: 161 / 160. Every check passes. |
+| Frozen evaluations and downloads | Phase 1 preserves rejection across 48 runs; its archive passes 150 manifest checks. Phase 2 preserves rejection across 64 runs; its archive passes 218 manifest checks. |
+
+The local verification client ran out of disk while starting a ZIP download. Space was reclaimed and verification resumed using the same completed production jobs; no native test was rerun to change an outcome. The final release includes retryable immutable publication, bounded cloud deadlines, safe source leases and frozen-evaluation downloads. Local cloud-adapter tests separately demonstrated result restoration after deleting the local cache.
 
 GitHub Actions is configured, but GitHub refused to start runners because recent account payments failed or the spending limit needed increasing. No GitHub-hosted CI pass is claimed and no billing settings were changed. The Vercel Linux build/run evidence is separate.
 
-The GitHub repo remains private. A private link alone is not judge viewing access; [SOURCE-ACCESS.md](../SOURCE-ACCESS.md) describes the prepared code handoff. No judge invitations or Devpost submission have been sent. The demonstration recording and its verified duration are tracked separately in the final delivery entry.
+The demonstration is [stormpilot-demo.mp4](../../stormpilot-demo.mp4): **214.000272 seconds (3:34)** and 14,699,396 bytes, with H.264 video at 1440×1040 / 25 fps and AAC mono audio at 44.1 kHz. A full FFmpeg decode exited successfully without errors. Frames sampled at 5, 40, 78, 114, 153, 169.2, 185, 195, 205 and 213 seconds show readable captions, the key metrics, the Phase 2 rejection, the matched actual replay and the live URL. The 205-second sample contains an ordinary brief reload before the stable final view. Measured audio levels are −16.9 dB mean and −1.9 dB maximum, without clipping; a complete human listening review is not claimed.
+
+The GitHub repo remains private. A private link alone is not judge viewing access; [SOURCE-ACCESS.md](../SOURCE-ACCESS.md) describes the prepared code handoff. No judge invitations or Devpost submission have been sent. The accompanying `stormpilot-source.zip` handoff records its exact source/documentation commit and included file hashes in `SOURCE-MANIFEST.json`. Video metadata and checksum are recorded in [demo-video.json](evidence/demo-video.json); the separate caption file is `stormpilot-demo.srt`.

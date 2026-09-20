@@ -1,0 +1,77 @@
+{
+  "artifact": "stormpilot-demo.mp4",
+  "sha256": "ddad820cc3f3e57d23ec8996fd4e22988d9c28d394f2c8d621189fa64ed9fd4d",
+  "verified_at": "2026-09-20T16:51:52.079112+00:00",
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1440,
+        "height": 1040,
+        "r_frame_rate": "25/1",
+        "duration": "214.000000"
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "44100",
+        "channels": 1,
+        "r_frame_rate": "0/0",
+        "duration": "214.000272"
+      }
+    ],
+    "format": {
+      "duration": "214.000272",
+      "size": "14699396"
+    }
+  },
+  "full_decode": {
+    "command": "ffmpeg -v error -threads 1 -i stormpilot-demo.mp4 -f null -",
+    "exit_code": 0,
+    "errors": []
+  },
+  "audio_measurement": {
+    "mean_db": -16.9,
+    "peak_db": -1.9,
+    "full_human_listening": false
+  },
+  "visual_review": {
+    "sample_seconds": [
+      5,
+      40,
+      78,
+      114,
+      153,
+      169.2,
+      185,
+      195,
+      205,
+      213
+    ],
+    "findings": [
+      "Readable captions in a dedicated area below the recorded app.",
+      "Development outcomes and frozen Phase 2 rejection visible.",
+      "Actual matching replay is shown.",
+      "Final frame includes stable discovery and live URL."
+    ],
+    "scope": "Sampled frames, not frame-by-frame human review."
+  },
+  "recording": {
+    "source": "Actual production browser interaction",
+    "narration": "macOS stock Samantha speech synthesis",
+    "duration_seconds": 214,
+    "scene_seconds": [
+      26,
+      36,
+      29,
+      42,
+      36,
+      45
+    ],
+    "edited": true,
+    "speed": "Scenes retain real-time playback."
+  }
+}

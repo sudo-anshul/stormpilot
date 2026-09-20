@@ -2,39 +2,45 @@
 
 Use the actual app at https://stormpilot.vercel.app. The recorded welcome discovery is UI job **6174a80795372955**, experiment **9df1ca1d7273778d8e7c**. Decompressed packet SHA-256: `4c14e2a1c82d14d96b6c1e4812e6b4af64a1ddd7a401add53438ca51bba460d4`. The final video must identify saved results as recorded. Only show an operation as successful after its actual completion.
 
-Target: about three minutes, with pauses for the evidence. Screen directions are not spoken.
+Final video duration: **3 minutes 34 seconds**. The scene boundaries below match the rendered video; screen directions and delivery notes are not spoken.
 
-## 0:00–0:25 — the missed failure
+## Delivery record
+
+The live release at https://stormpilot.vercel.app uses deployed source `ca5349fc02f038236599d31b5a34c0916065b1b6`. Final production checks passed on September 20, 2026; [production-release.json](evidence/production-release.json) records fresh discovery `14b596cd9e2b4d35`, response `669cc1f0e264448b`, declared robustness `56b486cd0c624402`, actual matched replay `b00bbe326bf047fc` and browser-import execution `e36d5a5d02514afa`, together with verified evidence downloads. The declared suite's passing result does not change the two rejected reserved evaluations narrated below.
+
+The demonstration is [stormpilot-demo.mp4](../../stormpilot-demo.mp4): 14,699,396 bytes and 214.000272 seconds, with H.264 video at 1440×1040 / 25 fps and AAC mono audio at 44.1 kHz. Full FFmpeg decode completed with no errors. Sampled frames show readable captions, the key metrics and Phase 2 rejection, the matched actual replay in the closing section, and the live URL in the stable final view. The ordinary brief reload sampled at 205 seconds remains visible. Audio measurement found a −16.9 dB mean and −1.9 dB maximum without clipping; no full human listening review is claimed. The accompanying compact full-app source ZIP records its exact source/documentation commit in its manifest. [Video metadata](evidence/demo-video.json) records the media checksum and verification scope.
+
+## 0:00–0:26 — the missed failure
 
 Screen: opening recorded discovery and the four-condition evidence.
 
 “StormPilot helps stormwater modelers test a proposed controller before recommending it. A sensor fault passes. A valve fault passes. Together, they cause a flood. This recorded experiment comes from the actual EPA hydraulic solver, with evidence available to inspect and replay in the live workbench.”
 
-## 0:25–0:55 — the mechanism
+## 0:26–1:02 — the mechanism
 
 Screen: discovery grid, fault windows, sensor-only and valve-only results.
 
 “This is Theta, a published two-basin benchmark, simulated over seventy-eight hours. A sensor reads one metre high from hour three to six. Later, outlet two is restricted from hour six to eight. Neither fault alone produces flooding. Together, they produce two hundred thirty-seven cubic metres, above our fixed limit of one hundred cubic metres. At hour six, the biased-sensor case already holds about four hundred seventy extra cubic metres of water.”
 
-## 0:55–1:20 — a real experiment
+## 1:02–1:31 — a real experiment
 
 Screen: native call counts and traces; briefly open setup/import or the declared grid.
 
 “The search checked nine declared fault pairs using twenty-one native simulations. Five full-proof cases preserve the normal, individual, joint and alternative outcomes. The grid, budget and stopping condition are visible. You can edit the faults or import a supported SWMM model with an explicit downstream mapping, then execute a fresh investigation.”
 
-## 1:20–1:55 — the tempting response
+## 1:31–2:13 — the tempting response
 
 Screen: actual completed plausible-depth response, parameters, sensor inspector at hour 3.
 
 “We also search candidate responses under flooding, downstream and terminal-storage guards. This candidate checks abrupt changes in past sensor readings and cautiously adjusts the depth used for control. It does not see hidden fault flags, true simulator depth or future rainfall. Here, observed depth and estimated control depth are separate. The estimated sensor offset is a hypothesis. On the development case, flooding falls from two hundred thirty-seven to nineteen point three-six cubic metres: a ninety-one point eight percent reduction.”
 
-## 1:55–2:35 — the result that matters
+## 2:13–2:49 — the result that matters
 
 Screen: Phase 2 frozen evaluation, rejection headline, aggregate and guard failure; Phase 1 briefly if time.
 
 “We froze the candidate and tested eight unseen transformations. All sixty-four simulations were valid. The aggregate flooding reduction was seven point two-nine percent, below our ten-percent requirement. Only two cases improved materially, and one downstream-excess guard failed. StormPilot rejects the candidate. It also preserves the earlier candidate that made the reserved suite twenty-two percent worse. The final decision follows every declared criterion.”
 
-## 2:35–3:05 — reproducibility and contribution
+## 2:49–3:34 — reproducibility and contribution
 
 Screen: decision report and actual source evidence download; return to full workflow.
 
