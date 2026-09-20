@@ -1,5 +1,7 @@
 # Executed verification — improved release
 
+The subsequent Alina interface refresh is documented in [ui-refresh-review.md](ui-refresh-review.md), with its own screenshots and browser checks. The hosting commit and video below describe the preceding release.
+
 Date: September 20, 2026. Local environment: macOS, Python 3.14.3, Node 22.20, clang and Chromium through Playwright. Production: Vercel native Linux container, Python 3.12 and compiled EPA SWMM 5.2.4. This record describes software and simulation evidence; no field validation or operator study is claimed.
 
 ## Scientific evidence

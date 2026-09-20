@@ -1,5 +1,5 @@
 import { CheckCircle2, ChevronDown, ScanSearch, TriangleAlert } from 'lucide-react';
-import { METRICS, number } from '../types';
+import { METRICS, number, timeLabel } from '../types';
 import type { InvestigationView } from '../types';
 
 export default function DiscoveryEvidence({ view }: { view: InvestigationView }) {
@@ -12,6 +12,10 @@ export default function DiscoveryEvidence({ view }: { view: InvestigationView })
   const pairVerified = result?.joint_proof_verified_by_engine ?? Boolean(view.repair && view.repair.status !== 'reference_not_joint_failure');
   const verified = pairVerified && ['pass', 'passed', 'verified'].includes(view.validation.status);
   const metric = METRICS[view.config.metric];
+  const selectedFaults = (view.cases.find(run => run.role === 'stress')?.faults ?? [])
+    .map(fault => ({ id: String(fault.id), type: String(fault.type), asset: String(fault.asset), start: Number(fault.start_s), end: Number(fault.end_s) }))
+    .filter(fault => Number.isFinite(fault.start) && Number.isFinite(fault.end) && fault.end > fault.start && fault.start >= 0);
+  const faultHorizon = Math.max(1, ...selectedFaults.map(fault => fault.end));
   const rows = values ? [
     { id: 'empty', label: 'Clean reference', note: 'Neither condition', value: values.nominal },
     { id: 'a', label: result ? 'Sensor only' : 'Condition A only', note: result ? `Basin ${result.declared_grid.sensor_asset}` : `Asset ${String(referenceCases[1]?.faults[0]?.asset ?? 'A')}`, value: values.sensor_only },
@@ -21,6 +25,13 @@ export default function DiscoveryEvidence({ view }: { view: InvestigationView })
   return <section id="discovery-evidence" className="discovery-evidence panel" aria-labelledby="discovery-title"><div className="section-heading"><div><div className="section-index"><ScanSearch size={15} />{result ? 'Compound-fault discovery' : 'Retained reference proof'}</div><h2 id="discovery-title" tabIndex={-1}>{verified ? 'Two passing faults. One failing pair.' : result?.status === 'baseline_failed' ? 'The clean reference already fails.' : values ? 'Inspect the retained pair.' : 'No qualifying pair found in this grid.'}</h2></div><span className={`small-badge ${verified ? 'verified' : ''}`}>{verified ? 'Retained proof checked' : 'Bounded search'}</span></div>
     <p className="section-description">{verified ? 'The same policy, rainfall and horizon were tested with neither condition, each condition alone, and both together. Each condition is necessary for this pair to exceed the declared check.' : result?.status === 'baseline_failed' ? 'A fault-specific interaction is not established when the clean reference already exceeds the check.' : 'The recorded search covers the declared grid and budget. An untested pair or a different model may behave differently.'}</p>
     {!!rows.length && <div className="paired-proof" aria-label={`${metric.label} for the retained four-case comparison`}>{rows.map(row => { const passes = row.value <= view.finding.threshold + .000001; return <div key={row.id} className={`paired-proof-case ${row.id === 'ab' ? 'joint' : ''}`}><span className="treatment-code">{row.id === 'empty' ? '∅' : row.id.toUpperCase()}</span><h3>{row.label}</h3><p>{row.note}</p><strong>{number(row.value, 3)}<small>{metric.unit}</small></strong><span className={`criterion-result ${passes ? 'pass' : 'fail'}`}>{passes ? <CheckCircle2 size={12} /> : <TriangleAlert size={12} />}{passes ? 'Within check' : 'Exceeds check'}</span></div>; })}</div>}
+    {selectedFaults.length > 0 && <div className="fault-sequence">
+      <div className="fault-sequence-heading"><strong>Selected fault windows</strong><span>0–{timeLabel(faultHorizon)} detail · {number(view.model.duration_hours)} h full simulation</span></div>
+      {selectedFaults.map((fault, index) => <div className="fault-sequence-row" key={fault.id}>
+        <div className="fault-sequence-label"><span className="treatment-code">{String.fromCharCode(65 + index)}</span><span>{fault.type.startsWith('sensor') ? 'Sensor' : 'Valve'} · {fault.asset}<small>{timeLabel(fault.start)}–{timeLabel(fault.end)}</small></span></div>
+        <div className="fault-sequence-track" aria-hidden="true"><span className={`fault-sequence-bar ${fault.type.startsWith('sensor') ? 'sensor' : 'valve'}`} style={{ left: `${fault.start / faultHorizon * 100}%`, width: `${(fault.end - fault.start) / faultHorizon * 100}%` }} /></div>
+      </div>)}
+    </div>}
     {values && <div className="interaction-statistic"><span>Interaction excess</span><strong>{number(values.interaction_excess, 3)} {metric.unit}</strong><p>Both − condition A only − condition B only + clean reference. This statistic describes the retained model experiment.</p></div>}
     {result ? <><div className="discovery-accounting"><div><strong>{number(result.simulator_calls, 0)}<small> / {number(result.budget, 0)}</small></strong><span>Total simulator calls / budget</span></div><div><strong>{number(result.screened_pairs, 0)}<small> / {number(result.declared_pairs, 0)}</small></strong><span>Pairs screened / declared</span></div><div><strong>{number(result.proof_simulator_calls, 0)}</strong><span>Retained proof calls</span></div><div><strong>{result.grid_exhausted ? 'Complete' : 'Partial'}</strong><span>Declared grid coverage</span></div></div>
     <details className="campaign-details"><summary>Inspect search scope and selection <ChevronDown size={13} /></summary><p>{result.coverage_note}</p><p>{result.selection_rule}</p><dl><div><dt>Sensor offsets</dt><dd>{result.declared_grid.bias_values_m.map(value => number(value, 4)).join(', ')} m</dd></div><div><dt>Valve openings</dt><dd>{result.declared_grid.valve_settings.map(value => number(value, 4)).join(', ')}</dd></div><div><dt>Stopped because</dt><dd>{result.stopping_reason.replaceAll('_', ' ')}</dd></div><div><dt>Grid SHA-256</dt><dd><code>{result.grid_sha256}</code></dd></div></dl><p className="scope-caveat">{result.verification_scope}</p></details></> : <p className="paired-proof-note">These four reference treatments are retained alongside the selected candidate’s four treatments. Parameter-search coverage is reported with the response below.</p>}

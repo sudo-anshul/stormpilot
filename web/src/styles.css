@@ -44,3 +44,772 @@
 .evaluation-failure-reasons{margin:0 27px 23px;padding:0 2px;color:#946b33;font-size:11px;line-height:1.8}.evaluation-failure-reasons>strong{font-size:11px;font-weight:650}.evaluation-failure-reasons ul{margin:9px 0 0;padding-left:17px}.evaluation-failure-reasons li+li{margin-top:5px}@media(max-width:760px){.evaluation-failure-reasons{margin-left:20px;margin-right:20px;font-size:11px}}
 @media(max-width:1100px){.sensor-inspector .section-heading{display:block}.sensor-inspector .section-heading>.text-button{margin-top:12px}.sensor-inspector-controls{grid-template-columns:130px 1fr}.sensor-inspector-controls>p{grid-column:1/-1}.sensor-reading-grid>div{padding:15px}.sensor-reading-grid strong{font-size:23px}.benchmark-versions{gap:12px;margin-top:10px}}
 @media(max-width:760px){.repair-search-fields{margin-left:20px;margin-right:20px;padding:16px}.repair-grid-inputs{grid-template-columns:1fr}.repair-grid-inputs .field-description{font-size:11px}.benchmark-versions{gap:14px;margin-top:3px}.benchmark-versions .benchmark-link{font-size:10px}.sensor-inspector .section-heading h2{font-size:19px;line-height:1.4}.sensor-inspector .section-description{font-size:11px}.sensor-inspector-controls{margin-left:20px;margin-right:20px;grid-template-columns:1fr;gap:14px}.sensor-inspector-controls .field label{font-size:11px}.sensor-inspector-controls .field select{font-size:12px}.sensor-inspector-controls>p{font-size:11px}.sensor-inspector-controls>p span{font-size:10px}.sensor-reading-grid{margin-left:20px;margin-right:20px;grid-template-columns:1fr}.sensor-reading-grid>div{border-right:0;border-bottom:1px solid #d6e0ce;padding:17px}.sensor-reading-grid strong{font-size:27px;margin-top:10px}.sensor-reading-grid>div>span{font-size:11px}.sensor-reading-grid p{font-size:10px}.sensor-hypothesis{margin-left:20px;margin-right:20px;padding:14px}.sensor-hypothesis p{font-size:11px}.sensor-hypothesis strong{font-size:12px}}
+
+/* Alina: hydraulic instrument workbench.
+   Surfaces distinguish configuration, measurement, and evidence instead of
+   giving every section the same card treatment. Existing component geometry
+   remains the baseline; this layer owns the shared visual contract. */
+:root {
+  --paper: #f3f6f4;
+  --surface: #ffffff;
+  --surface-subtle: #edf3ef;
+  --surface-rail: #e9f0eb;
+  --ink: #183c38;
+  --muted: #526b64;
+  --line: #d3dfd8;
+  --line-strong: #aebfb5;
+  --teal: #176f65;
+  --teal-dark: #124f48;
+  --teal-light: #e3f0e9;
+  --orange: #a74f20;
+  --orange-light: #fff2e4;
+  --violet: #655188;
+  --danger: #a0362c;
+  --success: #27664d;
+  --focus: #1c78b0;
+  --radius-control: 6px;
+  --radius-panel: 10px;
+  --shadow-dialog: 0 24px 100px #082e3540;
+  color: var(--ink);
+  background: var(--paper);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+}
+body { background: var(--paper); }
+::selection { background: #cce4d9; color: #103e36; }
+button, input, select, summary, a { -webkit-tap-highlight-color: transparent; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--focus); outline-offset: 3px;
+}
+button:disabled { opacity: .52; }
+input, select, button, textarea { max-width: 100%; }
+p, h1, h2, h3 { text-wrap: pretty; }
+button, select, summary { touch-action: manipulation; }
+.button, .icon-button, .text-button, .workflow-nav > a, .workflow-nav > button {
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+.button { min-height: 42px; padding: 10px 16px; border-radius: var(--radius-control); font-size: 12px; font-weight: 650; }
+.button.primary { background: var(--teal-dark); border-color: var(--teal-dark); box-shadow: 0 1px 2px #123c3712; }
+.button.primary:hover:not(:disabled) { background: #0b4039; border-color: #0b4039; }
+.button.secondary { border-color: var(--line-strong); background: #fff; }
+.button.secondary:hover:not(:disabled) { border-color: #78998a; background: #f1f7f3; }
+.text-button { font-size: 12px; min-height: 34px; }
+.icon-button { width: 34px; height: 34px; border-radius: 6px; }
+.icon-button:hover { background: var(--teal-light); border-color: var(--line-strong); }
+.skip-link { background: #fff; color: var(--teal-dark); border: 1px solid var(--line-strong); box-shadow: 0 4px 16px #123c3726; border-radius: 6px; }
+
+/* Persistent orientation: a compact identity bar and a distinct setup surface. */
+.masthead { height: 72px; padding: 0 30px; background: #123e39; border-bottom: 1px solid #315950; color: #fff; }
+.brand { color: #fff; font-size: 25px; font-weight: 750; letter-spacing: -1px; }
+.brand-mark { background: #e2f0e6; color: #164b41; width: 34px; height: 34px; border-radius: 10px 10px 10px 3px; }
+.brand-dot { color: #a3d8b9; }
+.masthead-divider { background: #45675e; }
+.workspace-name { color: #d3e3dc; font-size: 12px; }
+.masthead-right { gap: 24px; }
+.engine-status { color: #d7e7dd; font-size: 10px; }
+.engine-status > span { background: #b2dcbd; box-shadow: 0 0 0 3px #aacfb31a; }
+.engine-status.unavailable > span { background: #ffc1ae; }
+.source-link { color: #fff; font-size: 12px; }
+.masthead a:focus-visible { outline-color: #bfe7c8; }
+.workspace-layout { max-width: 1800px; grid-template-columns: 294px minmax(0, 1fr); }
+.setup-rail { background: var(--surface-rail); border-color: #cbd9cf; }
+.setup-content { padding: 26px 22px 24px; }
+.setup-heading { gap: 10px; margin-bottom: 22px; }
+.setup-heading h2 { font-size: 18px; line-height: 1.3; letter-spacing: -.45px; }
+.setup-heading p { font-size: 11px; margin-top: 5px; }
+.step-marker { width: 24px; height: 24px; border-color: #8fab9b; color: var(--teal-dark); background: #f6faf7; }
+.field { margin-bottom: 17px; min-width: 0; }
+.field > label, .node-inspector > label { font-size: 12px; font-weight: 650; margin-bottom: 7px; }
+.field input, .field select, .node-inspector select { min-height: 42px; background: #fff; border: 1px solid #aebfb5; border-radius: var(--radius-control); font-size: 12px; padding: 10px 11px; box-shadow: 0 1px 1px #163a2b04; }
+.field input:hover, .field select:hover, .node-inspector select:hover { border-color: #799b8a; }
+.field-description { font-size: 11px; line-height: 1.65; color: var(--muted); }
+.model-facts { font-size: 10px; gap: 9px; margin-top: 11px; }
+.model-facts > span + span { padding-left: 9px; border-color: #bacbc0; }
+.import-model-button { font-size: 11px; min-height: 34px; padding-top: 8px; }
+.field-group { padding-top: 19px; margin-top: 21px; border-color: #cad8ce; }
+.group-label { font-size: 12px; margin-bottom: 14px; gap: 9px; align-items: flex-start; }
+.fault-mini { font-size: 10px; color: #86521f; }
+.input-with-unit > span { font-size: 11px; right: 11px; }
+.input-with-unit > input { padding-right: 44px; }
+.experiment-mode { background: #dbe7df; border: 1px solid #bfcfc2; padding: 3px; border-radius: 7px; margin-bottom: 22px; }
+.experiment-mode > button { font-size: 10px; line-height: 1.55; padding: 9px 5px; border-radius: 4px; color: #365747; }
+.experiment-mode > button[aria-pressed=true] { background: #fff; color: #174d3f; box-shadow: 0 1px 3px #19442c12; }
+.advanced-settings, .policy-parameters, .scenario-settings { border-color: #c8d6cc; padding-top: 13px; }
+.advanced-settings summary, .policy-parameters > summary, .scenario-settings > summary, .registered-model-context > summary { font-size: 11px; color: #345f4f; min-height: 30px; }
+.policy-parameters > summary > span { font-size: 9px; }
+.registered-model-context dl, .registered-model-context > p { font-size: 10px; }
+.policy-parameters .field > label, .scenario-settings .field > label { font-size: 11px; }
+.scenario-settings .field input { font-size: 12px; }
+.run-controls { position: sticky; bottom: 0; z-index: 3; padding-top: 13px; padding-bottom: 12px; margin: 14px -6px 0; padding-inline: 6px; background: var(--surface-rail); border-top: 1px solid #c4d4c8; box-shadow: 0 -9px 15px -10px #123c3736; }
+.investigate-button { margin-top: 0; min-height: 46px; font-size: 11px; gap: 8px; }
+.run-description { margin-top: 9px; font-size: 10px; line-height: 1.7; text-align: left; }
+.rail-footer { margin-top: 16px; padding-top: 17px; border-color: #c8d6cc; }
+.rail-footer p { font-size: 10px; line-height: 1.7; }
+.rail-footer strong { color: #385e49; }
+.discovery-intro, .fault-behavior-note { font-size: 11px; line-height: 1.65; }
+.discovery-kind { font-size: 12px; }
+.discovery-scope { font-size: 11px; }
+.discovery-window-title, .discovery-window .field label, .additional-fault .fault-editor .field > label { font-size: 10px; }
+.discovery-list-field input { font-size: 12px; }
+.additional-fault { background: #dde9df; border-color: #bdcfc1; border-radius: 6px; }
+.additional-fault-heading { font-size: 11px; }
+.add-fault-button, .discovery-windows .add-fault-button { font-size: 11px; min-height: 36px; }
+.additional-fault .fault-behavior-note { font-size: 10px; }
+
+/* The result opens the workbench; navigation reads as location, not progress. */
+.investigation { padding: 25px 34px 0; }
+.workspace-purpose { margin: 0; padding: 0; border: 0; }
+.workspace-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13px; font-weight: 650; color: var(--ink); }
+.workspace-breadcrumb > svg { color: var(--teal); }
+.workspace-breadcrumb > span { color: var(--muted); font-weight: 450; }
+.workspace-purpose .workspace-intro, .workspace-intro { margin-top: 5px; font-size: 12px; line-height: 1.7; color: var(--muted); }
+.workspace-purpose > strong { font-size: 18px; }
+.workspace-purpose > p { font-size: 12px; }
+.workflow-nav { gap: 0; background: transparent; border: 0; border-radius: 0; border-bottom: 1px solid var(--line); margin: 18px 0 22px; overflow: visible; align-items: stretch; }
+.workflow-nav > a, .workflow-nav > button { flex: 0 1 auto; gap: 7px; padding: 10px 14px; min-height: 43px; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; color: #5a7064; font-size: 12px; font-weight: 550; white-space: nowrap; }
+.workflow-nav > button:first-child { padding-left: 0; margin-right: 10px; }
+.workflow-nav > a:hover, .workflow-nav > button:hover { background: #eaf1ec; color: var(--teal-dark); }
+.workflow-nav > a[aria-current=location], .workflow-nav > button[aria-current=location] { color: var(--teal-dark); border-bottom-color: var(--teal); font-weight: 750; }
+.workflow-nav > * > span, .workflow-nav > :first-child > span { display: inline; width: auto; height: auto; border: 0; background: transparent; color: #557c69; border-radius: 0; font-size: 10px; }
+.workflow-nav [aria-disabled=true] { opacity: .45; }
+.page-context { font-size: 11px; margin-bottom: 21px; }
+.context-right { font-size: 10px; }
+.context-dot { width: 6px; height: 6px; background: #9dbdac; }
+.finding-section { padding-bottom: 30px; }
+.finding-topline { margin-bottom: 13px; }
+.finding-status { font-size: 11px; gap: 7px; font-weight: 650; }
+.finding-status.violation, .finding-status.baseline_failure, .finding-status.incomplete { color: #97521e; }
+.finding-section h1 { font-size: clamp(29px, 2.9vw, 42px); letter-spacing: -1.35px; line-height: 1.15; font-weight: 650; max-width: 880px; }
+.finding-description { font-size: 13px; line-height: 1.8; max-width: 850px; margin-top: 12px; color: var(--muted); }
+.recorded-tag { border-color: #c5d6cc; background: #eaf2ec; font-size: 10px; border-radius: 4px; padding: 4px 7px; }
+.run-tags { font-size: 10px; }
+.run-id { font-size: 9px; }
+.experiment-scope { font-size: 11px; gap: 14px; margin-top: 18px; }
+.experiment-scope > span + span { padding-left: 14px; }
+.validation-link { font-size: 11px; min-height: 30px; color: var(--success); }
+.validation-link.fail { color: var(--danger); }
+.outcome-strip { grid-template-columns: 1.3fr .8fr .8fr auto; gap: 24px; margin-top: 21px; padding: 22px 24px; background: #174e46; border: 1px solid #174e46; border-radius: 9px; color: #fff; }
+.outcome-primary > span, .outcome-support > span { font-size: 11px; color: #deede4; }
+.outcome-primary .subtle { font-size: 9px; color: #c9dfd3; }
+.outcome-primary strong { font-size: 38px; font-weight: 650; letter-spacing: -1.4px; color: #fff; }
+.outcome-primary > div > span { font-size: 12px; color: #d0e5d8; }
+.outcome-primary p { font-size: 10px; line-height: 1.5; color: #f9d9b0; margin-top: 8px; }
+.outcome-primary > .outcome-meter { margin-top: 10px; display: block; height: 3px; max-width: 220px; border-radius: 2px; background: #416c60; overflow: hidden; }
+.outcome-meter > span, .outcome-meter > i { display: block; height: 100%; background: #acd5b8; border-radius: inherit; }
+.outcome-meter[data-status=exceeded] > span, .outcome-meter[data-status=exceeded] > i { background: #f5bf82; }
+.outcome-support { padding-left: 22px; border-left: 1px solid #4a7466; }
+.outcome-support > strong { font-size: 28px; font-weight: 550; color: #fff; margin-top: 6px; }
+.outcome-support small { font-size: 10px; color: #d0e5d8; }
+.outcome-support p { font-size: 10px; color: #c7ded0; }
+.outcome-action { display: block; }
+.outcome-action > span { font-size: 9px; color: #c7ded0; }
+.outcome-action .button { font-size: 11px; background: #eff7f1; color: #154c40; border-color: #b6d1be; }
+.outcome-action .button:hover:not(:disabled) { background: #fff; border-color: #fff; }
+.outcome-action .button:focus-visible { outline-color: #c3e9c7; }
+
+/* Proof and decision are structured documents; charts remain instrument panels. */
+.panel { border-color: var(--line); border-radius: var(--radius-panel); background: var(--surface); box-shadow: 0 1px 2px #174d3410; }
+.section-heading { padding: 24px 24px 0; gap: 18px; }
+.section-heading h2 { font-size: 22px; font-weight: 650; line-height: 1.35; letter-spacing: -.65px; }
+.section-index { font-size: 11px; color: #536f60; gap: 7px; margin-bottom: 7px; }
+.section-description { font-size: 12px; line-height: 1.8; color: var(--muted); }
+.discovery-evidence, .repair-panel, .evaluation-panel { background: transparent; border: 0; border-top: 1px solid #cbdacf; border-radius: 0; box-shadow: none; padding-top: 25px; margin-bottom: 31px; overflow: visible; }
+.discovery-evidence .section-heading, .repair-panel .section-heading, .evaluation-panel .section-heading { padding: 0 0 14px; }
+.discovery-evidence .section-description, .repair-panel .section-description, .evaluation-panel .section-description { margin: 0 0 22px; font-size: 13px; line-height: 1.8; max-width: 900px; }
+.small-badge { font-size: 10px; padding: 5px 8px; background: #e9f4e9; border-color: #bfd7c3; color: #356345; border-radius: 4px; max-width: 180px; }
+.paired-proof { margin: 0; border-color: #ccdbd0; border-radius: 8px; background: #fff; }
+.paired-proof-case { padding: 20px 20px 17px; border-color: #d3dfd6; }
+.paired-proof-case h3 { font-size: 13px; font-weight: 650; }
+.paired-proof-case > p { font-size: 11px; color: #5d7465; }
+.paired-proof-case > strong { font-size: 30px; letter-spacing: -1px; color: #255f46; margin: 18px 0 12px; }
+.paired-proof-case > strong > small { font-size: 11px; }
+.paired-proof-case.joint { background: #fff0df; }
+.paired-proof-case.joint > strong { color: #a14c1d; }
+.paired-proof-case .criterion-result { font-size: 11px; }
+.criterion-result.pass, .evaluation-criteria .pass { color: #276648; }
+.criterion-result.fail, .evaluation-criteria .fail { color: #994b1e; }
+.interaction-statistic { margin: 14px 0 0; padding: 14px 16px; border: 0; border-left: 3px solid #8cad97; border-radius: 0; background: #eaf2e9; gap: 7px 17px; }
+.interaction-statistic > span { font-size: 11px; }
+.interaction-statistic > strong { font-size: 16px; color: #2b664b; }
+.interaction-statistic p { font-size: 11px; line-height: 1.7; }
+.paired-proof-note { margin: 14px 0 20px; font-size: 11px; }
+.discovery-accounting { margin: 19px 0; padding: 17px 0; border-color: #cad9ce; }
+.discovery-accounting > div { border-color: #cbdad0; }
+.discovery-accounting strong { font-size: 23px; color: #345d45; }
+.discovery-accounting strong small { color: #647c67; }
+.discovery-accounting span { font-size: 11px; }
+.campaign-details { margin: 17px 0; font-size: 12px; }
+.campaign-details > summary { font-size: 12px; min-height: 36px; }
+.campaign-details > p, .campaign-details .scope-caveat { font-size: 11px; line-height: 1.8; }
+.campaign-details > dl > div { font-size: 11px; }
+.record-action { margin: 21px 0 0; border-color: var(--line); }
+.record-action > p { font-size: 11px; line-height: 1.8; }
+.record-action .button { font-size: 12px; }
+
+/* Plots are brighter and their interactive affordances read at normal scale. */
+.hydrograph { margin-top: 28px; margin-bottom: 24px; }
+.hydrograph .section-heading { align-items: flex-start; }
+.segmented { background: #eaf0ec; border-color: #d0ded4; border-radius: 6px; padding: 3px; max-width: none; }
+.segmented > button { font-size: 10px; padding: 8px 10px; border-radius: 4px; }
+.segmented > button[aria-pressed=true] { background: #fff; box-shadow: 0 1px 3px #21463214; color: #174f40; }
+.chart-legend { gap: 9px 18px; padding: 18px 24px 3px; }
+.legend-item { font-size: 11px; padding: 5px 0; gap: 7px; }
+.legend-item.selected { color: #183c38; border-color: #507960; }
+.line-key { width: 20px; }
+.plot-wrap { padding-top: 15px; }
+.grid-line { stroke: #dbe5de; }
+.grid-line.vertical { stroke: #e5ece7; }
+.axis-label, .axis-unit { fill: #4b6759; }
+.trace-line { stroke-width: 1.9; opacity: .9; }
+.trace-line.active { stroke-width: 2.7; }
+.trace-line.stress { stroke: #a74f20; }
+.trace-line.single_sensor, .trace-line.single_a { stroke: #4c7a5c; }
+.trace-line.single_valve, .trace-line.single_b { stroke: #427996; }
+.trace-line.mitigation_empty { stroke: #7c853c; }
+.trace-line.mitigation_a { stroke: #7a5792; }
+.trace-line.mitigation_b { stroke: #8b763e; }
+.line-key.single_sensor, .line-key.single_a { border-color: #4c7a5c; background: transparent; }
+.line-key.single_valve, .line-key.single_b { border-color: #427996; background: transparent; }
+.line-key.mitigation_empty { border-color: #7c853c; background: transparent; }
+.line-key.mitigation_a { border-color: #7a5792; background: transparent; }
+.line-key.mitigation_b { border-color: #8b763e; background: transparent; }
+.trace-dot.single_sensor, .trace-dot.single_a, .legend-dot.single_sensor, .legend-dot.single_a { fill: #4c7a5c; background: #4c7a5c; }
+.trace-dot.single_valve, .trace-dot.single_b, .legend-dot.single_valve, .legend-dot.single_b { fill: #427996; background: #427996; }
+.threshold-line { stroke: #a0362c; }
+.threshold-label { fill: #942f26; }
+.chart-range-controls { margin-top: 12px; gap: 12px; }
+.range-buttons { border-color: #becfc2; border-radius: 5px; }
+.range-buttons button { font-size: 10px; padding: 8px 10px; color: #42614c; }
+.range-buttons button[aria-pressed=true] { background: #e0eee2; color: #204d32; }
+.chart-range-controls > span, .range-scale-note { font-size: 10px; }
+.chart-range-controls > select { font-size: 10px; min-height: 33px; border-color: #b6cbb9; border-radius: 4px; }
+.time-control { padding-top: 10px; padding-bottom: 17px; gap: 13px; }
+.time-control > label { font-size: 11px; min-width: 150px; }
+.time-control input { height: 5px; }
+.time-readings { background: #f1f6f2; }
+.time-reading { padding: 13px 18px; }
+.time-reading > span { font-size: 10px; line-height: 1.5; }
+.time-reading > strong { font-size: 17px; }
+.time-reading strong small { font-size: 10px; }
+.time-reading > small { font-size: 9px; }
+.time-reading.active { background: #e5f0e6; box-shadow: inset 0 3px #4c805c; }
+.chart-note { font-size: 10px; line-height: 1.8; padding: 11px 24px; }
+.investigation-details { grid-template-columns: .9fr 1.2fr; gap: 20px; margin-top: 24px; }
+.network-panel h2, .witness-panel h2 { font-size: 20px; }
+.network-svg { height: 245px; }
+.network-caption, .network-note { font-size: 10px; line-height: 1.75; }
+.node-inspector > label { font-size: 11px; }
+.node-inspector select { font-size: 11px; min-height: 38px; }
+.node-reading > span { font-size: 11px; }
+.node-reading > span small { font-size: 10px; }
+.node-reading > strong { font-size: 23px; }
+.fault-record { padding-top: 20px; padding-bottom: 20px; }
+.fault-record-label { font-size: 10px; color: #785727; }
+.fault-record h3 { font-size: 17px; }
+.fault-record p { font-size: 11px; }
+.bounded-copy { font-size: 12px; line-height: 1.85; }
+.witness-stats > div > span { font-size: 10px; }
+.witness-stats strong { font-size: 30px; }
+.witness-claim { font-size: 10px; line-height: 1.65; max-width: 128px; padding: 7px 9px; color: #3a6545; }
+.witness-footnote { font-size: 10px; line-height: 1.7; align-items: flex-start; }
+.condition-item strong, .condition-state, .coverage-details, .coverage-details summary { font-size: 11px; }
+.condition-item > div > span { font-size: 10px; line-height: 1.65; }
+.condition-item strong code, .condition-item > div > span code { font-size: 9px; }
+.coverage-details > p, .coverage-details > ul, .reduction-explanation, .search-stop-reason, .removal-details > p { font-size: 11px; line-height: 1.8; }
+.additional-fault-summary > span { font-size: 10px; }
+.removal-details summary { font-size: 11px; min-height: 30px; }
+.comparison-panel { margin-top: 24px; }
+.comparison-assumption { font-size: 10px; }
+.comparison-table th, .comparison-table td { padding-top: 17px; padding-bottom: 17px; }
+.comparison-table tbody th, .comparison-table thead th:first-child, .column-case { font-size: 11px; }
+.comparison-table tbody td { font-size: 13px; color: #2e533f; }
+.comparison-table thead small, .comparison-table tbody th small { font-size: 9px; }
+.primary-check-label { font-size: 8px; padding: 3px 5px; }
+.comparison-note, .comparison-verdict p { font-size: 11px; line-height: 1.8; }
+.comparison-verdict strong { font-size: 12px; }
+
+/* The ledger keeps rejection reasons beside the numbers that caused them. */
+.repair-search-fields { margin: 0 0 21px; padding: 21px; background: #fff; border-color: #cadace; border-radius: 8px; }
+.repair-grid-inputs .field label { font-size: 12px; }
+.repair-grid-inputs .field-description { font-size: 11px; }
+.repair-start .campaign-details { background: #ecf2e9; border-color: #d0dfcd; border-radius: 7px; padding: 16px 18px; }
+.repair-selection { margin: 0 0 19px; padding: 22px; border-color: #bfd7c3; background: #e8f2e6; border-radius: 8px; }
+.repair-selection h3 { font-size: 21px; }
+.repair-selection > div > span, .repair-selection p { font-size: 12px; color: #426c47; }
+.repair-selection strong { font-size: 31px; color: #2c693d; }
+.repair-selection .selection-status > span { font-size: 12px; color: #326c40; }
+.repair-selection.unqualified { background: #fff0df; border-color: #dfbd93; }
+.rejected-example { margin: 0 0 22px; padding: 16px 18px; border-color: #e0c6a1; background: #fff4e7; border-radius: 7px; color: #8f5525; }
+.rejected-example strong { font-size: 12px; }
+.rejected-example p { font-size: 12px; line-height: 1.8; color: #74532f; }
+.campaign-table-wrap { border-color: #cadace; border-radius: 7px; background: #fff; scrollbar-color: #91ad99 #edf3ed; }
+.campaign-table { min-width: 760px; font-size: 11px; }
+.campaign-table th, .campaign-table td { font-size: 11px; padding: 14px 15px; line-height: 1.7; border-color: #dde6df; }
+.campaign-table thead th { font-size: 11px; color: #436449; background: #eaf2e9; }
+.campaign-table tbody tr:hover > * { background: #f0f6f0; }
+.campaign-table .guard-fail { background: #fff0de; color: #96501f; }
+.campaign-table td small, .campaign-table th small { font-size: 10px; color: #5a745e; }
+.campaign-table td:last-child { font-family: inherit; font-size: 11px; }
+.evaluation-start { margin: 0; padding: 22px; background: #fff; border-color: #cadace; border-radius: 8px; }
+.evaluation-start strong { font-size: 14px; }
+.evaluation-start p { font-size: 12px; line-height: 1.8; }
+.evaluation-start .button { font-size: 12px; }
+.benchmark-versions { gap: 9px; }
+.benchmark-versions .benchmark-link { border: 1px solid #c4d5c8; background: #fff; padding: 8px 10px; border-radius: 5px; min-height: 35px; font-size: 11px; color: #345f45; }
+.benchmark-versions .benchmark-link:hover { background: #e7f1e7; text-decoration: none; border-color: #93b69b; }
+.evaluation-record-note { margin: 13px 0 23px; font-size: 11px; }
+.evaluation-source { margin: 0 0 18px; padding: 14px 17px; background: #edf3eb; border: 0; border-left: 3px solid #95b58f; border-radius: 0; }
+.evaluation-source > span { font-size: 12px; color: #416d41; }
+.evaluation-source p { font-size: 11px; line-height: 1.8; }
+.evaluation-verdict { margin: 0 0 20px; padding: 22px; background: #e6f2e7; border-color: #bad4bd; border-radius: 8px; }
+.evaluation-verdict h3 { font-size: 24px; letter-spacing: -.6px; }
+.evaluation-verdict p { font-size: 13px; line-height: 1.8; color: #426c48; }
+.evaluation-verdict.fail { background: #fff0df; border-color: #e4c19a; color: #955020; }
+.evaluation-verdict.fail p { color: #785430; }
+.evaluation-failure-reasons { margin: 0 0 22px; padding: 2px 0; font-size: 12px; color: #8d4f25; }
+.evaluation-failure-reasons > strong { font-size: 12px; }
+.evaluation-failure-reasons li + li { margin-top: 7px; }
+.evaluation-policy-pair { margin: 0 0 20px; padding: 18px 0; border-color: #cbdacb; }
+.evaluation-policy-pair span { font-size: 11px; }
+.evaluation-policy-pair strong { font-size: 13px; }
+.evaluation-criteria { gap: 12px 22px; margin: 0 0 22px; }
+.evaluation-criteria > span { font-size: 12px; }
+.evaluation-regression-note { margin: 0 0 22px; font-size: 12px; color: #8b5426; }
+.evaluation-table-heading { padding: 0 0 14px; }
+.evaluation-table-heading h3 { font-size: 17px; }
+.evaluation-table-heading p { font-size: 12px; }
+.evaluation-case { margin: 0; border-color: #cddbcf; }
+.evaluation-case > summary { gap: 18px; padding: 18px 4px; }
+.evaluation-case > summary:hover { background: #eaf2e9; }
+.evaluation-case-id { font-size: 13px; color: #416f42; }
+.case-transform-summary { font-size: 12px; }
+.case-transform-summary small, .case-joint-result small { font-size: 10px; color: #5a725b; }
+.case-joint-result { font-size: 13px; }
+.evaluation-case > summary > .criterion-result { font-size: 10px; min-width: 90px; }
+.evaluation-case-content > p { font-size: 12px; line-height: 1.8; }
+.evaluation-limitations { margin: 19px 0 23px; font-size: 11px; }
+.evaluation-exports { margin: 0 0 26px; gap: 12px; }
+.evaluation-exports .button { font-size: 11px; }
+.evaluation-exports .text-button { font-size: 11px; }
+.evaluation-progress, .evaluation-error, .evaluation-invalid { margin: 18px 0 24px; font-size: 12px; }
+.evaluation-progress p { font-size: 11px; }
+.information-boundary-details > p { font-size: 11px; background: #eaf1e7; border-color: #c9dbc2; }
+.sensor-inspector { margin-bottom: 28px; }
+.sensor-inspector .section-heading h2 { font-size: 22px; }
+.sensor-inspector .section-description { font-size: 12px; }
+.sensor-inspector .section-heading > .text-button { font-size: 11px; }
+.sensor-inspector-controls { grid-template-columns: 145px 1.1fr 1fr; }
+.sensor-inspector-controls .field label, .sensor-inspector-controls > p { font-size: 11px; }
+.sensor-inspector-controls .field select { font-size: 12px; }
+.sensor-inspector-controls > p span { font-size: 10px; }
+.sensor-reading-grid { background: #f2f7ef; border-color: #cbdcc3; border-radius: 7px; }
+.sensor-reading-grid > div { border-color: #cbdcc3; }
+.sensor-reading-grid > div > span { font-size: 12px; color: #486c42; }
+.sensor-reading-grid strong { font-size: 30px; color: #366c34; }
+.sensor-reading-grid p { font-size: 11px; line-height: 1.8; }
+.sensor-reading-grid > div:last-child { background: #e6f0de; }
+.sensor-hypothesis { border-color: #91b078; background: #edf4e5; border-radius: 0; }
+.sensor-hypothesis strong { font-size: 12px; color: #466c38; }
+.sensor-hypothesis p { font-size: 11px; }
+
+/* Evidence, overlays, and recovery retain the same clear type hierarchy. */
+.evidence-panel { background: #e3eee3; border-color: #bfd3bd; border-radius: 9px; padding: 25px; margin-top: 29px; }
+.evidence-seal { border-color: #abc5a5; color: #436f3a; background: #f0f7ec; }
+.evidence-copy h2 { font-size: 23px; color: #28592e; }
+.evidence-copy p { font-size: 12px; line-height: 1.8; color: #456941; }
+.evidence-copy .section-index { font-size: 11px; }
+.evidence-id, .evidence-id code { font-size: 10px; color: #46663c; }
+.provenance-line, .provenance-line code { font-size: 10px; line-height: 1.7; overflow-wrap: anywhere; }
+.workspace-footer { font-size: 10px; line-height: 1.8; padding: 22px 0; margin-top: 28px; }
+.footer-brand { font-size: 12px; color: #365e40; }
+.error-banner, .progress-banner, .stale-banner { border-radius: 7px; font-size: 12px; line-height: 1.7; }
+.error-banner p, .progress-banner p { font-size: 12px; }
+.stale-banner { background: #fff5df; color: #795f23; border-color: #dac28c; }
+.validation-dialog { border-color: #a8c0ae; border-radius: 12px; width: min(820px, calc(100vw - 40px)); max-height: calc(100dvh - 48px); box-shadow: var(--shadow-dialog); }
+.validation-dialog::backdrop { background: #0d302a88; backdrop-filter: blur(4px); }
+.dialog-inner { padding: 30px; }
+.dialog-heading h2 { font-size: 29px; letter-spacing: -.85px; font-weight: 650; }
+.dialog-heading .icon-button { background: #eef4ee; border-color: #d3e1d2; }
+.dialog-intro { font-size: 13px; line-height: 1.8; }
+.validation-summary { padding: 14px 17px; font-size: 13px; color: #2b663d; border-color: #bcd6bc; background: #e9f4e7; border-radius: 7px; }
+.validation-summary > span:last-child { font-size: 11px; }
+.check-list strong { font-size: 12px; }
+.check-list p { font-size: 12px; line-height: 1.8; }
+.check-list > li > span { font-size: 10px; }
+.check-list > li { padding: 17px 0; gap: 12px; }
+.limitations { padding: 19px; background: #f0f5eb; border-radius: 7px; }
+.limitations h3 { font-size: 13px; }
+.limitations li, .limitations p { font-size: 12px; }
+.dialog-provenance { font-size: 11px; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; }
+.dialog-provenance code { font-size: 10px; }
+.artifact-checks { border-radius: 7px; padding: 15px 17px; }
+.artifact-checks > summary { font-size: 12px; min-height: 30px; }
+.artifact-checks > summary > span { font-size: 10px; }
+.artifact-checks .check-list strong { font-size: 10px; }
+.dialog-footer { margin-top: 26px; padding-top: 20px; gap: 14px; }
+.model-import-dialog { width: min(840px, calc(100vw - 40px)); }
+.model-import-dialog .dialog-heading h2 { font-size: 29px; }
+.import-stage-strip > span { font-size: 12px; color: #607d64; }
+.import-stage-strip .current { color: #245e35; }
+.import-stage-strip .current > span { color: #fff; border-color: #2e7143; background: #2e7143; }
+.import-scope-note, .import-warnings > strong, .import-warnings > ul { font-size: 12px; }
+.import-error strong, .import-error p { font-size: 12px; }
+.import-model-summary > div > strong { font-size: 21px; }
+.import-model-summary > div > span { font-size: 10px; }
+.import-accepted { font-size: 11px; color: #326a3c; }
+.import-facts { padding: 18px; background: #ebf3e8; border-color: #c7d9bf; border-radius: 7px; }
+.import-facts dt { font-size: 11px; }
+.import-facts dd { font-size: 22px; color: #3b6634; }
+.import-mapping h3 { font-size: 17px; }
+.import-mapping > div > p, .import-targets > p { font-size: 12px; }
+.import-mapping .field input, .import-mapping .field select { font-size: 12px; min-height: 42px; }
+.import-targets > summary { font-size: 12px; min-height: 34px; }
+.import-targets > summary > span { font-size: 10px; }
+.import-target-grid > .field label { font-size: 11px; }
+.import-hash > span, .import-hash code { font-size: 10px; }
+.model-import-dialog .dialog-footer .button { font-size: 12px; }
+
+/* Reflow follows the actual failure points of the bench and its data tables. */
+@media (min-width: 1600px) {
+  .workspace-layout { grid-template-columns: 310px minmax(0, 1fr); }
+  .setup-content { padding-inline: 26px; }
+  .investigation { padding-inline: 44px; }
+  .masthead { padding-inline: max(30px, calc((100vw - 1740px) / 2)); }
+}
+@media (max-width: 1280px) and (min-width: 901px) {
+  .workspace-layout { grid-template-columns: 268px minmax(0, 1fr); }
+  .setup-content { padding-inline: 19px; }
+  .investigation { padding-inline: 26px; }
+  .workflow-nav > a, .workflow-nav > button { padding-inline: 10px; font-size: 11px; }
+  .outcome-strip { grid-template-columns: 1.25fr .85fr .85fr; gap: 18px; padding: 21px; }
+  .outcome-action { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #416c60; padding-top: 15px; gap: 16px; }
+  .outcome-action > span { margin: 0; font-size: 10px; }
+  .outcome-support { padding-left: 17px; }
+  .outcome-primary strong { font-size: 35px; }
+  .outcome-support > strong { font-size: 25px; }
+  .paired-proof-case { padding: 18px 14px; }
+  .paired-proof-case > strong { font-size: 25px; }
+  .paired-proof-case > p { font-size: 10px; }
+  .investigation-details { grid-template-columns: 1fr; }
+  .segmented { max-width: 220px; }
+}
+@media (max-width: 1100px) {
+  .sensor-inspector-controls { grid-template-columns: 145px 1fr; }
+  .sensor-inspector-controls > p { grid-column: 1 / -1; }
+  .sensor-reading-grid > div { padding: 16px; }
+  .sensor-reading-grid strong { font-size: 25px; }
+  .evaluation-start { align-items: flex-start; }
+  .campaign-table { min-width: 740px; }
+}
+@media (max-width: 900px) {
+  .masthead { height: 66px; padding-inline: 22px; gap: 15px; }
+  .workspace-name, .masthead-divider { display: none; }
+  .workspace-layout { display: block; }
+  .setup-rail { border-right: 0; border-bottom: 1px solid #bed1c3; }
+  .setup-content { position: static; display: none; padding: 24px; }
+  .setup-rail.is-open .setup-content { display: block; }
+  .mobile-setup-toggle { display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%; min-height: 54px; padding: 13px 24px; font-size: 12px; }
+  .mobile-setup-toggle > span { display: flex; align-items: center; gap: 8px; }
+  .mobile-setup-toggle > span:first-child { font-weight: 650; }
+  .mobile-setup-toggle > span:last-child { color: #506e59; font-size: 11px; }
+  .setup-rail.is-open .mobile-setup-toggle { border-bottom: 1px solid #cbdacf; }
+  .setup-rail.is-open .mobile-setup-toggle > span:last-child > svg { transform: rotate(180deg); }
+  .setup-heading, .rail-footer { display: none; }
+  #experiment-form > fieldset { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 22px; }
+  #experiment-form > fieldset > .experiment-mode, #experiment-form > fieldset > .discovery-setup, #experiment-form > fieldset > .additional-faults, #experiment-form > fieldset > .scenario-settings, #experiment-form > fieldset > .advanced-settings { grid-column: 1 / -1; }
+  .field-group { margin-top: 4px; }
+  .run-controls { margin-top: 18px; }
+  .investigate-button { font-size: 12px; }
+  .investigation { padding: 24px 26px 0; }
+  .workflow-nav { margin-top: 16px; }
+  .workflow-nav > a, .workflow-nav > button { flex: 1 1 auto; font-size: 11px; padding-inline: 10px; }
+  .outcome-strip { grid-template-columns: 1.3fr 1fr 1fr; gap: 20px; padding: 22px; }
+  .outcome-action { display: flex; align-items: center; justify-content: space-between; grid-column: 1 / -1; border-top: 1px solid #416c60; padding-top: 15px; }
+  .outcome-action > span { margin: 0; font-size: 10px; }
+  .finding-section h1 { font-size: 36px; }
+  .context-right { display: inline; }
+  .network-panel { display: block; }
+  .network-svg { height: 260px; }
+  .node-inspector { border-top: 1px solid var(--line); padding-top: 15px; margin-top: 0; }
+  .node-reading { flex-direction: row; }
+  .investigation-details { grid-template-columns: 1fr 1.2fr; }
+  .time-readings { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .time-reading:nth-child(odd) { border-left: 0; }
+  .time-reading:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .evidence-panel { display: flex; }
+  .evidence-actions { flex-direction: column; align-items: flex-start; margin: 0; gap: 8px; }
+}
+@media (max-width: 680px) {
+  .masthead { height: 64px; padding-inline: 18px; }
+  .brand { font-size: 23px; }
+  .brand-mark { width: 31px; height: 31px; border-radius: 8px 8px 8px 2px; }
+  .engine-status { font-size: 9px; gap: 6px; }
+  .masthead-right { gap: 0; }
+  .source-link { display: none; }
+  .mobile-setup-toggle { padding-inline: 18px; font-size: 12px; gap: 10px; }
+  .mobile-setup-toggle > span:last-child { max-width: 44%; font-size: 10px; text-align: right; }
+  .setup-content { padding: 21px 18px; }
+  #experiment-form > fieldset { grid-template-columns: 1fr; gap: 0; }
+  .policy-parameters { grid-column: 1 / -1; }
+  .field-group { margin-top: 6px; padding-top: 18px; }
+  .field input, .field select, .node-inspector select, .scenario-settings .field input { font-size: 16px; min-height: 44px; }
+  .field > label, .field-description, .discovery-intro, .discovery-setup .field-description { font-size: 12px; }
+  .field-description, .discovery-intro { line-height: 1.7; }
+  .experiment-mode > button { font-size: 11px; min-height: 42px; }
+  .registered-model-context > summary, .policy-parameters > summary, .scenario-settings > summary { font-size: 12px; }
+  .discovery-list-field input { font-size: 16px; }
+  .run-description { font-size: 11px; }
+  .investigation { padding: 21px 18px 0; }
+  .workspace-breadcrumb { font-size: 12px; gap: 6px; }
+  .workspace-purpose .workspace-intro, .workspace-purpose > p { font-size: 12px; line-height: 1.75; }
+  .workflow-nav { display: flex; overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin; scrollbar-color: #afc3b1 transparent; margin: 15px 0 21px; padding-bottom: 1px; }
+  .workflow-nav > a, .workflow-nav > button { flex: 0 0 auto; min-height: 43px; justify-content: flex-start; padding: 9px 12px; font-size: 11px; border-right: 0; }
+  .workflow-nav > :nth-child(-n + 2) { border-bottom: 2px solid transparent; }
+  .workflow-nav > a[aria-current=location], .workflow-nav > button[aria-current=location] { border-bottom-color: var(--teal); }
+  .workflow-nav > button:first-child { padding-left: 0; margin-right: 3px; }
+  .page-context { margin-bottom: 17px; font-size: 10px; }
+  .context-right { display: none; }
+  .finding-topline { gap: 8px; align-items: flex-start; margin-bottom: 13px; }
+  .finding-status { font-size: 10px; }
+  .recorded-tag { font-size: 9px; padding: 3px 5px; }
+  .finding-section h1 { font-size: clamp(29px, 7.7vw, 36px); line-height: 1.17; letter-spacing: -.95px; }
+  .finding-description { font-size: 13px; line-height: 1.8; }
+  .experiment-scope { align-items: flex-start; gap: 10px 14px; font-size: 11px; }
+  .experiment-scope > span:first-child { display: block; width: 100%; }
+  .experiment-scope > span + span { border-left: 0; padding-left: 0; }
+  .validation-link { margin-left: auto; font-size: 11px; padding: 0; min-height: 20px; }
+  .outcome-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 19px 16px; padding: 20px; margin-top: 20px; border-radius: 8px; }
+  .outcome-primary { grid-column: 1 / -1; padding-bottom: 17px; border-bottom: 1px solid #416c60; }
+  .outcome-primary > span { font-size: 12px; }
+  .outcome-primary .subtle { display: inline; font-size: 10px; }
+  .outcome-primary strong { font-size: 42px; }
+  .outcome-primary > .outcome-meter { max-width: none; }
+  .outcome-primary p { font-size: 11px; }
+  .outcome-support { border-left: 0; padding-left: 0; }
+  .outcome-support + .outcome-support { border-left: 1px solid #416c60; padding-left: 16px; }
+  .outcome-support > span { font-size: 10px; }
+  .outcome-support > strong { font-size: 26px; }
+  .outcome-support p { font-size: 9px; }
+  .outcome-action { display: block; text-align: left; padding-top: 17px; }
+  .outcome-action .button { width: 100%; min-height: 42px; font-size: 12px; }
+  .outcome-action > span { font-size: 10px; text-align: center; margin-top: 8px; }
+  .finding-section { padding-bottom: 26px; }
+  .section-heading { padding: 21px 19px 0; }
+  .section-heading h2, .network-panel h2, .witness-panel h2 { font-size: 21px; }
+  .section-index { font-size: 11px; }
+  .section-description { font-size: 12px; margin-inline: 19px; }
+  .discovery-evidence, .repair-panel, .evaluation-panel { padding-top: 22px; margin-bottom: 27px; }
+  .discovery-evidence .section-heading, .repair-panel .section-heading, .evaluation-panel .section-heading { padding: 0 0 14px; }
+  .discovery-evidence .section-description, .repair-panel .section-description, .evaluation-panel .section-description { margin: 0 0 19px; font-size: 12px; }
+  .discovery-evidence .small-badge { font-size: 10px; margin-top: 11px; }
+  .paired-proof { margin: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .paired-proof-case { padding: 18px 15px; }
+  .paired-proof-case h3 { font-size: 12px; }
+  .paired-proof-case > p { font-size: 10px; }
+  .paired-proof-case > strong { font-size: 27px; }
+  .paired-proof-case .criterion-result { font-size: 10px; }
+  .interaction-statistic { margin-inline: 0; padding: 13px 14px; }
+  .interaction-statistic p { font-size: 11px; }
+  .paired-proof-note { margin-inline: 0; font-size: 11px; }
+  .discovery-accounting { margin-inline: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 17px; }
+  .discovery-accounting > div:nth-child(2) { border: 0; }
+  .discovery-accounting span { font-size: 11px; }
+  .campaign-details, .record-action { margin-inline: 0; }
+  .campaign-details > summary, .campaign-details > p { font-size: 12px; }
+  .campaign-details > dl > div, .campaign-details .scope-caveat { font-size: 11px; }
+  .record-action { margin-top: 19px; }
+  .record-action > p { font-size: 11px; }
+  .record-action .button { min-height: 44px; font-size: 12px; }
+  .hydrograph { margin-top: 25px; }
+  .hydrograph .section-heading { display: block; }
+  .segmented { margin-top: 15px; max-width: none; justify-content: flex-start; width: fit-content; }
+  .segmented > button { font-size: 10px; padding: 8px; }
+  .chart-legend { padding-inline: 19px; gap: 6px 14px; }
+  .legend-item { font-size: 10px; }
+  .chart-range-controls { margin-inline: 19px; }
+  .chart-range-controls > span { margin-left: 0; font-size: 9px; }
+  .chart-range-controls > select { font-size: 11px; min-height: 36px; }
+  .range-buttons button { min-height: 34px; padding-inline: 8px; font-size: 10px; }
+  .range-scale-note { font-size: 10px; }
+  .time-control { padding-inline: 14px; gap: 9px; flex-wrap: wrap; }
+  .time-control > label { width: 100%; min-width: 0; font-size: 11px; }
+  .time-control input { flex: 1; width: auto; }
+  .time-reading { padding: 13px 14px; }
+  .time-reading > span { font-size: 10px; }
+  .time-reading > strong { font-size: 17px; }
+  .time-reading > small { font-size: 9px; }
+  .chart-note { padding-inline: 19px; font-size: 10px; }
+  .investigation-details { grid-template-columns: 1fr; gap: 20px; }
+  .network-panel { display: block; }
+  .network-svg { height: 230px; }
+  .network-caption, .network-note { font-size: 10px; }
+  .node-reading > span { font-size: 12px; }
+  .node-reading > span small { font-size: 10px; }
+  .bounded-copy { font-size: 12px; }
+  .fault-record { padding-inline: 19px; }
+  .fault-record h3 { font-size: 16px; }
+  .fault-record h3 span { font-size: 12px; }
+  .fault-record p { font-size: 11px; }
+  .witness-stats { gap: 15px; }
+  .witness-stats > div > span { font-size: 9px; }
+  .witness-claim { font-size: 9px; max-width: 106px; }
+  .comparison-note { font-size: 11px; }
+  .comparison-table-wrap { margin-inline: 19px; }
+  .comparison-table th, .comparison-table td { padding-inline: 12px; }
+  .comparison-table tbody td { font-size: 12px; }
+  .horizontal-scroll-hint { font-size: 10px; }
+  .repair-search-fields, .repair-selection, .rejected-example { margin-inline: 0; padding: 18px; }
+  .repair-grid-inputs { grid-template-columns: 1fr; gap: 0; }
+  .repair-grid-inputs .field-description { font-size: 12px; }
+  .repair-selection h3 { font-size: 20px; }
+  .repair-selection > div > span, .repair-selection p { font-size: 12px; }
+  .rejected-example p { font-size: 12px; }
+  .benchmark-versions { margin-top: 13px; gap: 8px; }
+  .evaluation-panel .benchmark-link { margin-top: 0; font-size: 11px; }
+  .evaluation-start { margin-inline: 0; padding: 19px; }
+  .evaluation-start strong { font-size: 14px; }
+  .evaluation-start p { font-size: 12px; }
+  .evaluation-start .button { font-size: 11px; min-height: 44px; }
+  .evaluation-record-note, .evaluation-source, .evaluation-verdict, .evaluation-policy-pair, .evaluation-criteria, .evaluation-regression-note, .evaluation-failure-reasons, .evaluation-case, .evaluation-exports, .evaluation-limitations, .evaluation-progress, .evaluation-error, .evaluation-invalid { margin-inline: 0; }
+  .evaluation-verdict { padding: 19px; gap: 11px; }
+  .evaluation-verdict h3 { font-size: 21px; }
+  .evaluation-verdict p { font-size: 12px; }
+  .evaluation-source p, .evaluation-record-note { font-size: 11px; }
+  .evaluation-failure-reasons { font-size: 12px; }
+  .evaluation-policy-pair { grid-template-columns: 1fr; gap: 12px; }
+  .evaluation-policy-pair > svg { transform: rotate(90deg); }
+  .evaluation-policy-pair strong { font-size: 12px; }
+  .evaluation-criteria { gap: 12px; }
+  .evaluation-criteria > span { font-size: 11px; }
+  .evaluation-table-heading { padding-inline: 0; }
+  .evaluation-table-heading p { font-size: 12px; }
+  .evaluation-case > summary { display: grid; grid-template-columns: 30px minmax(0, 1fr) 18px; gap: 10px; }
+  .case-transform-summary { font-size: 12px; }
+  .case-transform-summary small, .case-joint-result small { font-size: 10px; }
+  .case-joint-result { font-size: 12px; white-space: normal; }
+  .evaluation-case > summary > .criterion-result { font-size: 11px; justify-content: flex-start; }
+  .evaluation-case-content > p, .evaluation-limitations { font-size: 11px; }
+  .evaluation-exports { display: grid; grid-template-columns: 1fr; }
+  .evaluation-exports .button { font-size: 12px; min-height: 44px; white-space: normal; }
+  .evaluation-exports .text-button { font-size: 11px; margin: 0; }
+  .campaign-table thead th, .campaign-table td:last-child { font-size: 11px; }
+  .sensor-inspector .section-heading h2 { font-size: 21px; }
+  .sensor-inspector-controls { margin-inline: 19px; grid-template-columns: 1fr; gap: 14px; }
+  .sensor-inspector-controls .field label, .sensor-inspector-controls > p { font-size: 12px; }
+  .sensor-inspector-controls .field select { font-size: 16px; }
+  .sensor-reading-grid { margin-inline: 19px; grid-template-columns: 1fr; }
+  .sensor-reading-grid > div { padding: 17px; }
+  .sensor-reading-grid strong { font-size: 29px; }
+  .sensor-reading-grid p { font-size: 11px; }
+  .sensor-hypothesis { margin-inline: 19px; padding: 15px; }
+  .sensor-hypothesis p { font-size: 12px; }
+  .evidence-panel { display: block; padding: 21px; }
+  .evidence-copy h2 { font-size: 22px; }
+  .evidence-copy p { font-size: 12px; }
+  .evidence-actions { margin-top: 18px; align-items: stretch; flex-direction: column; gap: 10px; }
+  .evidence-actions > div { justify-content: flex-start; }
+  .evidence-actions .button { font-size: 12px; }
+  .evidence-id, .evidence-id code { font-size: 10px; }
+  .provenance-line { gap: 9px 15px; font-size: 10px; }
+  .workspace-footer { display: flex; flex-wrap: wrap; gap: 8px 15px; font-size: 10px; }
+  .workspace-footer > p { max-width: 100%; margin: 0; }
+  .error-banner, .progress-banner, .stale-banner { padding: 14px; gap: 9px; font-size: 12px; align-items: flex-start; }
+  .error-banner { flex-wrap: wrap; }
+  .error-banner > div { min-width: calc(100% - 35px); }
+  .error-banner p, .progress-banner p { font-size: 12px; }
+  .validation-dialog, .model-import-dialog { width: calc(100vw - 24px); max-height: calc(100dvh - 24px); border-radius: 10px; }
+  .dialog-inner { padding: 23px 19px; }
+  .dialog-heading h2, .model-import-dialog .dialog-heading h2 { font-size: 25px; }
+  .dialog-intro { font-size: 12px; }
+  .dialog-provenance { grid-template-columns: 83px minmax(0, 1fr); font-size: 11px; gap: 10px; }
+  .dialog-provenance code { font-size: 9px; }
+  .dialog-footer { display: flex; flex-wrap: wrap; gap: 10px; }
+  .dialog-footer .button { flex: 1; min-width: 120px; font-size: 11px; padding: 10px; white-space: normal; }
+  .model-import-dialog .dialog-footer .button { font-size: 11px; min-height: 44px; }
+  .model-import-dialog .dialog-footer .text-button { font-size: 11px; }
+  .validation-summary { font-size: 12px; padding: 13px; gap: 8px; }
+  .validation-summary > span:last-child { font-size: 10px; }
+  .check-list strong, .check-list p { font-size: 12px; }
+  .check-list > li > span { font-size: 9px; }
+  .limitations { padding: 15px; }
+  .limitations li, .limitations p { font-size: 12px; }
+  .artifact-checks { padding: 13px; }
+  .artifact-checks > summary { font-size: 11px; }
+  .artifact-checks > summary > span { font-size: 9px; }
+  .import-stage-strip { gap: 17px; }
+  .import-stage-strip > span { font-size: 11px; }
+  .import-model-summary > div > strong { font-size: 19px; }
+  .import-accepted { font-size: 10px; }
+  .import-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 16px; gap: 18px; }
+  .import-facts dt { font-size: 11px; }
+  .import-facts dd { font-size: 21px; }
+  .import-mapping h3 { font-size: 16px; }
+  .import-mapping-fields, .import-target-grid { grid-template-columns: 1fr; }
+  .import-mapping .field input, .import-mapping .field select { font-size: 16px; }
+  .import-targets > summary { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  .spin { animation: none; }
+}
+
+/* Timing is derived from the selected faults; the ruler conveys sequence only. */
+.outcome-primary > .outcome-meter { position: relative; overflow: visible; }
+.outcome-meter > .outcome-meter-fill { max-width: 100%; }
+.outcome-meter > .outcome-meter-limit { position: absolute; top: -3px; width: 2px; height: 9px; border-radius: 1px; background: #fff; transform: translateX(-1px); }
+.fault-sequence { margin-top: 17px; padding: 17px 19px; border: 1px solid #cfddd2; border-radius: 7px; background: #edf4ee; }
+.fault-sequence-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 15px; margin-bottom: 14px; }
+.fault-sequence-heading strong { font-size: 12px; font-weight: 650; color: #365e43; }
+.fault-sequence-heading > span { font-size: 10px; color: #526e57; }
+.fault-sequence-row { display: grid; grid-template-columns: 135px minmax(0, 1fr); align-items: center; gap: 20px; }
+.fault-sequence-row + .fault-sequence-row { margin-top: 10px; }
+.fault-sequence-label { display: flex; align-items: center; gap: 9px; font-size: 11px; color: #365b41; }
+.fault-sequence-label .treatment-code { display: inline-flex; align-items: center; justify-content: center; margin: 0; min-width: 23px; height: 23px; font-size: 10px; background: #fff; border-color: #b6ccbb; border-radius: 4px; color: #385f42; }
+.fault-sequence-label small { display: block; font-size: 10px; color: #5e775f; margin-top: 2px; }
+.fault-sequence-track { position: relative; height: 17px; background-color: #dce9df; background-image: linear-gradient(to right, #b6cdbb 1px, transparent 1px); background-size: 25% 100%; border-right: 1px solid #b6cdbb; border-radius: 2px; }
+.fault-sequence-bar { display: block; position: absolute; top: 3px; bottom: 3px; border-radius: 2px; background: #4a8161; }
+.fault-sequence-bar.valve { background: #a9602b; }
+@media (max-width: 680px) {
+  .fault-sequence { padding: 15px; }
+  .fault-sequence-heading { display: block; margin-bottom: 14px; }
+  .fault-sequence-heading > span { display: block; margin-top: 4px; font-size: 10px; }
+  .fault-sequence-row { grid-template-columns: 107px minmax(0, 1fr); gap: 12px; }
+  .fault-sequence-label { font-size: 10px; gap: 7px; }
+}
+
+
+/* Navigation and configuration remain reachable in long evidence reports. */
+:root { --masthead-height: 72px; --section-nav-height: 46px; }
+html { scroll-padding-top: 0; }
+#setup-content { scroll-margin-top: calc(var(--masthead-height) + 12px); }
+.masthead { position: sticky; top: 0; z-index: 40; }
+.workflow-nav { position: sticky; top: var(--masthead-height); z-index: 25; background: var(--paper); box-shadow: 0 7px 10px -10px #163e3355; }
+.workflow-nav > a:focus-visible, .workflow-nav > button:focus-visible { outline-offset: -3px; border-radius: 3px; }
+.setup-content { top: var(--masthead-height); max-height: calc(100dvh - var(--masthead-height)); overflow-y: auto; scrollbar-width: thin; scrollbar-color: #a3bcaa transparent; overscroll-behavior: contain; }
+#result-title, #hydrograph-title, #response-search, #robustness-evaluation, #evidence-title,
+.discovery-evidence, .repair-panel, .evaluation-panel,
+.discovery-evidence h2:focus, .repair-panel h2:focus, .evaluation-panel h2:focus {
+  scroll-margin-top: calc(var(--masthead-height) + var(--section-nav-height) + 20px);
+}
+@media (max-width: 900px) {
+  :root { --masthead-height: 66px; }
+  .setup-content { max-height: none; overflow: visible; overscroll-behavior: auto; }
+}
+@media (max-width: 680px) {
+  :root { --masthead-height: 64px; --section-nav-height: 47px; }
+}
+
+/* Full-width action shelf occludes scrolled fields at the rail's lower edge. */
+.setup-content { --rail-inset: 22px; padding-inline: var(--rail-inset); padding-bottom: 0; }
+.run-controls { margin-inline: calc(-1 * var(--rail-inset)); padding-inline: var(--rail-inset); padding-bottom: 18px; bottom: 0; }
+.rail-footer { margin-bottom: 22px; }
+@media (min-width: 1600px) { .setup-content { --rail-inset: 26px; } }
+@media (max-width: 1280px) and (min-width: 901px) { .setup-content { --rail-inset: 19px; } }
+@media (max-width: 900px) { .setup-content { --rail-inset: 24px; } }
+@media (max-width: 680px) { .setup-content { --rail-inset: 18px; } }
+
+/* Small pending validation labels need normal-text contrast on the dialog. */
+.check-list > li.pending { color: #856222; }
