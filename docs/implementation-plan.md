@@ -13,7 +13,7 @@ Status: working implementation completed locally, September 20, 2026; final deli
 | 2 — investigation and reduction | A two-condition case reduces to one retained condition through 5 native calls; matched fallback exposes downstream regressions. |
 | 3 — workbench | Production React app supports fresh runs, recorded demo, trace/time/fault inspection, removal evidence, comparison, export and replay. Desktop, 390px and 320px flows inspected. |
 | 4 — independent evidence | 60 local tests pass. Five recorded configurations replay exactly on this Mac. Exported archive compiles/replays in a separate directory without repo access. |
-| 5 — delivery | Setup, Dockerfile, GitHub Actions, source attribution, four-minute narration and submission copy prepared. Hosting account selection, final video recording and actual submission remain. CI startup is being diagnosed; no Ubuntu pass claimed yet. |
+| 5 — delivery | Setup, Dockerfile, GitHub Actions, source attribution, four-minute narration and submission copy prepared. Hosting account selection, final video recording and actual submission remain. GitHub blocks CI runners because of account billing; no Ubuntu pass claimed. |
 
 Current local app: `http://127.0.0.1:8787`. Tracked welcome fixture:
 `fixtures/demo-packet.json.gz`, experiment `a3fd3abf0ac0fe120dcb`.

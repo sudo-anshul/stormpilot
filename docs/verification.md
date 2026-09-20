@@ -55,9 +55,15 @@ sticky-sidebar capture. Ordinary viewport inspection confirmed the live layout.
 
 ## Delivery checks still separate
 
-The private GitHub repository and milestone pushes are verified. The first
-Actions run stopped before any jobs with `startup_failure`; this is being
-diagnosed and is not counted as an Ubuntu test pass. The local Docker daemon was
-unavailable, so the provided Dockerfile has not yet been built locally. The
-hosting account has not been selected in this session. Public deployment, final
-video recording, judge invitations and Devpost submission have not been performed.
+The private GitHub repository and milestone pushes are verified. Both the first
+push and an explicit workflow dispatch stopped before any jobs with
+`startup_failure`. The signed-in GitHub run page exposed the cause: an account
+billing banner and the annotation, “The job was not started because recent
+account payments have failed or your spending limit needs to be increased.”
+The workflow parses and is registered active. No Ubuntu pass is claimed and no
+payment/account settings were changed. Billing resolution is a user account step.
+
+The local Docker daemon was unavailable, so the provided Dockerfile has not yet
+been built locally. The hosting account has not been selected in this session.
+Public deployment, final video recording, judge invitations and Devpost submission
+have not been performed.
