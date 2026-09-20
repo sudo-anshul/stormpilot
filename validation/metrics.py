@@ -126,12 +126,15 @@ def compute_metrics(
             row = right if integration == "right_rectangle" else left
             flood_parts.append(dt * row["total_flooding_m3s"])
             excess_parts.append(dt * max(row["downstream_flow_m3s"] - threshold, 0))
-    result = {
-        "flood_volume_m3": math.fsum(flood_parts),
-        "downstream_excess_volume_m3": math.fsum(excess_parts),
-        "peak_downstream_flow_m3s": max(row["downstream_flow_m3s"] for row in rows),
-        "terminal_storage_m3": rows[-1]["total_storage_m3"],
-    }
+    try:
+        result = {
+            "flood_volume_m3": math.fsum(flood_parts),
+            "downstream_excess_volume_m3": math.fsum(excess_parts),
+            "peak_downstream_flow_m3s": max(row["downstream_flow_m3s"] for row in rows),
+            "terminal_storage_m3": rows[-1]["total_storage_m3"],
+        }
+    except OverflowError:
+        raise EvidenceError("trace integral overflows a finite physical metric") from None
     for name, value in result.items():
         finite_number(value, name)
     return result

@@ -143,27 +143,50 @@ Run these commands from the repository root:
 
 ```sh
 python3 -m unittest discover -s validation -t . -v
-python3 -m validation.validate_packet engine/runs/first-packet.json --root .
+python3 engine/cli.py investigate --request engine/examples/reduction-request.json --output packet.json
+python3 -m validation.validate_packet packet.json --root .
 python3 -m validation.validate_packet packet.json --root extracted-packet --output validation-report.json
+python3 engine/cli.py replay --request packet.json --output replayed-packet.json
+python3 -m validation.replay packet.json replayed-packet.json --root . --output replay-report.json
 ```
 
 The command exits with `0` for passed recorded checks, `1` for failed evidence, and `2` for partial evidence. Its report includes `status`, individual `checks` with `passed`, `failed` or `unperformed`, per-run `computed_metrics`, independently evaluated `claims`, `scope: "recorded_evidence"`, and `replay_status: "unperformed"`. A record check never sets a replay badge. Artifact identity is partial when no artifact root or manifest is supplied. Missing numerical diagnostics remain unperformed; supplied nonfinite diagnostics fail.
 
 Source/interface review and field calibration are explicit unperformed categories in the automatic report, outside its arithmetic/integrity pass status. Source review by a human or separate agent must be documented independently, tied to the actual code being shipped. A producer's own validation flags and explanatory prose are not used to accept evidence.
 
+`validation.replay.compare_replay(original, replayed, root_path)` compares a freshly executed replay against the original. It checks both packets, unchanged experiment/request/source identities, logical run IDs and treatments, all physical trace rows, recomputed metrics, and per-node flood/peak results. It ignores creation times, runtime and report CPU timings. The current replay comparator expects the same routing sample grid within timestamp tolerance. The simulator CLI re-executes all unique recorded controller/fault treatments; search declarations are retained for comparison, but the search procedure itself is not re-executed. Comparing two copied packets alone cannot establish execution.
+
 ## Architecture review and observed checks
 
 The implementation plan's process-isolated native engine, fixed policy library, shared exogenous catalog and separate validation module support the intended evidence boundary. A native engine with global state must not run competing simulations in a shared thread. Keeping all exogenous fault boundaries in every ablation's step schedule avoids a numerical step change being mistaken for the removed fault's effect.
 
-The first stable native packet was checked against three complete 9,361-row traces. All independently recomputed metrics, native flooding crosschecks, common contexts, horizon coverage and continuity bounds passed. Its artifact manifest was not yet included, so the recorded report was partial and replay was unperformed. The result showed 0 m³ nominal flooding, approximately 1,618.64 m³ under the stressed policy, and approximately 1,267.83 m³ under the all-open fallback. The fallback increased positive downstream excess volume from 0 to approximately 2,649.28 m³ and peak downstream discharge from approximately 0.4901 to 6.2656 m³/s. This supports a tradeoff, not an unqualified improvement.
+The final frozen reduction packet (`engine/runs/final-reduction-packet.json`, experiment `1841c184f7f7d0b3fbcb`) passed **131 recorded checks**, with zero failures. Three explicitly separate categories remain unperformed by that invocation: independently executed replay, policy information-access proof, and field calibration. Source provenance, canonical forcing/settings/property hashes, model/rainfall reconstruction, all five run traces, native flood crosschecks, continuity, paired removals, fallback guards and recorded search coverage passed. The packet used five unique simulations from a budget of eight.
 
-Source review identified two presentation/correctness issues before integration: terminal water originally counted nodes only and must also include link water; sensor “dropout” is implemented as a zero reading, so it must be described as a zero-reading sensor failure. The current `commands` interface receives perturbed observations from its own run, static geometry and policy parameters; the call does not expose future rainfall or the fault catalog. That is a source review of this implementation, not a proof about arbitrary uploaded controllers.
+| Physical metric | Nominal | Reduced stressed case | All-open fallback |
+|---|---:|---:|---:|
+| Flood volume (m³) | 0.00 | 1,621.45 | 1,275.42 |
+| Positive downstream excess volume above 0.5 m³/s (m³) | 0.00 | 0.00 | 2,661.93 |
+| Peak positive downstream discharge (m³/s) | 0.49155 | 0.49009 | 6.35534 |
+| Terminal node-and-link water volume (m³) | 4.65102 | 4.65102 | 4.59102 |
 
-The 31 focused validator tests currently cover independent irregular-interval arithmetic, threshold crossing, invalid timestamps/numbers, missing diagnostics, canonical-content changes, altered/missing artifacts, changed horizons, unfair ablation/fallback treatments, incomplete minimality evidence and hidden terminal-water regressions. Their small synthetic fixtures test evidence handling, not SWMM's hydraulic equations. Corrected final packets must be regenerated and rechecked after source or metric changes.
+The declared requirement was flood volume no greater than 100 m³, with numerical tolerance 1e-6 m³. A supplied two-condition case was reduced to `f1`; the complete single-removal evidence supports **1-minimality under this model and property**, not global minimality over all timing, severities, storms or conditions. The fallback reduces flooding by approximately 346.03 m³ but fails both downstream guards. Its honest conclusion is a tradeoff.
+
+A separate, actually executed CLI replay then reran all five recorded configurations from the frozen packet. The independent replay comparator passed all eight checks; all **63,556 physical trace rows** and recomputed metrics matched exactly on this machine. This observed equality does not imply byte-identical cross-platform results. The comparator allows the documented numerical tolerance. `validation/final-packet-check.json` and `validation/final-replay-check.json` record these checks in the local workspace.
+
+Two additional real-engine outcome cases were executed and independently checked, with **115 passed recorded checks each** and no failures:
+
+- `validation/cases/nominal-violation.json` deliberately sets a peak-discharge limit of zero. The nominal run already violates it, so the result is `nominal_violation` with no claimed fault witness.
+- `validation/cases/no-violation.json` deliberately sets a very permissive flood-volume limit. The complete supplied one-condition envelope yields `no_violation_found`, with no witness and an accurately recorded `envelope_exhausted` stop.
+
+These deliberately extreme limits test result handling, not operationally meaningful engineering requirements. Run either case with `python3 engine/cli.py investigate --request validation/cases/CASE.json --output case-packet.json`, followed by the record-check command above. Reports are saved locally as `validation/nominal-violation-check.json` and `validation/no-violation-check.json`.
+
+A copy of the genuine final packet was deliberately altered by subtracting 100 m³ from its reported stressed flood volume while preserving the original trace. Independent validation rejected it; `validation/genuine-corruption-check.json` records the failed arithmetic and dependent claims. The **40 focused validator tests** also pass, covering irregular-interval arithmetic, threshold crossing, invalid timestamps/numbers and overflow, missing diagnostics, canonical-content changes, altered/missing artifacts, wrong horizons, unfair treatments, incomplete minimality evidence, hidden terminal-water regressions, inconsistent search budgets/candidates and changed replays. Small synthetic unit fixtures test evidence handling, not SWMM's equations.
+
+Source review produced three implemented corrections before this final evidence was generated: total terminal water now includes node and link volumes; sensor “dropout” is explicitly a zero-reading failure; and timestep caps preserve adaptive routing instead of invoking the public route-step setter that silently disables it. The current `commands` interface receives perturbed observations from its own run, static geometry and policy parameters, without future rainfall or a fault catalog. That is a source review of this fixed implementation, not a proof about arbitrary uploaded controllers. Source and metric changes require new packets and checks.
 
 ## Source basis
 
 - [EPA SWMM](https://www.epa.gov/water-research/storm-water-management-model-swmm): model scope and numerical simulation context.
 - [pystorms](https://pystorms.netlify.app/): public scenarios and established fault/controller comparisons.
-- [Inspected instrumentation source](https://github.com/kLabUM/pystorms/blob/release/2.0.0/pystorms/environment.py): per-read noise, hidden state, fault windows and mode-switch semantics; pin the actual revision used.
+- [Inspected upstream instrumentation](https://github.com/kLabUM/pystorms/blob/release/2.0.0/pystorms/environment.py): per-read noise, hidden state, fault windows and mode-switch semantics.
 - [Dario Amodei, Machines of Loving Grace (2024)](https://www.darioamodei.com/essay/machines-of-loving-grace): intelligence cannot replace missing observations. This is a researched application of his reasoning, not an endorsement of StormPilot.

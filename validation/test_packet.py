@@ -126,6 +126,29 @@ class PacketEvidenceTests(unittest.TestCase):
         self.packet["request"]["seed"] = 300
         self.assert_failed_check("canonical_fingerprints")
 
+    def add_search_record(self):
+        self.packet["request"]["controller_id"] = "test-policy"
+        self.packet["search"] = dict(
+            budget=3, simulator_calls=3, envelope_fault_ids=["f1"], global_minimality_claimed=False,
+            candidates=[dict(run_id="nominal", active_fault_ids=[], violated=False, metric="flood_volume_m3", units="m3", value=0),
+                        dict(run_id="stress", active_fault_ids=["f1"], violated=True, metric="flood_volume_m3", units="m3", value=20)],
+            nominal_passes=True, status="witness_found", stopping_reason="single_deletion_neighborhood_complete",
+        )
+
+    def test_recorded_search_coverage_passes(self):
+        self.add_search_record()
+        self.assertEqual(self.report()["status"], "passed")
+
+    def test_false_search_budget_accounting_fails(self):
+        self.add_search_record()
+        self.packet["search"]["simulator_calls"] = 2
+        self.assert_failed_check("search_consistency")
+
+    def test_false_search_candidate_conclusion_fails(self):
+        self.add_search_record()
+        self.packet["search"]["candidates"][1]["violated"] = False
+        self.assert_failed_check("search_consistency")
+
     def test_false_reported_integral_fails(self):
         self.packet["runs"][1]["metrics"]["flood_volume_m3"] = 2
         self.assert_failed_check("trace_metrics")

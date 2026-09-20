@@ -48,6 +48,11 @@ class TraceArithmeticTests(unittest.TestCase):
             compute_metrics([sample(0, 0, 0), sample(5, 0, 0)], integration="right_rectangle",
                             downstream_threshold_m3s=2, start_s=0, end_s=10)
 
+    def test_finite_samples_that_overflow_integral_are_rejected(self):
+        with self.assertRaises(EvidenceError):
+            compute_metrics([sample(0, 0, 0), sample(1, 1e308, 0), sample(2, 1e308, 0)],
+                            integration="right_rectangle", downstream_threshold_m3s=2)
+
 
 class PropertyTests(unittest.TestCase):
     def test_material_increase_uses_declared_reference(self):

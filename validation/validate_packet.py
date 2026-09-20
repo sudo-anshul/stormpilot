@@ -11,6 +11,7 @@ import argparse
 import hashlib
 import json
 import re
+from itertools import combinations
 from collections.abc import Mapping
 from pathlib import Path
 from typing import Any
@@ -309,7 +310,7 @@ def _verify_fingerprints(packet: Mapping, root_path: Path | None, report: dict):
             raise EvidenceError("solver/bridge source bundle differs from provenance")
         _check(report, "source_provenance", "passed", "Exact base model, controller, runner and solver/bridge source bytes match recorded provenance.")
         _verify_rainfall(packet, model_path.read_text(), report)
-    except (EvidenceError, OSError, KeyError, TypeError) as exc:
+    except (EvidenceError, OSError, KeyError, TypeError, ValueError) as exc:
         _check(report, "source_provenance", "failed", str(exc))
 
 
@@ -362,6 +363,86 @@ def _verify_rainfall(packet: Mapping, base_text: str, report: dict):
 def _same_policy(a: Mapping, b: Mapping):
     if a["controller"] != b["controller"]:
         raise EvidenceError("ablation must use the same controller source and parameters")
+
+
+def _verify_search(packet: Mapping, by_id: Mapping, property_results: Mapping, report: dict):
+    search = packet.get("search")
+    if search is None:
+        return
+    try:
+        search = _object(search, "search")
+        budget, calls = search.get("budget"), search.get("simulator_calls")
+        if any(isinstance(v, bool) or not isinstance(v, int) or v < 0 for v in (budget, calls)):
+            raise EvidenceError("search budget and simulator calls must be nonnegative integers")
+        if calls > budget:
+            raise EvidenceError("reported simulator calls exceed the search budget")
+        treatments = set()
+        for run in by_id.values():
+            controller = _object(run.get("controller"), "controller")
+            treatments.add(canonical_sha256(dict(
+                controller={key: controller.get(key) for key in ("id", "source_sha256", "parameters")},
+                context=run.get("context"), active_fault_ids=sorted(_faults(run.get("active_fault_ids"), "active faults")),
+            )))
+        if calls != len(treatments):
+            raise EvidenceError("reported simulator calls differ from recorded unique controller/fault treatments")
+        envelope = _faults(search.get("envelope_fault_ids"), "search envelope")
+        expected_envelope = {_object(f, "fault").get("id") for f in packet["experiment"]["faults"]}
+        if envelope != expected_envelope:
+            raise EvidenceError("search envelope differs from the experiment fault catalog")
+        if search.get("global_minimality_claimed") is not False:
+            raise EvidenceError("bounded subset search cannot claim global minimality")
+        candidates = search.get("candidates")
+        if not isinstance(candidates, list):
+            raise EvidenceError("search candidates must be recorded as a list")
+        for item in candidates:
+            item = _object(item, "candidate")
+            run = by_id[item["run_id"]]
+            result = property_results.get(item["run_id"])
+            if result is None:
+                raise EvidenceError("search candidate lacks a validated property result")
+            if item.get("active_fault_ids") != run["active_fault_ids"]:
+                raise EvidenceError("candidate faults differ from its actual run")
+            if item.get("violated") is not result["violated"]:
+                raise EvidenceError("candidate's reported violation differs from independent property evaluation")
+            if item.get("metric") != result["metric"] or item.get("units") != result["unit"]:
+                raise EvidenceError("candidate property identity or units differ")
+            if not close_enough(item.get("value"), result["value"], absolute=1e-6, relative=1e-8):
+                raise EvidenceError("candidate value differs from independently recomputed metric")
+        nominal = [r for r in by_id.values() if r.get("role") == "nominal"]
+        if len(nominal) != 1 or nominal[0]["run_id"] not in property_results:
+            raise EvidenceError("search requires one validated nominal reference")
+        nominal_passes = not property_results[nominal[0]["run_id"]]["violated"]
+        if search.get("nominal_passes") is not nominal_passes:
+            raise EvidenceError("search nominal-pass status differs from its independent result")
+        status = search.get("status")
+        if status == "nominal_violation" and nominal_passes:
+            raise EvidenceError("nominal violation claim contradicts the nominal run")
+        if status in {"witness_found", "no_violation_found"} and not nominal_passes:
+            raise EvidenceError("fault-search result requires a nominal case satisfying the property")
+        if status == "witness_found" and "witness" not in report["claims"]:
+            raise EvidenceError("search found-witness claim lacks accepted witness evidence")
+        if status == "no_violation_found" and any(item.get("violated") for item in candidates):
+            raise EvidenceError("search claims no violation despite a failing candidate")
+        if status not in {"nominal_violation", "witness_found", "no_violation_found"}:
+            raise EvidenceError("unsupported search status")
+        reason = search.get("stopping_reason")
+        if reason == "single_deletion_neighborhood_complete" and report["claims"].get("witness", {}).get("claim") != "1-minimal":
+            raise EvidenceError("complete-neighborhood stopping claim lacks 1-minimal witness evidence")
+        if reason == "envelope_exhausted":
+            ids = sorted(envelope)
+            if len(ids) > 12:
+                raise EvidenceError("exhaustive envelope check supports at most 12 declared faults")
+            expected = {frozenset(c) for count in range(len(ids)+1) for c in combinations(ids, count)}
+            policy_id = packet["request"].get("controller_id")
+            observed = {frozenset(run["active_fault_ids"]) for run in by_id.values()
+                        if run["controller"]["id"] == policy_id}
+            if not expected <= observed:
+                raise EvidenceError("envelope-exhausted claim omits supported fault subsets")
+        _check(report, "search_consistency", "passed", "Recorded treatments, budget, candidate outcomes and declared stopping condition are consistent.",
+               unique_treatments=len(treatments), budget=budget, search_status=status,
+               limitation="This checks recorded coverage, not unlogged execution or global search completeness.")
+    except (EvidenceError, KeyError, TypeError, ValueError) as exc:
+        _check(report, "search_consistency", "failed", str(exc))
 
 
 def validate_packet(packet: Mapping[str, Any], root_path: str | Path | None = None) -> dict[str, Any]:
@@ -500,6 +581,8 @@ def validate_packet(packet: Mapping[str, Any], root_path: str | Path | None = No
                 _check(report, "fallback_claim", "failed", "Claimed guarded improvement is unsupported; primary benefit may conceal tradeoffs.")
         except (EvidenceError, KeyError, TypeError) as exc:
             _check(report, "fallback_comparison", "failed", str(exc))
+
+    _verify_search(packet, by_id, property_results, report)
 
     _check(report, "independent_replay", "unperformed", "This invocation checks records; it does not execute the hydraulic engine.", required=False)
     _check(report, "controller_information_access", "unperformed", "Recorded information boundaries require separate source/interface review.", required=False)

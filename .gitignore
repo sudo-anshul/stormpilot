@@ -24,3 +24,4 @@ engine/vendor/**/.git/
 test-results/
 playwright-report/
 validation/*-check.json
+validation/runs/
