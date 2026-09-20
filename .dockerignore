@@ -1,0 +1,12 @@
+.git
+node_modules
+web/dist
+runtime
+work
+engine/build
+engine/runs
+validation/runs
+**/__pycache__
+**/*.pyc
+**/*.log
+.env*
